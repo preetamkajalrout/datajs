@@ -21,7 +21,7 @@ The `options` object may have the following fields. The only required values are
 - `prefetchSize`: number of items to prefetch ahead of any request in a deferred manner, -1 to scan until the end of the collection, 0 to disable.
 - `idle`: initial value for the `onidle` event.
 - `mechanism`: if specified, indicates the store mechanism to use.
-- {{metadata, httpClient, user, password, enableJsonpCallback, callbackParameterName, formatQueryString, httpClient}}: when the source is an OData URI, these values will be applied.
+- `metadata, httpClient, user, password, enableJsonpCallback, callbackParameterName, formatQueryString, httpClient`: when the source is an OData URI, these values will be applied.
 
 ## cache.readRange
 

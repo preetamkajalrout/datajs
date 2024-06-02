@@ -101,9 +101,7 @@ The `read` operation returns a request value. The request value supports an `abo
 
 Sends a request containing OData payload to the server.
 
-{{
-OData.request = function (request, [success(data, response)](success(data,-response)), [error(error)](error(error)), [handler](handler), [httpClient](httpClient), [metadata](metadata))
-}}
+> OData.request = function (request, success(data, response), error(error), handler, httpClient, metadata)
 
 - request - An Object that represents the HTTP request to be sent
 - success(data, response) - A callback function that is executed if the request succeeds, taking the processed data and the server response.
