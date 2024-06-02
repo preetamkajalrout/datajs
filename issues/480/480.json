@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "We need a possibility to add our custom handler for our custom format, but there is no way to add additional handler to local handlers collection:\n \nvar handlers = [odata.jsonHandler, odata.atomHandler, odata.xmlHandler, odata.textHandler];",
+    "LastUpdatedDate": "2013-02-21T17:20:11.35-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-09-30T08:15:35.07-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Create a possibility to add custom handler for data",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 480
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "You can create your custom handler and either set is as the default handler for all the requests, by changing the value of the odata.defaultHandler variable.. or per request by passing your handler as an argument to the OData.read or OData.request function.",
+      "PostedDate": "2012-04-05T18:48:59.003-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:11.35-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

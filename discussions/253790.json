@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "596850",
+    "ThreadId": "253790",
+    "Html": "\r\n<p>I'm trying to use the library in an Firefox 4 Add-on but I'm getting the next error:</p>\r\n<p>Error: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsIDOMStorageWindow.localStorage]<br>\r\nSource file: chrome://addon/content/datajs-0.0.3.min.js<br>\r\nLine: 14</p>\r\n",
+    "PostedDate": "2011-04-13T14:29:32.427-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "596907",
+    "ThreadId": "253790",
+    "Html": "<p>Hi Bitisuvanje,</p>\r\n<p>This seems to be a <a href=\"http://stackoverflow.com/questions/4648645/localstorage-in-a-firefox-extension\">Firefox issue</a> in which access to the localStorage component is denied in the context of an add&nbsp;on.&nbsp; On the other hand, it is interesting that you are trying to use the library in this way and it is a scenario we hadn't considered before.&nbsp; Could you please share a minimum repro with us?</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-04-13T17:04:10.297-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "597004",
+    "ThreadId": "253790",
+    "Html": "<p>Thanks for the fast response.</p>\r\n<p>I want to use the library for communication with my WCF Data Service. The add-on sends junks of data to the service, and vice versa.</p>\r\n<p>Salute,<br />Adam Markovski</p>",
+    "PostedDate": "2011-04-13T23:40:58.82-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "597031",
+    "ThreadId": "253790",
+    "Html": "<p>Instead of localStorage, I've used globalStorage...</p>\r\n<p>The next error was, unknown one, at line 4531: var mozIndexedDB = window.mozIndexedDB;</p>\r\n<p>So to fix this I've referred to this <a href=\"http://stackoverflow.com/questions/3949779/firefox-4-06b-indexeddb-support\" target=\"_blank\">post</a>. And instead of mozIndexedDB, I've used mozIndexedDb.</p>\r\n<p>Now it's loaded.</p>\r\n<p>Adam</p>",
+    "PostedDate": "2011-04-14T00:38:52.797-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "597312",
+    "ThreadId": "253790",
+    "Html": "<p>Hi Adam,</p>\r\n<p>It is great to see that you were able to fix your problem.&nbsp; Are you using FireFox 4 beta?&nbsp; If yes, which number of beta?&nbsp; It strikes to my attention the difference in the mozIndexedDB name...</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-04-14T10:18:43.117-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "598106",
+    "ThreadId": "253790",
+    "Html": "<p>The strange thing is that I run Firefox 4.0. :)</p>\r\n<p>Adam</p>",
+    "PostedDate": "2011-04-15T10:57:07.507-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "598152",
+    "ThreadId": "253790",
+    "Html": "<p>Hi Adam,</p>\r\n<p>Seems to me, based on the&nbsp;<a href=\"http://stackoverflow.com/questions/3949779/firefox-4-06b-indexeddb-support\" target=\"_blank\">post</a> you mention, that you might be using FireFox 4.0 beta 10 and that's the reason of the object name change.&nbsp; We started&nbsp;development of datajs.0.0.3 on FireFox 4.0 beta 11 and up.. which use the mozIndexedDB identifier instead.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-04-15T12:00:02.99-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

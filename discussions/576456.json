@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1337746",
+    "ThreadId": "576456",
+    "Html": "Install-Package datajs <br />\n<br />\n&lt;!DOCTYPE html&gt;<br />\n&lt;html xmlns=&quot;<a href=\"http://www.w3.org/1999/xhtml\" rel=\"nofollow\">http://www.w3.org/1999/xhtml</a>&quot;&gt;<br />\n&lt;head&gt;  \n&lt;script src=&quot;Scripts/datajs-1.1.2.min.js&quot;&gt;&lt;/script&gt;\n&lt;/head&gt;\n&lt;body&gt;<br />\n&lt;script type=&quot;text/javascript&quot;&gt;\n\nOData.read(&quot;http://services.odata.org/Northwind/Northwind.svc/Categories&quot;, function (data) {\n\n//success\n}\n);\n\n&lt;/script&gt;\n&lt;/body&gt;<br />\n&lt;/html&gt;<br />\n <br />\nThis has got to be something trivial I'm overlooking. This is the default example they are giving for datajs. I cannot get it to work.<br />\n <br />\nThrows exception &quot;HTTP request failed&quot; Navigate browsers to &quot;<a href=\"http://services.odata.org/Northwind/Northwind.svc/Categories\" rel=\"nofollow\">http://services.odata.org/Northwind/Northwind.svc/Categories</a>&quot; // it's there.<br />\n <br />\nI'm sure I'm overlooking something. Any help?<br />\n",
+    "PostedDate": "2014-12-29T14:56:56.413-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1337747",
+    "ThreadId": "576456",
+    "Html": "<pre><code>OData.read({ requestUri: &quot;uri&quot;, enableJsonpCallback: true} , function (data) { \n    // success function\n}, \nfunction (err) {\n    // error function.\n});</code></pre>\n\nIt'd be really nice if there was an exception that was more descriptive.<br />\n",
+    "PostedDate": "2014-12-29T15:16:42.85-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1340638",
+    "ThreadId": "576456",
+    "Html": "I am experiencing the same problem.\r<br />\nHas anyone found any solution ?\r<br />\nThank you <br />\n",
+    "PostedDate": "2015-01-10T03:16:00.2-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

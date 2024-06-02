@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "839767",
+    "ThreadId": "356806",
+    "Html": "\r\n<p>Hi all,</p>\r\n<p>I am having trouble with caching (assuming that it has something to do with cache)</p>\r\n<p>I am using phonegap and datajs. first time accessing the page is alright it goes smoothly. But when it returns to the page that was accessed b4 it will have a 403 forbiden message. Due to that, we tried to clear data manually on android, then access the\r\n application again then it works. But again on second time accessing the page trows us a 403 forbiden error.</p>\r\n<p>For HTC it will not refresh to the updated list. But these codes that I am using, it works perfectly on iOs.</p>\r\n<p>I am not sure why this is happening but normally I would get 403 only when the authentication token is invalid. However, in debuging the token has a value and the time the token is fetched till it is passed back is just a short time. therefore, it should\r\n be the token's expired.</p>\r\n<p>There is also another problem. When there is a post request to update data, it will also return a 403 (HTC and Samsung). but in iOs it works perfectly.</p>\r\n<p>Does datajs stores cache automatically because, we did not save any cache in the application. Is there anyway to clear all cache without even saving it in the first place? Has this problem go something to do with datajs or phonegap or android?</p>\r\n<p>Any advice and input is much appreciated... thank you.</p>\r\n<p>Amanda</p>\r\n",
+    "PostedDate": "2012-05-23T00:35:12.197-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "842774",
+    "ThreadId": "356806",
+    "Html": "<p>Hi Amanda,</p>\r\n<p>&nbsp;&nbsp; By caching do you mean that you are using datajs data cache component or the browser's cache?&nbsp;&nbsp; I assume that the latter... datajs doesn't fiddle with the browser cache at all (I'm pretty sure you cannot change stuff on the browsers cache using javascript anyway... maybe clear it).&nbsp;&nbsp;&nbsp;</p>\r\n<p>&nbsp;&nbsp; Also, by returning to the page you mean that you navigate to&nbsp;a different page and then back to&nbsp;your webapp?&nbsp;Can you explain a little bit more&nbsp;the steps&nbsp;you take to get to the invalid behavior?&nbsp;&nbsp;&nbsp; Based on what you describe&nbsp;above, seems to be an&nbsp;Android specific behavior.. have you tried to turn off caching in your webapp using html meta tags...&nbsp;&nbsp; Have you also verified in the request trace that the correct authorization headers are being sent?&nbsp; I would start by looking a a trace from iOS and compare it against a trace from Android and see what are the differences.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-05-30T12:57:54.55-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

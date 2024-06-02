@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "566461",
+    "ThreadId": "246107",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I tried to read a data service metadata document with custom attributes (defined in a custom namespace) . Currently it seems that these additional attributes and namespaces are not supported right? I also found a &nbsp;// TODO: support namespaces in attributes\r\n and&nbsp;// Currently, only m: for metadata is supported as a prefix in the schema. in the code. Is this feature planned?</p>\r\n<p>Another point: do additional annotation properties already work?</p>\r\n<p>Thank you guys!</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2011-02-15T06:17:12.857-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "566691",
+    "ThreadId": "246107",
+    "Html": "<p>We haven't implemented these because we're not sure who's using them and for what. It's certainly doable, and we'll be happy to add support for them if needed.</p>\r\n<p>Can you tell us a bit about what you're planning to do with these&nbsp;extensions? (they'll likely simply show up in the metadata object model).</p>\r\n<p>Thanks,</p>\r\n<p>Marcelo</p>\r\n<p>PS: the comment about 'm:' prefix is misleading - that actually refers to our internal parsing table, which only has elements from the main namespace or an 'm' extension namespace, which are treated as first-class because they're referneced in the various specs. We can still add support for other annotations in a an \"extension bucket\" per element.</p>",
+    "PostedDate": "2011-02-15T12:36:49.763-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "567225",
+    "ThreadId": "246107",
+    "Html": "<p>Hi Marcelo,</p>\r\n<p>thank you. Yes I used an odata service with additional custom properties which were defined in the metadata document and I couldn't access them through odata.</p>\r\n<p>Another question I have:</p>\r\n<p>does datajs also consider Feed Customization annotations when using atom feed format</p>\r\n<p>like described here?:</p>\r\n<p>http://www.odata.org/developers/protocols/atom-format#CustomizingtheRepresentationofanEntry</p>\r\n<p>Do i have to read the metadata document first and then hand it over to the request so that it works correctly or does datajs take care of it automatically?</p>\r\n<p>Thanks</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2011-02-16T08:30:14.56-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "567290",
+    "ThreadId": "246107",
+    "Html": "<p>Yes, datajs is aware of feed customization annotations and will apply them if present in metadata.</p>\r\n<p>The library doesn't read metadata automatically (because it incurs an extra round-trip). You can download it at runtime like David explains at <a href=\"http://datajs.codeplex.com/discussions/245593\">http://datajs.codeplex.com/discussions/245593</a>, or you can simply declare a literal and pass it around or push it onto OData.defaultMetadata (and then you don't have to re-specify this every time you need it).</p>\r\n<p>Thanks for describing how you're using the custom properties!</p>",
+    "PostedDate": "2011-02-16T10:05:26.977-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

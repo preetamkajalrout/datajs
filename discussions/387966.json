@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "889760",
+    "ThreadId": "387966",
+    "Html": "\r\n<p>Hello,</p>\r\n<p>I am having problems with my app in server.</p>\r\n<p>Basically it is due to server does not accept MERGE or DELETE for method.</p>\r\n<p>I have been asked to modify the batch to use POST tunneling. I&nbsp;tried&nbsp;something like this for to build every quest:&nbsp;request = { requestUri: serviceURL &#43; entityName &#43; &quot;(&quot; &#43; condition &#43; &quot;)&quot;, method: &quot;POST&quot;, data: null, headers: { &quot;X-HTTP-Method&quot;:\r\n &quot;DELETE&quot;} };</p>\r\n<p>Those request are putted into an array called&nbsp;changeRequests.</p>\r\n<p>Finally when I execute the request it is falling.</p>\r\n<p>OData.request(&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n<p><span style=\"white-space:pre\"></span>{&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n<p><span style=\"white-space:pre\"></span>requestUri: this.serviceUrl &#43; &quot;$batch&quot;,&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n<p><span style=\"white-space:pre\"></span>method: &quot;POST&quot;,&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n<p><span style=\"white-space:pre\"></span>data: { __batchRequests: [{ __changeRequests: changeRequests}] }&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n<p>}</p>\r\n<p>It would be great if you could refer me to an example using batch with POST&nbsp;tunneling</p>\r\n",
+    "PostedDate": "2012-07-24T08:40:13.05-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

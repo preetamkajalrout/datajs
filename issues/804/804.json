@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "readResponseHeaders uses split(\": \") to separate header field name from header field value. This breaks if the  field value contains \": \", or if colon and field value are not separated by exactly one space. HTTP doesn't require a space and considers leading or trailing linear white space not to be part of the header field value, so \n \n    var header = responseHeaders[i].split(\": \");\n    headers[header[0]] = header[1];\n \nshould be replaced with\n \n    var pos = responseHeaders[i].indexOf(\":\");\n    headers[responseHeaders[i].substr(0,pos)] = responseHeaders[i].substr(pos+1).replace(/^[ \\t]+|[ \\t]+$/g, \"\");\n \nor something equivalent.",
+    "LastUpdatedDate": "2014-01-09T04:09:54.16-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-08-15T05:51:47.46-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "readResponseHeaders corrupts header values containing \": \"",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 3,
+    "Id": 804
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "The v1.1.1beta still seems to split on ': ' as the below snippet shows:\r\n\r\n     var readResponseHeaders = function (xhr, headers) {\n        /// <summary>Reads response headers into array.</summary>\n        /// <param name=\"xhr\" type=\"XMLHttpRequest\">HTTP request with response available.</param>\n        /// <param name=\"headers\" type=\"Array\">Target array to fill with name/value pairs.</param>\r\n\r\n        var responseHeaders = xhr.getAllResponseHeaders().split(/\\r?\\n/);\n        var i, len;\n        for (i = 0, len = responseHeaders.length; i < len; i++) {\n            if (responseHeaders[i]) {\n                var header = responseHeaders[i].split(\": \");\n                headers[header[0]] = header[1];\n            }\n        }\n    };\r\n\r\nI also suggest changing the parsing strategy.",
+      "PostedDate": "2013-05-05T07:37:36.75-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-05T13:32:25.507-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2014-01-09T04:09:54.16-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

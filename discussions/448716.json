@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1063186",
+    "ThreadId": "448716",
+    "Html": "Hi guys,\r<br />\n<br />\nit is possible to load the metadata in a batch request? If yes how do I do it?\r<br />\n<br />\nNormally I would hand over the metadata handler but when using batch I use the batch handler.\r<br />\n<br />\nDoes this work or is that not possible?\r<br />\n<br />\nThanks and best regards\r<br />\nJoe<br />\n",
+    "PostedDate": "2013-07-01T07:43:43.287-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1066809",
+    "ThreadId": "448716",
+    "Html": "Hi Joe,\r<br />\n<br />\ncurrently you can't do this with datajs API, I think you can write your own handler that can detect that the response is metadata or not but that would be complicated.\r<br />\nIs there a certain scenario that you have that needs to request that metadata in a batch request ?\r<br />\n<br />\nHussein<br />\n",
+    "PostedDate": "2013-07-10T15:42:42.5-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067056",
+    "ThreadId": "448716",
+    "Html": "Hi nomier,\r<br />\n<br />\nthanks for your reply. I wanted to know if this is possible or not. But you are right, normally it is not necessary. \r<br />\n<br />\nI thought about doing the metadata batch request and additionally in that request do a loading of data where datajs can already use that returned metadata for the next data load request in the batch response from the server. But I guess this is not possible.<br />\n",
+    "PostedDate": "2013-07-11T07:26:07.2-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

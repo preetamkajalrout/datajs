@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Idea Categories</title>
+<style type="text/css">
+body {
+    color: #444444;
+    font-family: Calibri, Verdana;
+}
+.titleSpan {
+    font-weight: bold;
+}
+.ideaBox {
+    padding-top: 8px;
+}
+#modelArea {
+    border: 1px solid gainsboro;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+button, input, textarea { font-family: Calibri, Verdana; font-size: 100%; }
+</style>
+</head>
+<body>
+
+<h1>Idea Categories</h1>
+
+<p>
+This sample demonstrates working with links. Each idea can belong to
+many categories, and each category can include many ideas.
+</p><p>
+There are different common ways in which this is presented in user
+interfaces. In this case, we chose to use a collection of checkboxes,
+because there is a small number of categories that won't change very
+often.
+</p>
+
+<div id="modelArea" data-bind="template: { name: 'modelTemplate' }">
+</div>
+
+<div id="messageBar"></div>
+
+<script type="text/x-jquery-tmpl" id="modelTemplate">
+{{each ideas()}}
+<div class='ideaBox'>
+<span class='titleSpan'>
+{{if $value.ClosedDate}}
+<i>${$value.Title} (closed)</i>
+{{else}}
+${$value.Title}
+{{/if}}
+</span><br />${$value.Description}<br />
+<div>
+<b>Categories:</b>
+{{each(i, category) categories()}}
+<input type="checkbox" value="${category.__metadata.uri}" data-bind="checked: $value.CategoryIDs, disable: communicating" />${category.Name} &nbsp;
+{{/each}}
+</div>
+{{/each}}
+</script>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+
+<!-- Get this from https://github.com/SteveSanderson/knockout/downloads. -->
+<script type="text/javascript" src="knockout-1.2.1.js"></script>
+<script type="text/javascript" src="datajs-1.0.0.js"></script>
+
+<script type="text/javascript">
+
+    // Root URI for the service.
+    var serviceUri = "./IdeasService.svc/";
+
+    // This is what our view model looks like.
+    var ideasViewModelFn = function () {
+        var that = this;
+
+        // The list of ideas we are editing.
+        this.ideas = ko.observableArray([]);
+
+        // The list of categories we have available.
+        this.categories = ko.observableArray([]);
+
+        this.communicating = ko.observable(false);
+
+        // Looks up the category key for the specified URI identifier.
+        this.categoryKeyForID = function (id) {
+            var categories = that.categories();
+            for (var i = 0; i < categories.length; i++) {
+                if (categories[i].__metadata.uri === id) {
+                    return categories[i].CategoryID;
+                }
+            }
+        };
+
+        // Discards all ideas and reloads them from the server.
+        this.loadAll = function () {
+            makeRequest({ requestUri: serviceUri + "Categories" }, function (data) {
+                // Refresh all categories.
+                that.categories().splice(0, that.categories().length);
+                $.each(data.results, function (index, value) {
+                    that.categories.push(value);
+                });
+
+                makeRequest({ requestUri: serviceUri + "Ideas?$expand=Categories" }, function (data) {
+                    // Refresh all ideas.
+                    that.ideas().splice(0, that.ideas().length);
+
+                    $.each(data.results, function (index, value) {
+                        // Change the value to make it more binding-friendly;
+                        // include the URI of categories as an observable array.
+                        value.CategoryIDs = ko.observableArray([]);
+                        $.each(value.Categories, function (index, categoryValue) {
+                            value.CategoryIDs.push(categoryValue.__metadata.uri);
+                        });
+
+                        value.CategoryIDsOriginal = [].concat(value.CategoryIDs());
+                        value.CategoryIDs.subscribe(function (newArray) {
+                            var diff = ko.utils.compareArrays(value.CategoryIDsOriginal, newArray);
+                            value.CategoryIDsOriginal = [].concat(newArray);
+
+                            // Expecting a single change - programmatically we could
+                            // have many if the array as a whole is updated, but
+                            // we'll ignore that case here.
+                            $.each(diff, function (index, diff) {
+                                if (diff.status === "added") {
+                                    // To add a link, we submit a POST request to the
+                                    // URI of the entity with "/$links/[property name]" appended
+                                    makeRequest({
+                                        method: "POST",
+                                        requestUri: value.__metadata.uri + "/$links/Categories",
+                                        data: { uri: diff.value }
+                                    });
+                                } else if (diff.status === "deleted") {
+                                    // To remove a link, we submit a DELETE request to the
+                                    // URI of the entity with "/$links/[property name](key)" appended
+                                    var key = that.categoryKeyForID(diff.value);
+                                    makeRequest({
+                                        method: "DELETE",
+                                        requestUri: value.__metadata.uri + "/$links/Categories(" + key + ")"
+                                    });
+                                }
+                            });
+                        });
+
+                        that.ideas.push(value);
+                    });
+                });
+            });
+        };
+    };
+
+    var ideasViewModel = new ideasViewModelFn();
+
+    // Make a request, setting the 'communicating' flag.
+    var makeRequest = function (request, success) {
+        ideasViewModel.communicating(true);
+        $("#messageBar").text("Contacting server...").show();
+        return OData.request(request, function (data) {
+            ideasViewModel.communicating(false);
+            $("#messageBar").hide();
+            if (success) {
+                success(data);
+            }
+        }, function (err) {
+            ideasViewModel.communicating(false);
+            $("#messageBar").text("Error while contacting server: " + err.message + " - " + JSON.stringify(err));
+        });
+    };
+
+    // Bind the model to everything in the document that needs it.
+    ko.applyBindings(ideasViewModel);
+
+    // Start loading data asynchronously.
+    ideasViewModel.loadAll();
+
+</script>
+
+
+</body>
+</html>

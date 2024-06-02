@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1170136",
+    "ThreadId": "501343",
+    "Html": "Hi\r<br />\n<br />\nIs there a way to POST an image using the OData.Request? I was able to POST some plain text, but I wasn't able to do it with an image. I keep getting &quot;No handler for data&quot;. I want to know how I am supposed to pass the image file in the request. I have tried passing it as a base 64 string and a Blob object. It does not work.\r<br />\n<br />\nHere's an example of the code I am trying<br />\n<pre><code>var file = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';\n\nvar headers = {  &quot;Content-Type&quot;: &quot;image/png&quot;,\n            &quot;Slug&quot;: &quot;reddot.png&quot; };\n\nvar oRequest = {\n    headers: headers,\n    requestUri: &quot;...&quot;\n    method: &quot;POST&quot;,\n    data: file\n}\nOData.request( oRequest, fSuccessFn, fErrorFn );</code></pre>\n\nThanks for any help.<br />\n",
+    "PostedDate": "2014-01-15T13:43:46.653-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

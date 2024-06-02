@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1064288",
+    "ThreadId": "449002",
+    "Html": "I am using data.js to read data from a sharepoint 2010 site.  I have a list called holidays with a date field called HolidayDate. It’s  a Date and Time field and has been set to display the 'Date Only'\r<br />\n<br />\nIn the Site’s Regional Settings , the time zone is set to (UTC - 500) Eastern Time, and the time zone on my desktop is Eastern standard time.\r<br />\n<br />\nI added a new Holiday to my Holiday table and set the date to July 4, 2013.<br />\nWhen I retrieve the date with data.js (and set recognizeDates to true), the date retrieved shows in my javascript debugger ass Wed Jul 3 20:00:00 EDT 2013.\r<br />\nUsing fiddler I see that the JSON value returned was &quot;HolidayDate&quot;: &quot;\\/Date(1372896000000)\\/&quot;,\r<br />\n<br />\nSo iIn the Site’s Regional Settings  of the site I changed the Time zone of the site to  (UTC) Coordinated Universal Time.\r<br />\nNow when I retrieve the date, it is displayed as Thu Jul 4 00:00:00 EDT 2013  and using fiddler I see the date returned as &quot;HolidayDate&quot;: &quot;\\/Date(1372910400000)\\/&quot;\r<br />\n<br />\nHow Can I get data js to properly display the date , Even if the sites time zone is UTC-500.<br />\n",
+    "PostedDate": "2013-07-03T13:27:06.32-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067661",
+    "ThreadId": "449002",
+    "Html": "I fixed my issue :\r<br />\n<a href=\"http://yetanothersharepointblog.wordpress.com/2013/07/13/timezone-issues-when-working-with-dates-in-sharepoints-rest-services/\" rel=\"nofollow\">http://yetanothersharepointblog.wordpress.com/2013/07/13/timezone-issues-when-working-with-dates-in-sharepoints-rest-services/</a><br />\n",
+    "PostedDate": "2013-07-12T12:39:38.41-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

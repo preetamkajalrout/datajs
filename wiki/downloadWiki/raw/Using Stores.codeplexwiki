@@ -1,0 +1,16 @@
+! Using Stores
+
+datajs provides support for storing data in the browser such that it's available if the network connectivity is lost or if the browser is restarted.
+
+There are three mechanisms currently supported:
+
+# Local Storage, often referred to as DOM storage.
+# IndexedDB, currently in experimental support.
+# In-memory storage, useful as a fallback mechanism for browsers that don't support any of the newer APIs.
+
+These stores can be used as key/value pairs, where the key is a string and the value is a JavaScript value persisted through a JSON round-trip. The APIs are asynchronous, and so code written for one store should work the same across all stores.
+
+See also the [datajs store API] reference.
+----
+Previous Topic: [Cross Domain Requests]
+Next Topic: [Using Caches]

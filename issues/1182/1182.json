@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi,I am try to use OData.read() function send the request url having some large string as parameter but it cant be send giving the \"Http request Failed \" error,then after debug the code i found that the long string parameter  in the url cant be sent complete, Please tell me how to increase the request url capacity length.",
+    "LastUpdatedDate": "2013-12-04T22:55:34.757-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-12-04T22:54:25.807-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Odata.read() unable to send long string request url",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1182
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": ".",
+      "PostedDate": "2013-12-04T22:55:34.757-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

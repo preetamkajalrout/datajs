@@ -1,0 +1,66 @@
+[
+  {
+    "Id": "1087597",
+    "ThreadId": "455241",
+    "Html": "I've seen this error reported a few times already but the cause seems to be always different.<br />\n<br />\nI'm trying to access a WEBAPI OData service and while I do get results (I see that from the response in Chrome), the error 'No Handler for Data' is raised by datajs.<br />\n<br />\nThe Response Body contains the data in JSON format<br />\n<br />\nThe Request Header is :<br />\n<pre><code>Demande GET /odata/Mandates?$inlinecount=allpages HTTP/1.1\nMaxDataServiceVersion   3.0\nAccept  application/atomsvc+xml;q=0.8, application/json;odata=fullmetadata;q=0.7, application/json;q=0.5, */*;q=0.1\nReferer http://localhost:1506/axa.portal.web/chat\nAccept-Language fr-FR\nAccept-Encoding gzip, deflate\nUser-Agent  Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)\nHost    localhost:52446\nConnection  Keep-Alive\n</code></pre>\n\nand the Response header is:<br />\n<pre><code>Cache-Control   no-cache\nContent-Length  22494\nContent-Type    application/json; charset=utf-8\nDate    Tue, 03 Sep 2013 09:40:30 GMT\nExpires -1\nPersistent-Auth true\nPragma  no-cache\nRéponse HTTP/1.1 200 OK\nServer  Microsoft-IIS/8.0\nWWW-Authenticate    Negotiate oRswGaADCgEAoxIEEAEAAABDh+CIwTbjqQAAAAA=\nX-AspNet-Version    4.0.30319\nX-Powered-By    ASP.NET\nX-SourceFiles   =?UTF-8?B?YzpcdXNlcnNcYmVydGhlbG90c1xkb2N1bWVudHNcdmlzdWFsIHN0dWRpbyAyMDEyXFByb2plY3RzXFdlYkFQSU5vQnJlZXplXFdlYkFQSU5vQnJlZXplXG9kYXRhXE1hbmRhdGVz?=</code></pre>\n\n",
+    "PostedDate": "2013-09-03T02:49:16.207-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1134149",
+    "ThreadId": "455241",
+    "Html": "Hello,\r<br />\n<br />\nI have the same issue. The response from the service seems good but &quot;No handler fort data&quot; is raised by datajs. The success callback is never called.<br />\n",
+    "PostedDate": "2013-12-10T22:14:33.507-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1200211",
+    "ThreadId": "455241",
+    "Html": "Hi,\r<br />\n<br />\nI am also seeing this error and have no idea how to fix :/\r<br />\n<br />\nI have setup a web api 2.1 oData service and can call it fine in the browser.\r<br />\n<br />\nWhen trying to call using datajs however I get the No handler for data error and like the OP i can see the data being returned in Chrome. Here is my code calling the service:<br />\n<pre><code>\n    OData.read({\n        requestUri: &quot;http://localhost:81/odata/BlogPost&quot;,\n        data: &quot;json&quot;,\n        method: &quot;GET&quot;\n    },\n    function (data) {\n       alert(JSON.parse(data));\n    },\n    function (err) {\n        alert(err.message);\n    });</code></pre>\n\nHere are the headers from chrome:\r<br />\n<br />\n<strong>Request Header</strong><br />\n<pre><code>GET /odata/BlogPost HTTP/1.1\nHost: localhost:81\nConnection: keep-alive\nCache-Control: no-cache\nPragma: no-cache\nMaxDataServiceVersion: 3.0\nOrigin: http://localhost\nUser-Agent: Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36\nContent-Type: application/json\nAccept: application/atomsvc+xml;q=0.8, application/json;odata=fullmetadata;q=0.7, application/json;q=0.5, */*;q=0.1\nDataServiceVersion: 1.0\nDNT: 1\nReferer: http://localhost/Blog\nAccept-Encoding: gzip,deflate,sdch\nAccept-Language: en-GB,en;q=0.8,en-US;q=0.6\nResponse Headersview source\n</code></pre>\n\n<strong>Response Header</strong><br />\n<pre><code>Access-Control-Allow-Origin:http://localhost\nCache-Control:no-cache\nContent-Length:4196\nContent-Type:application/json; odata=fullmetadata; charset=utf-8\nDataServiceVersion:3.0\nDate:Tue, 28 Jan 2014 22:33:12 GMT\nExpires:-1\nPragma:no-cache\nServer:Microsoft-IIS/8.5\nX-AspNet-Version:4.0.30319\nX-Powered-By:ASP.NET</code></pre>\n\nHere is the data being returned.<br />\n<pre><code>{\n  &quot;odata.metadata&quot;:&quot;http://localhost:81/odata/$metadata#BlogPost&quot;,&quot;value&quot;:[\n    {\n      &quot;BlogPostID&quot;:1,&quot;BlogPostTitle&quot;:&quot;Welcome To Azert&quot;,&quot;BlogPostDate&quot;:&quot;2014-01-07T22:38:17&quot;,&quot;BlogPostSummary&quot;:&quot;&lt;p&gt;\\r\\n\\tAzert is a Belfast, Northern Ireland based tech blog&lt;/p&gt;\\r\\n&quot;,&quot;BlogPostBody&quot;:&quot;Text here&quot;,&quot;BlogPostTeaser&quot;:null\n    }\n  ]\n}</code></pre>\n\nThe headers etc seem to be fine, is it a problem with my data?\r<br />\n<br />\nMark<br />\n",
+    "PostedDate": "2014-01-28T15:24:15.543-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1200428",
+    "ThreadId": "455241",
+    "Html": "Hi,\r<br />\nYou might suffer from some missing CORS headers (on response) that prevent datajs from properly handling your data (hence the error message). I wrote a discussion part on it. Please see <a href=\"https://datajs.codeplex.com/discussions/528288\" rel=\"nofollow\">CORS with datajs 1.1.1 and OData v3 discussion</a>.<br />\n",
+    "PostedDate": "2014-01-29T04:35:18.943-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1200439",
+    "ThreadId": "455241",
+    "Html": "Hi,\r<br />\n<br />\nThis looks identical to my problem. I have actually already included CORS as I came across the same link you mention in your post (<a href=\"http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api\" rel=\"nofollow\">http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api</a>).\r<br />\n<br />\nMy setup of it must be the problem I think, you mentioned in your post that:<br />\n<blockquote>\nIt was configured to accept all origins, all headers, all methods on requests and exposed the OData specific headers on responses. <br />\n</blockquote>\nHow did you set this up to expose the OData response headers?\r<br />\n<br />\nMine is currently setup like the below:<br />\n<pre><code>var cors = new EnableCorsAttribute(&quot;http://localhost&quot;, &quot;*&quot;, &quot;GET&quot;);\n        config.EnableCors(cors);</code></pre>\n\nAm I missing something here?\r<br />\n<br />\nMark<br />\n",
+    "PostedDate": "2014-01-29T05:18:10.937-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1200456",
+    "ThreadId": "455241",
+    "Html": "Hi Mark,<br />\n<br />\nThe magic happens in the 4th parameter of the EnableCorsAttribute constructor:<br />\n<pre><code>config.EnableCors(new EnableCorsAttribute(&quot;*&quot;, &quot;*&quot;, &quot;*&quot;, &quot;DataServiceVersion, MaxDataServiceVersion&quot;));</code></pre>\n\nIn particular the DataServiceVersion header, being exposed on responses this way, is picked up by datajs when trying to handle the response.<br />\n<br />\nMichael<br />\n",
+    "PostedDate": "2014-01-29T06:06:50.51-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1200477",
+    "ThreadId": "455241",
+    "Html": "Ahhh, I see, didn't know about that!\r<br />\n<br />\nI'm not at home at the moment but will be later and I'll be trying this out as soon as I get in. I'll let you know if I get any success!\r<br />\n<br />\nThanks,\r<br />\n<br />\nMark<br />\n",
+    "PostedDate": "2014-01-29T06:51:14.133-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1200695",
+    "ThreadId": "455241",
+    "Html": "Hi,\r<br />\n<br />\nIt works! Thanks very much for your help!\r<br />\n<br />\nMark<br />\n",
+    "PostedDate": "2014-01-29T15:21:10.8-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

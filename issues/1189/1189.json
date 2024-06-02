@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi Experts,\nI am a beginner to DataJS .. I am consuming an OData service using OData.Read method \n\n```\n OData.read({\nrequestUri: newURL,\n\t\t\t\t DataServiceVersion : \"2.0\",\n\t\t\t\t enableJsonpCallback: false,\n\t\t\t\t Accept: \"application/json\"\n\t\t\t\t},\n\t\t\t\t\t\tfunction(odata,resposense)\n\t\t\t\t\t\t{\n\t\t\t\t \t\t\t\t//alert(odata.results.length);\n\t\t\t\t\t\t\t\toModel =  new sap.ui.model.json.JSONModel({\n\t\t\t\t\t\t\t\t country : odata.results\n\t\t\t\t\t\t\t\t});\n\t\t\t\t\t\t\t\toBarChart.setModel(oModel);\t\t\t\t\t\n\t\t\t\t\t\t},\n\t\t\t\t\t\tfunction(oError)\n\t\t\t\t\t\t {\n\t\t\t\t\t\t\t alert(\"Error:\"+JSON.stringify(oError));\n\t\t\t\t\t\t });\n```\n\tIn Internet Expolrer (9) i am getting the data return properly. But in Firefox browser  it is returning error :  HTTP Request failed\n\nThe detailed exception object is as follows\n```\n\n\nError:{\"message\":\"HTTP request failed\",\n\t\"request\":{\n\t\"requestUri\":\"http://*.com:8000/sap/opu/odata/sap/ZCOUNTRY_SRV/country?$filter=(Country eq '121533')\",\n\t\"DataServiceVersion\":\"2.0\",\n\t\"enableJsonpCallback\":false,\n\t\"Accept\":\"application/json\",\n\t\"recognizeDates\":false,\n\t\"callbackParameterName\":\"$callback\",\n\t\"formatQueryString\":\"$format=json\",\n\t\"inferJsonLightFeedAsObject\":false,\n\t\"method\":\"GET\",\"headers\":{\n\t\t\t\"Accept\":\"application/atomsvc+xml;q=0.8, application/json;odata=fullmetadata;q=0.7, application/json;q=0.5, */*;q=0.1\",\n\t\t\t\"MaxDataServiceVersion\":\"3.0\"}},\n\t\t\t\"response\":{\"requestUri\":\"http://*:8000/sap/opu/odata/sap/ZCOUNTRY_SRV/country?$filter=(Country eq '121533')\",\"statusCode\":0,\"statusText\":\"\",\"headers\":[],\"body\":\"\"\n\t\t}\n\t}\t\t\t \n```\n\nAny Hope ??\nThanks in advance.",
+    "LastUpdatedDate": "2013-12-11T22:52:53.69-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-12-11T22:52:53.69-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "HTTP Request failed in Firefox",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1189
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

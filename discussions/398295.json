@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "922832",
+    "ThreadId": "398295",
+    "Html": "\r\n<p>Hello,</p>\r\n<p>I use the SharePoint 2010 odata service (which is a version 1 odata service).&nbsp;When I send an update using POST with X-HTTP-METHOD MERGE I can see using fiddler that I get a successful HTTP 204 No Content response with a new value for the concurrency\r\n token in the ETag http response header.</p>\r\n<pre>HTTP/1.1 204 No Content\r\nCache-Control: no-cache\r\n<strong>ETag</strong>: W/&quot;2&quot;\r\nServer: Microsoft-IIS/7.5\r\nSPRequestGuid: 1f93ae70-a787-4d07-b1e8-8711c165334f\r\nX-SharePointHealthScore: 0\r\nDataServiceVersion: 1.0;\r\nX-AspNet-Version: 2.0.50727\r\nWWW-Authenticate: Negotiate oRswGaADCgEAoxIEEAEAAABDh&#43;CIwTbjqQAAAAA=\r\nPersistent-Auth: true\r\nX-Powered-By: ASP.NET\r\nMicrosoftSharePointTeamServices: 14.0.0.6120\r\nX-MS-InvokeApp: 1; RequireReadOnly\r\nDate: Sat, 06 Oct 2012 14:51:40 GMT</pre>\r\n<p>However, when I try to get at this new value&nbsp;for the concurrency token&nbsp;using response.headers.ETag&nbsp;it is undefined.&nbsp;In fact, response.headers is an empty array [].</p>\r\n<p>Is this a problem with datajs? I found&nbsp;the same problem using jquery.ajax. So perhaps the problem&nbsp;is the XMLHttpRequest / ActiveXObject&nbsp;that does not pass back any response http headers when the http response is 204 No Content.&nbsp;</p>\r\n<p>My workaround for now is to immediately reload the object after the successful update (since the SharePoint odata service is version 1 I cannot send a prefer http header with value return-content, but even if I could send a prefer header the service may\r\n not honor this request to return content anyway).&nbsp;What I really need is to read the ETag response http header.&nbsp;</p>\r\n<p>Here is the code:</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:blue\">function</span> requestUpdate(model, selector) {\r\n    <span style=\"color:blue\">var</span> deferred = <span style=\"color:blue\">new</span> $.Deferred();\r\n    OData.request({\r\n        requestUri: model.__metadata.uri,\r\n        method: <span style=\"color:#a31515\">&quot;POST&quot;</span>,\r\n        data: selector ? selector(model) : model,\r\n        headers: {\r\n            <span style=\"color:#a31515\">&quot;If-Match&quot;</span>: model.__metadata.etag,\r\n            <span style=\"color:#a31515\">&quot;X-HTTP-Method&quot;</span>: <span style=\"color:#a31515\">&quot;MERGE&quot;</span>\r\n        }\r\n    }, <span style=\"color:blue\">function</span> (data, response) {\r\n        model.__metadata.etag = response.headers.<strong>ETag</strong>;\r\n        deferred.resolve({ d: model });\r\n    }, <span style=\"color:blue\">function</span> (error) {\r\n        deferred.reject(error);\r\n    });\r\n    <span style=\"color:blue\">return</span> deferred.promise();\r\n}</pre>\r\n</div>\r\n",
+    "PostedDate": "2012-10-06T08:09:57.56-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "922875",
+    "ThreadId": "398295",
+    "Html": "<p>I just tested this in Chrome and it&nbsp;works ok in Chrome. So for now it appears to just not work in Internet Explorer 9 on Windows Server 2008 R2</p>",
+    "PostedDate": "2012-10-06T09:58:42.36-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927618",
+    "ThreadId": "398295",
+    "Html": "<p>Hi Remco,</p>\r\n<p>&nbsp;&nbsp;&nbsp; No, this is by design so far.&nbsp; The endpoint may send an ETag in the payload... for now, if it comes as a response header datajs will ignore it. You will have to pick it up as per the code above.&nbsp; What error&nbsp;are you facing in IE9, is it throwing an error?</p>\r\n<p>Thanks,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-16T12:33:50.31-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927620",
+    "ThreadId": "398295",
+    "Html": "<p>Hi Alex,</p>\r\n<p>In IE9 response.headers is an empty array [] and therefore response.headers.ETag is undefined. No error thrown. I'm a bit confused why you say this is by design as it works ok&nbsp;in Chrome. In Chrome response.headers is an object with an ETag property with the correct new value&nbsp; of the concurrency token.&nbsp;</p>\r\n<p>thanks</p>\r\n<p>Remco</p>",
+    "PostedDate": "2012-10-16T12:40:35.13-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927673",
+    "ThreadId": "398295",
+    "Html": "<p>Hi Remco,</p>\r\n<p>&nbsp;&nbsp; Sorry If didn't explain myself properly.&nbsp; What is by design is that the etag doesn't show up inside __metadata.&nbsp; That is because&nbsp; it may be sent by the endpoint as part of the payload.&nbsp; The fact the headers array is coming back as empty in IE9 is not by design. Thanks for letting us know I will investigate.&nbsp; Which version of datajs are you using?</p>\r\n<p>Thanks,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-16T14:36:02.403-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927876",
+    "ThreadId": "398295",
+    "Html": "<p>Hi Alex,</p>\r\n<p>It's version 1.0.3</p>\r\n<p>thanks</p>\r\n<p>Remco</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-10-17T00:58:43.157-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "940052",
+    "ThreadId": "398295",
+    "Html": "<p>There's a bug in IE8/9. It drops all headers if it gets a 204 response.</p>\r\n<p>do a google on <strong>IE0013: IE XMLHTTP implementation turns 204 response code into bogus 1223 status code</strong></p>\r\n<p><strong>Russell</strong></p>\r\n<p><strong>&nbsp;</strong></p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-11-11T17:25:03.057-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

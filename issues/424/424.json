@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "All the Storage API async methods should return a $.Deferred object instead of having \"success\" and \"error\" arguments.\nIt would be a lot easier to pipe the functionality, and it would match the new coding style.\n \nstorage.read('key')\n    .done(function() {\n \n    });",
+    "LastUpdatedDate": "2013-02-21T17:20:11.83-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-07-18T12:11:56.83-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "All async methods should return a deferred object",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 3,
+    "Id": 424
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

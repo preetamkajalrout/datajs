@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "565964",
+    "ThreadId": "245972",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>could you please provide sample for cross domain request using the datajs ?</p>\r\n<p>currently the same code that works on chrome and firefox does not work on IE using JQuery package, any recommendation ?</p>\r\n<p>thanks</p>\r\n",
+    "PostedDate": "2011-02-14T09:33:06.017-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "565978",
+    "ThreadId": "245972",
+    "Html": "<p>Hi fadihaik,</p>\r\n<p>Is it possible you&rsquo;re using IE6 or IE7 (or a later version in compatibility mode)? IE6 and IE7 do not have native JSON support so you&rsquo;ll need to add an additional script reference to <a href=\"https://github.com/douglascrockford/JSON-js/raw/master/json2.js\">https://github.com/douglascrockford/JSON-js/raw/master/json2.js</a> for cross domain requests.</p>\r\n<p><span style=\"color: blue; font-size: 9.5pt;\">&lt;</span><span style=\"color: maroon; font-size: 9.5pt;\">script</span><span style=\"font-size: 9.5pt;\"> <span style=\"color: red;\">type</span><span style=\"color: blue;\">=\"text/javascript\"</span> <span style=\"color: red;\">src</span><span style=\"color: blue;\">=\"https://github.com/douglascrockford/JSON-js/raw/master/json2.js&gt;&lt;/</span><span style=\"color: maroon;\">script</span><span style=\"color: blue;\">&gt;</span></span></p>\r\n<p>If that doesn&rsquo;t resolve the issue, please let me know (and please include the error you are seeing and the version of IE).</p>\r\n<p>-Beth</p>",
+    "PostedDate": "2011-02-14T10:11:32.08-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "566536",
+    "ThreadId": "245972",
+    "Html": "<p>Hi Beth,</p>\r\n<p>as far as I understand the options for cross domain requests are</p>\r\n<div id=\"imcontent\" style=\"margin-left: 12px;\"><span>\r\n<div style=\"font-family: MS Shell Dlg 2; direction: ltr; color: #000000; font-size: 9pt;\">\r\n<ul>\r\n<li>Have the web server provide a relaying mechanism to redirect requests to the appropriate OData endpoint. </li>\r\n<li>Use an XDomainRequest object. This option is not available in all browsers. </li>\r\n<li>Use cross origin <em>XMLHttpRequest</em> object. This option is also not available in all browsers. </li>\r\n<li>Prompt for consent on first use. This option is not available in all browsers and generally provides a poor user experience. </li>\r\n</ul>\r\n</div>\r\n<p>but unfortunatly XDomainRequest supported only in IE and <em>XMLHttpRequest is not supported in IE ( but supported in many other browsers)</em></p>\r\n<p><span><em>which means probably should be kind of generic solution that checks if IE /&nbsp; XDomainRequest supported and use the right way to do the requests.</em></span></p>\r\n<p><span><span><em>I wonder if such generic solution should not included withen datajs ?</em></span></span></p>\r\n<p><span><span><span><em>beside that jquery so far does not support XDomainRequest maybe we should put effort there ?</em></span></span></span></p>\r\n<p><span><span><span><span><em>Thanks in advnace,</em></span></span></span></span></p>\r\n<p><span><span><span><span><em>Fadi Haik</em></span></span></span></span></p>\r\n</span></div>",
+    "PostedDate": "2011-02-15T08:23:10.707-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "566545",
+    "ThreadId": "245972",
+    "Html": "<p>Hi fadihak,</p>\r\n<p>I would recommend the use of a ProxyServlet or something similar that does the relaying for you. I would say that it's not the task of a library to cover cross domain requests. That are security related questions. JQuery also doesn't do it. But I may be wrong here ;)</p>",
+    "PostedDate": "2011-02-15T08:35:08.747-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "567347",
+    "ThreadId": "245972",
+    "Html": "<p>Hi fadihaik</p>\n<p>We appreciate your feedback and yes we have thought on providing some more general mechanism to support cross domain requests;&nbsp;&nbsp; the thing is that doing so involves certain security risk. That's the same reason why we disable JSONP support for cross domain reads by default. We consider this to be a more advanced scenario and expect the developer to consciously enable cross domain requests in the application if needed. To do this you have also the option to replace datajs http client stack with a custom one that supports cross domain requests using XDR if the XDR object is available and cross origin XMLHttpRequest otherwise. The library offers you two ways to use a custom http client.</p>\n<p>1. Inject a custom httpClient object as a parameter in the call to OData.read&nbsp; or OData.request:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>\n<pre> OData.read(<span style=\"color: #a31515;\">\"http://someUri\"</span>, <span style=\"color: blue;\">function</span> success(data, response) {}, <span style=\"color: blue;\">function</span> error(error) {}, <span style=\"color: blue;\">null</span>, customHttpClient);&nbsp;&nbsp; </pre>\n<p>2. Replace the defaultHttpClient;</p>\n<div style=\"background-color: white; color: black;\">\n<div style=\"background-color: white; color: black;\">\n<pre>var oldHttpClient = OData.defaultHttpClient;</pre>\n<pre>OData.defaultHttpClient = {\r\n    request: <span style=\"color: blue;\">function</span> (request, success, error) {\r\n        <span style=\"color: green;\">/// Custom http client implementation.</span>\r\n    }\r\n};</pre>\n<pre>&nbsp;</pre>\n</div>\n</div>\n<p>Regards,</p>\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-02-16T11:37:23.83-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "582813",
+    "ThreadId": "245972",
+    "Html": "<p>Alex,</p>\n<p>what would a custom http client look like - I am trying to call a dataservice that lives on a different host but in the same domain.</p>\n<p>Any examples/links to point me in the right direction&nbsp;would be great</p>\n<p>thanks<br />Michael</p>\n<p><strong>EDIT: FOUND SOLUTION</strong></p>\n<p>I ended up using JSONP by implementing the JSONP extension for WCF Data Services <a href=\"http://archive.msdn.microsoft.com/DataServicesJSONP\">http://archive.msdn.microsoft.com/DataServicesJSONP</a></p>\n<p>works great - the service I am calling is on our own servers&nbsp;so JSONP in-security really is not a concern for our scenario.</p>",
+    "PostedDate": "2011-03-18T12:11:34.767-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

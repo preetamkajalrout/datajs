@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1201341",
+    "ThreadId": "528526",
+    "Html": "When a page loads, I call &quot;OData.read&quot;, to read in a list of objects from a remote web-service. This works well. My code looks something like this:<br />\n<pre><code>   OData.read({ requestUri: oDataURL },\n\n      function (data, request) {\n            // do stuff with a successful request\n      }, function (err) {\n          alert(&quot;An error occurred &quot; + err.message);\n\n      });\n</code></pre>\n\nThis service can take a few seconds. In the meantime, if I click another link on my page (forcing window.location to change) then the error-block gets called. But the message is not &quot;Request aborted&quot;, but the &quot;HTTP Request failed&quot; message. How do I detect the case where the page has changed, and I should treat this error as someone getting impatient?<br />\n",
+    "PostedDate": "2014-01-31T07:05:47.59-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

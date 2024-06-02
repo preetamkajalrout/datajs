@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1119945",
+    "ThreadId": "466888",
+    "Html": "I'm using Eclipse for a number of projects, and I'm having trouble getting the <a href=\"https://datajs.codeplex.com/wikipage?title=Read%20Data%20Sample\" rel=\"nofollow\">Read Data Sample</a> to work.\r<br />\n<br />\nI create a static-web page project in Eclipse, and run it on an &quot;http preview&quot; server. Doing all of this on my local machine, btw.\r<br />\n<br />\nFrom there, I open the sample.htm link in Chrome, and the page opens OK. But when I hit the &quot;Search&quot; button, the call to Odata.read fails. I get a 400 - Bad Request back.\r<br />\n<br />\nApparently it has something to do with the &quot;enableJsonpCallback&quot; flag being set to true.\r<br />\n<br />\nI'm extremely new to this kind of development. I'm just trying to understand datajs by going through the samples. Any help would be greatly appreciated.<br />\n",
+    "PostedDate": "2013-11-07T10:52:25.317-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

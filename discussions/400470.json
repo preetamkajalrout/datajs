@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "931094",
+    "ThreadId": "400470",
+    "Html": "\r\n<p>Hi Alex,</p>\r\n<p>I also note that when creating a batch with a POST then the content-Length header is not set for that data, so my request fails for that POST:</p>\r\n<p>&nbsp;</p>\r\n<p><code>--batch_1939-8da1-bf2e </code><code>Content-Type: multipart/mixed; boundary=changeset_f1ea-5ee2-61fc\r\n</code><code>--changeset_f1ea-5ee2-61fc </code><code>Content-Type: application/http\r\n</code><code>Content-Transfer-Encoding: binary </code><code>POST Products HTTP/1.1\r\n</code><code>Accept: application/json </code><code>MaxDataServiceVersion: 2.0 </code>\r\n<code>DataServiceVersion: 2.0 </code><code>Content-Type: application/json;odata=verbose\r\n</code><code>{&quot;ID&quot;:&quot;9&quot;,&quot;Name&quot;:&quot;Test&quot;,&quot;Description&quot;:&quot;Description&quot;,&quot;ReleaseDate&quot;:&quot;\\/Date(1350943200000)\\/&quot;,&quot;Price&quot;:&quot;2&quot;</code><code>,&quot;Rating&quot;:&quot;3&quot;}\r\n</code><code>--changeset_f1ea-5ee2-61fc-- </code><code>--batch_1939-8da1-bf2e--</code></p>\r\n<p>Is this a bug or how can I set this header?</p>\r\n<p>The content-length for the complete batch request is set though but not for the batch parts...</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-10-23T07:20:18.03-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931913",
+    "ThreadId": "400470",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp;&nbsp; The content-length is set by the browser for the entire request. The fact that we don't set the content-length for each of the parts is by design and this because&nbsp;there is no real good way for us to compute the length of the payload in javascript.&nbsp; And second, the content-length for the part is preferred by the http standard, but not required so we elected no to put it.</p>\r\n<p>&nbsp;&nbsp;&nbsp; Which server are you using? And what is the failure that you get?</p>\r\n<p>Thanks</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-24T11:29:33.09-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "932298",
+    "ThreadId": "400470",
+    "Html": "\r\n<p>Hi Alex,</p>\r\n<p>thanks,</p>\r\n<p>I was wondering about that because it is mentioned here in the sample:</p>\r\n<p>http://www.odata.org/documentation/batch#BatchRequestBody</p>\r\n<p>But can't you calculate the content-length with UTF-8 charset yourself?</p>\r\n<p>&nbsp;</p>\r\n<p>I debugged and hacked a bit in datajs and added it as follows:</p>\r\n<p>var writeRequest = function (request) {<br>\r\n/// &lt;summary&gt;<br>\r\n/// Serializes a request object to a string.<br>\r\n/// &lt;/summary&gt;<br>\r\n/// &lt;param name=&quot;request&quot; optional=&quot;false&quot;&gt;Request object to serialize&lt;/param&gt;<br>\r\n/// &lt;returns type=&quot;String&quot;&gt;String representing the serialized request&lt;/returns&gt;<br>\r\n<br>\r\nvar result = (request.method ? request.method : &quot;GET&quot;) &#43; &quot; &quot; &#43; request.requestUri &#43; &quot; HTTP/1.1\\r\\n&quot;;<br>\r\nfor (var name in request.headers) {<br>\r\nif (request.headers[name]) {<br>\r\nresult = result &#43; name &#43; &quot;: &quot; &#43; request.headers[name] &#43; &quot;\\r\\n&quot;;<br>\r\n}<br>\r\n}<br>\r\n&nbsp;// my modification to add content-length <br>\r\n// code added to add the content-length for each batch part...may be removed for later gateway versions<br>\r\nif (request.body) {<br>\r\n<br>\r\nfunction utf8Len(ch) {<br>\r\nif (ch &lt;= 0x7F) return 1;<br>\r\nif (ch &lt;= 0x7FF) return 2;<br>\r\nif (ch &lt;= 0xFFFF) return 3;<br>\r\nif (ch &lt;= 0x1FFFFF) return 4;<br>\r\nif (ch &lt;= 0x3FFFFFF) return 5;<br>\r\nif (ch &lt;= 0x7FFFFFFF) return 6;<br>\r\nthrow new Error(&quot;Illegal argument: &quot; &#43; ch);<br>\r\n}<br>\r\n<br>\r\nfunction utf8ByteCount(str) {<br>\r\nvar count = 0;<br>\r\nfor (var i = 0; i &lt; str.length; i&#43;&#43;) {<br>\r\nvar ch = str.charCodeAt(i);<br>\r\ncount &#43;= utf8Len(ch);<br>\r\n}<br>\r\nreturn count;<br>\r\n}<br>\r\nresult &#43;= &quot;Content-Length: &quot; &#43; utf8ByteCount(request.body) &#43; &quot;\\r\\n&quot;;<br>\r\n} <br>\r\n&nbsp;// End modification<br>\r\n<br>\r\nresult &#43;= &quot;\\r\\n&quot;;<br>\r\n<br>\r\nif (request.body) {<br>\r\nresult &#43;= request.body;<br>\r\n}<br>\r\n<br>\r\nreturn result;<br>\r\n};</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-10-25T03:43:51.533-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "932594",
+    "ThreadId": "400470",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; I see, well the description never mentions the Content-Length at all; though the sample has it... but that is a sample and they are not always accurate.&nbsp; Yes, you can calculate the length if your know the encoding... but it is not guaranteed that you know the ecoding before hand or that you will be using UTF-8 always. I know UTF-8 is very popular and seems everything is gravitating towards that.&nbsp;</p>\r\n<p>&nbsp;&nbsp; I like your solution above, but I feel that computing this is just extra overhead.&nbsp; Does the gateway requires content-length to understand a batch payload?? Knowing the content-length&nbsp;is very helpful, but there should always be the option to scan the part delimiters in the body of the request.</p>\r\n<p>Thanks,</p>\r\n<p>Alex Trigo.&nbsp;</p>",
+    "PostedDate": "2012-10-25T12:02:00.013-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "932849",
+    "ThreadId": "400470",
+    "Html": "<p>Hi Alex,</p>\r\n<p>&nbsp;</p>\r\n<p>thanks for your reply.</p>\r\n<p>&nbsp;Yes afaik gateway needs that content-length but I guess they fixed it now for newer versions.</p>\r\n<p>Because of UTF-8: I've read that W3C XMLHTTPRequest standard specifies POST data will always be encoded with the UTF-8 .</p>\r\n<p>Well, don't know if this is right.</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-10-26T01:37:53.91-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

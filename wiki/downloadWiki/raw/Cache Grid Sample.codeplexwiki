@@ -1,0 +1,12 @@
+! Cache Sample
+
+This sample displays movies from Netflix and allows filtering on the average rating and year released.
+
+Some techniques demonstrated include:
+
+* How to configure the cache to store and prefetch items. 
+* How to use filterForward and filterBack to populate pages. 
+
+The sample file is [file:NetflixCache.htm], which can be added to the [Local Service Sample] to run.
+
+*Note:* The sample does not include an implemenation for "Last Page" because the Netflix service does not implement $count for JSONP. $count is supported in [url:DataServicesJSONP v0.3|http://archive.msdn.microsoft.com/DataServicesJSONP/Release/ProjectReleases.aspx?ReleaseId=5660].

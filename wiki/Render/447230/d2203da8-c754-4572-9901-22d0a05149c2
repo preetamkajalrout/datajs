@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Netflix Movies</title>
+</head>
+<body>
+    <h1>
+        Cache Sample</h1>
+    <p>
+        This page shows how use the datajs cache with a grid.
+    </p>
+    <span id="filter">
+        <select id="filterFields">
+            <option value="AverageRating">User Rating</option>
+            <option value="ReleaseYear">Year Released</option>
+        </select>
+        <select id="predicate">
+            <option value="lessThan">Less Than</option>
+            <option value="equals">Equals</option>
+            <option value="greaterThan">Greater Than</option>
+        </select>
+        <input id="filterText" type="text" />
+    </span>
+    <input id="filterButton" type="button" value="Filter" />
+    <input id="resetButton" type="button" value="Reset" />
+    <p id="navigator">
+        <a id="beginning">&lt; Return to Beginning</a> 
+        <a id="prev">&lt; Prev</a> 
+        <a id="next" href="#">Next &gt;</a>
+    </p>
+    <table class="table" cellspacing="0">
+        <col width="700"/>
+        <col width="100"/>
+        <col width="100"/>
+        <col width="100"/>
+        <thead>
+            <tr>
+                <th style="vertical-align: top; padding: 5px;">
+                    <b>Name</b>
+                </th>
+                <th style="vertical-align: top; padding: 5px;">
+                    <b>Average User Rating</b>
+                </th>
+                <th style="vertical-align: top; padding: 5px;">
+                    <b>Year Released</b>
+                </th>
+                <th style="vertical-align: top; padding: 5px;">
+                    <b>Rating</b>
+                </th>
+            </tr>
+        </thead>
+        <script id="mytemplate" type="text/x-jquery-tmpl">
+                <tr>
+                    <td style="vertical-align: top; padding: 5px;">
+                        <b>${Name}</b>
+                    </td>
+                    <td style="vertical-align: top; padding: 5px;">
+                        ${AverageRating}
+                    </td>
+                    <td style="vertical-align: top; padding: 5px;">
+                        ${ReleaseYear}
+                    </td>
+                    <td style="vertical-align: top; padding: 5px;">
+                        ${Rating}
+                    </td>
+                </tr>
+
+        </script>
+        <tbody id="dataTable">
+        </tbody>
+    </table>
+    <p id="searching">Searching...</p>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="datajs-1.0.0.js"></script>
+    <script type="text/javascript">
+        // Configure the cache options
+        var cachePageSize = 10;
+        var itemsDisplayed = 10;
+        var firstIndex = 0;
+        var lastIndex = -1;
+        var itemsToPrefetch = 300;
+        var cacheSize = -1;
+        var filterBack = false;
+        var predicate = null;
+
+        var options = { name: "cache", source: "http://odata.netflix.com/Catalog/Titles", pageSize: cachePageSize, prefetchSize: itemsToPrefetch, cacheSize: cacheSize };
+        OData.defaultHttpClient.enableJsonpCallback = true;
+
+        var cache = datajs.createDataCache(options);
+
+        var displayData = function () {
+            $("#dataTable").empty();
+            $("#searching").show();
+            if (predicate) {
+                if (filterBack) {
+                    // Filter backwards to get the previous page
+                    cache.filterBack(firstIndex, itemsDisplayed, predicate).then(function (results) {
+                        setBoundaryIndices(results);
+                        fillInTable($.map(results, function (element) { return element.item }));
+                    });
+                } else {
+                    // Filter forward to get the next page
+                    cache.filterForward(firstIndex, itemsDisplayed, predicate).then(function (results) {
+                        setBoundaryIndices(results);
+                        fillInTable($.map(results, function (element) { return element.item }));
+                    });
+                }
+            } else {
+                cache.readRange(firstIndex, itemsDisplayed).then(function (results) {
+                    setBoundaryIndices(results);
+                    fillInTable(results);
+                });
+            }
+        };
+
+        var setFirstIndex = function () {
+            if (filterBack) {
+                // If filterBack start from right before current first index.
+                // If readRange, start at the beginning of the previous page
+                firstIndex = predicate ? firstIndex - 1 : firstIndex - itemsDisplayed;
+            } else {
+                firstIndex = lastIndex + 1;
+            }
+
+            if (firstIndex < 0) { firstIndex = 0; }
+        };
+
+        var setBoundaryIndices = function (results) {
+            // Set the first and last indices based on the result from the filter
+            if (results && results.length) {
+                if (results[0].index) {
+                    firstIndex = results[0].index;
+                    lastIndex = results[results.length - 1].index;
+                } else {
+                    lastIndex = firstIndex + itemsDisplayed - 1;
+                }
+
+            } else {
+                // Disable the next button if no results were returned
+                $("#next").removeAttr("href", "#");
+                setFirstPage();
+            }
+        };
+
+        var fillInTable = function (results) {
+            if (results && results.length > 0) {
+                $("#dataTable").empty();
+                $("#mytemplate").tmpl(results).appendTo("#dataTable");
+                $("#searching").hide();
+            }
+        };
+
+        var setFirstPage = function () {
+            firstIndex = 0;
+            filterBack = false;
+
+            $("#next").attr("href", "#");
+            $("#prev").removeAttr("href", "#");
+            $("#beginning").removeAttr("href", "#");
+        };
+
+        var basicPredicates = {
+            equals: function (field, value) {
+                return function (item) { return parseFloat(item[field]) === value; }
+            }
+            ,
+            lessThan: function (field, value) {
+                return function (item) { return parseFloat(item[field]) < value; }
+            }
+            ,
+            greaterThan: function (field, value) {
+                return function (item) { return parseFloat(item[field]) > value; }
+            }
+        };
+
+        $("#filterButton").click(function () {
+            var movieName = $("#nameText").val();
+            var userRating = $("#userRatingText").val();
+
+            setFirstPage();
+            var predicateName = $("#predicate option:selected").val();
+            predicate = basicPredicates[predicateName]($('#filterFields option:selected').val(), parseFloat($("#filterText").val()));
+
+            displayData();
+        });
+
+        $("#next").click(function () {
+            filterBack = false;
+            setFirstIndex();
+
+            $("#prev").attr("href", "#");
+            $("#beginning").attr("href", "#");
+
+            displayData();
+        });
+
+        $("#prev").click(function () {
+            filterBack = true;
+            setFirstIndex();
+            if (firstIndex < itemsDisplayed - 1) {
+                setFirstPage();
+            }
+
+            displayData();
+            $("#next").attr("href", "#");
+
+        });
+
+        $("#beginning").click(function () {
+            setFirstPage();
+            displayData();
+        });
+
+        $("#resetButton").click(function () {
+            predicate = null;
+            setFirstPage();
+            displayData();
+        });
+
+        $(function () {
+            displayData();
+        });
+    </script>
+</body>
+</html>

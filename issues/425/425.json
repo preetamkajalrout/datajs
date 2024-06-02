@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "delay is mandatory for setTimeout function:\n \nIn datajs-1.0.0.js:\nwindow.setTimeout(callback);\n \nhttp://msdn.microsoft.com/en-us/library/ms536753(v=VS.85).aspx\nhttps://developer.mozilla.org/en/DOM/window.setTimeout",
+    "LastUpdatedDate": "2013-06-14T00:31:44.95-07:00",
+    "PlannedForRelease": "datajs version 1.0.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-07-18T13:14:26.693-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "setTimeout without delay",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 425
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

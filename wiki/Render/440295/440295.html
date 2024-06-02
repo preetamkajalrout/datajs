@@ -1,0 +1,36 @@
+<div class="wikidoc"><h1>datajs cache API</h1>The datajs cache API provides a very simple way of reading large paginated results into the browser in an efficient way that is very responsive to the needs of the user interface.<br /><br />For more information on using this API, see <a href="https://datajs.codeplex.com/wikipage?title=Using%20Caches&referringTitle=datajs%20cache%20API">Using Caches</a>.<br />
+<h2>datajs.createDataCache</h2><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> cache = datajs.createDataCache(options);
+</pre></div><br />This returns a <span class="codeInline">cache</span> object. The cache object is created immediately, although it may delay-perform work.<br /><br />The <span class="codeInline">options</span> object may have the following fields. The only required values are <span class="codeInline">name</span> and <span class="codeInline">source</span>.<br />
+<ul><li><span class="codeInline">name</span>: name of the cache (used by the underlying store) </li>
+<li><span class="codeInline">source</span>: URI for the collection (without $top or $skip options)</li>
+<li><span class="codeInline">cacheSize</span>: estimated maximum size of cached data in bytes.</li>
+<li><span class="codeInline">pageSize</span>: page size for requests and prefetching</li>
+<li><span class="codeInline">prefetchSize</span>: number of items to prefetch ahead of any request in a deferred manner, -1 to scan until the end of the collection, 0 to disable.</li>
+<li><span class="codeInline">idle</span>: initial value for the <span class="codeInline">onidle</span> event.</li>
+<li><span class="codeInline">mechanism</span>: if specified, indicates the store mechanism to use.</li>
+<li><span class="codeInline">metadata, httpClient, user, password, enableJsonpCallback, callbackParameterName, formatQueryString, httpClient</span>: when the source is an OData URI, these values will be applied.</li></ul>
+
+<h2>cache.readRange</h2><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> deferred = cache.readRange(startIndex, count);
+</pre></div><br />This returns a deferred result. When the result completes, the success handler is invoked with the items starting from startIndex, up to a maximum of count. If the range is beyond the collection, the request still succeeds, but with zero items.<br />
+<h2>cache.toObservable</h2><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> observable = cache.toObservable();
+</pre></div><br />This returns an Observable object if the <a href="http://msdn.microsoft.com/en-us/data/gg577609">Reactive Extensions for Javascript</a> library is available. The observable will enumerate all the elements of the cache source, and can be used like other Observable objects for additional composition. The method is also available as <span class="codeInline">ToObservable</span>.<br />
+<h2>cache.count</h2><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> deferred = cache.count();
+</pre></div><br />This returns a deferred result. When the result completes, the success handler is invoked with the count of items in the collection.<br />
+<h2>cache.clear</h2><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> deferred = cache.clear();
+</pre></div><br />This returns a deferred result. When the result completes, all data in the cache will have been cleared, including supporting metadata if needed. Any pending operations will be canceled.<br />
+<h2>cache.onidle</h2><div style="color:Black;background-color:White;"><pre>
+cache.onidle = <span style="color:Blue;">function</span>() {};
+</pre></div><br />This function will be called whenever the cache has finishes reading and prefetching work.<br />
+<h2>deferred.then</h2><div style="color:Black;background-color:White;"><pre>
+deferred.then(doneCallback, failCallback);
+</pre></div><br />When invoked on a deferred result, this will register success and failure callbacks. This returns the specified deferred result.<br />
+<h2>deferred.abort</h2><div style="color:Black;background-color:White;"><pre>
+deferred.abort();
+</pre></div><br />When invoked on a deferred result, this will attempt to abort the operation. If the operation hasn&#39;t completed, the fail callback will be invoked, otherwise nothing will happen. This returns the specified deferred result.
+<hr />
+Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=datajs%20store%20API&referringTitle=datajs%20cache%20API">datajs store API</a><br /></div><div class="ClearBoth"></div>

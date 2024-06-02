@@ -1,0 +1,130 @@
+[
+  {
+    "Id": "799796",
+    "ThreadId": "344801",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I'm sending an OData.request like this:</p>\r\n<p><span></span>OData.request({<span> </span>requestUri : uri,<span> </span>method : &quot;POST&quot;,<span>\r\n</span>data : data<span> </span>}, function(insertedItem) {<span>&nbsp;} });</span></p>\r\n<p><span>Everything is ok unless &quot;data&quot; contains a javascript date object. The object is not converted to OData format and the service replies with a &quot;<span>500 (invalid date format)</span>&quot;.</span></p>\r\n<p>Can you explain me how am I supposed to make datajs automatically translate the javascript date object?</p>\r\n<p>I'm using&nbsp;datajs-1.0.2.min.js.</p>\r\n<p>Thanks!</p>\r\n",
+    "PostedDate": "2012-02-25T04:17:07.053-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "802312",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Miguelans,</p>\r\n<p>Can you share a network trace of the request?&nbsp; I assume you are sending your request using JSON as the payload format so the library should convert the date object to the ATOM wire format.. (please see <a href=\"http://blogs.msdn.com/b/marcelolr/archive/2011/02/15/datajs-support-for-datatime-and-datetimeoffset.aspx\" target=\"_blank\">Marcelo's Blog </a>for an explanation behind this decision)</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-02-27T16:31:48.37-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "802492",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Alex,</p>\r\n<p>This is the request that is sent:</p>\r\n<p><strong>Headers:</strong></p>\r\n<p>POST /datastore.svc/Appointment(151) HTTP/1.1<br />Host: 127.0.0.1:8888<br />Connection: keep-alive<br />Content-Length: 106<br />Origin: http://127.0.0.1:8888<br />X-HTTP-Method: MERGE<br />User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.22 (KHTML, like Gecko) Chrome/19.0.1049.3 Safari/535.22<br />Content-Type: application/json<br />Accept: application/atomsvc+xml;q=0.8, application/json;q=0.5, */*;q=0.1<br />DataServiceVersion: 1.0<br />Referer: http://127.0.0.1:8888/home<br />Accept-Encoding: gzip,deflate,sdch<br />Accept-Language: en-US,en;q=0.8,pt;q=0.6<br />Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3<br />Cookie: JSESSIONID=bf2cao6yt5n1<br /><br /><br /><strong>Payload:</strong></p>\r\n<p><span>{\"startDate\":\"2012-01-23T19:00:49.878\",\"endDate\":\"2012-01-23T20:00:00\",\"description\":\"Desc\",\"name\":\"Test\"}</span></p>\r\n<p>&nbsp;</p>\r\n<p><strong>JS object sent:</strong></p>\r\n<ol class=\"properties properties-tree monospace\">\r\n<li class=\"parent expanded\"><span class=\"name\">data</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-object\">Object</span><ol class=\"children expanded\">\r\n<li><span class=\"name\">description</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-string\">\"Desc\"</span></li>\r\n<li class=\"parent\"><span class=\"name\">endDate</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-date\">Mon Jan 23 2012 20:00:00 GMT+0000 (GMT Standard Time)</span></li>\r\n<li><span class=\"name\">name</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-string\">\"Test\"</span></li>\r\n<li class=\"parent\"><span class=\"name\">startDate</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-date\">Mon Jan 23 2012 19:00:49 GMT+0000 (GMT Standard Time)</span></li>\r\n<li class=\"parent\"><span class=\"name dimmed\">__proto__</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-object\">Object</span></li>\r\n</ol></li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p>If you need any other info,&nbsp;please just ask!</p>\r\n<p>Thanks!</p>",
+    "PostedDate": "2012-02-28T02:03:45.327-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "802784",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Miguelans,&nbsp;</p>\r\n<p>&nbsp;&nbsp; Thanks for the info!&nbsp; Looking at the trace above the library did convert the date objects into a string using the ISO date format.&nbsp; That is intended because, of how JSON works, we cannot serialize the date into the OData format you mention above (the link to the blog I posted explains the reasons behind this).&nbsp; Do you know if the odata endpoint is implemented using Microsoft's WCF Data Services library or another implementation?&nbsp; If it is WCF based, which verison? I ask you this because we tested this scenario using WCF Data Services based&nbsp;OData V1 and OData V2 endpoints and they both support ISO date strings in a JSON request.&nbsp;</p>\r\n<p>&nbsp;&nbsp; Have you tried using ATOM instead of json?&nbsp; You can do that in two different ways, one is to add the&nbsp;Content-Type header to the request&nbsp;object&nbsp;header collections&nbsp;and set it to atom:&nbsp;&nbsp;&nbsp;</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.request({\r\n  requestUri: <span style=\"color: #a31515;\">\"http://odata.netflix.com/v1/Catalog/Genres\"</span>,\r\n  headers: { <span style=\"color: #a31515;\">\"Content-Type\"</span>: <span style=\"color: #a31515;\">\"application/atom+xml\"</span> } },\r\n  <span style=\"color: blue;\">function</span> (data, response) {\r\n    alert(<span style=\"color: #a31515;\">\"Operation succeeded.\"</span>);\r\n  }, <span style=\"color: blue;\">function</span> (err) {\r\n    alert(<span style=\"color: #a31515;\">\"Error occurred \"</span> + err.message);\r\n  });\r\n\r\n</pre>\r\n</div>\r\n<p>Or by explicitly using the library's atom handler:&nbsp;&nbsp;</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.request(requestObject, \r\n    <span style=\"color: blue;\">function</span>(data, response) { \r\n        <span style=\"color: green;\">// success function </span>\r\n    }, \r\n    <span style=\"color: blue;\">function</span>(err) { \r\n        <span style=\"color: green;\">//error function </span>\r\n    }, \r\n    OData.atomHandler);\r\n</pre>\r\n</div>\r\n<p>Thanks,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-02-28T12:08:35.927-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "802888",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Alex,</p>\n<p>I've just tried your suggestion to use Atom and it works.<br /> I'm using odata4j 0.5 so that is the problem...<br /> As it is still in an early stage of development, maybe some day it'll support the other JSON format.</p>\n<p>Thanks.</p>\n<p>Best regards,</p>\n<p>Miguel</p>",
+    "PostedDate": "2012-02-28T15:19:51.473-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "803071",
+    "ThreadId": "344801",
+    "Html": "<p>Hi again,</p>\n<p>Unfortunately, odata4j has another problem, now regarding dates and the Atom protocol.<br /> While they don't fix it, I'd like to know if there is any kind of flag or something that may enable the date formatting in standard OData JSON format (that is, the \"\\/Date(millis)\\/\"), or some method I may override to force this formatting.<br /> I found a method you apparently had in a previous version of datajs to format dates in standard OData&nbsp;JSON format (in here <a href=\"http://datajs.codeplex.com/SourceControl/changeset/view/2286#16634\">http://datajs.codeplex.com/SourceControl/changeset/view/2286#16634</a>&nbsp;-&nbsp;formatJsonDateString). Can I reuse it safely in 1.0.2?</p>\n<p>JSON format is also much clearer for debugging purposes. Are you considering supporting the standard OData&nbsp;JSON date format by default in a future version of datajs?</p>\n<p>Thanks.</p>",
+    "PostedDate": "2012-02-29T03:12:12.433-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "803710",
+    "ThreadId": "344801",
+    "Html": "<p>May I also suggest the replacing of the Atom format in JSON requests by the format \"/Date(millis)/\" which is supported by odata4j (don't know if this is the case for WCF Data Services). If you need a beta tester I'm available.</p>\r\n<p>Thanks.</p>",
+    "PostedDate": "2012-03-01T04:35:32.913-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "803944",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Miguel,&nbsp;</p>\r\n<p>&nbsp;&nbsp;&nbsp; So, odata4j doesn't process properly dates in Atom?&nbsp; The date format in JSON is precisely the problem.&nbsp; OData, as per the protocol (and the WCF Data Services implementation is strict on this one) is that dates in json follow the following format on the wire:</p>\r\n<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\">\r\n<tbody>\r\n<tr>\r\n<td width=\"148\" valign=\"top\">\r\n<p>Edm.DateTime</p>\r\n</td>\r\n<td width=\"456\" valign=\"top\">\r\n<p>\"\\/Date(&lt;ticks&gt;[\"+\" | \"-\" &lt;offset&gt;)\\/\"</p>\r\n<p>&lt;ticks&gt; = number of milliseconds since midnight Jan 1, 1970</p>\r\n<p>&lt;offset&gt; = number of minutes to add or subtract</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;&nbsp;&nbsp;The problem specifically are the \"\\/\" combinations.&nbsp;These cannot be reliably generated by the JSON serializers currently available in the browsers...&nbsp;And based on what you mention that odata4j works with /Date(nnn)/&nbsp;rathern than \\/Date(nnn)\\/&nbsp; makes me think that the JSON implementation they use has the same behavior.&nbsp;&nbsp;</p>\r\n<p>&nbsp;&nbsp; This issue made us use the&nbsp;ISO date format for JSON requests and comment out the function you mention above.&nbsp;&nbsp;As a workaround you can&nbsp;make your own build of datajs replacing&nbsp;the current&nbsp;date formatting function with the&nbsp;one above.&nbsp; Thanks&nbsp;for the test offer :), once&nbsp;we sorted this out in a later release (no plans&nbsp;yet)&nbsp;I hope you&nbsp;try it out.</p>\r\n<p>Thanks!</p>\r\n<p>Alex Trigo.&nbsp;&nbsp;&nbsp;&nbsp;</p>",
+    "PostedDate": "2012-03-01T12:11:05.753-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "804259",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Alex,</p>\r\n<p>I ended up replacing the date formatting function with the commented function in the file I referred to in a previous post.<br />Dates are now sent in the format I told you (\"/Date(&lt;ticks&gt;)/\") and odata4j works correctly with it.<br />For anyone experiencing the same problem, I pasted the patched datajs.js file here:&nbsp;<a href=\"http://pastebin.com/rY0qayEx\">http://pastebin.com/rY0qayEx</a><br />Thanks for you fast and kind support, Alex.<br />I'll occasionally check if a new version is available with this problem solved :)</p>\r\n<p>Best regards,<br />Miguel</p>",
+    "PostedDate": "2012-03-02T01:44:53.117-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "804347",
+    "ThreadId": "344801",
+    "Html": "<p>By the way,</p>\r\n<p>Receiving a date in JSON format is not being interpreted correctly by datajs (as you probably already know, and most likely due to the same parser problem you were talking about). Here's an example:</p>\r\n<p>The following response:</p>\r\n<p>\r\n<div>{</div>\r\n<div>\"d\" : {</div>\r\n<div>\"results\" : [</div>\r\n<div>{</div>\r\n<div>\"__metadata\" : {</div>\r\n<div>\"uri\" : \"http://127.0.0.1:8888/datastore.svc/Appointment(150L)\", \"type\" : \"Datastore.Appointment\"</div>\r\n<div>}, \"id\" : \"150\", \"startDate\" : \"\\/Date(1327536000000)\\/\", \"endDate\" : \"\\/Date(1327622400000)\\/\", \"description\" : \"Desc1\", \"name\" : \"Evento1\"</div>\r\n<div>}, ...</div>\r\n</p>\r\n<p>Will result in the following object, where the dates are simple strings with the back slash missing:</p>\r\n<ol class=\"children expanded\">\r\n<li><span class=\"name\">description</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-string\">\"Desc1\"</span></li>\r\n<li><span class=\"name\">endDate</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-string\">\"/Date(1327622400000)/\"</span></li>\r\n<li><span class=\"name\">id</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-string\">\"150\"</span></li>\r\n<li><span class=\"name\">name</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-string\">\"Evento1\"</span></li>\r\n<li><span class=\"name\">startDate</span><span class=\"separator\">:&nbsp;</span><span class=\"value console-formatted-string\">\"/Date(1327536000000)/\"</span></li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<p>Regards,<br />Miguel&nbsp;</p>",
+    "PostedDate": "2012-03-02T04:16:56.047-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "804742",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Miguel,&nbsp;</p>\r\n<p>&nbsp;&nbsp; You have to instruct the library that you want it to intrepret&nbsp; those string values as dates. This can be done in several ways:</p>\r\n<p>&nbsp;&nbsp; Globally:&nbsp;&nbsp; The conversion will happen on every single request you make.&nbsp; This is enabled by setting the flag</p>\r\n<p style=\"padding-left: 30px;\">&nbsp;&nbsp; odata.jsonHandler.recognizeDates = true;</p>\r\n<p>&nbsp;&nbsp; Per request:&nbsp; The&nbsp;conversion will happen&nbsp;on a request only. This is enabled by&nbsp;adding the approrpiate flag to the&nbsp;rquest object:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.request({\r\n  requestUri: <span style=\"color: #a31515;\">\"http://odata.netflix.com/v1/Catalog/Genres\"</span>,\r\n  headers: { },\r\n  recognizeDates: <span style=\"color: blue;\">true</span> },\r\n  <span style=\"color: blue;\">function</span> (data, response) {\r\n    alert(<span style=\"color: #a31515;\">\"Operation succeeded.\"</span>);\r\n  }, <span style=\"color: blue;\">function</span> (err) {\r\n    alert(<span style=\"color: #a31515;\">\"Error occurred \"</span> + err.message);\r\n  });\r\n\r\n</pre>\r\n</div>\r\n<p>&nbsp;&nbsp; Regards,</p>\r\n<p>Alex Trigo.</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-03-02T17:11:45.98-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "805615",
+    "ThreadId": "344801",
+    "Html": "<p>Hi Alex,</p>\r\n<p>All working now with JSON.</p>\r\n<p>Thanks a lot :)<br />Regards,<br />Miguel&nbsp;</p>",
+    "PostedDate": "2012-03-05T08:42:10.353-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "905923",
+    "ThreadId": "344801",
+    "Html": "<p>Hi,</p>\r\n<p>I'm using datajs 1.0.3, my oData endpoint is implemented using WCF Data Services library, also I configured the request to instruct string values as date (recognizeDates: <span style=\"color: #000000;\"><span style=\"color: #0000ff;\">true</span>), but I get the error \"Cannot convert a primitive value to the expected type 'Edm.DateTime'\" from my endpoint.</span></p>\r\n<p><span style=\"color: #000000;\">I'm using a single Html page to send requests (post, put, get, merge, and delete)&nbsp;to a OData endpoint. That page allows t</span><span style=\"color: #000000;\">he user to type the request data (in Json format) and selects the Http method to send the request. I have to accept Json format only (user's requirement). If the request does not include dates, the request works fine. </span></p>\r\n<p><span style=\"color: #000000;\">I use fiddler to see the real request and the request does not include the escape character \"\\\"; so dates come like: \"/Date(...)/\" and not like \"<strong>\\</strong>/Date(...)<strong>\\</strong>/\". The OData endpoint answer with a deserialization error, because it can not interpret correctly that string like a date.</span></p>\r\n<p><span style=\"color: #000000;\">&nbsp;</span></p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>&lt;script src=<span style=\"color: #a31515;\">\"datajs-1.0.3.min.js\"</span> type=<span style=\"color: #a31515;\">\"text/javascript\"</span>&gt;&lt;/script&gt;\r\n&lt;script src=<span style=\"color: #a31515;\">\"json2.js\"</span> type=<span style=\"color: #a31515;\">\"text/javascript\"</span>&gt;&lt;/script&gt;\r\n\r\n&lt;script language=<span style=\"color: #a31515;\">\"javascript\"</span> type=<span style=\"color: #a31515;\">\"text/javascript\"</span>&gt;\r\n\r\n<span style=\"color: blue;\">function</span> btnTest_onclick() {\r\n\r\nOData.defaultHttpClient.enableJsonpCallback = <span style=\"color: blue;\">true</span>;\r\nOData.jsonHandler.recognizeDates = <span style=\"color: blue;\">true</span>;\r\n...\r\n<span style=\"color: blue;\">var</span> data = $(<span style=\"color: #a31515;\">\"#txtData\"</span>).val();\r\n<span style=\"color: blue;\">var</span> jsonData = JSON.parse(data);\r\n<span style=\"color: blue;\">var</span> request = { requestUri: url, method: httpMethod, user: user, password: password, data: jsonData, jsonpCallback: <span style=\"color: #a31515;\">'myCallback'</span>, dataType: <span style=\"color: #a31515;\">'jsonp'</span>, recognizeDates: <span style=\"color: blue;\">true</span> };\r\n\r\n\r\nOData.request(\r\n\trequest,\r\n\t<span style=\"color: blue;\">function</span> (data, result) {\r\n\t\t\t\t\t\t<span style=\"color: blue;\">var</span> jsonResult = <span style=\"color: #a31515;\">\"\"</span>;\r\n\t\t\t\t\tjsonResult = <span style=\"color: #a31515;\">\"Status code:\"</span> + result.statusCode + <span style=\"color: #a31515;\">\"\\n\"</span> + <span style=\"color: #a31515;\">\"Status text:\"</span> + result.statusText;\r\n\t\t\t\t\ttxtResult.value = jsonResult;\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\thandleException);\r\n}\r\n&lt;/script&gt;\r\n</pre>\r\n</div>\r\n<p><span class=\"hps\">Any help</span> <span class=\"hps\">is appreciated!<br />Regards,</span></p>\r\n<p><span class=\"hps\">Christian Sandoval</span></p>",
+    "PostedDate": "2012-08-29T13:22:22.223-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "906793",
+    "ThreadId": "344801",
+    "Html": "<p>Hi,</p>\r\n<p>&nbsp;</p>\r\n<p>I also have the same error. I think it is a bug in datajs.</p>",
+    "PostedDate": "2012-08-31T03:59:24.06-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "907056",
+    "ThreadId": "344801",
+    "Html": "\r\n<p>Hi Christian, Joe</p>\r\n<p>I assume that the user of your web page would enter a text in JSON format, so if she wants to include a date it would do something like this right?</p>\r\n<p>{ dateValue: &quot;\\/Date(12345678)\\/&quot; }</p>\r\n<p>The problem is the format of the datetime literal itself. It is unfortunate, but this pattern doens't roundtrip when using standards compliant JSON parsers and serializers (like the one in the browser).&nbsp;So in the code above, when you do&nbsp; var jsonData\r\n = JSON.parse(data),&nbsp; the value that you get in the variable is:</p>\r\n<p>&quot;{ dateValue: /Date(12345678)/ }&quot;<span style=\"color:#0000ff; font-size:x-small\"><span style=\"color:#0000ff; font-size:x-small\">&nbsp;</span></span></p>\r\n<p><span style=\"color:#0000ff; font-size:x-small\"><span style=\"color:#0000ff; font-size:x-small\">&nbsp;</span></span>You get it back as string, but notice that the backslashes are gone. This is because of the escaping (and WCF Data Services doesn't like this).&nbsp;\r\n When you pass this value to DataJS, it is already a string in the wrong format.&nbsp; DataJS recongnizeDates flag only works when reading responses, not when sending them. This because DataJS expect that dates are javascript date objects.</p>\r\n<p>Also, going back a litle bit to the roundtripping, you can force the JSON.parse function to give you back a string in the format that you want... but you will need to doulbe-escape the backslashes:&nbsp;</p>\r\n<p>var x = '&quot;<a>\\\\\\\\/Date(...)\\\\\\\\/&quot;'</a>;<br>\r\nJSON.parse(x);</p>\r\n<p>&quot;\\/Date(...)\\/&quot;</p>\r\n<p>&nbsp;But that's half of the stroy, now you have to send this string as is to the endpoint. But if you stringify it again, there is no way you can keep it as it is (no matter how much escaping you do), the JSON stringify function will mess it up do to the\r\n escaping of the backslashes.&nbsp;</p>\r\n<p>&nbsp;I see three options for you.&nbsp;</p>\r\n<p>1. When writing your payload in your webpage, use&nbsp;the ISO datetime format for date time literals instead.&nbsp; This works well with WCF data services and that is what DataJS does when dealing with dates due to the problems inherent to the OData JSON\r\n datetime literal format.</p>\r\n<p>2. use DataJS to parse your date by injecting a response using a mock httpclient object (if you want to still parse and stringify the data):&nbsp;</p>\r\n<div style=\"background-color:white; color:black\">\r\n<pre>OData.read(<span style=\"color:#a31515\">&quot;&quot;</span>, \r\n    <span style=\"color:blue\">function</span> success(data) {\r\n        jsonData = data;    \r\n    },     \r\n    <span style=\"color:blue\">function</span> error(err) {\r\n        <span style=\"color:green\">// do something with the error </span>\r\n    },\r\n    OData.jsonHandler,\r\n    {\r\n       request: <span style=\"color:blue\">function</span>(request, success) {\r\n            <span style=\"color:blue\">var</span> response = { \r\n                  body: $(<span style=\"color:#a31515\">&quot;#txtData&quot;</span>).val(), \r\n                  statusCode: 200, \r\n                  headers: { \r\n                       <span style=\"color:#a31515\">&quot;Content-Type&quot;</span>: <span style=\"color:#a31515\">&quot;application/json&quot;</span>\r\n                  } \r\n            };\r\n            success(data);\r\n       }\r\n   } \r\n);\r\n</pre>\r\n</div>\r\n<p>3. use a custom handler object that will not modify the data (it is already in&nbsp;JSON format, so why you would want to parse and stringify it again? )</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:blue\">var</span> request = { requestUri: url, ..., data:$(<span style=\"color:#a31515\">&quot;#txtData&quot;</span>).val()};\r\nOData.request(request, \r\n    <span style=\"color:blue\">function</span> success(data) {\r\n       <span style=\"color:green\">// do something with data  </span>\r\n    },     \r\n    <span style=\"color:blue\">function</span> error(err) {\r\n        <span style=\"color:green\">// do something with the error </span>\r\n    },\r\n    {\r\n       accept: OData.defaultHandler.accept,\r\n       maxDataServiceVersion: OData.defaultHandler.maxDataServiceVersion,\r\n       read: OData.defaultHandler.read,\r\n       write: <span style=\"color:blue\">function</span>(request){\r\n           <span style=\"color:green\">// set the appropriate headers to the request.</span>\r\n           request.headers = {\r\n               <span style=\"color:#a31515\">&quot;Content-Type&quot;</span> : <span style=\"color:#a31515\">&quot;application/json&quot;</span>,\r\n               <span style=\"color:#a31515\">&quot;DataServiceVersion&quot;</span> : <span style=\"color:#a31515\">&quot;2.0&quot;</span>\r\n           };\r\n   \r\n           <span style=\"color:green\">// data is assumed to be a JSON string, so just pass it through</span>\r\n           request.body = request.data;\r\n       }\r\n    }\r\n);\r\n</pre>\r\n</div>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>\r\n",
+    "PostedDate": "2012-08-31T12:27:46.61-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "907120",
+    "ThreadId": "344801",
+    "Html": "<p>Excellent! It works!</p>\r\n<p>Option A, always was my plan \"B\".</p>\r\n<p>I choose the third option. I have only a doubt: my endpoint creates the entity correctly, with the correct date; but I get the response in the error function (not in the success function).<br />The message property of the error object says: \"ERROR: Invalid date/time value\", but the endpoint does not report any error.&nbsp;The error object has in the response property&nbsp;the data of the created register (in Atom format, not in Json). <br /><br />Thank you so much, I appreciate your valuable time and answer!</p>",
+    "PostedDate": "2012-08-31T16:05:24.803-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

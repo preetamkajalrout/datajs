@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Using the sample in the documentation it seems like $.each usage to loop over results does not work correctly.\n \nfor (var i = 0; i < data.results.length; i++) {\n       html += \"<li>\" + data.results[i].CategoryName + \"</li>\";\n}\n \nPrints the CategoryName correctly. However the below line does not, even though they should be doing the same.\n \n$.each(data.results, function (record) { html += \"<li>\" + record.CategoryName + \"</li>\"; });\n \nThe below line prints 'undefined'",
+    "LastUpdatedDate": "2013-02-21T17:20:09.547-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-05-12T23:50:08.737-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "$.each works incorrectly",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 656
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "670498",
+    "ThreadId": "272261",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>&nbsp;</p>\r\n<p>I have a question regarding write functions.</p>\r\n<p>As of now I find it a bit complex to do writing to an odata service.</p>\r\n<p>Wouldn't it be nice to retrieve the data with datajs and then operate on this data and finally simply call</p>\r\n<p>e.g. datajs.write(modifiedData)</p>\r\n<p>&nbsp;and hand over the modified data.</p>\r\n<p>Something like an easy to use API would be nice.</p>\r\n<p>Is this possible or planned?</p>\r\n<p>THX</p>\r\n",
+    "PostedDate": "2011-09-12T02:14:52.97-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "670696",
+    "ThreadId": "272261",
+    "Html": "<p>Hi Joe82,</p>\r\n<p>Thank you for your feedback and yes&nbsp;we have considered having such higher level services.&nbsp; Right now, the library is very low level in this regard and that is intended because of how the OData protocol works.&nbsp; Reading is always the same operation in OData; however, writing is done by different methods with siginficantly different outcome.&nbsp; Writing to an OData&nbsp;endpoint&nbsp;is done&nbsp;via http requests with specific verbs: POST for inserting a new item, PUT for a full update&nbsp;of an item and&nbsp;MERGE (through tunneling) for differential update of an item.&nbsp; These different ways of \"writing\" to an OData service require either&nbsp;that the user selects what operation wants to do or have a change tracking mechanism that allows the library to determine the correct HTTP verb to use.</p>\r\n<p>We will&nbsp;give more consideration to&nbsp;such a feature when planning&nbsp;the next changes&nbsp;to dataJS.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.&nbsp;</p>",
+    "PostedDate": "2011-09-12T10:40:30.64-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

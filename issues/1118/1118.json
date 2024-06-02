@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I am using datajs to do cross domain request, and I have enabled the jsonp-callback but just found that when i requested the metadata, i got response like this: __Resource interpreted as Script but transferred with MIME type application/xml: \"http://localhost:8000/d.svc/$metadata?$callback=parent.handleJSONP_0&$format=xml\".__ and also it said: __Uncaught SyntaxError: Unexpected token <__, so if anyone has come across the sam issue...",
+    "LastUpdatedDate": "2013-08-05T00:47:01.8-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-08-05T00:47:01.8-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "OData CrossDomain Problem",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1118
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

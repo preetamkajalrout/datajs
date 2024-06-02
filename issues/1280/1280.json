@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Currently, we datajs used in CORS, it cannot send cookie info to server.\n\nI think below code need to be added when init xhr\n\n\tif(\"OPTIONS\" != request.method){\n\t\txhr.withCredentials = true;\n\t}",
+    "LastUpdatedDate": "2015-03-31T12:28:11.42-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2014-05-03T22:20:58.743-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "CORS not supported",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 3,
+    "Id": 1280
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "I would prefer that a new createXmlHttpRequest  property be exposed that can be used as an alternative the internal createXmlHttpRequest() function. This would allow the xhr.withCredentials property to be set as above, and allow for any other current or future changes to the xhr object in the users override.",
+      "PostedDate": "2014-07-10T09:17:32.893-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2014-10-16T13:17:07.863-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2015-03-31T12:28:11.42-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

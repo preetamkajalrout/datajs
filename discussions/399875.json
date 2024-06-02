@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "928663",
+    "ThreadId": "399875",
+    "Html": "\r\n<p>Hi Alex,</p>\r\n<p>I have seen that datajs returns an object which has an abort function to abort the current request:</p>\r\n<p>var object = OData.read(oRequest, fnSuccess, fnError);</p>\r\n<p>object.abort();</p>\r\n<p>Can I use this because it is not documented or will there be changes in the future of what will be returned? I also see that I only can abort the function but I don't get any more information back.</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks</p>\r\n<p>Joe</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-10-18T03:45:01.81-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931831",
+    "ThreadId": "399875",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Yes, indeed you can.&nbsp; Thanks for letting us know that it is not documented.&nbsp; You can use it freely, the funciton is part of the public API and we don't have any plans to change it.&nbsp;</p>\r\n<p>&nbsp;&nbsp;&nbsp; The function works on a best effort basis.&nbsp; If the request has not been completely served and processed it will abort and invoke the error callback function&nbsp;passing the following object as the argument.</p>\r\n<p>&nbsp;&nbsp;&nbsp; {&nbsp;message:&nbsp;<span style=\"color: maroon;\">\"Request&nbsp;aborted\"</span>&nbsp;}</p>\r\n<p>&nbsp;&nbsp;&nbsp; On the other hand, if the request has been completed by now, then the function does nothing.&nbsp; You may thing that it does nothing if the endpoint is responding too quickly to the request.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-24T09:29:03.537-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "932295",
+    "ThreadId": "399875",
+    "Html": "<p>Thanks Alex for the clarifications :)</p>",
+    "PostedDate": "2012-10-25T03:40:26.47-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

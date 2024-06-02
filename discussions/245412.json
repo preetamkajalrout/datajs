@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "563815",
+    "ThreadId": "245412",
+    "Html": "\r\n<pre>when trying to execute OData.read(<span>&quot;http://odata.netflix.com/v1/Catalog/Genres&quot;),&nbsp;</span>the response is returned from server (as checked in Fiddler), but xhr.getAllResponseHeaders() returns null and throws exception.&nbsp;</pre>\r\n<pre>Is it because of &quot;Same Origin Policy&quot;? Can you please suggest how to resolve the issue?</pre>\r\n<pre><span><br></span></pre>\r\n<pre><pre><br></pre>\r\n<br></pre>\r\n",
+    "PostedDate": "2011-02-10T01:52:20.703-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "564217",
+    "ThreadId": "245412",
+    "Html": "\r\n<p>odata.netflix.com supports JSONP, which you can access if your page is served from a different domain.</p>\r\n<p>The big doc page <a href=\"http://datajs.codeplex.com/documentation#x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_xdomain\">\r\ndiscusses this</a>, and I encourage you to go through the section, but in short, you should be able to read from this domain by adding this before the read request.</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre>OData.defaultHttpClient.enableJsonpCallback = <span style=\"color:blue\">true</span>;\r\n</pre>\r\n</div>\r\n<p>Please let me know how this goes and if you run into any other problems.</p>\r\n<p>Thanks,<br>\r\nMarcelo</p>\r\n",
+    "PostedDate": "2011-02-10T13:44:30.76-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "564437",
+    "ThreadId": "245412",
+    "Html": "<p>Thanks. The issue is resolved.</p>\r\n<p>OData.read(\"http://odata.netflix.com/v1/Catalog/Genres\", function (data, request) {&nbsp;</p>\r\n<p><span style=\"white-space: pre;\"> </span>var html = \"\";<span> </span>for (var i = 0; i &lt; data.results.length; i++) {&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>\r\n<p><span style=\"white-space: pre;\"> </span>html += \"&lt;div&gt;\" + data.results[i].Name + \"&lt;/div&gt;\";} &nbsp;</p>\r\n<p><span style=\"white-space: pre;\"> </span>alert(html); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span> </span></p>\r\n<p><span style=\"white-space: pre;\"> </span>}</p>\r\n<p>});</p>\r\n<p>And if the dataVersion is 1.0 (in the HTTP Header), then the response data is returned in \"data.results\" variable and if dataVersion is 2.0, the response data is in \"data\" variable as in documentation example.</p>",
+    "PostedDate": "2011-02-11T00:13:49.537-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

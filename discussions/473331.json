@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1135001",
+    "ThreadId": "473331",
+    "Html": "Adding the necessary headers to working with the SharePoint REST API is not difficult at all. But where does this code belong? Should it be a &quot;plugin&quot; for datajs or could it even be merged into the core so you can do: <code>OData.defaultHttpClient = OData.spHttpClient</code> for example.<br />\n<pre><code>var defaultClient = OData.defaultHttpClient;\n    var spClient = {\n        request: function (request, success, error) {\n            request.headers = {\n                &quot;Accept&quot;: &quot;application/json;odata=verbose&quot;,\n                &quot;Content-Type&quot;: &quot;application/json;odata=verbose&quot;,\n                &quot;X-RequestDigest&quot;: document.getElementById(&quot;__REQUESTDIGEST&quot;).value,\n                &quot;If-Match&quot;: &quot;*&quot;\n            };\n\n            return defaultClient.request(request, success, error);\n        }\n    }\n    OData.defaultHttpClient = spClient;</code></pre>\n\n",
+    "PostedDate": "2013-12-12T04:57:54.05-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "723815",
+    "ThreadId": "285798",
+    "Html": "\r\n<p>If I accessing a date element from a Sharepoint 2010 list I get a string not a date object.</p>\r\n<p>OData.read(requestUri, function (data) {<br>\r\n&nbsp; for (var i = 0; i &lt; data.results.length; i&#43;&#43;) {<br>\r\n&nbsp;&nbsp;&nbsp; alert(data.results[i].Modified);<br>\r\n&nbsp;&nbsp;&nbsp; // I got a string: /Date(872467200000)/<br>\r\n&nbsp; }</p>\r\n<p>Is this correct?</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-01-11T10:36:36.72-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "724006",
+    "ThreadId": "285798",
+    "Html": "<p>Hi VolkerMSYS,</p>\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; Yes this is correct... without any metadata the library will not try to&nbsp;parse&nbsp;Date literals in a JSON&nbsp;feed and instead&nbsp;returns them as&nbsp;strings.&nbsp; You can control this behavior and have the library try and parse these values into&nbsp;Date objects:</p>\n<ul>\n<li>Globally, meaning that&nbsp;the library will do the parsing for every JSON response received by setting the odata.jsonHandler.recognizeDates flag to true. </li>\n<li>Per request, by setting the recognizeDates&nbsp;property of the request object to true: </li>\n</ul>\n<div style=\"background-color: white; color: black;\">\n<pre style=\"padding-left: 30px;\">OData.read({ requestUri: <span style=\"color: #a31515;\">\"uri\"</span>, recognizeDates: <span style=\"color: blue;\">true</span>} , <span style=\"color: blue;\">function</span> (data) {\r\n  <span style=\"color: blue;\">for</span> (<span style=\"color: blue;\">var</span> i = 0; i &lt; data.results.length; i++) {\r\n    alert(data.results[i].Modified);\r\n    <span style=\"color: green;\">// I got a string: /Date(872467200000)/</span>\r\n  }&nbsp;</pre>\n</div>\n<p>Regards,</p>\n<p>Alex Trigo.</p>\n<p>&nbsp;&nbsp;</p>\n<p>&nbsp;</p>",
+    "PostedDate": "2012-01-11T17:58:18.443-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "724191",
+    "ThreadId": "285798",
+    "Html": "<p>Hi Alex,<br />now it woks fine, <br />Thanks</p>\r\n<p>Regards <br />Volker</p>",
+    "PostedDate": "2012-01-12T04:21:13.427-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

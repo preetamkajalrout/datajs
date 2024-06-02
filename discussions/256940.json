@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "609683",
+    "ThreadId": "256940",
+    "Html": "\r\n<p>I'm working on a browser based OData service navigator that utilizes the information in the metadata to build a UI. I've found my self reimplementing some general metadata search functions you have in datajs but are not public in the API. Any plans on exposing\r\n functions such as 'lookupTypeInMetadata', 'lookupEntityType', etc. or creating other functions to help traverse the metadata&nbsp;programmatically? Being able to do things like get from a given entitySet to the associated entityType using something like Customers.entityType\r\n would be very nice.</p>\r\n",
+    "PostedDate": "2011-05-09T11:17:08.203-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "609853",
+    "ThreadId": "256940",
+    "Html": "<p>Jason, I think that exposing some of the metadata helpers might be OK - this is something we can definitely look into.</p>\r\n<p>The Customers.entityType-style access is worthy of more discussion though. On one hand, I like the fact that it's a lot faster than doing look-ups continuously. On the other hand, I'm reluctant to modify the metadata that the page supplies to add these shortcuts, primarily because we don't think we \"own\" that data, and we'd have to come up with something to detect changes and react to them. Performance-wise, I intuitively would imagine it's not a big deal compared to the cost of doing HTTP request/responses most of the time which is involved in reading/writing data.</p>\r\n<p>Thanks for bringing this up!</p>",
+    "PostedDate": "2011-05-09T17:13:00.923-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

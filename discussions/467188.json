@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1120535",
+    "ThreadId": "467188",
+    "Html": "I'm running the &quot;Read Data&quot; sample provided in this site.\r<br />\n<br />\nIf I just search for &quot;HTML&quot;, this is the resulting URL that gets generated:\r<br />\n<br />\n<a href=\"http://tv.telerik.com/services/odata.svc/Videos?$select=Name,Description,ImageUrl,Url&amp;$top=50&amp;$orderby=DatePublish%20desc&amp;$filter=substringof('HTML',%20Description)&amp;$callback=parent.handleJSONP_5&amp;$format=json\" rel=\"nofollow\">http://tv.telerik.com/services/odata.svc/Videos?$select=Name,Description,ImageUrl,Url&$top=50&$orderby=DatePublish%20desc&$filter=substringof('HTML',%20Description)&$callback=parent.handleJSONP_5&$format=json</a>\r<br />\n<br />\nOK, so it doesn't like the callback parameter. I get this:\r<br />\nThe query parameter '$callback' begins with a system-reserved '$' character but is not recognized.\r<br />\n<br />\nBut then I remove that parameter, just for testing purposes, and I get this:\r<br />\nThe query parameter '$format' begins with a system-reserved '$' character but is not recognized.\r<br />\n<br />\nThis is supposed to be a JSONP example, yet it doesn't like the $format=json parameter either? What's going on here?<br />\n",
+    "PostedDate": "2013-11-08T08:51:01.08-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

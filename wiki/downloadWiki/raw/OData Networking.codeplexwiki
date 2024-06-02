@@ -1,0 +1,17 @@
+! OData Networking
+
+The OData functionality in datajs is based on an {{httpClient}} object. The responsibility of the object is to implement an asynchronous network request through a {{request}} API.
+
+By default, datajs will use the XMLHttpRequest object in the browser to make a network request. If JSONP is enabled, it will use this technique when the request is for a different domain.
+
+You can use a different {{httpClient}} object by setting it on the appropriate API call or, in the case of the cache, by setting the {{httpClient}} property on the constructor options.
+
+The default client is available through {{OData.defaultHttpClient}}, which is used when the caller doesn't specify one explicitly. You can use this directly as well, for example to implement a custom {{httpClient}} that modifies the request and then calls the original behavior. See [Custom OData httpClient] for a sample.
+
+Because the implementation is based on XMLHttpRequest, some of its constraints are also applicable to datajs. For example:
+* Some headers are restricted and cannot be set, for example {{Referer}}.
+* Redirections from the server have limited support. In some formats, relative URLs may be corrupted; in some browsers, the second request may change the headers - in particular, addressing the root of a service {{http://server/service}} may redirect to {{http://server/service/}} and cause the request to fail.
+* [Cross Domain Requests] have limited support.
+----
+Previous Topic: [OData Code Snippets]
+Next Topic: [OData Security]

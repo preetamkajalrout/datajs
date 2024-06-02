@@ -1,0 +1,56 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi, \n\nIt seems that __datajs-1.1.2.js__ has some bug in the __xmlNewAttribute__ function.\nThere's the code:\n\n```\nvar attribute =\n            dom.createAttributeNS && dom.createAttributeNS(namespaceURI, qualifiedName) ||\n            dom.createNode(2, qualifiedName, namespaceURI || undefined);\n```\n\nThere neither createAttributeNS nor createNode exists in the dom object (screenshot attached).\nException I got was: \"__TypeError: undefined is not a function__\".\n\nTo make it works I just replaced this code with the following one:\n\n```\nvar attribute = dom.createAttribute(qualifiedName);\n```\n\nTested on the Chrome Version 34.0.1847.116.\n```\nOData.request(\n    {\n        requestUri: \"...\",\n        method: \"POST\",\n        headers: {\n          \"Accept\": \"application/atom+xml\",\n          \"Content-Security-Policy\": \"default-src 'none'; script-src 'self'; connect-src: 'self'; img-src: 'self'; style-src: 'self';\",\n          \"Content-Type\": \"application/atom+xml\",\n          \"DataServiceVersion\": \"2.0\",\n          \"X-Requested-With\": \"XMLHttpRequest\"\n        },\n        data: {\n          id: \"...\"\n        }\n     },\n     function(data, response){\n\tconsole.log(\"OK\");\n     },\n     function (err) {\n\tconsole.log(err.message);\n     }\n);\n```",
+    "LastUpdatedDate": "2014-04-14T12:32:52.48-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2014-04-14T07:56:51.243-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "TypeError: undefined is not a function at xmlNewAttribute",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1272
+  },
+  "FileAttachments": [
+    {
+      "FileId": 323,
+      "FileName": "xmlNewAttributeIssue.png",
+      "DownloadUrl": ".\\323"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Check the following link for the root cause of this issue: https://groups.google.com/a/chromium.org/forum/#!searchin/blink-dev/DocumentCreateAttributeNSMethod/blink-dev/8p-gwWL4ypc/ptLj4UqvMmsJ",
+      "PostedDate": "2014-04-14T11:27:34.527-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "crbug.com/347506",
+      "PostedDate": "2014-04-14T12:32:52.48-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

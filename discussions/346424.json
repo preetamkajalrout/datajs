@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "802014",
+    "ThreadId": "346424",
+    "Html": "\r\n<p>Hi I have the following problem:</p>\r\n<p>I have a datetimeoffset type which is handed over to datajs and datajs crashes in the</p>\r\n<p>parseJsonDateString method where the value parameter of the property is <span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">\r\ndatetimeoffset'2012-02-20T12:40:45.327&#43;01:00'</span></p>\r\n<p>Then the</p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n<span><span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">jsonDateRE</span></span><span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">.<span>exec</span>(<span>value</span>);</span></p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n<span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">method returns null...&nbsp;</span></p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n&nbsp;</p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n<span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">All this happens in the jsonParser and the property type is Edm.DateTimeOffset and the value as seen above:</span></p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n<span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\"><span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">datetimeoffset'2012-02-20T12:40:45.327&#43;01:00'</span>&nbsp;</span></p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n<span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">Is this a bug?&nbsp;</span></p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n<span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">Thanks and best regards</span></p>\r\n<p style=\"font-style:normal; font-variant:normal; font-weight:400; font-size:9.75pt; line-height:normal\">\r\n<span style=\"font-size:8.5pt; color:black; font-family:&quot;Courier New&quot;; font-style:normal; font-variant:normal; font-weight:400; line-height:normal\">Joe&nbsp;</span></p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-02-27T06:56:49.477-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "802342",
+    "ThreadId": "346424",
+    "Html": "<p>Hi Joe,&nbsp;</p>\n<p>So, the property value you are getting from the endpoint is <em><span style=\"line-height: normal; font-variant: normal; font-family: 'Courier New'; color: black; font-size: 8.5pt; font-weight: 400;\"><span style=\"line-height: normal; font-variant: normal; font-family: 'Courier New'; color: black; font-size: 8.5pt; font-weight: 400;\">datetimeoffset'2012-02-20T12:40:45.327+01:00' </span></span></em>?&nbsp;</p>\n<p>The format of the value is odd because per the protcol the library is expecting a value in the form \\/Date(&lt;miliseconds&gt; +|- &lt;offset&gt;)\\/.&nbsp; That's why the regular expression fails to match and&nbsp; returns a null value.&nbsp; Can you share with us a trace of the request and the response?&nbsp; Is the endpoint using Microsoft WCF Data Services or some other OData implementation?</p>\n<p>Thanks!</p>\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-02-27T18:16:17.7-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "805559",
+    "ThreadId": "346424",
+    "Html": "<p>Hi Alex,</p>\n<p>hope you are doing great :).</p>\n<p>Thanks for your answer but I don't get it. The spec says:</p>\n<p><span style=\"font-size: 12pt; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;; font-style: normal; font-variant: normal; font-weight: 400; line-height: normal;\"><a href=\"http://www.odata.org/developers/protocols/json-format#PrimitiveTypes\">http://www.odata.org/developers/protocols/json-format#PrimitiveTypes</a></span></p>\n<p><span style=\"font-size: 12pt; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;; font-style: normal; font-variant: normal; font-weight: 400; line-height: normal;\"><a href=\"http://www.odata.org/developers/protocols/json-format#PrimitiveTypes\"></a></span>Edm.DateTimeOffset <br /> Literal form of Edm.DateTimeOffset as used in URIs formatted as a JSON string</p>\n<p>&nbsp;</p>\n<p>So should the value now include the string 'datetimeoffset' or not?</p>\n<p>And is this different for dates? I see here an example:</p>\n<p>http://www.odata.org/developers/protocols/overview#AbstractTypeSystem</p>\n<p>datetime'2000-12-12T12:00'</p>\n<p>So what is the correct value the server should sent for datetime and datetimeoffset?</p>\n<p>Thanks for your help!</p>\n<p>Joe</p>",
+    "PostedDate": "2012-03-05T07:13:14.647-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "805741",
+    "ThreadId": "346424",
+    "Html": "<p>Hi Joe,</p>\r\n<p>I'm doing good thank you :). The documentation you mention above can be a little bit confusing. The <a href=\"http://msdn.microsoft.com/en-us/library/dd541461.aspx\" target=\"_blank\">protocol specificiation document</a>&nbsp;states that&nbsp;DateTimeOffset in JSON should follow the same format as the Date in JSON.</p>\r\n<p style=\"padding-left: 30px;\"><em>jsonDateTime= quotation-mark&nbsp; </em><br /><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \"\\/Date(\" </em><br /><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ticks</em><br /><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [(\"+\" / \"-\") offset]</em><br /><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \")\\/\" </em><br /><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; quotation-mark </em><br /><br /><em>ticks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = *DIGIT </em><br /><br /><em>; ticks is the number of milliseconds since midnight&nbsp; </em><br /><em>; January 1, 1970 </em><br /><br /><em>offset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 4DIGIT</em><br /><em>; offset represents the number of minutes to add (if preceded by \"+\") or substract (if preceded by \"-\") from the time value represented by ticks</em><br /><br /><em>;Note: This format is the same used by the ASP.NET </em><br /><em>;AJAX framework, described in <a href=\"http://msdn2.microsoft.com/en-;us/library/bb299886.aspx\">http://msdn2.microsoft.com/en-;us/library/bb299886.aspx</a>&nbsp;</em></p>\r\n<p>In the scenario you describe above you are getting a response that has a DateTimeOffset property using a different format.&nbsp; That's why I'm so interested in knowing if the endpoint you are using was implemented using Microsoft&nbsp;WCF Data Services or&nbsp;a third party library like&nbsp;odata4j.&nbsp;</p>\r\n<p>Thanks!</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-03-05T11:51:20.343-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "806154",
+    "ThreadId": "346424",
+    "Html": "<p>Hi Alex,</p>\n<p>&nbsp;</p>\n<p>thanks,</p>\n<p>I ran into this while testing with an OData SAP Gateway Service.</p>\n<p>&nbsp;</p>\n<p>But is the spec you mentioned not different to the official odata spec link I mentioned?</p>\n<p>odata.org:</p>\n<p>Edm.DateTimeOffset\t<br /> Literal form of Edm.DateTimeOffset as used in URIs formatted as a JSON string</p>\n<p>MSDN:</p>\n<p>Edm.DateTypeOffset \t<br />jsonDateTimeOffset \t=  jsonDateTime</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
+    "PostedDate": "2012-03-06T05:06:28.513-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "806431",
+    "ThreadId": "346424",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Thanks for the answer.&nbsp; Can you share with me a network trace of the response please?&nbsp; Also, I assume you are passing a metadata object when calling OData.read&nbsp; / OData.request.</p>\r\n<p>&nbsp;&nbsp;&nbsp;The difference in&nbsp;the&nbsp;specs is what&nbsp;I want to sort out as well.&nbsp; And thank you for bringing this into&nbsp;our attention :).</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;&nbsp;</p>",
+    "PostedDate": "2012-03-06T12:06:51.08-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "813932",
+    "ThreadId": "346424",
+    "Html": "<p>Hi Alex,</p>\r\n<p>&nbsp;</p>\r\n<p>sorry for the delay. I currently retried to reproduce the error but perhaps the service has been adapted. I get the dates now in the correct format...hm</p>\r\n<p>Anyway thanks for your help.</p>\r\n<p>Regards</p>\r\n<p>Joe</p>",
+    "PostedDate": "2012-03-22T02:21:35.323-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

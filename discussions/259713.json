@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "621147",
+    "ThreadId": "259713",
+    "Html": "\r\n<p><span style=\"color:#000000\">Marcelo,</span></p>\r\n<p><span style=\"color:#000000\">Myself and Nik Garusha (@nik_g) are trying to do some stuff with OGDI based services. But&nbsp;we are facing problem when using it with datajs. Please go thro the following and let us know where we are going wrong:</span></p>\r\n<p><span style=\"color:#000000\">The service we are trying to access&nbsp;is : <a href=\"http://datadotgcds2.cloudapp.net/v1/Hack%20OpenData/CouncilExpenseData\">\r\nhttp://datadotgcds2.cloudapp.net/v1/Hack%20OpenData/CouncilExpenseData</a></span></p>\r\n<p><span style=\"color:#000000\">Since OGDI doesnt support $skip, we cannot use dataja cache. We first wrote a Jquery Ajax request as below:<br>\r\n</span></p>\r\n<div><span style=\"color:#000000\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><br>\r\n----------------------------------------------------<br>\r\nvar query = &quot;<a href=\"http://datadotgcds2.cloudapp.net/v1/Hack\">http://datadotgcds2.cloudapp.net/v1/Hack</a> OpenData/CouncilExpenseData/?&amp;format=json&quot; &#43; &quot;&amp;$callback=SuccessCallback&quot;;\r\n<br>\r\n$.ajax({dataType:&quot;jsonp&quot;, <br>\r\nurl: query,<br>\r\nsuccess: SuccessCallback<br>\r\n});<br>\r\n----------------------------------------------------<br>\r\n</span></span></span></span></span></span></span></span></span><span style=\"color:#000000\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><br>\r\nthis comes back with JSON result.</span></span></span></span></span></span></span></span></span></div>\r\n<p>I tried to achieve the same with datajs. Here is the code:<br>\r\n<br>\r\n----------------------------------------------------<br>\r\nOData.defaultHttpClient.enableJsonpCallback = true;<br>\r\nOData.read({<br>\r\nrequestUri: &quot;<a href=\"http://datadotgcds2.cloudapp.net/v1/Hack\">http://datadotgcds2.cloudapp.net/v1/Hack</a> OpenData/CouncilExpenseData&quot;,<br>\r\nheaders: { Accept: &quot;application/json&quot; }<br>\r\n},<br>\r\nfunction (data, response) {<br>\r\nalert(&quot;Operation succeeded.&quot;);<br>\r\n},<br>\r\nfunction (err) {<br>\r\nalert(&quot;Error occurred &quot; &#43; err.message);<br>\r\n}<br>\r\n);<br>\r\n----------------------------------------------------&nbsp;</p>\r\n<p><span style=\"color:#000000\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\">&#65279;</span></span></span></span></span></span></span></span></span>i\r\n dont get success or error. When i do network capture the call to the service is 200. I use F12 and capture the network. so there what i have noticed is its not coming back with JSON instead it coming back with atom&#43;xml ??</p>\r\n<p><span style=\"color:#000000\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\">&#65279;</span></span></span></span></span></span></span></span></span>Any\r\n idea what i am doing wrong here ?</p>\r\n",
+    "PostedDate": "2011-05-31T20:04:48.103-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "621163",
+    "ThreadId": "259713",
+    "Html": "<p>The server is using 'format' rather than '$format' as the parameter name. This should do the trick for you.</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.defaultHttpClient.formatQueryString = <span style=\"color: #a31515;\">\"format=json\"</span>;\r\n</pre>\r\n</div>\r\n<p>As an extra note, the <em>headers</em> values are ignored when we use JSONP - we send what we've got and try to deal with the result as best as we can - for read-only scenarios where JSONP is appropriate, there is no \"error\" in general by not including these values.</p>",
+    "PostedDate": "2011-05-31T21:35:25.957-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "622074",
+    "ThreadId": "259713",
+    "Html": "<p>Marcel,</p>\r\n<p>Thanks for the tip. that did the trick. I am now able to get the OGDI service data. One more question i had is :<br /><br />Using createDataCache we can cache all the data by setting the prefetch to -1. is there a way we can read till the end using the readRange ?? is this possible. Scenario is i want to cache using the createDataCache. and then read the whole lot.... any pointers on this.</p>\r\n<p>regards<br />Lohith</p>",
+    "PostedDate": "2011-06-02T10:47:58.573-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "622154",
+    "ThreadId": "259713",
+    "Html": "<p>Right now, your best bet is to pass a \"really really large\" number for readRange count - that should get you everything. Do you really want everything in a big array like that though?</p>\r\n<p>Another option that will be available in a near-future changeset; we've added ToObservable support, so if you're using RxJs, you can get async notification of the items as we download them (so you don't have to hold on to all of them at once).</p>",
+    "PostedDate": "2011-06-02T13:02:32.127-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

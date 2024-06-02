@@ -1,0 +1,60 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi,\n \nI guess this is a bug in datajs:\nI first read the metadata and then provide this metadata in the next read request. The returned data is XML\nwhich doesn't contain embedded additional metadata:\ne.g.\n \n<content type=\"application/xml\">\n<m:properties>\n<d:AMOUNT>13224.47</d:AMOUNT>\n<d:CURRENCY_CODE>EUR</d:CURRENCY_CODE>\n<d:CREATED_AT>2012-02-03T13:43:47.0000000</d:CREATED_AT>\n<d:CHANGED_AT>2012-02-03T13:43:47.0000000</d:CHANGED_AT>\n<d:CREATED_BY></d:CREATED_BY>\n<d:CHANGED_BY></d:CHANGED_BY>\n</m:properties>\n</content>\n \nNow the problem is that in the returned parsed data by datajs the embedded metadata always contains the EDM.String type for all properties (I checked the __metadata property) whereas the metadata document defined different types. e.g. Edm.Datetime for the CREATED_AT property. So the data is returned as string and not as Date object.\n \nOn the other hand it works with e.g. the northwind sample which included embedded metadata in the read response, additionally to the read metadata document: e.g.\n \n<content type=\"application/xml\">\n<m:properties>\n<d:OrderID m:type=\"Edm.Int32\">10248</d:OrderID>\n<d:CustomerID>VINET</d:CustomerID>\n<d:EmployeeID m:type=\"Edm.Int32\">5</d:EmployeeID>\n<d:OrderDate m:type=\"Edm.DateTime\">1996-07-04T00:00:00</d:OrderDate>\n<d:RequiredDate m:type=\"Edm.DateTime\">1996-08-01T00:00:00</d:RequiredDate>\n<d:ShippedDate m:type=\"Edm.DateTime\">1996-07-16T00:00:00</d:ShippedDate>\n<d:ShipVia m:type=\"Edm.Int32\">3</d:ShipVia>\n<d:Freight m:type=\"Edm.Decimal\">32.3800</d:Freight>\n<d:ShipName>Vins et alcools Chevalier</d:ShipName>\n<d:ShipAddress>59 rue de l'Abbaye</d:ShipAddress>\n<d:ShipCity>Reims</d:ShipCity>\n<d:ShipRegion m:null=\"true\"></d:ShipRegion>\n<d:ShipPostalCode>51100</d:ShipPostalCode>\n<d:ShipCountry>France</d:ShipCountry>\n</m:properties>\n</content>\n \nThere datajs works right.\n \nI guess it has something to do with the readAtomEntryProperty function where \nthere is the var propertyTypeValue = \"Edm.String\"; which is set to EDM.String.\n \nAnd because there are no attributes (embedded metadata) the code in the method:\n        xmlAttributes(property, function (attribute) {\n            if (attribute.nsURI === odataMetaXmlNs) {\n                switch (attribute.localName) {\n                    case \"null\":\n                        propertyNullValue = attribute.domNode.nodeValue;\n                        return;\n                    case \"type\":\n                        propertyTypeValue = attribute.domNode.nodeValue;\n                        return;\n                };\n            }\n \n            if (isExtensionNs(attribute.nsURI)) {\n                var extension = readAtomExtensionAttribute(attribute);\n                propertyExtensions.push(extension);\n            }\n        });\nis never called and so all properties get Edm.String as type.\n \nCould you please check that?\nI didn't find the place in the code where the type from the already loaded metadata document is fetched.\nAs already said the metadata document was read before the read request and was also parsed correctly.",
+    "LastUpdatedDate": "2013-02-21T17:20:10.43-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-02-07T04:19:13.78-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "EDM Types problem with metadata document",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 557
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Thanks for reporting this Joe. I will check it out in the following days. ",
+      "PostedDate": "2012-02-27T18:20:16.423-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Is your service above implemented using WFC Data Services October 2011 CTP or later??  ",
+      "PostedDate": "2012-05-02T21:14:51.077-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Hi Alex,\r\n\r\nsorry I cannot say any more which testservice I used back then. Couldn't you test it with a service and then remove the embedded metadata in the server response before datajs does the parsing and then check how datajs handles it and if datajs uses the metadata document (which had been loaded before) correctly and embeds it correctly in its response?",
+      "PostedDate": "2012-05-03T05:31:19.353-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:10.43-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

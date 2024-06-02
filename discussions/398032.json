@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "921868",
+    "ThreadId": "398032",
+    "Html": "\r\n<p>I posted a new issue here:</p>\r\n<p><a href=\"http://datajs.codeplex.com/workitem/857\">http://datajs.codeplex.com/workitem/857</a></p>\r\n<p>Anyone else have this issue and know of a workaround or temporary fork that handles this? For now I have to work without metadata and manually parse out properties that would have been parsed for me by datajs if it had metadata. Also I don't get full validation\r\n in either direction.</p>\r\n",
+    "PostedDate": "2012-10-04T06:12:22.493-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "922016",
+    "ThreadId": "398032",
+    "Html": "<p>Hi SleepyDaddySoft,</p>\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp; Thanks for reporting this. We will fix it and will get back to you&nbsp;with a workaround.&nbsp; Could you please let me know which version of datajs are you using, 1.0.3 or 1.1.0-beta?</p>\r\n<p>Thanks!</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-04T11:09:00.88-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "922026",
+    "ThreadId": "398032",
+    "Html": "<p>1.1.0-beta. Thanks for the followup!</p>",
+    "PostedDate": "2012-10-04T11:22:10.5-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "922579",
+    "ThreadId": "398032",
+    "Html": "<p>Awesome, thanks.&nbsp; A new beta is scheduled to go out next week, we will include a fix for this.&nbsp; In the meantime can you use ATOM instead of JSON?</p>\r\n<p>Thanks</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-05T11:19:14.437-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "922588",
+    "ThreadId": "398032",
+    "Html": "<p>I'll just work without metadata in the meantime - it seems to be working fine so far.</p>\r\n<p>Unrelated question: Does datajs support the new JSON Light format in OData V3? I would like to move to that format as soon as that makes it into a stable release of WCF Data Services.&nbsp;</p>",
+    "PostedDate": "2012-10-05T11:31:53.673-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

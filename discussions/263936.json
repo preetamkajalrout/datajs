@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "637439",
+    "ThreadId": "263936",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I have a question regarding datajs and retrieving data from northwind db:</p>\r\n<p>When i use datajs to retrieve:</p>\r\n<p>http://services.odata.org/Northwind/Northwind.svc/Products?$skip=0&amp;$top=100&amp;$inlinecount=allpages</p>\r\n<p>I only get the first 20 entries and then at the bottom of the server XML response:</p>\r\n<pre id=\"line17\">  &lt;link rel=&quot;next&quot; href=&quot;http://services.odata.org/Northwind/Northwind.svc/Products?$inlinecount=allpages&amp;amp;$top=80&amp;amp;$skiptoken=20&quot; /&gt;\r\n<br>I guess the reason it that the server paging is set to 20 entries.<br>How can I retrieve the desired 100 entries at once with datajs without doing a followup read request? Or how can I get the info that not all data was loaded?<br><br>Do I have to use caching with datajs or does it also work without caching and the normal OData.read function?<br></pre>\r\n<p>&nbsp;Thank you!</p>\r\n",
+    "PostedDate": "2011-07-05T05:28:11.817-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "637683",
+    "ThreadId": "263936",
+    "Html": "<p>Joe, you're right in that the next link indicates that there are additional results.</p>\r\n<p>The server ultimately controls the amount of information returned, so you really just have a couple of options.</p>\r\n<p>1. Set the \"max data service version\" header&nbsp;to 1.0. The server may realize that you won't understand the \"next\" link and decide not to paginate.</p>\r\n<p>2. A better choice is to simply keep reading until you have enough records for whatever purpose you intended.</p>\r\n<p>For a sample of #2, see the \"Read paginated data\" snippet at <a href=\"http://datajs.codeplex.com/wikipage?title=OData%20Code%20Snippets\">http://datajs.codeplex.com/wikipage?title=OData%20Code%20Snippets</a>. If you don't want to keep reading until the end, you can keep a counter around and \"stop early\" once you've got enough data.</p>\r\n<p>Hope this helps,</p>\r\n<p>Marcelo</p>",
+    "PostedDate": "2011-07-05T11:42:52.98-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "638571",
+    "ThreadId": "263936",
+    "Html": "<p>Thanks Marcelo,</p>\r\n<p>&nbsp;</p>\r\n<p>I haven't tested it yet but would it work when using the cache with a read range of 100 like this?:</p>\r\n<p>cache.readRange(0, 100).then(function (data) {<br /> $.tmpl($(\"#my-template\"), data).appendTo(\"#somewhere\");<br />});</p>\r\n<p>Thanks</p>",
+    "PostedDate": "2011-07-06T23:52:14.623-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "639066",
+    "ThreadId": "263936",
+    "Html": "<p>Hi Joe,</p>\r\n<p>When using the cache you don't have to worry about server side paging. The cache implementation handles this for you.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-07-07T14:32:51.16-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "639274",
+    "ThreadId": "263936",
+    "Html": "<p>Hi Alex,</p>\r\n<p>that's what I wanted to hear :)</p>\r\n<p>Thanks!</p>",
+    "PostedDate": "2011-07-08T00:09:21.353-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "639328",
+    "ThreadId": "263936",
+    "Html": "<p>Another question...</p>\r\n<p>&nbsp;</p>\r\n<p>what's when using a proxy servlet ... so my client request url would be something like this:</p>\r\n<p>http://server/proxyservlet/services.odata.org/Northwind/Northwind.svc/Products?$skip=0&amp;$top=100&amp;$inlinecount=allpages</p>\r\n<p>&nbsp;In this case...the additional loading won't work because the URL</p>\r\n<pre id=\"line1\">&lt;link rel=\"next\" href=\"http://services.odata.org/Northwind/Northwind.svc/Products?$skiptoken=20\" /&gt;\r\n<br />would not go through the proxy...<br /><br />What could I do then? The same problem occurs when using datajs caching<br /><br />Will datajs support proxies?<br /><br />I saw in the code (queryForDataInternal function) that you also take the __next URLs<br /><br />Or is there another solution?<br /></pre>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2011-07-08T02:08:20.37-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "640588",
+    "ThreadId": "263936",
+    "Html": "<p>Hi Joe,</p>\r\n<p>For the proxy servlet scenario your best bet would be to override the default httpClient and implement your own, which forwards requests to the proxy. Then the rest of your app can work with the unproxied URLs, the server will also return unproxied URLs in its payloads, and the httpClient will take care of the proxying.</p>\r\n<p>Take a look at this page for more information on how to override the httpClient: <a href=\"http://datajs.codeplex.com/wikipage?title=OData%20Networking\">http://datajs.codeplex.com/wikipage?title=OData%20Networking</a></p>\r\n<p>Please let us know if you are able to get that to work!</p>\r\n<p>David</p>",
+    "PostedDate": "2011-07-11T11:43:40.32-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "642349",
+    "ThreadId": "263936",
+    "Html": "<p>Hi David,</p>\r\n<p>great, I got it to work with the help of your Custom OData httpClient sample.</p>\r\n<p>You guys rock :D</p>\r\n<p>Best regards</p>\r\n<p>Joe</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2011-07-14T07:35:08.04-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "644037",
+    "ThreadId": "263936",
+    "Html": "<p>Glad to hear it!</p>",
+    "PostedDate": "2011-07-18T17:07:29.003-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

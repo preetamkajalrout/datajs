@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "565912",
+    "ThreadId": "245960",
+    "Html": "\r\n<p>Hey guys,<br>\r\n<br>\r\nthanks for your help.<br>\r\nI have an additional question regarding requests which return only simple values and not XML or JSON like:<br>\r\nhttp://services.odata.org/Northwind/Northwind.svc/Categories/$count<br>\r\nDo I have to write a custom handler for that? How does this work?<br>\r\n<br>\r\nAnother question: How can I trigger synchronous requests using datajs read/request? Is this already possible?<br>\r\n<br>\r\nBest regards and keep up the good work!</p>\r\n",
+    "PostedDate": "2011-02-14T08:00:53.673-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "566076",
+    "ThreadId": "245960",
+    "Html": "<p>So far we haven't written the primitive value handlers, but we're open to doing it if it looks like a good option.</p>\r\n<p>There are two main reasons why we haven't done this so far:</p>\r\n<p>1. We can't do much better than reading the plain text response and returning that (the plain values don't have any annotations that tell us whether they are numbers, strings, dates, etc). At that point, we're pretty much equivalent to reading the responseText property of an XHR.</p>\r\n<p>2. One of the nice things about datajs is how it can 'smooth out' differences, for example between reading from a local ATOM server to an other-domain JSON server. For primitive values however, JSONP may not work well. In particular, $count is always plain text and there is no JSON-based representation. So perhaps it's better that we \"promise less\" in this case.</p>\r\n<p>That said, there area also arguments <em>for</em> implementing this, such as not having to pull in an additional library to work around XHR differences or just the consistency of plugging this along with the dance of httpClient, handlers&nbsp;and such.</p>\r\n<p>I'd love to hear your thoughts on this.</p>\r\n<p>Thanks,</p>\r\n<p>Marcelo</p>",
+    "PostedDate": "2011-02-14T12:53:37.69-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "566111",
+    "ThreadId": "245960",
+    "Html": "<p>Hi Marcelo,</p>\r\n<p>thank you for your help.</p>\r\n<p>Yes you are right about this. I already thought on using for example jQuery for this simple requests.</p>\r\n<p>And I also got it working by writing an own \"plain handler\" and implement the read method for it and return the value.</p>\r\n<p>So both ways should work and you can decide if you want to use an additional library like jQuery (which most users do anyway I guess) or simply use only datajs to have it all packed in one library.</p>\r\n<p>But to the other point I had: Are synchronous requests already possible like in jQuery where you can specify that?</p>\r\n<p>That might be useful if you need a specific value before you can proceed to render for example a specific amount of rows in a table.</p>\r\n<p>Thanks!</p>",
+    "PostedDate": "2011-02-14T14:14:09.457-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "566155",
+    "ThreadId": "245960",
+    "Html": "<p>Hi ironmanager,</p>\r\n<p>No we do not currently have a jQuery-like flag for making requests synchronous. I am probably missing the details of your scenario, but couldn't you put the rendering code in the success callback of the request?</p>\r\n<p>David</p>",
+    "PostedDate": "2011-02-14T15:22:52.78-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "566287",
+    "ThreadId": "245960",
+    "Html": "<p>To add to what David has mentioned, most proposed APIs for the browser use some form of asynchronous execution (IndexedDB and WebSocket comes to mind), certainly on the UI thread.</p>\r\n<p>We think that making this style pervasive will make it easier to use everything together in the long run, and that often we can find better solutions at a higher level.</p>\r\n<p>Also, thanks a ton for your feedback - it's good to know we're not the only ones who can see the plain value support going either way :) And more details around your scenario like David asked of course can only help us, so again, thank you for taking the time to talk to us.</p>\r\n<p>Marcelo</p>",
+    "PostedDate": "2011-02-14T21:51:25.697-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1047509",
+    "ThreadId": "245960",
+    "Html": "We are also looking for Sync read calls from Web Worker, please.<br />\n",
+    "PostedDate": "2013-05-22T22:29:44.827-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

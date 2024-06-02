@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "1114234",
+    "ThreadId": "464276",
+    "Html": "I am making an oData request cross domain using JSONP:<br />\n<pre><code>OData.defaultHttpClient.enableJsonpCallback = true;</code></pre>\n\nThe request seems to respond as expected in Chrome, Firefox and IE8. Just not in IE9+.\r<br />\n<br />\nFrom what I understand this error occurs when the Iframe calls a function that has been disposed of in the parent.\r<br />\n<br />\nI have monitored the network traffic for the request, and the response body contains the correct data:<br />\n<pre><code>parent.handleJSONP_0({\n   &quot;odata.metadata&quot;:&quot;http://localhost:1313/$metadata#Points&amp;$select=Test&quot;,\n   &quot;value&quot;:[{&quot;Test&quot;:&quot;test}]\n})</code></pre>\n\n<em>I have modified this to hide sensitive data.</em>\r<br />\n<br />\nCan anybody see anything I am missing or suggest areas where I can investigate?\r<br />\n<br />\n<em>Does anybody else have this problem?</em><br />\n",
+    "PostedDate": "2013-10-30T09:30:33.117-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1115328",
+    "ThreadId": "464276",
+    "Html": "Hi liammoat,\r<br />\n<br />\nThanks for reporting the issue you are having, \r<br />\nmay I ask which version of datajs are you using ?\r<br />\n<br />\n-Hussein<br />\n",
+    "PostedDate": "2013-10-31T14:09:19.547-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1116557",
+    "ThreadId": "464276",
+    "Html": "Hi Hussein,\r<br />\n<br />\nI am using version 1.1.1\r<br />\n<br />\nRegards,\r<br />\n<br />\nLiam<br />\n",
+    "PostedDate": "2013-11-01T08:44:26.86-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1228572",
+    "ThreadId": "464276",
+    "Html": "I am having the same problem, also using OData.defaultHttpClient.enableJsonpCallback = true;\r<br />\n<br />\nThe response body contains the response data i want, but JayData.js (version 1.3.5) hangs on checking operation 'first'. Apperently the context has been disposed somehow.\r<br />\n<br />\nThe problem first appearde when i adapted the service i'm calling from <a href=\"http:// to https:// (which works ok using a browser\" rel=\"nofollow\">http:// to https:// (which works ok using a browser</a>).\r<br />\n<br />\nAny suggestions?<br />\n",
+    "PostedDate": "2014-03-31T05:42:49.823-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

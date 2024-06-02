@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1069056",
+    "ThreadId": "450210",
+    "Html": "I'm working with a legacy database that stores some DateTime fields in local time (each database instance has its own timezone), so technically the timezone offset for these DateTimes would be &quot;unspecified&quot;.\r<br />\n<br />\nWhen I get the dates from datajs, they are instantiated as UTC dates in the result data. The problem with this is that when I create a new Date(), it will be in local time. Which means that when datajs formats the POST or MERGE request, it converts my local dates into UTC time. So, if the user types &quot;1/15/2013&quot; and clicks save, it will be saved as &quot;1/14/2013&quot;.\r<br />\n<br />\nDoes DataJS support this scenario? If not, is there a workaround?<br />\n",
+    "PostedDate": "2013-07-16T08:49:52.21-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

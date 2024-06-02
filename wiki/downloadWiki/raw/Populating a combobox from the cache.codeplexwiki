@@ -1,0 +1,71 @@
+The following sample shows how to populate a combo box using the caching API.
+
+{{
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Combo Box Sample</title>
+  <script type="text/javascript" src="datajs-0.0.3.js"></script>
+</head>
+<body>
+
+<select id='targetbox'></select>
+
+<script type="text/javascript">
+
+function populateComboBox(cache, id, propertyName) {
+  var chunkSize = 100;
+  var element = document.getElementById(id);
+  var index = 0;
+
+  var addItem = function (text) {
+    var option = document.createElement("OPTION");
+    option.text = text;
+    element.add(option, null);
+  };
+
+  var successCallback = function (data) {
+    for (var i = 0; i < data.length; i++) {
+      addItem(data[i][propertyName]);
+    }
+
+    if (data.length === chunkSize) {
+      index += chunkSize;
+      cache.readRange(index, chunkSize).then(successCallback, errorCallback);
+    } else {
+      element.disabled = false;
+      element.options.remove(0);
+    }
+  };
+
+  var errorCallback = function (err) {
+    while (element.options.length) {
+      element.options.remove(0);
+    }
+    addItem("(error - " + err.message + ")");
+  };
+
+  element.disabled = true;
+  addItem("(loading)");
+  cache.readRange(index, chunkSize).then(successCallback, errorCallback);
+}
+
+var cache = datajs.createDataCache({
+  name: "genres",
+  source: "http://odata.netflix.com/Catalog/Genres",
+  enableJsonpCallback: true
+});
+
+populateComboBox(cache, "targetbox", "Name");
+
+</script>
+
+</body>
+</html>
+}}
+
+The page just creates a cache with a source on a different domain using JSONP, and then invokes the populateComboBox helper function with the ID of the target element and the property name to be used to fill in the combo box.
+
+The helper function works by reading data from the cache in chunks. You can try playing with the chunkSize value to see what works best for you. It also disables and then re-enables the combo box while data is loading, but you can try other things: fade out / in, start hidden and then slide in, show an animation GIF while loading, etc.
+
+If you run this in your favorite browser you should see a much faster load time the second time, courtesy of the cache.

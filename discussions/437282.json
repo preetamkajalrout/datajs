@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1018066",
+    "ThreadId": "437282",
+    "Html": "Greetings,\r<br />\n<br />\nI am performing a simple OData.Read on a webservice using the datajs-1.0.0.js. Its works fine on browser.However when I run run it on a Phonegap iOS Application its does not work.\r<br />\n<br />\nThanks in Advance..<br />\n",
+    "PostedDate": "2013-03-19T23:03:56.63-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

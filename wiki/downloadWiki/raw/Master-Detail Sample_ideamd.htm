@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Idea Master / Detail</title>
+<style type="text/css">
+body {
+    color: #444444;
+    font-family: Calibri, Verdana;
+}
+.titleSpan {
+    font-weight: bold;
+}
+.ideaBox {
+    cursor: pointer;
+    padding-top: 8px;
+}
+#modelArea {
+    border: 1px solid gainsboro;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+button, input, textarea { font-family: Calibri, Verdana; font-size: 100%; }
+</style>
+</head>
+<body>
+
+<h1>Idea Master / Detail</h1>
+
+<p>
+This sample demonstrates working with master/detail data.
+Each idea can have zero or more comments associated with it, and comments
+correspond to a single idea.
+</p>
+
+<div id="modelArea" data-bind="template: { name: 'modelTemplate' }"></div>
+
+<div id='commentsArea' data-bind="template: { name: 'commentsTemplate' }"></div>
+
+<div id="messageBar"></div>
+
+<script type="text/x-jquery-tmpl" id="modelTemplate">
+{{each ideas()}}
+<div class='ideaBox' data-bind='click: function() { selectIdea($value); } '>
+
+<span class='titleSpan'>
+${$value.Title} {{if $value.ClosedDate}} <i>(closed)</i> {{/if}}
+</span>
+
+<br />${$value.Description}
+
+</div>
+{{/each}}
+</script>
+
+<script type="text/x-jquery-tmpl" id="commentsTemplate">
+{{if selectedIdea()}}
+<b>Comments for ${selectedIdea().Title}</b><br />
+
+<ul>
+{{each selectedIdea().LoadedComments}}
+<li>
+${$value.Content}
+<button data-bind="click: function() { deleteComment(selectedIdea(), $value); }, disable: communicating">Delete</button>
+</li>
+{{/each}}
+</ul>
+
+Add a new comment: <input type="text" data-bind="value: newComment().Content, disable: communicating" size="80" />
+<button data-bind="click: selectedIdea().saveNewComment, disable: communicating">Save</button>
+
+{{else}}
+<span>No idea selected.</span>
+{{/if}}
+</script>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+
+<!-- Get this from https://github.com/SteveSanderson/knockout/downloads. -->
+<script type="text/javascript" src="knockout-1.2.1.js"></script>
+<script type="text/javascript" src="datajs-1.0.0.js"></script>
+
+<script type="text/javascript">
+
+    // Root URI for the service.
+    var serviceUri = "./IdeasService.svc/";
+
+    // This is what our view model looks like.
+    var ideasViewModelFn = function () {
+        var that = this;
+
+        // The list of ideas we are displaying.
+        this.ideas = ko.observableArray([]);
+
+        this.selectedIdea = ko.observable(null);
+
+        this.communicating = ko.observable(false);
+
+        this.newComment = ko.observable({
+            Content: ko.observable("(new comment)")
+        });
+
+        this.deleteComment = function (idea, comment) {
+            makeRequest({
+                method: "DELETE",
+                requestUri: comment.__metadata.uri
+            }, function () {
+                idea.LoadedComments.remove(comment);
+            });
+        };
+
+        this.selectIdea = function (idea) {
+            // If we haven't loaded the items yet, do so now and
+            // overwrite the comments.
+            if (idea.Comments.__deferred) {
+                makeRequest({ requestUri: idea.Comments.__deferred.uri }, function (data) {
+                    idea.Comments = data.results;
+                    idea.LoadedComments(data.results);
+                    that.selectedIdea(idea);
+                });
+            } else {
+                that.selectedIdea(idea);
+            }
+        };
+
+        var ideaModelToViewModel = function (idea) {
+            idea.LoadedComments = ko.observableArray([]);
+            idea.saveNewComment = function () {
+                makeRequest({
+                    method: "POST",
+                    requestUri: idea.__metadata.uri + "/Comments",
+                    data: { CreatedDate: new Date(), Content: that.newComment().Content() }
+                }, function (newComment) {
+                    idea.LoadedComments.push(newComment);
+                    that.newComment({
+                        Content: ko.observable("(new comment)")
+                    });
+                });
+            };
+
+            return idea;
+        };
+
+        this.load = function () {
+            makeRequest({ requestUri: serviceUri + "Ideas" }, function (data) {
+                that.ideas($.map(data.results, ideaModelToViewModel));
+            });
+        };
+    };
+
+    var ideasViewModel = new ideasViewModelFn();
+
+    // Make a request, setting the 'communicating' flag.
+    var makeRequest = function (request, success) {
+        ideasViewModel.communicating(true);
+        $("#messageBar").text("Contacting server...").show();
+        return OData.request(request, function (data) {
+            ideasViewModel.communicating(false);
+            $("#messageBar").hide();
+            if (success) {
+                success(data);
+            }
+        }, function (err) {
+            ideasViewModel.communicating(false);
+            $("#messageBar").text("Error while contacting server: " + err.message + " - " + JSON.stringify(err));
+        });
+    };
+
+    // Bind the model to everything in the document that needs it.
+    ko.applyBindings(ideasViewModel);
+
+    // Start loading data asynchronously.
+    ideasViewModel.load();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "853799",
+    "ThreadId": "360977",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>&nbsp;</p>\r\n<p>how can I prevent that datajs adds the odata=verbose header to the content type?</p>\r\n<p>I have a service 2.0. who doesn't work with this header.</p>\r\n<p>As OData doesn't 2.0 specify this verbose header value...is this a bug in datajs where it shouldn't append this header value for 2.0 services?\r\n<br>\r\n<br>\r\nAs I see here:<br>\r\nhttp://msdn.microsoft.com/en-us/library/dd541525(v=prot.10).aspx<br>\r\n&quot;This content type is used in a request to a data service to request the data service format for the response payload using the application/json; odata=verbose format according to the formatting rules outlined in Verbose JSON format (section 2.2.6.3). A data\r\n service MAY support this content type.&quot;<br>\r\n<br>\r\nBut this is for 3.0 only?<br>\r\nOr how can I prevent that datajs modifies the content-type header which I set?<br>\r\nThanks and best regards<br>\r\nJoe</p>\r\n",
+    "PostedDate": "2012-06-26T06:40:14.287-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "854526",
+    "ThreadId": "360977",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; You can fix the Content-Type header (and pretty much any header)&nbsp;in the request object you pass to OData.request:&nbsp;&nbsp;&nbsp;</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.request({ \r\n    requestUri: <span style=\"color: #a31515;\">\"http://myUrl\"</span>,\r\n    headers: { \r\n         <span style=\"color: #a31515;\">\"Accept\"</span>: <span style=\"color: #a31515;\">\"application/json\"</span>,\r\n         <span style=\"color: #a31515;\">\"Content-Type:\"</span> <span style=\"color: #a31515;\">\"application/json\"</span>\r\n    } \r\n  }, \r\n  <span style=\"color: blue;\">function</span> (data, response) {\r\n      <span style=\"color: green;\">// do something interesting with the data</span>\r\n  },\r\n  <span style=\"color: blue;\">function</span> (err) {\r\n      <span style=\"color: green;\">// handle the error</span>\r\n  });\r\n</pre>\r\n</div>\r\n<p>&nbsp;&nbsp;&nbsp; Now, the content type \"application/json;odata=verbose\" is still application/json, with a parameter&nbsp;that doesn't alter that fact&nbsp;and should be ignored by the endpoint if it doesn't understand it.&nbsp;&nbsp;Do you happen to know&nbsp;what server implementation the endpoing is using?? (Eg.&nbsp;WCF Data Services,&nbsp;odata4J, etc.)&nbsp; because seems to me that&nbsp;it is doing a string comparison against the content-type header in the request instead of parsing it to extract the mime type and the parameters.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.&nbsp;</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-06-27T11:16:36.93-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "855031",
+    "ThreadId": "360977",
+    "Html": "\r\n<p>Thanks Alex,</p>\r\n<p>that worked nicely :D</p>\r\n<p>The endpoint I tested was a SAP OData Gateway service who apparently doesn't ignore this header.</p>\r\n",
+    "PostedDate": "2012-06-28T07:34:04.08-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

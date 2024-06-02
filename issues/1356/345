@@ -1,0 +1,13 @@
+Index: src/store-indexeddb.js
+===================================================================
+--- src/store-indexeddb.js	(revision 32075)
++++ src/store-indexeddb.js	(working copy)
+@@ -23,7 +23,7 @@
+ 
+     // CONTENT START
+ 
+-    var indexedDB = window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.indexedDB;
++    var indexedDB = window.mozIndexedDB || window.msIndexedDB || window.indexedDB;
+     var IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+     var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || {};
+ 

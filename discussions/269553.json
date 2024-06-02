@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "659935",
+    "ThreadId": "269553",
+    "Html": "\r\n<p>When we pass &quot;$inlinecount=allpages&quot; to the odata query it will return the records count as &quot;<span>&lt;</span><span>m:count</span><span>&gt;</span><span>652</span><span>&lt;/</span><span>m:count</span><span>&gt;&quot; in odata. My question is there any datajs\r\n function to get the record count similar like &quot;OData.read(url)&quot; to get the&nbsp;values&nbsp;from odata. &nbsp;or if we call like this&nbsp;OData.read(&quot;http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages&quot;) how to get the record count using\r\n jquery&nbsp;template&nbsp;like we get the productID data from odata using this piece &nbsp;of code &quot;${$value.ProductID}&quot;.</span></p>\r\n",
+    "PostedDate": "2011-08-18T04:26:20.233-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "660048",
+    "ThreadId": "269553",
+    "Html": "<p>Hi anishjeyanth,</p>\r\n<p>When you specify ?$inlinecount=allpages on a collection when reading with datajs, the resulting payload will contain&nbsp;the top level&nbsp;property \"__count\" (you can see more about this in our <a href=\"http://datajs.codeplex.com/wikipage?title=OData%20Payload%20Formats&amp;referringTitle=Documentation#Feed\">payload format documentation</a>). So making a OData.read&nbsp;call like this:</p>\r\n<p>OData.read({ requestUri: \"<a href=\"http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages\">http://services.odata.org/OData/OData.svc/Products?$inlinecount=allpages</a>\" }, function (data) { alert( <strong>data.__count </strong>) });</p>\r\n<p>would show that there are 9 entries in the Products collection. Note that this functionality is only available in OData v2.0 (if you are seeing <span>&lt;</span><span>m:count</span><span>&gt;</span><span>652</span><span>&lt;/</span><span>m:count</span><span>&gt; that means that service is v2). Does that answer your question? Please let me know if that's not what you were looking for.</span></p>\r\n<p><span>-Beth</span></p>",
+    "PostedDate": "2011-08-18T07:44:22.957-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "660084",
+    "ThreadId": "269553",
+    "Html": "<p>Hi BethMantey,</p>\r\n<p><span style=\"white-space: pre;\"> </span>This is what i expected but&nbsp;instead&nbsp;of displaying the record count as an alert message i want it to&nbsp;display&nbsp;the record count in the&nbsp;jquery&nbsp;template, that i achieved by using&nbsp;${$data.__count}. Our odata version is 2.0. using fiddler i saw the top level&nbsp;property&nbsp;\"__count\" but i&nbsp;don't&nbsp;know how to display the value. once again thanks for your great help, i appreciate your quick response and the detailed&nbsp;explanation. &nbsp;DataJs is rocking and you&nbsp;guys&nbsp;are doing a&nbsp;wonderful&nbsp;job.</p>\r\n<p>-Anish</p>\r\n<p><span style=\"white-space: pre;\"> </span></p>",
+    "PostedDate": "2011-08-18T09:10:54.47-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "660146",
+    "ThreadId": "269553",
+    "Html": "<p>Ah yes, something like this, modified from the <a href=\"http://datajs.codeplex.com/wikipage?title=Read%20Data%20Sample&amp;referringTitle=Documentation\">Read Data sample</a>:</p>\r\n<p>OData.read(requestUri, function (data) {$(\"#searchResultsTemplate\").tmpl(data).appendTo(\"#resultsArea\");})</p>\r\n<p>&lt;div id=\"resultsArea\"&gt;&lt;/div&gt;<br />&lt;script type=\"x-jquery-tmpl\" id=\"searchResultsTemplate\"&gt;<br />&lt;div&gt;&lt;span class='count'&gt;${__count} results found&lt;/span&gt;&lt;/div&gt;<br />&lt;/script&gt;</p>\r\n<p>I'm glad to help!&nbsp;Please let us know if you have any more questions.</p>\r\n<p>-Beth</p>",
+    "PostedDate": "2011-08-18T10:57:55.543-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "670499",
+    "ThreadId": "269553",
+    "Html": "<p>Hi&nbsp;BethMantey,</p>\r\n<p><span style=\"white-space: pre;\"> </span>When displaying the datajs results we will &nbsp;be displaying using the jquery template, is there a way to display the datajs&nbsp;results&nbsp;without using jquery template. &nbsp; Also is it &nbsp;true &nbsp;that search engine wont index the url created by the jquery&nbsp;template&nbsp;and what we want to do for the url's to be indexed.</p>\r\n<p>-Anish</p>",
+    "PostedDate": "2011-09-12T02:15:12.573-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "670743",
+    "ThreadId": "269553",
+    "Html": "<p>Hi Anish,</p>\r\n<p>You can avoid using jquery template by directly manipulating the DOM. You can find a tutorial on that here: <a href=\"http://www.w3schools.com/dom/dom_intro.asp\">http://www.w3schools.com/dom/dom_intro.asp</a>. For example you could populate a combobox with the Netflix genres by reading the url and adding the names from the result to the dropdown menu&nbsp;in the success function:</p>\r\n<p>&lt;select id='targetbox'&gt;&lt;/select&gt;</p>\r\n<p>&lt;script type=\"text/javascript\"&gt;<br />var element = document.getElementById(\"targetbox\");</p>\r\n<p>OData.defaultHttpClient.enableJsonpCallback = true;</p>\r\n<p>OData.read(\"<a href=\"http://odata.netflix.com/Catalog/Genres\">http://odata.netflix.com/Catalog/Genres</a>\", function (data) {<br />&nbsp;&nbsp;&nbsp; for (var i = 0; i &lt; data.results.length; i++) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var option = document.createElement(\"OPTION\");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; option.text = data.results[i].Name;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; element.add(option, null);<br />&nbsp;&nbsp;&nbsp; }<br />})<br />&lt;/script&gt;</p>\r\n<p>I don't know much about getting a url indexed by a search engine but I haven't heard of jquery template affecting what gets indexed.</p>\r\n<p>-Beth</p>",
+    "PostedDate": "2011-09-12T11:48:46.467-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "671151",
+    "ThreadId": "269553",
+    "Html": "<p>Hi Beth,</p>\n<p>This is what i am taking about. &nbsp;Also regarding the&nbsp;search engine&nbsp;indexing the results&nbsp;displayed&nbsp;from the datajs either&nbsp;through&nbsp;the jquery template or by directly manipulating the DOM is not indexed by the search engine's  if we open the page view &nbsp;source the jquery and datajs codes only we can see not the results. thanks for the help keep up &nbsp;your good work.. :-)</p>\n<p>-Anish</p>",
+    "PostedDate": "2011-09-13T06:34:34.487-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

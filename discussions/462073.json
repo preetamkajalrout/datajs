@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1107038",
+    "ThreadId": "462073",
+    "Html": "Hi guys,\r<br />\n<br />\ndoes datajs support deep creates/updates e.g. \r<br />\ncreate entries with embedded new entries for its navigation properties?\r<br />\n<br />\nThanks!<br />\n",
+    "PostedDate": "2013-10-14T01:39:15.533-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1116360",
+    "ThreadId": "462073",
+    "Html": "Hi Joe,\r<br />\n<br />\nYes DataJS supports deep inserts/updates.\r<br />\n<br />\nFor example for deep inserting you simply add the related entities payloads in the data property for the request like <br />\n<pre><code> var request =\n    {\n        headers: Headers,\n        requestUri: &quot;MySVC/Employees&quot;,\n        method: &quot;POST&quot;\n        data: { \n                &quot;odata.type&quot;: &quot;readWriteSvc.Employee&quot;, \n                 ID: 5, Name: &quot;new employee&quot;, \n                 Department: {\n                     &quot;DID&quot;: 10, \n                     &quot;DName&quot;: &quot;new Department&quot;\n                 }\n        }\n    };</code></pre>\n\n-Hussein<br />\n",
+    "PostedDate": "2013-10-31T16:03:01.073-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1202832",
+    "ThreadId": "462073",
+    "Html": "Hi thanks,<br />\n<br />\nis it also possible to create 1...n deep entries so if e.g. an employee has more departments?<br />\nHow should the data be structured?<br />\nMust I use arrays?<br />\n<br />\nI ran into problems how to structure the data and also in Atom/XML format it didn't work.<br />\n<br />\nThanks!<br />\n",
+    "PostedDate": "2014-02-05T01:39:34.473-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

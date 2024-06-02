@@ -1,0 +1,14 @@
+    this.cache = datajs.createDataCache({
+                name: name,
+                source: config.url,
+                httpClient: {
+                    request: function (request, success, error) {
+
+                        request.headers.Authorization = ...;
+                        return OData.defaultHttpClient.request(request, success, error);
+                    }
+                }
+            });
+
+
+this.cache.readRange(s, t).then(this.createRequestCallback(null, operation, callback, scope));

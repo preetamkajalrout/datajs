@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "596066",
+    "ThreadId": "253595",
+    "Html": "\r\n<div style=\"color:black; background-color:white\">\r\n<pre>In the example below how/where do I specify $skip and $top parameters?</pre>\r\n<pre>OData.request( {\r\n    requestUri: <span style=\"color:#a31515\">&quot;http://ODataServer/FavoriteMovies.svc/$batch&quot;</span>,\r\n    method: <span style=\"color:#a31515\">&quot;POST&quot;</span>,\r\n    data: { __batchRequests: [\r\n       { requestUri: <span style=\"color:#a31515\">&quot;BestMovies(0)&quot;</span>, method: <span style=\"color:#a31515\">&quot;GET&quot;</span> },\r\n       { requestUri: <span style=\"color:#a31515\">&quot;BestMovies(1)&quot;</span>, method: <span style=\"color:#a31515\">&quot;GET&quot;</span> }\r\n    ]}\r\n},\r\n<span style=\"color:blue\">function</span> (data, response) {\r\n    <span style=\"color:green\">//success handler</span>\r\n}, undefined, OData.batchHandler);\r\n\r\n</pre>\r\n</div>\r\n",
+    "PostedDate": "2011-04-12T10:16:53.313-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "596387",
+    "ThreadId": "253595",
+    "Html": "<p>$top and $skip are used on a per-request operation, so if you are making multiple requests in a batched requests, these would go inside the requestUris inside the __batchRequests array, rather than on the top-level one.</p>\r\n<p>Now, in this particular example, BestMovies(0) and BestMovies(1) seem to refer to single entries rather than feeds, so the $top and $skip options don't really make much sense.</p>\r\n<p>A scenario where this might come in handy is if you want to display just the first few items from multiple lists. Let's say for example that you have a feed for \"Reviews\" and \"Products\", and you wanted to show on your front page a few of the latest products added and the latest reviews that users made (whether on those products or any other). You can get the \"latest\" of each from by doing something of the sort, assuming that they both have a \"CreatedDate\" property.</p>\r\n<p><code>OData.request( {<br />&nbsp;&nbsp;&nbsp; requestUri: \"http://ODataServer/MyData.svc/$batch\",<br />&nbsp;&nbsp;&nbsp; method: \"POST\",<br />&nbsp;&nbsp;&nbsp; data: { __batchRequests: [<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { requestUri: \"Reviews?$top=4&amp;$orderby=CreatedDate%20desc\", method: \"GET\" },<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { requestUri: \"Products?$top=4&amp;$orderby=CreatedDate%20desc\", method: \"GET\" }<br />&nbsp;&nbsp;&nbsp; ]}<br />},<br />function (data, response) {<br />&nbsp;&nbsp;&nbsp; //success handler<br />}, undefined, OData.batchHandler);</code></p>\r\n<p>Please let me know whether this helps,</p>\r\n<p>Marcelo</p>",
+    "PostedDate": "2011-04-13T00:31:06.107-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

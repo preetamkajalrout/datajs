@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi I walked through the current 1.1.1beta and made some changes (mostly to make jsLint happy) && hope I did not break anything && it helps :-)\n\nFormat is diff -Nua i.e.:\n\n$ datajs-1.1.1beta.js atajs-1.1.1beta-sdrees.js > datajs-1.1.1beta_diff-Nua.txt \n\nbut I can also provide the changed complete file (if patch is not at hand).\n\nEDIT: Please ignore diff here. I submitted a patch with ID 14425 and sorry for not reading the top level menu thoroughly before (so I did not came across the patch submission entry before writing this issue here :-)\n\nAll the best,\nStefan.",
+    "LastUpdatedDate": "2017-12-07T12:26:23.1-08:00",
+    "PlannedForRelease": "datajs version 1.1.1beta",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-05-05T07:22:01.3-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Diff for suggested changes to 1.1.1beta",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 1049
+  },
+  "FileAttachments": [
+    {
+      "FileId": 278,
+      "FileName": "datajs-1.1.1beta_diff-Nua.txt",
+      "DownloadUrl": ".\\278"
+    }
+  ],
+  "Comments": []
+}

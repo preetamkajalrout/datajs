@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1227017",
+    "ThreadId": "540238",
+    "Html": "For Delta Query support we need minimal changes, how do I go about adding the changes into datajs?\r<br />\n<br />\nIt seems from my testing there is only 4 lines in atomReadFeedLink that need to be added to support this functionality<br />\n",
+    "PostedDate": "2014-03-26T10:20:32.84-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

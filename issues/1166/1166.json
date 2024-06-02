@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Need some sample on how can I get the HTTP response code if my OData Request fails.\n\nWhen I try to prompt the error message in error call back all I get is a generic message that \"HTTP Request failed\"",
+    "LastUpdatedDate": "2013-10-30T16:07:38.89-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-10-29T14:41:15.78-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Response Status Code",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1166
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "You can try \"err.response.statusCode\" to get the response code. ",
+      "PostedDate": "2013-10-30T16:07:38.89-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

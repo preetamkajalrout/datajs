@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1077542",
+    "ThreadId": "452638",
+    "Html": "If you want to access lists in Sharepoint from another domain using JavaScript you have to use the cross domain library, it is described here <a href=\"http://msdn.microsoft.com/en-us/library/fp179927.aspx\" rel=\"nofollow\">http://msdn.microsoft.com/en-us/library/fp179927.aspx</a>. Is it possible to combine these? Making requests is much more pleasant with data.js.<br />\n",
+    "PostedDate": "2013-08-06T21:57:32.11-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

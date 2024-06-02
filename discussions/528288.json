@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1200426",
+    "ThreadId": "528288",
+    "Html": "Recently for a project I worked with OData v3 exposed through ASP.NET Web API OData on the server. Generally we were exchanging OData v3 's JSON light format. On a separate server the endpoint was consumed and also some browser-side clients ran html+javascript files from their local filesystem that consume the endpoint. Hence we needed to support cross-origin resource sharing (CORS) to interact with the OData endpoint.\r<br />\n<br />\nUnfortunately we suffered from 'no handler found for data' exceptions in JavaScript thrown from deep down in datajs (in our case version 1.1.1). After a thorough investigation of the datajs source code we pinpointed the error. Its root causes were a missing CORS response header Access-Control-Expose-Headers from our server and datajs relying on the DataServiceVersion response header (with value 3.0) to enable the code path for parsing JSON light.\r<br />\n<br />\nThe missing Access-Control-Expose-Headers response header prevented datajs to access the DataServiceVersion header. The DataServiceVersion header is read by datajs (along with other headers it supports) and checked. Its inaccessibility caused the expected handler not to trigger, even worse no handler was triggered at all (hence the 'no handler found for data' exception message).\r<br />\n<br />\nNote that with datajs v1.0.3. the Accept-header on the request contained something like 'odata=verbose', triggering the non-JSONlight processing of OData before v3. Hence the issue was not observed. However datajs v1.1.0 and by default include in the Accept-header something like 'odata=fullmetadata' which triggers OData v3 JSON light, but requires the DataServiceVersion response header too!\r<br />\n<br />\nAfter some experimenting with CORS headers accepted by and sent from the server, we could solve the issue. In our case we used the CORS extensions for Web API (and OWIN; see <a href=\"http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api\" rel=\"nofollow\">CORS in Web API</a>). It was configured to accept all origins, all headers, all methods on requests and exposed the OData specific headers on responses.\r<br />\n<br />\nDid anyone else experience similar problems? Moreover if you did a similar root cause analysis like we did, do you think it is in part a problem of the datajs implementation?<br />\n",
+    "PostedDate": "2014-01-29T04:31:49.933-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1225109",
+    "ThreadId": "528288",
+    "Html": "Could this be related to what I experience with this sample on jsbin: <a href=\"http://jsbin.com/UwuMAZo/25/edit\" rel=\"nofollow\">http://jsbin.com/UwuMAZo/25/edit</a> ??\r<br />\nI does not work in Chrome be it win or mac, but in safari on mac it works fine.<br />\n",
+    "PostedDate": "2014-03-20T23:57:30.673-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1226082",
+    "ThreadId": "528288",
+    "Html": "You can verify when performing an OData query and check that the server response has the proper headers set. In your code sample I get a HTTP 501 on the options request to metadata. So I could not verify.<br />\n",
+    "PostedDate": "2014-03-24T09:32:11.707-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "981755",
+    "ThreadId": "428038",
+    "Html": "\r\n<p>Hi Guys,</p>\r\n<p>Are you planning Odata V3 support?</p>\r\n<p>Thanks,&nbsp;</p>\r\n<p>Anafious</p>\r\n",
+    "PostedDate": "2012-12-30T04:23:50.213-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "997607",
+    "ThreadId": "428038",
+    "Html": "Hi anafious,\r<br />\n<br />\nsorry for the late replay,\r<br />\nIn the last version, We already support some features like Json light and collection and $format, other features from OData V3 are still in progress and will be in next releases, but there is no specific date yet for the next release.<br />\n",
+    "PostedDate": "2013-02-06T16:33:21.517-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

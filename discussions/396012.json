@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "914378",
+    "ThreadId": "396012",
+    "Html": "\r\n<p>I have an WCF Data Service in .NET and I am consuming this service with datajs in Phonegap. I am trying to implement authentication as decribed here:&nbsp;<a rel=\"nofollow\" href=\"http://goo.gl/0xQvC\">http://goo.gl/0xQvC</a>, and sending credentials with\r\n OData.read method (datajs), but when I read credentials with HttpContext.Current.Request.Headers[&quot;Authorization&quot;], I found they are empty. What I am doing wrong?</p>\r\n<p>Service Code:</p>\r\n<pre>[ServiceBehavior( IncludeExceptionDetailInFaults = true )]\r\n    public class TeyunaDataService : DataService&lt; Meteora.TeyunaServices.Models.TeyunaContext &gt;\r\n    {\r\n        public static void InitializeService(DataServiceConfiguration config)\r\n        {\r\n            config.SetEntitySetAccessRule(&quot;Clientes&quot;, EntitySetRights.AllRead );\r\n            config.SetEntitySetAccessRule(&quot;Transacciones&quot;, EntitySetRights.All);\r\n\r\n            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V2;\r\n            config.UseVerboseErrors = true;\r\n        }\r\n\r\n        public TeyunaDataService()\r\n        {\r\n            this.ProcessingPipeline.ProcessingRequest &#43;= new EventHandler&lt;DataServiceProcessingPipelineEventArgs&gt;(OnRequest);\r\n        }\r\n\r\n        void OnRequest(object sender, DataServiceProcessingPipelineEventArgs e)\r\n        {\r\n            var auth = HttpContext.Current.Request.Headers[&quot;Authorization&quot;]; //This is empty                \r\n        }\r\n    }\r\n}</pre>\r\n<p>Javascript Client code:</p>\r\n<pre>OData.read({ requestUri: url, user: &quot;pruebausr&quot;, password: &quot;passprb&quot; },    \r\n    function (data, request) {\r\n        // ... code to procesing data (It works fine)\r\n\r\n    },  function(err) {\r\n            $.mobile.hidePageLoadingMsg();\r\n            alert(&quot;Error al obtener clientes. &quot; &#43; err.message);\r\n    }\r\n);</pre>\r\n<pre>Service web.config here:&nbsp;<a href=\"https://gist.github.com/3746043\">https://gist.github.com/3746043</a></pre>\r\n<p>I am using: WCF Data Services 5. IIS Express.</p>\r\n",
+    "PostedDate": "2012-09-18T18:03:41.26-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "916799",
+    "ThreadId": "396012",
+    "Html": "\r\n<p>Hi Japonte,</p>\r\n<p>&nbsp;&nbsp; Can you share a network trace of the request and the response?&nbsp; By the way, I noticed in your web.config that you are using&nbsp;forms authentication instead of basic http authentication (which uses the Authorizaton header directly).&nbsp;\r\n That may be the reason why the header no longer has the value that you expect because ASP.Net form authentication module has preprocessed the result to create&nbsp;an object that represents the user principal.&nbsp; You can find more details on how forms authentication\r\n work here <a href=\"http://msdn.microsoft.com/en-us/library/7t6b43z4(v=VS.100).aspx\">\r\nhttp://msdn.microsoft.com/en-us/library/7t6b43z4(v=VS.100).aspx</a>.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>\r\n",
+    "PostedDate": "2012-09-24T11:17:53.233-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

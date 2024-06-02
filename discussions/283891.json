@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "716038",
+    "ThreadId": "283891",
+    "Html": "\r\n<p>Hi</p>\r\n<p>I am submitting a batch request using Odata API of data.js . I want to use a object created in same request. scenario as follows</p>\r\n<p>I want to create a usergroup&nbsp; which have two child object</p>\r\n<p>1) Users associated with user group</p>\r\n<p>2) Permissions associated with user group</p>\r\n<p>But want to save with bath request. and request uri will be UserGroups , UserGroup(1)/Users ,UsesrGroup(1)/Permissions. Here &quot;1&quot; is the ID of usergroup created with first request uri in same batch request</p>\r\n<p>Can any one help me&nbsp; that how i use response of first request uri in request of second request uri</p>\r\n<p>Thanks</p>\r\n",
+    "PostedDate": "2011-12-22T05:02:42.487-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "720411",
+    "ThreadId": "283891",
+    "Html": "<p>Hi Anilgautam,&nbsp;</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp;&nbsp;Look at&nbsp;our&nbsp;the&nbsp;this <a href=\"http://datajs.codeplex.com/wikipage?title=OData%20Code%20Snippets&amp;referringTitle=Using%20OData\" target=\"_blank\">snippet </a>for&nbsp;an example of how can you&nbsp;cross reference entities in a batch request.</p>\r\n<p>Regards</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-01-04T10:56:49.177-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

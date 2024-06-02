@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "DomStore.prototype.clear has this check:\nif (key instanceof Array) {\nerror({ message: \"Array of keys not supported\" });\n}\n \nthere is no key argument. This code should be removed.",
+    "LastUpdatedDate": "2013-06-14T00:31:45.36-07:00",
+    "PlannedForRelease": "datajs version 1.0.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-07-11T15:45:36.76-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Useless code in a method",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 407
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

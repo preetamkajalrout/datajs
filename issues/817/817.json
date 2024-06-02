@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi, I've encountered a bug when sending a PUT request in Atom format (by setting Content-Type : application/atom+xml).\nInto request.data I put the same object that was previously loaded from the same custom OData service and it contains an etag. I've debugged it, and it's when adding this etag that incorrect second xmlns attribute is added to entry element (method writeAtomEntryMetadata) and the resulting xml looks like:\n<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:d=\"http://schemas.microsoft.com/ado/2007/08/dataservices\" xmlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\" etag=\"ac1c1c3b-6900-0001-3925-78fc69000058-4468-15\" xmlns=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\">\n...\n</entry>",
+    "LastUpdatedDate": "2013-02-21T17:20:08.26-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-08-17T05:54:43.78-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Incorrect XML output in Atom PUT request",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 817
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

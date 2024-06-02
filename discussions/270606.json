@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "664138",
+    "ThreadId": "270606",
+    "Html": "\r\n<p>Hi</p>\r\n<p>Following on from this thread : http://datajs.codeplex.com/discussions/269553?ProjectName=datajs</p>\r\n<p>Does the DataCache provide a means to include the total record count inline or do we need to query the total first?</p>\r\n<p>e.g. can we do something like:</p>\r\n<p></p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:blue\">var</span> options = { name: <span style=\"color:#a31515\">&quot;cache&quot;</span>, source: <span style=\"color:#a31515\">&quot;http://odata.netflix.com/Catalog/Titles?$inlinecount=allpages&quot;</span>, pageSize: cachePageSize, prefetchSize: itemsToPrefetch, cacheSize: cacheSize };\r\nOData.defaultHttpClient.enableJsonpCallback = <span style=\"color:blue\">true</span>;\r\n\r\n<span style=\"color:blue\">var</span> cache = datajs.createDataCache(options);\r\n\r\ncache.readRange(firstIndex, itemsDisplayed).then(<span style=\"color:blue\">function</span> (results) {\r\n       <span style=\"color:blue\">var</span> total = results.__count\r\n});\r\n\r\n\r\nI'm presuming not but just thought I check<br><br>Thanks <br></pre>\r\n</div>\r\n<p></p>\r\n",
+    "PostedDate": "2011-08-26T17:59:07.06-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "664621",
+    "ThreadId": "270606",
+    "Html": "<p>The cache will not return the count inline, but you can use the count method to get the value.</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre><span style=\"color: blue;\">var</span> cache = ...\r\ncache.count().then(<span style=\"color: blue;\">function</span>(total) { alert(<span style=\"color: #a31515;\">\"There are \"</span> + total + <span style=\"color: #a31515;\">\" items.\"</span>); });\r\n</pre>\r\n</div>\r\n<p>Hope this helps,</p>\r\n<p>Marcelo</p>",
+    "PostedDate": "2011-08-28T17:30:44.733-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "666577",
+    "ThreadId": "270606",
+    "Html": "<p>Excellent thanks</p>",
+    "PostedDate": "2011-09-01T18:41:26.907-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "670352",
+    "ThreadId": "270606",
+    "Html": "<p>I was unable to use the .count method() because I was using JSONP on a remote server (Netflix) and it returned a 415 message.</p>\r\n<p>I ended up doing a read for just a single item and including the inlinecount param before I accessed my cache.</p>\r\n<p>That worked fine however it would be great if datajs hid this type of thing away and managed it for you i.e. use an alternate means itself if the standard method failed.</p>\r\n<p>Cheers</p>\r\n<p>Mark</p>",
+    "PostedDate": "2011-09-11T14:52:20.4-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

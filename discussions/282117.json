@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "708715",
+    "ThreadId": "282117",
+    "Html": "<p>I am trying use data.js with&nbsp;batch operations:</p>\n<p>&nbsp;</p>\n<div style=\"color: black; background-color: white;\">\n<pre>        <span style=\"color: blue;\">var</span> request = {};\n        request.requestUri = <span style=\"color: blue;\">this</span>.get__batchUrl();\n        request.method = <span style=\"color: #a31515;\">'POST'</span>;\n        request.headers = {};</pre>\n</div>\n<p>&nbsp;</p>\n<div style=\"color: black; background-color: white;\">\n<pre>        <span style=\"color: blue;\">var</span> batchRequest = {};\n        batchRequest.requestUri = <span style=\"color: blue;\">this</span>.get_serviceUrl();\n        batchRequest.method = <span style=\"color: #a31515;\">'GET'</span>;\n        <span style=\"color: blue;\">var</span> batchData = {};\n        batchData.__batchRequests = [];\n        batchData.__batchRequests.add(batchRequest);\n        request.data = batchData;\n</pre>\n</div>\n<p>&nbsp;</p>\n<p>then I call OData.request. Fidler shows following request:&nbsp;</p>\n<p>&nbsp;</p>\n<pre>POST http://localhost/Service/EngineData.svc/$batch HTTP/1.1\nDataServiceVersion: 1.0\nSession-Id: sZ6PXiyhSGJN17I/c2d1jo8VbUWwodnNs961nUv7x3TjVyrqBrZU5Pin951ziP7LCIZjVjZn6pOJjrHEsWyMEpv9zV0pf5L0QHUDfckNJ+U=\nService-Name: Server\nAccept: application/atomsvc+xml;q=0.8, application/json;q=0.5, */*;q=0.1\nContent-Type: application/json\n\n{\"__batchRequests\":[{\"requestUri\":\"/Service/EngineData.svc/SubmitForm?folderId='dd'&amp;actionName='FirstAction'&amp;formName='dd'&amp;serverData='dd'&amp;fields=''\",\"method\":\"GET\"}]}</pre>\n<p>&nbsp;</p>\n<p>but server rerurns \"The content type specified in not valid for batch requests. Content type must be 'multipart/mixed' and there must be a valid single boundary delimiter specified.\"</p>\n<p>What can be wrong? I use WCF data service.</p>",
+    "PostedDate": "2011-12-07T03:46:53.233-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "709420",
+    "ThreadId": "282117",
+    "Html": "<p>Hi Slava,</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great. Seems to me that the batch handler is not being used in the call to to OData.request thus causing the request to be sent as a regular POST request instead of a batched multipart request.&nbsp; Please make sure that your call to OData.request looks like this:</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.request(request, <span style=\"color: blue;\">function</span> (data, response) { <span style=\"color: green;\">//success callback</span> }, <span style=\"color: blue;\">function</span> (err) { <span style=\"color: green;\">// error callback</span> }, OData.batchHandler);</pre>\r\n<pre>Regards,</pre>\r\n<pre>Alex Trigo.</pre>\r\n</div>",
+    "PostedDate": "2011-12-08T10:25:56.897-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "709705",
+    "ThreadId": "282117",
+    "Html": "<p>Hi Alex,</p>\r\n<p>Thank you, now it is working.</p>\r\n<p>regards, Slava</p>",
+    "PostedDate": "2011-12-08T23:18:46.02-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "709706",
+    "ThreadId": "282117",
+    "Html": "<p>the problem was in&nbsp;<span style=\"font-family: Consolas, 'Courier New', Courier, monospace; white-space: pre;\">OData.batchHandler, i skipped it</span></p>",
+    "PostedDate": "2011-12-08T23:20:11.667-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

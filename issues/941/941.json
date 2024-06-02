@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Unlike the odata json verbose behavior, the json light json reader in datajs inserts metadata into the __metadata field of the response before handing the response to the client code. For instance, see the jsonLightReadObject function, obj is initially set to { __metadata: { type: actualType } }. I would like this behavior to be optional. I am using datajs to round-trip data, which means in order to reduce the size of my MERGE requests, I would have to go through the object tree and remove these __metadata fields everywhere before sending it off (unless you're removing them in your code?). I also use pretty-printed json for debugging purposes in the app, and these inserted __metadata fields are exploding the object tree, making the debug output useless. \n\nI just want the json light object tree as it comes from the service, but with metadata applied (for example converting dates from the service in string format to json dates). Can I get a per-request or global option for that? Thanks!",
+    "LastUpdatedDate": "2013-02-21T17:20:07.007-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-02-04T06:29:06.06-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Need optional json light __metadata insertion",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 941
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

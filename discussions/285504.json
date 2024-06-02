@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "722633",
+    "ThreadId": "285504",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>&nbsp; I know the datajs library enables us to use &quot;username/password&quot; to authenticate to an OData provider, but besides this basic authentication mechanism, is there any existing way (or future planned way) to enable SSO or SAML authentication in the datajs\r\n library ?</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks in advance for your time,</p>\r\n<p>Chris</p>\r\n",
+    "PostedDate": "2012-01-09T10:01:53.93-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "723294",
+    "ThreadId": "285504",
+    "Html": "<p>Hi Clarose,</p>\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; We currently don't have any plans for enabling Single Sign On or SAML... however, you can always replace with&nbsp;your custom http client that supports whatever authentication mechanism you need.&nbsp; Please see&nbsp;our <a href=\"http://datajs.codeplex.com/wikipage?title=OData%20Networking&amp;referringTitle=OData%20Security\" target=\"_blank\">documentation page</a> on networking on the library and the sample on creating a <a href=\"http://datajs.codeplex.com/wikipage?title=Custom%20OData%20httpClient&amp;referringTitle=OData%20Networking\" target=\"_blank\">custom http client</a>.</p>\n<p>Regards,</p>\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-01-10T11:36:45.867-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

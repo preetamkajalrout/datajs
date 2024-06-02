@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1200701",
+    "ThreadId": "528367",
+    "Html": "Hi guys, <br />\n<br />\nI am having trouble executing an OData batch request in Firefox 26. In Chrome the request works fine, but in Firefox there is no data attached to the response. <br />\n<br />\n xmlHttpRequest returns a response with content-type:'multipart/mixed' in Chrome, while in Firefox it is 'application/json'. This is my only clue, but really I'm not sure what's going on.<br />\n<br />\nHere is the code I am using to send the request: <br />\n<pre><code>           OData.request(\n                {\n                    requestUri: &quot;/api/v1/wth/$batch&quot;,\n                    method: &quot;POST&quot;,\n                    headers: {},\n                    data: {\n                        __batchRequests: [\n                            jQuery.parseJSON(requestData)\n                        ]\n                    }\n                },\n                function (data, response) {\n                    // &quot;data is undefined&quot;\n                    var responseJson = data.__batchResponses;\n                    // etc... \n                }</code></pre>\n\nI've tried setting Content-Type to 'multipart/mixed' in the header, but it doesn't seem to make a difference.<br />\n<br />\nAny advice on this issue is much appreciated. Thanks! <br />\n",
+    "PostedDate": "2014-01-29T15:32:22.563-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

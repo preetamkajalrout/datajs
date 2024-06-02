@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I get an Eclipse evaluation error on line 4291 in datajs 1.0\n \nvar responseHeaderRegex = /^([^()<>@,;:\\\\\"/[\\]?={} \\t]+)\\s?:\\s?(.*)/;\n \nShouldn't this be\n \nvar responseHeaderRegex = /^([^()<>@,;:\\\\\"\\/[\\]?={} \\t]+)\\s?:\\s?(.*)/;\n \n?\nThanks",
+    "LastUpdatedDate": "2013-06-14T00:31:45.16-07:00",
+    "PlannedForRelease": "datajs version 1.0.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-07-14T01:15:18.543-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Error in regex evaluation",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 408
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

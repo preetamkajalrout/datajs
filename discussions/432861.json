@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1000092",
+    "ThreadId": "432861",
+    "Html": "It is probably not the best place to ask this question but I couldn't find any OData specific forum. \r<br />\n<br />\nIn our project we use one field to store flags where a first bit is for read/unread flag and another one is private/public. So using SQL syntax I could do combinations like this: \r<br />\nSELECT * FROM <code>records</code> WHERE flags &amp; 1 AND flags &amp; 2 = 0 to get results where records are read and private. \r<br />\n<br />\nI looked through the OData documentation and I didn't find any way to work with bitmasks.  Is there any way to do that using OData syntax without creating custom functions on the server side?<br />\n",
+    "PostedDate": "2013-02-12T08:52:21.607-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

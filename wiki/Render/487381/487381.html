@@ -1,0 +1,116 @@
+<div class="wikidoc"><h1>OData Payload Formats</h1>
+The library uses an internal representation for the different OData payloads currently used by the protocol. As a payload is processed it will be transformed to/from an object that has a certain structure. The chosen formats mimic the OData V2 JSON format with certain extensions to capture additional ATOM constructs.<br />
+<ul><li><a href="#Feed">Feed</a></li>
+<li><a href="#Entry">Entry</a></li>
+<li><a href="#Extension">Extension</a></li>
+<li><a href="#Links">Links</a></li>
+<li><a href="#Service Documents">Service Documents</a></li>
+<li><a href="#Batch Requests">Batch Requests</a></li></ul>
+<br /><a name="Feed"></a><br /><b>Feed</b><br /><br />OData feeds are collections of entry objects with some additional metadata depending on whether the data is transferred using ATOM or JSON formats. The library defines the feed object as follows.<br /><br /><div style="color:Black;background-color:White;"><pre>
+feed = {
+  results: array,            <span style="color:Green;">// array of entry objects</span>
+  __count: integer,          <span style="color:Green;">// count of entries in the collection; only available in OData V2 and later  </span>
+  __next: string,            <span style="color:Green;">// URI to the next partial feed list; only available in OData V2 and later</span>
+  __metadata: {              <span style="color:Green;">// additional data about the feed; only available from feeds in ATOM format</span>
+    id: string,              <span style="color:Green;">// value of the id element in the ATOM feed document</span>
+    id_extensions: array,    <span style="color:Green;">// array of attribute extension objects</span>
+    next_extensions: array,  <span style="color:Green;">// array of attribute extension objects</span>
+    self: string,            <span style="color:Green;">// URI of the feed</span>
+    title: string,           <span style="color:Green;">// value of the title element in the ATOM feed document</span>
+    title_extensions: array, <span style="color:Green;">// array of attribute extension objects</span>
+    feed_extensions: array,  <span style="color:Green;">// array of attribute and element extension objects</span>
+  }
+};
+</pre></div><br /><a name="Entry"></a><br /><b>Entry</b><br /><br />Similar to OData feeds, entries can have additional metadata if they are transmitted over the wire using ATOM documents.  These are represented using the following definition:<br /><br /><div style="color:Black;background-color:White;"><pre>
+entry = {
+  __metadata : { <span style="color:Green;">// additional data about the entry</span>
+    uri: string, <span style="color:Green;">// URI to the entry</span>
+    uri_extensions: array <span style="color:Green;">// array of attribute extension objects; only available from entries in ATOM format</span>
+    type: string, <span style="color:Green;">// entry entity type</span>
+    type_extensions: array <span style="color:Green;">// array of attribute extension objects; only available from feeds in ATOM format</span>
+    etag: string, <span style="color:Green;">// entity ETag value used for concurrency checks</span>
+    edit: string, <span style="color:Green;">// URI for editing the entry</span>
+    edit_link_extensions: array, <span style="color:Green;">// array of attribute extension objects; only available from entries in ATOM format</span>
+    edit_media: string, <span style="color:Green;">// URI for editing the media entry</span>
+    edit_media_extensions: array <span style="color:Green;">// array of attribute extension objects; only available from entries in ATOM format</span>
+    media_src: string, <span style="color:Green;">// URI to the media source of the media entry</span>
+    media_etag: string, <span style="color:Green;">// ETag value used for the media entry</span>
+    content_type: string, <span style="color:Green;">// MIME type of the media entry        </span>
+    self: string, <span style="color:Green;">// URI to the entry self link</span>
+    self_link_extensions: array, <span style="color:Green;">// array of attribute extension objects; only available from entries in ATOM format</span>
+    properties: { <span style="color:Green;">// object that contains property metadata as a dictionary ; only available from entries in ATOM format</span>
+      name: {
+        type: string, <span style="color:Green;">// property type</span>
+        extensions: array <span style="color:Green;">// array of attribute extension objects</span>
+        properties: object <span style="color:Green;">// object that contains complex type property metadata as name value pairs</span>
+      }
+    },
+  name: primitive | inline | deferred | complex <span style="color:Green;">// entry property and value</span>
+};
+
+complex = {
+    __metadata : {
+       type: string <span style="color:Green;">// complex property type</span>
+    },
+    property: primitive | complex <span style="color:Green;">// property and value</span>
+};
+
+deferred = {
+    __deferred: { 
+        uri: string <span style="color:Green;">// URI to the linked entries</span>
+    }
+};
+
+inline = feed object | entry object;
+
+primitive = string | number | date;
+</pre></div><br />Date primitive values are a special case. In order to preserve offset data and distinguish the value between date time and date time offset two properties are added to the date object:<br />
+<ul><li><span class="codeInline">__edmType</span></li>
+<li><span class="codeInline">__offset</span></li></ul>
+<br />High precission date time values are supported by the library (up to nanoseconds) in which case the following property is added to the Date object and contains an integer with the number of nanoseconds found in the value:<br />
+<ul><li><span class="codeInline">__ns</span></li></ul>
+<br />Entry navigation properties show up as properties in the entry object and, depending on whether the linked entry is in lined with in the payload, their values will be represented as deferred properties or in lined properties.<br /><br /><a name="Extension"></a><br /><b>Extension</b><br /><br />ATOM format has well defined points in which custom elements and attributes might be added to the document. OData endpoints may leverage this characteristic of the protocol to add extra information when transferring data via ATOM documents. In order to handle this possibility, the library defines the following extensions object:<br /><br /><div style="color:Black;background-color:White;"><pre>
+extensions = {
+    name: string,      <span style="color:Green;">// local name of the custom XML element or attribute</span>
+    namespace: string, <span style="color:Green;">// namespace URI of the custom XML element or attribute</span>
+    value: string,     <span style="color:Green;">// value of the custom XML element or attribute</span>
+    attributes: array, <span style="color:Green;">// array of attribute extension objects of the custom XML element</span>
+    children: array    <span style="color:Green;">// array of element extension objects of the custom XML element</span>
+};
+</pre></div><br />Extensions in an ATOM document can be in the form of custom XML elements or attributes.  To distinguish between both kinds of extension the documentation uses the terms  element extension object and attribute extension object.<br /><br /><a name="Links"></a><br /><b>Links</b><br /><br />Links documents are collections of URIs pointing to linked entries; they are represented using the following definition:<br /><br /><div style="color:Black;background-color:White;"><pre>
+links = {
+  __count: integer,  <span style="color:Green;">// count of entries in the collection; only available in OData V2 and later JSON format </span>
+  results: array     <span style="color:Green;">// array of uri objects.</span>
+};
+
+uri = {
+    uri: string      <span style="color:Green;">// URI to the linked entry</span>
+};
+</pre></div><br /><a name="Service Documents"></a><br /><b>Service Document</b><br /><br /><div style="color:Black;background-color:White;"><pre>
+service_document = {
+  extensions: array  <span style="color:Green;">// array of element extension objects</span>
+  workspaces: array  <span style="color:Green;">// array of workspace objects</span>
+};
+
+workspace = {
+  extensions: array, <span style="color:Green;">// array of element extension objects</span>
+  title: string,     <span style="color:Green;">// value of the workspace’s title element in the ATOM service document</span>
+  collections: array <span style="color:Green;">// array of collection objects</span>
+};
+
+collection = {
+  extensions: array, <span style="color:Green;">// array of element extension objects</span>
+  href: string,      <span style="color:Green;">// URI to the collection</span>
+  title: string      <span style="color:Green;">// name of the collection</span>
+};
+</pre></div><br />Service documents are an ATOM only concept and thus only available when using the ATOM format. If a service document is requested using JSON, then the OData endpoint only sends an array with all the available collection names. The library normalizes the JSON data into the above representation using a single workspace object without title.<br /><br /><a name="Batch Requests"></a><br /><b>Batch Request</b><br /><br />Batch request objects allow for grouping several requests into a single operation that is sent to the OData endpoint. They are defined as:<br /><br /><div style="color:Black;background-color:White;"><pre>
+batch = {
+  __batchRequests : array   <span style="color:Green;">// array of read request objects or changeRequest objects</span>
+};
+ 
+changeRequest= {
+  __changeRequests : array  <span style="color:Green;">// array of write request objects</span>
+};
+</pre></div><br />Read request object, those whose HTTP method is &quot;GET&quot;, cannot be part of a change request object. Similarly, write requests can only be batched inside a changeRequest object.
+<hr />
+Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=datajs%20OData%20API&referringTitle=OData%20Payload%20Formats">datajs OData API</a><br />Next Topic: <a href="https://datajs.codeplex.com/wikipage?title=datajs%20store%20API&referringTitle=OData%20Payload%20Formats">datajs store API</a></div><div class="ClearBoth"></div>

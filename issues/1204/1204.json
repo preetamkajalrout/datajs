@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi,\nI'm using datajs with json+minimalmetadata, model is downloaded ahead of time and is passed as an argument to OData.request.\nProblem is that it throws when any of the navigation properties are expanded. It does so because not all 'Schema' elements in the metadata have 'EntityContainer' children so\n\n```\n                var containers = schema.entityContainer;\n                for (var i = 0; i < containers.length; i++) {\n```\n\nthrows because 'containers.length' is referencing a property on the 'undefined'. Applying following diff fixes problem for me:\n\n```\n@@ -1969,7 +1969,7 @@\n             var rel = navigationProperty.relationship;\n             var associationSet = forEachSchema(metadata, function (schema) {\n                 var containers = schema.entityContainer;\n-                for (var i = 0; i < containers.length; i++) {\n+                for (var i = 0; containers && i < containers.length; i++) {\n                     var associationSets = containers[i].associationSet;\n                     if (associationSets) {\n                         for (var j = 0; j < associationSets.length; j++) {\n@@ -1996,7 +1996,7 @@\n\n         var info = forEachSchema(metadata, function (schema) {\n             var containers = schema.entityContainer;\n-            for (var i = 0; i < containers.length; i++) {\n+            for (var i = 0; containers && i < containers.length; i++) {\n                 var entitySets = containers[i].entitySet;\n                 if (entitySets) {\n                     for (var j = 0; j < entitySets.length; j++) {\n```\n\nAlternatively you could initialize containers to an empty array if there is no schema.entityContainer property.\n\nRegards,\nSerge\n\nUpdate: it seems this is a dupe for [#1126](https://datajs.codeplex.com/workitem/1126)",
+    "LastUpdatedDate": "2014-01-03T22:28:43.577-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2014-01-03T03:00:06.217-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "datajs-1.1.1.js: lookupNavigationPropertyEntitySet and getEntitySetInfo throw an exception",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1204
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

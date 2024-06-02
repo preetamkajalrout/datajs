@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "628006",
+    "ThreadId": "261456",
+    "Html": "\r\n<p>Hey everybody,</p>\r\n<p>Currently I am trying to read an atom feed, but I always get the error &quot;invalid label&quot;. I think that there is a problem with the callback handler as it it set to Jsonp. Without&nbsp; &quot;OData.defaultHttpClient.enableJsonpCallback = true;&quot; I get the 401 (not\r\n authorized Error).</p>\r\n<p>Please help, I was not able to find an example for reading an atom feed.</p>\r\n<p>Best regards and thanks in advance,</p>\r\n<p>Caranthor</p>\r\n",
+    "PostedDate": "2011-06-15T01:59:22.14-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "628272",
+    "ThreadId": "261456",
+    "Html": "<p>datajs should be able to deal with an OData payload regardless of whether it's JSON or ATOM-based.</p>\r\n<p>Do you need some form of authentication on the server? Can you share the HTTP traces for the cases with jsonp on true / false?</p>",
+    "PostedDate": "2011-06-15T11:05:43.323-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "628382",
+    "ThreadId": "261456",
+    "Html": "<p>Caranthor, I've just posted a video on how to get simple HTTP traces. Just capture these while your page is running, that should provide more information on what's going on.</p>\r\n<p><a href=\"http://blogs.msdn.com/b/marcelolr/archive/2011/06/15/network-capture-with-internet-explorer.aspx\">http://blogs.msdn.com/b/marcelolr/archive/2011/06/15/network-capture-with-internet-explorer.aspx</a></p>",
+    "PostedDate": "2011-06-15T14:27:40.03-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "629132",
+    "ThreadId": "261456",
+    "Html": "<p>Hi,</p>\n<p>I use Firebug for tracing. Can't save in XML files. Anyways, When Json callback is true the parameters that are sent are:</p>\n<table class=\"netInfoParamsText netInfoText netInfoParamsTable \" cellspacing=\"0\" cellpadding=\"0\">\n<tbody class=\" \">\n<tr class=\" \">\n<td class=\"netInfoParamName \"><span class=\" \">$callback</span></td>\n<td class=\"netInfoParamValue \"><code class=\"focusRow subFocusRow \">handleJSONP_0</code></td>\n</tr>\n<tr class=\" \">\n<td class=\"netInfoParamName \"><span class=\" \">$format</span></td>\n<td class=\"netInfoParamValue \"><code class=\"focusRow subFocusRow \">json</code></td>\n</tr>\n<tr class=\" \">\n<td class=\"netInfoParamName \"><span class=\" \">sap-client</span></td>\n<td class=\"netInfoParamValue \"><code class=\"focusRow subFocusRow \">&nbsp;100</code></td>\n</tr>\n</tbody>\n</table>\n<div class=\"netInfoResponseText netInfoText \">\n<pre><code class=\"wrappedText focusRow\">The Server returns the Following answer. <br /><br />&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;atom:feed xml:base=\"http://vmw3811.wdf.sap.corp:50075/sap/opu</code><code class=\"wrappedText focusRow\">/sdata/sap/ZEAM_MOB_GEO/\".................... <br /></code><code class=\"wrappedText focusRow\">............&lt;/atom:title&gt;&lt;atom:updated&gt;2011-06-17T08:55:04Z&lt;/atom:updated&gt;&lt;/atom:entry&gt;&lt;/atom:feed&gt;<br /><br />datajs expects json, but receives atom =&gt; can't deal with it.<br /><br /><br />When jsonp callback is false: Parameters: only sap-client 100 (set by me, not by the framework)<br />and no answer, instead Status 401 (unauthorized).<br /><br />*edit* yes, i need authentication. first time a sign in pop up is used for authentication<br /><br />Thank you</code></pre>\n</div>",
+    "PostedDate": "2011-06-17T02:08:46.11-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "630209",
+    "ThreadId": "261456",
+    "Html": "<p>Caranthor, can you tell me what software is service OData from the server?</p>\r\n<p>From your description, it looks like asking for JSON through the $format query parameter doesn't make the server return JSON - it ignores it and returns ATOM XML instead.</p>\r\n<p>When setting JSONP to false, datajs still makes an attempt to use XMLHttpRequest. In this case, Firefox will try to do a cross-domain request if the server allows it, but it won't flow authentication information by default (which is probably why you're getting the 401 response from the server). Using withCredentials as per <a href=\"https://developer.mozilla.org/En/HTTP_access_control#Requests_with_credentials\">https://developer.mozilla.org/En/HTTP_access_control#Requests_with_credentials</a>&nbsp;should help in this case.</p>\r\n<p>Note however that XHR in cross-domain scenarios are not widely / consistently implemented in browsers, so it's a tricky proposition.</p>\r\n<div id=\"_mcePaste\" class=\"mcePaste\" style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; top: 0px; left: -10000px;\">﻿</div>",
+    "PostedDate": "2011-06-20T12:15:24.2-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

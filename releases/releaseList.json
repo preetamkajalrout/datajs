@@ -1,0 +1,362 @@
+[
+  {
+    "Id": "0",
+    "Name": "datajs version 1.1.1",
+    "DevelopmentStatus": "Stable",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n*Changes from DataJS 1.1.0 release*\n* Support for Json minimalmetadata format with computation for Uris when metadata is provided, which reduces the payload size on the wire.\n* Ability to read current version using datajs.version.\n* Ability to parse XML metadata using OData.parseMetadata API.\n* Bug fixes that include fixes for bugs 899, 980, 1049, 1110, 1111.\n* Code cleanup.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2013-07-17T11:21:31.917-07:00",
+    "Files": [
+      {
+        "Id": "5e9765e6-bcb1-4ec1-88b5-0dfe98c60e64",
+        "FileName": "datajs-1.1.1.min.js",
+        "Url": "./0/5e9765e6-bcb1-4ec1-88b5-0dfe98c60e64",
+        "Type": "Source Code",
+        "UploadDate": "2013-07-16T15:19:22.82-07:00"
+      },
+      {
+        "Id": "77085e23-9008-44ce-9ec4-c90cfce00726",
+        "FileName": "datajs-1.1.1.js",
+        "Url": "./0/77085e23-9008-44ce-9ec4-c90cfce00726",
+        "Type": "Source Code",
+        "UploadDate": "2013-07-16T15:19:22.853-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "1",
+    "Name": "datajs version 1.1.1beta2",
+    "DevelopmentStatus": "Beta",
+    "Description": "Release Notes\ndatajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features: OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\nSingle store abstraction that provides a common API on top of HTML5 local storage technologies.\nData cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\nChanges from datajs 1.1.1beta\n- bug fixes and code cleanup and applying codeplex patch for code convention.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2013-07-17T12:54:05.05-07:00",
+    "Files": [
+      {
+        "Id": "3c04d566-24f1-4a2c-b183-a78f2f70947c",
+        "FileName": "datajs-1.1.1beta2.min.js",
+        "Url": "./1/3c04d566-24f1-4a2c-b183-a78f2f70947c",
+        "Type": "Source Code",
+        "UploadDate": "2013-05-17T10:58:50.993-07:00"
+      },
+      {
+        "Id": "d53d250e-db33-4373-a07c-8decf7febe7d",
+        "FileName": "datajs-1.1.1beta2.js",
+        "Url": "./1/d53d250e-db33-4373-a07c-8decf7febe7d",
+        "Type": "Application",
+        "UploadDate": "2013-05-17T10:58:51.04-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "2",
+    "Name": "datajs version 1.1.1beta",
+    "DevelopmentStatus": "Beta",
+    "Description": "!! Release Notes\n\ndatajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n!! Changes from datajs 1.1.0\n* Support for Json minimalmetadata format with computation for Uris when metadata is provided, which reduces the payload size on the wire, for more information about Json format details: [url: http://www.bitwhys.com/odata-101-what-is-json-light/]\n* Ability to read current version using datajs.version.\n* Bug fixes and code cleanup.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2013-04-22T10:56:14.943-07:00",
+    "Files": [
+      {
+        "Id": "4279ce25-3a34-4231-a591-a0f98bfb66df",
+        "FileName": "datajs-1.1.1beta.min.js",
+        "Url": "./2/4279ce25-3a34-4231-a591-a0f98bfb66df",
+        "Type": "Source Code",
+        "UploadDate": "2013-03-26T14:54:00.07-07:00"
+      },
+      {
+        "Id": "3de86b61-eb7c-4563-add9-456bee8ed967",
+        "FileName": "datajs-1.1.1beta.js",
+        "Url": "./2/3de86b61-eb7c-4563-add9-456bee8ed967",
+        "Type": "Source Code",
+        "UploadDate": "2013-03-26T14:54:00.15-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "3",
+    "Name": "datajs version 1.1.0",
+    "DevelopmentStatus": "Stable",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n+Changes from datajs 1.1.0-beta2+\n\n* Add support for advertised functions and actions in JSON light payloads.\n* JSON with full metadata is now the preferred format set by the default handler in the request's accept header.\n* Updated the CSDL schema in the metadata handler.\n* Bug fixes and code cleanup.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2012-11-26T03:58:03.357-08:00",
+    "Files": [
+      {
+        "Id": "d93ac606-8d45-458b-bf75-bd95a5a9c40b",
+        "FileName": "datajs-1.1.0.min.js",
+        "Url": "./3/d93ac606-8d45-458b-bf75-bd95a5a9c40b",
+        "Type": "Application",
+        "UploadDate": "2012-11-26T03:58:03.043-08:00"
+      },
+      {
+        "Id": "4ffd5d5b-259e-490b-a89a-d7b8bd5c1b23",
+        "FileName": "datajs-1.1.0.js",
+        "Url": "./3/4ffd5d5b-259e-490b-a89a-d7b8bd5c1b23",
+        "Type": "Application",
+        "UploadDate": "2012-11-26T03:58:03.09-08:00"
+      }
+    ]
+  },
+  {
+    "Id": "4",
+    "Name": "datajs version 1.1.0-beta2",
+    "DevelopmentStatus": "Beta",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n+Changes from datajs 1.1.0-beta+\n\n* Add support for OData the new JSON light format.\n* Add support for OData spatial properties.\n* Bug fixes and code cleanup.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2012-11-14T14:48:33.857-08:00",
+    "Files": [
+      {
+        "Id": "47c7973a-ff66-4c81-88a7-ceb12bce45fd",
+        "FileName": "datajs-1.1.0-beta2.min.js",
+        "Url": "./4/47c7973a-ff66-4c81-88a7-ceb12bce45fd",
+        "Type": "Source Code",
+        "UploadDate": "2012-11-14T14:48:32.967-08:00"
+      },
+      {
+        "Id": "e42f0f63-58ed-4b2f-9505-f6071f36b2fd",
+        "FileName": "datajs-1.1.0-beta2.js",
+        "Url": "./4/e42f0f63-58ed-4b2f-9505-f6071f36b2fd",
+        "Type": "Source Code",
+        "UploadDate": "2012-11-14T14:48:32.967-08:00"
+      }
+    ]
+  },
+  {
+    "Id": "5",
+    "Name": "datajs version 1.1.0-beta",
+    "DevelopmentStatus": "Beta",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n+Changes from datajs 1.0.3+\n\n* Add support for OData V3 features such as collection properties, namded streams, and actions advertised in the payload.\n* Updates the IndexedDB store provider to the latest spec so it can be used with IE 10, Chrome 11.0{\"+, and Firefox 4.0+\"}.\n* Full support for IE 10 in tiled and desktop modes.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2012-09-13T07:17:26.387-07:00",
+    "Files": [
+      {
+        "Id": "28ad4939-db52-4872-a666-fcd9de8e1c41",
+        "FileName": "datajs-1.1.0-beta.min.js",
+        "Url": "./5/28ad4939-db52-4872-a666-fcd9de8e1c41",
+        "Type": "Application",
+        "UploadDate": "2012-09-13T07:16:29.64-07:00"
+      },
+      {
+        "Id": "5c1beef8-0209-489e-93d6-34884dc3dcef",
+        "FileName": "datajs-1.1.0-beta.js",
+        "Url": "./5/5c1beef8-0209-489e-93d6-34884dc3dcef",
+        "Type": "Application",
+        "UploadDate": "2012-09-13T07:16:29.67-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "6",
+    "Name": "datajs version 1.0.3",
+    "DevelopmentStatus": "Stable",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n+Changes from datajs 1.0.2+\n\nThe changes made since the previous release contain the following minor updates to support OData V3 services:\n\n* The library will add the MaxDataServiceVersion header if missing from the request.\n* The mime type for json payload has been changed to \"application/json;odata=verbose\"\n* Minor fix for reading the responses to a batch request.\n* Add the new EDM namespace to the metadata handler.\n\nDespite these changes, the library still is an OData V2 client.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2012-05-02T13:02:03.673-07:00",
+    "Files": [
+      {
+        "Id": "f0cf256f-5898-46ad-9020-3cea77b5d50b",
+        "FileName": "datajs-1.0.3.min.js",
+        "Url": "./6/f0cf256f-5898-46ad-9020-3cea77b5d50b",
+        "Type": "Source Code",
+        "UploadDate": "2012-05-02T12:08:00.423-07:00"
+      },
+      {
+        "Id": "476075e5-4183-4a25-9963-89c130dab2a2",
+        "FileName": "datajs-1.0.3.js",
+        "Url": "./6/476075e5-4183-4a25-9963-89c130dab2a2",
+        "Type": "Source Code",
+        "UploadDate": "2012-05-02T12:08:00.47-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "7",
+    "Name": "datajs version 1.0.2",
+    "DevelopmentStatus": "Stable",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n+Changes from datajs 1.0.1+\n\n  The changes made since the previous release include a fix for supporting high precision datetime values (up to nanoseconds) thus properly working with data feeds from Azure Table Storage.  It also contains a minor fix to avoid random error messages in IE9 thrown when properties from XHR are being accessed after the request has been canceled.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-11-09T18:09:31.593-08:00",
+    "Files": [
+      {
+        "Id": "a371726a-7322-4733-aa43-fa54dbdf6730",
+        "FileName": "datajs-1.0.2.min.js",
+        "Url": "./7/a371726a-7322-4733-aa43-fa54dbdf6730",
+        "Type": "Source Code",
+        "UploadDate": "2011-10-19T17:37:58.823-07:00"
+      },
+      {
+        "Id": "3239ac13-8eba-4ec1-854b-ea867cb87851",
+        "FileName": "datajs-1.0.2.js",
+        "Url": "./7/3239ac13-8eba-4ec1-854b-ea867cb87851",
+        "Type": "Source Code",
+        "UploadDate": "2011-10-19T17:37:58.84-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "8",
+    "Name": "datajs version 1.0.1",
+    "DevelopmentStatus": "Stable",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n+Changes from datajs 1.0.0+\n\n  The changes made since the previous release include a minor fix to support autocompletion as well as small typos.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-08-02T16:31:13.553-07:00",
+    "Files": [
+      {
+        "Id": "cfb482e2-c11d-4d03-8bf8-c23f946e0dd8",
+        "FileName": "datajs-1.0.1.min.js",
+        "Url": "./8/cfb482e2-c11d-4d03-8bf8-c23f946e0dd8",
+        "Type": "Source Code",
+        "UploadDate": "2011-08-02T16:30:10.23-07:00"
+      },
+      {
+        "Id": "118ed7c4-8b73-4960-9179-7907baff9252",
+        "FileName": "datajs-1.0.1.js",
+        "Url": "./8/118ed7c4-8b73-4960-9179-7907baff9252",
+        "Type": "Source Code",
+        "UploadDate": "2011-08-02T16:30:10.26-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "9",
+    "Name": "datajs version 1.0.0",
+    "DevelopmentStatus": "Stable",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\n+Changes from datajs 0.0.4+\n\n  The changes made since the previous release include minor fixes to the cache state machines, improve handling of JSONP responses, and code cleanup.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-06-29T16:26:21.947-07:00",
+    "Files": [
+      {
+        "Id": "4cc94c6f-478a-4192-a84f-e80c5b224978",
+        "FileName": "datajs-1.0.0.min.js",
+        "Url": "./9/4cc94c6f-478a-4192-a84f-e80c5b224978",
+        "Type": "Source Code",
+        "UploadDate": "2011-06-29T15:37:54.377-07:00"
+      },
+      {
+        "Id": "eee3b792-ecd1-42fc-b499-34f062bb9bb4",
+        "FileName": "datajs-1.0.0.js",
+        "Url": "./9/eee3b792-ecd1-42fc-b499-34f062bb9bb4",
+        "Type": "Source Code",
+        "UploadDate": "2011-06-29T15:37:54.393-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "10",
+    "Name": "datajs version 0.0.4",
+    "DevelopmentStatus": "Alpha",
+    "Description": "This release contains the following breaking changes:\n\n* The data cache API destroy() has been renamed to clear(). \n* The data cache onprefetch event has been replaced by the onidle event that will fire whenever the cache is not performing any operations.\n* The Indexed DB as a storage mechanism is no longer the mechanism of choice in Firefox 4 and it will be have to be requested explicitly when creating both cache and store objects. DOM storage is now considered the mechanism of choice in all browsers that support it.\n\nAlso this release adds to the library support for basic authentication by setting username and password in the requests. Support for configuring and controlling cache sizes as well as user defined cache data sources.  It also adds filtering forward/backwards to cache objects and support for using [url:RxJs|http://msdn.microsoft.com/en-us/devlabs/gg577609]. Finally, JSONP options can now be set on a per-request basis.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-06-16T21:08:14.793-07:00",
+    "Files": [
+      {
+        "Id": "a60c4138-3fdd-4e20-91f1-df49ef505b41",
+        "FileName": "datajs-0.0.4.min.js",
+        "Url": "./10/a60c4138-3fdd-4e20-91f1-df49ef505b41",
+        "Type": "Source Code",
+        "UploadDate": "2011-06-16T18:06:05.963-07:00"
+      },
+      {
+        "Id": "4b28f3e6-371b-49ec-b4a1-4bb2798b8ce4",
+        "FileName": "datajs-0.0.4.js",
+        "Url": "./10/4b28f3e6-371b-49ec-b4a1-4bb2798b8ce4",
+        "Type": "Source Code",
+        "UploadDate": "2011-06-16T18:06:05.98-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "11",
+    "Name": "datajs version 0.0.3",
+    "DevelopmentStatus": "Alpha",
+    "Description": "This release adds a cache API that provides a very simple way of reading large paginated results, a store API that provides a common abstraction over a few mechanisms that can be used to store data locally and support for OData $links feeds.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-04-11T20:10:13.177-07:00",
+    "Files": [
+      {
+        "Id": "95fd4e49-abaa-436e-bae2-db98a5c5fe38",
+        "FileName": "datajs-0.0.3.min.js",
+        "Url": "./11/95fd4e49-abaa-436e-bae2-db98a5c5fe38",
+        "Type": "Source Code",
+        "UploadDate": "2011-04-11T19:33:20.557-07:00"
+      },
+      {
+        "Id": "ffa68571-c546-430c-806f-cd3a8b11bd58",
+        "FileName": "datajs-0.0.3.js",
+        "Url": "./11/ffa68571-c546-430c-806f-cd3a8b11bd58",
+        "Type": "Source Code",
+        "UploadDate": "2011-04-11T19:33:56.803-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "12",
+    "Name": "datajs version 0.0.2",
+    "DevelopmentStatus": "Alpha",
+    "Description": "This release adds support for parsing DateTime and DateTimeOffset properties into javascript Date objects and serialize them back.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-02-16T18:14:08.107-08:00",
+    "Files": [
+      {
+        "Id": "7bc10370-3cfc-4dfe-86b6-cd85355dcd7e",
+        "FileName": "datajs-0.0.2.min.js",
+        "Url": "./12/7bc10370-3cfc-4dfe-86b6-cd85355dcd7e",
+        "Type": "Source Code",
+        "UploadDate": "2011-02-16T18:13:04.883-08:00"
+      },
+      {
+        "Id": "0cac5a78-2683-45cc-9ee1-7ea8b7c7fbb3",
+        "FileName": "datajs-0.0.2.js",
+        "Url": "./12/0cac5a78-2683-45cc-9ee1-7ea8b7c7fbb3",
+        "Type": "Source Code",
+        "UploadDate": "2011-02-16T18:13:04.913-08:00"
+      }
+    ]
+  },
+  {
+    "Id": "13",
+    "Name": "datajs version 0.0.1",
+    "DevelopmentStatus": "Alpha",
+    "Description": "This is an alpha release of a new project called ‘datajs’, a cross-browser JavaScript library that enables data-centric web applications by leveraging modern web protocols.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2011-02-02T14:34:31.863-08:00",
+    "Files": [
+      {
+        "Id": "f957542e-f393-4780-a8d9-8c3401736ad7",
+        "FileName": "datajs-0.0.1.min.js",
+        "Url": "./13/f957542e-f393-4780-a8d9-8c3401736ad7",
+        "Type": "Source Code",
+        "UploadDate": "2011-02-01T19:24:05.88-08:00"
+      },
+      {
+        "Id": "d55bcd42-bff0-4c9f-b667-3f3f7c0b4d70",
+        "FileName": "datajs-0.0.1.js",
+        "Url": "./13/d55bcd42-bff0-4c9f-b667-3f3f7c0b4d70",
+        "Type": "Source Code",
+        "UploadDate": "2011-02-01T19:24:05.893-08:00"
+      }
+    ]
+  },
+  {
+    "Id": "14",
+    "Name": "datajs version 1.1.2",
+    "DevelopmentStatus": "Stable",
+    "Description": "datajs is a cross-browser and UI agnostic JavaScript library that enables data-centric web applications with the following features:\n\n* OData client that enables CRUD operations including batching and metadata support using both ATOM and JSON payloads.\n* Single store abstraction that provides a common API on top of HTML5 local storage technologies.\n* Data cache component that allows reading data ranges from a collection and storing them locally to reduce the number of network requests.\n\nChanges from DataJS 1.1.1 release:\n* Change the copyright from “Copyright (c) Microsoft.” to “Copyright (c) Microsoft Open Technologies, Inc.”.  \n* Fix the issue of causing \"unknown exception\" when using JsonP on IE10.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-01-28T23:05:57.193-08:00",
+    "Files": [
+      {
+        "Id": "17173e5b-c465-40af-baa7-a64425a7ab76",
+        "FileName": "datajs-1.1.2.min.js",
+        "Url": "./14/17173e5b-c465-40af-baa7-a64425a7ab76",
+        "Type": "Source Code",
+        "UploadDate": "2014-01-28T23:05:56.863-08:00"
+      },
+      {
+        "Id": "ebfa4adb-ac08-4525-948c-7b0eff88e06d",
+        "FileName": "datajs-1.1.2.js",
+        "Url": "./14/ebfa4adb-ac08-4525-948c-7b0eff88e06d",
+        "Type": "Source Code",
+        "UploadDate": "2014-01-28T23:05:56.927-08:00"
+      }
+    ]
+  }
+]

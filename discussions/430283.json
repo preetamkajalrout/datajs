@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "989682",
+    "ThreadId": "430283",
+    "Html": "\r\n<p>Hey guys,</p>\r\n<p>&nbsp;</p>\r\n<p>I have also the problem with DELETE batch requests that I get no handler for data error in datajs 1.0.3</p>\r\n<p>According to the spec for a DELETE request:</p>\r\n<p>If the DeleteEntity Request was successful, the response MUST have a 204 (No Content) status code, as specified in [RFC2616].</p>\r\n<p>I analyzed a bit and found out that in the default Handler code:</p>\r\n<p>if (response &amp;&amp; assigned(response.body) &amp;&amp; response.headers[&quot;Content-Type&quot;]) {<br>\r\ndispatchHandler(&quot;read&quot;, response, context);<br>\r\n}</p>\r\n<p>the assigned function doesn't check if the body is an empty string which is the case from the server response : response.body = &quot;&quot;.</p>\r\n<p>So the dispatchHandler function is called which tries to parse the response where there is no one.</p>\r\n<p>Is this a bug...Shouldn't be also checked if the repsonse body is an empty string..e.g. if (response.body)?</p>\r\n<p>&nbsp;Thanks!</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2013-01-21T05:21:15.073-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "996802",
+    "ThreadId": "430283",
+    "Html": "Hi Joe82,\r<br />\n<br />\nIt seems that it's a bug in the current version, you can do a work around by changing the version you are working on to check if response.body =&quot;&quot;, and we'll work on fixing the bug in the next release.\r<br />\n<br />\nThanks,<br />\n",
+    "PostedDate": "2013-02-05T09:48:34.723-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "999488",
+    "ThreadId": "430283",
+    "Html": "Hi nomier,\r<br />\n<br />\nThank you very much. I added this fix temporarily and looking forward for the next version :D\r<br />\n<br />\nJoe<br />\n",
+    "PostedDate": "2013-02-11T01:46:14.99-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

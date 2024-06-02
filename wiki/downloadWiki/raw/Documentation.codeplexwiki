@@ -1,0 +1,29 @@
+! Welcome to datajs
+Welcome to the datajs library project! The documentation on this site should help you [Getting Started] quickly and provide you an [Overview] of the functionality you can gain by using this library, as well as detailed [References] on everything that's available.
+
+If you have feedback or questions, we'd like to encourage you get in touch with the community through the [url:Discussions|http://datajs.codeplex.com/discussions] section of the site.
+
+Enjoy!
+
+*Table Of Contents*
+* [Getting Started]
+* [Overview]
+** [Using OData] ([snippets|OData Code Snippets], [networking|OData Networking], [security|OData Security], [x-domain|Cross Domain Requests])
+** [Using Stores]
+** [Using Caches] ([prefetching|Cache Prefetching])
+* [Frequently Asked Questions]
+* [References]
+** [OData API|datajs OData API]
+** [OData Payload Formats]
+** [Store API|datajs store API]
+** [Cache API|datajs cache API]
+* [Samples]
+** [Read Data Sample]
+** [Local Service Sample]
+** [Metadata Generation Sample]
+** [Simple CRUD Sample]
+** [Linked Data Sample]
+** [Master-Detail Sample]
+** [Storing Preferences Sample]
+** [Cache Grid Sample]
+** [Virtual List Sample]

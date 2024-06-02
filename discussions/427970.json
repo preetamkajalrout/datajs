@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "981543",
+    "ThreadId": "427970",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I tried to Delete one data using my Odata service using the DELETE method , there is a</p>\r\n<pre>'no handler for data' error returns </pre>\r\n<p>And the error as</p>\r\n<pre><code>{\r\n</code><code>    &quot;error&quot;: {\r\n</code><code>        &quot;message&quot;: {\r\n</code><code>            &quot;lang&quot;: &quot;en-US&quot;, &quot;value&quot;: &quot;This release of library support only GET (read) request, received</code><code> a request with method DELETE&quot;\r\n</code><code>        }\r\n</code><code>    }\r\n</code><code>}<br><br>I tried with datajs <span>version 1.1.0, and&nbsp;</span><a id=\"ReleaseLinkStable8\" title=\"datajs version 0.0.3\" href=\"http://datajs.codeplex.com/releases/view/64285\">datajs version 0.0.3</a><span>. (minimum and maximum) : same error for both.</span></code></pre>\r\n<pre><code><br></code></pre>\r\n<pre><code>Odata service created using mySQL connector (<a href=\"http://odatamysqlphpconnect.codeplex.com/\">http://odatamysqlphpconnect.codeplex.com/</a>)<br><br> please help me to solve this issue<br><br>Regards<br>Ratheesh</code></pre>\r\n",
+    "PostedDate": "2012-12-28T23:09:20.74-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "982003",
+    "ThreadId": "427970",
+    "Html": "\r\n<p>Hi ratheeshkr,</p>\r\n<p>I looked at mySQL connector service provider manual&nbsp;and from what I&nbsp;see it doesn't have the IDataServiceUpdateProvider interface which is responsible for making the update requests, so you can't make update requests to services that use mySQL connector.</p>\r\n<div id=\"_mcePaste\" style=\"overflow:hidden; height:1px; left:-10000px; top:0px; width:1px\">\r\n&#65279;</div>\r\n<p>---</p>\r\n<p>Hussein</p>\r\n",
+    "PostedDate": "2012-12-31T10:27:32.583-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

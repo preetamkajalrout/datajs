@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Today I spend half the day finding out why datajs was throwing an exception. Eventually I found out that in some very specific situations, IE can throw an exception when you try to use window.localStorage.\nWhen I say specific, I really mean specific. I have been unable to find out the exact conditions needed to trigger it. \n\nI found the problem when setting up our CI server (with Cruise Control .NET) to run our unit and E2E Javascript tests. The e2e tests are run via Karma. Karma uses some iframes to run the tests. However, when manually running the build (using the same user as Cruise Control) from the command line the exception did not occur. But when running the exact same tests on the exact same code from Cruise Control, the exception did occur.\n\nAnyway, I eventually found where the exception came from, and found an fix: https://github.com/nbubna/store/commit/27d6ad2018106e8ed673e82b22112c817066139f.\n\nI fixed it in datajs in the following way:\n\nRemoved:\n    var localStorage = window.localStorage;\n\nAdded:\n    var localStorage = null; \n    try{\n        localStorage = window.localStorage;\n    }\n    catch(e){}",
+    "LastUpdatedDate": "2013-07-04T06:01:44.35-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-07-04T05:56:09.503-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Obscure IE bug when using window.localStorage",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1099
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

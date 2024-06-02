@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "735559",
+    "ThreadId": "289559",
+    "Html": "\r\n<p>Hello, I am having a really hard time to pass the correct json format from the browser, my wcf data service uses inheritance and every single time I get: &quot;Error processing request stream. Type information must be specified for types that take part in inheritance&quot;.\r\n When I issue a get I get inside the JSON an array:&nbsp; &quot;:{&quot;__metadata&quot;:{&quot;id&quot;:&quot;http://localhost:58712/Test.svc/People(1)&quot;,&quot;uri&quot;:&quot;http://localhost:58712/Test.svc/People(1)/KO.Data.Student&quot;,&quot;type&quot;:&quot;KO.Data.Student&quot;},</p>\r\n<p>Now I could compose that JSON manually, but since I am using knockoutjs to map to my viewmodel it's proving very difficult, I've already downloaded the metadata and sending it as the last parameter in my OData request.</p>\r\n<p>Please help.</p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"></p>\r\n<p><span lang=\"EN\"></span></p>\r\n&nbsp;</span></span>\r\n<p></p>\r\n",
+    "PostedDate": "2012-02-01T15:50:37.96-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "776534",
+    "ThreadId": "289559",
+    "Html": "<p>Hi rkemish,</p>\r\n<p>&nbsp;&nbsp; I'm terribly sorry for the delayed response.&nbsp; Do you have a network trace of what the request being sent to the service looks like?&nbsp; You get the error message when you do a read or a write request?&nbsp;&nbsp;</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-02-17T16:50:34.793-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

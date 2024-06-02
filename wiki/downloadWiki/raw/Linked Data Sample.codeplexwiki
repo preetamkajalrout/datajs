@@ -1,0 +1,13 @@
+! Linked Data Sample
+
+This sample builds on the [Local Service Sample] and adds a page that can be used to categorize ideas from the idea service.
+
+The relationship between ideas and categories is a typical many-to-many association. The user interface for these sort of relationships will typically vary depending on the number of elements on each side. In this case, the sample simply presents a collection of check boxes for each idea.
+
+Some techniques demonstrated include:
+
+* How to craft a request that adds / removes a link or association from a collection.
+* Using [url:Knockout|http://knockoutjs.com/] to simplify data binding, including binding check boxes to arrays.
+* Adding a view model observable property, communicating, useful to avoid submitting multiple requests to the server at the same time.
+
+The sample file is [file:ideacats.htm], which can be added to the [Local Service Sample] to run.

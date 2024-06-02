@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "1018068",
+    "ThreadId": "437283",
+    "Html": "Greetings,\r<br />\n<br />\nI am performing a simple OData.Read on a webservice using the datajs-1.0.0.js. Its works fine on browser.However when I run run it on a Phonegap iOS Application its does not work.\r<br />\n<br />\nThanks in Advance..<br />\n",
+    "PostedDate": "2013-03-19T23:14:52.337-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1019227",
+    "ThreadId": "437283",
+    "Html": "Hi priya23.\r<br />\n<br />\nI tried datajs-1.0.0.js with Phonegap and I used OData,Read with <a href=\"http://odata.netflix.com/Catalog/Titles\" rel=\"nofollow\">Netflix Srvice </a>, it worked fine.\r<br />\nSo in order to detect the problem, I have twoquestions:<br />\n<ul>\n<li>Did you set enableJsonPCallback in OData.read ?</li>\n<li>Is there any error that occur when using Phonegap ?</li>\n</ul>\n<hr />\nRegards,\r<br />\nHussein<br />\n",
+    "PostedDate": "2013-03-21T15:41:11.19-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1019382",
+    "ThreadId": "437283",
+    "Html": "Hello Hussein,<br />\n<br />\nI am using datajs1.1.0.js and cordova iOS project version 2.4.<br />\n<br />\nI have written the following code in device ready event of Page<br />\n<pre><code>                 OData.defaultHttpClient.enableJsonpCallback = true;\n\n\n\n                  OData.read(&quot;http://services.odata.org/Northwind/Northwind.svc/Customers('ALFKI')/Orders&quot;,\n                             function(data, response){\n\n                             alert('oData Function');\n\n                             var str;\n                             alert('before for');\n                             for(var objRec in data.results){\n                             var obj = data.results[objRec];\n\n                             str = str + ' '+obj.OrderID;\n                             }\n                             alert(str);\n                             alert('after for');\n                             }, function (err) {\n                             alert(err.message);\n                             });\n              }\n\n</code></pre>\n\nIn the config.xml,I have set <br />\n<br />\n&lt;access origin=&quot;*&quot; /&gt;<br />\n<br />\nIt does not throw any error but nothing happens.<br />\n<br />\n<br />\nThanks <br />\nPriya23<br />\n",
+    "PostedDate": "2013-03-22T02:12:14.027-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1019722",
+    "ThreadId": "437283",
+    "Html": "This should be working fine, maybe another two questions can help: <br />\n<ul>\n<li>Do you run this code after deviceready event ?</li>\n<li>Is these alerts are navigator.notification.alert or just alert?. because I think alerts don't work with phonegap.</li>\n</ul>\n<hr />\nRegards,\r<br />\nHussein <br />\n",
+    "PostedDate": "2013-03-22T11:14:43.903-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

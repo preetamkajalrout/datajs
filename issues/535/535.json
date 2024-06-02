@@ -1,0 +1,65 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi\nI am using batch data request but dont know how to parse response of this request\n \nMy code:\n OData.request({\n            requestUri: baseURL + \"$batch\",\n            method: \"POST\",\n            data: { __batchRequests: [\n       { requestUri: \"Users(1)\", method: \"GET\" },\n       { requestUri: \"Users(2)\", method: \"GET\" }\n    ]\n            }\n        }, function (data, response) {\n            alert(data.d);\n        }, undefined, OData.batchHandler);\n \nCan anyone please tell me that how to parse response as i am very new for odata\nMy response\n\t\nPOST http://localhost:80/api/api/$batch\n\t\n202 Accepted\n\t\t204ms\t\nHeadersPostResponse\n \n--batchresponse_55a9c5b2-a3f0-4aa5-8316-776f119ac67f\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n \nHTTP/1.1 200 OK\nDataServiceVersion: 1.0;\nContent-Type: application/json;charset=utf-8\nX-Content-Type-Options: nosniff\nCache-Control: no-cache\n \n{\"d\":{\"__metadata\":{\"id\":\"localhost:80/api/api/Users(1)\",\"uri\":\"localhost:80/api/api/Users(1)\",\"type\":\"MyApp.Models.User\"},\"Active\":null,\"Description\":null,\"EmailID\":\"johnd@test1.com\",\"FirstName\":\"John\",\"ID\":1,\"LastName\":\"Dalton\",\"UserID\":\"JohnD\"}}\n--batchresponse_55a9c5b2-a3f0-4aa5-8316-776f119ac67f\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n \nHTTP/1.1 200 OK\nDataServiceVersion: 1.0;\nContent-Type: application/json;charset=utf-8\nX-Content-Type-Options: nosniff\nCache-Control: no-cache\n \n{\"d\":{\"__metadata\":{\"id\":\"http://localhost:80/api/api/Users(2)\",\"uri\":\"http://localhost:80/api/api/Users(2)\",\"type\":\"MyApp.Models.User\"},\"Active\":null,\"Description\":null,\"EmailID\":\"kathyr@test2.com\",\"FirstName\":\"Kathy\",\"ID\":2,\"LastName\":\"Ross\",\"UserID\":\"KathyR\"}}\n--batchresponse_55a9c5b2-a3f0-4aa5-8316-776f119ac67f--\n \n\"NetworkError: 500 Internal Server Error - http://localhost:80/api/api/UserGroups(2)/Users\"\nUsers\n \nThanks",
+    "LastUpdatedDate": "2013-02-21T17:20:10.647-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-12-15T03:32:13.473-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "How to parse response of odata batch request",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 535
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "I am using jquery",
+      "PostedDate": "2011-12-15T03:33:24.797-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2011-12-15T03:36:14.883-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Hi anilgautam,\r\n\r\n  Hope you are doing great.  I think this \"issue\" should be moved to the discussions section :) . Still, the network trace you show indicates that there was an internal server error when building the response of the batch request.  Is the success handler of your OData call above being executed at all??  It shouldn't because the I see that the response is faulted and not a properly formed multipart response...\r\n\r\n   When the response is correct, you don't have to worry about parsing it, the library will do it for you and the response payload will be passed to the success handler as an object containing the collection of responses.  For example look at the section \"Adding data in batches\" on \r\n\r\nhttp://datajs.codeplex.com/wikipage?title=OData%20Code%20Snippets&referringTitle=Documentation\r\n\r\n\r\n\r\n",
+      "PostedDate": "2011-12-16T14:48:06.7-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2012-02-01T21:50:17.043-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:10.647-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

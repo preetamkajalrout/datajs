@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1328440",
+    "ThreadId": "573921",
+    "Html": "My service can work and I can see returned data if I use direct link in my web browser (<a href=\"http://localhost:53307/odata/Customers\" rel=\"nofollow\">http://localhost:53307/odata/Customers</a>). But I get 404 error if I try to run the following scripts.<br />\n<pre><code>$().ready(function() {\n    OData.read(&quot;http://localhost:53307/odata/Customers&quot;);\n});\n</code></pre>\n\nand my bundle's configuration<br />\n<pre><code> bundles.Add(new ScriptBundle(&quot;~/bundles/datajs&quot;).Include(\n            &quot;~/Scripts/jquery-{version}.intellisence.js&quot;,\n            &quot;~/Scripts/datajs-{version}.js&quot;,\n            &quot;~/Scripts/respond.matchmedia.addListener.js&quot;));\n\n bundles.Add(new ScriptBundle(&quot;~/bundles/app/customers&quot;).Include(\n            &quot;~/Scripts/app/customers.js&quot;));\n</code></pre>\n\nThanks<br />\n",
+    "PostedDate": "2014-12-03T08:27:40.12-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1329334",
+    "ThreadId": "573921",
+    "Html": "Hi,<br />\n<br />\nI resolved this problem after finding the answer in &quot;<a href=\"http://stackoverflow.com/questions/26859984/odata-uri-in-batch-returns-404-while-if-i-go-to-the-url-provided-it-works-why\" rel=\"nofollow\">http://stackoverflow.com/questions/26859984/odata-uri-in-batch-returns-404-while-if-i-go-to-the-url-provided-it-works-why</a>&quot;<br />\n<br />\nThanks,<br />\n",
+    "PostedDate": "2014-12-05T22:29:04.823-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

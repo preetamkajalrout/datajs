@@ -1,0 +1,65 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "When using against WCF/OData v3 I get \"Request header field MaxDataServiceVersion is not allowed by Access-Control-Allow-Headers.\"",
+    "LastUpdatedDate": "2015-03-19T05:23:45.867-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-05-23T06:14:25.523-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "MaxDataServiceVersion is not allowed by Access-Control-Allow-Headers.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 678
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Hi, could you please provide a short repro of the issue. A network trace of the request would be helpful also.",
+      "PostedDate": "2012-05-30T15:09:40.393-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "I have the same issue with WCF Data Service 5. I am using <customHeaders> tags in my hosting ASP web.config for XDR, and I was able to work around this issue by adding the indicated header to the Access-Control-Allow-Headers header:\r\n\r\n<system.webServer>\r\n  ...\r\n  <httpProtocol>\r\n    <customHeaders>\r\n      <add name=\"Access-Control-Allow-Origin\" value=\"*\" />\r\n      <add name=\"Access-Control-Max-Age\" value=\"3600\" />\r\n      <add name=\"Access-Control-Allow-Headers\" value=\"Content-Type, Accept, MaxDataServiceVersion\" />\r\n      <add name=\"Access-Control-Allow-Methods\" value=\"PUT, POST, GET, DELETE, MERGE, OPTIONS\" />\r\n    </customHeaders>\r\n  </httpProtocol>\r\n</system.webServer>",
+      "PostedDate": "2012-07-03T12:58:37.29-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:08.973-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "He is trying to do a CORS request. I saw this too. In CORS, you cannot add custom headers unless the server allows you to send them - but datajs always send them and has no way to not send this custom header - even with your own httpClient, which breaks all CORS scenarios unless you can change that server side code to allow those headers.",
+      "PostedDate": "2013-12-12T11:46:37.747-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Hi,\nI tried allowing these options on server side in CORS. Unfortunately the OPTIONS query says that these headers are allowed but the GET query returns 404 error.",
+      "PostedDate": "2015-03-19T05:23:45.867-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I'm getting an exception in a batch request when I use the json light format (GET requests within the batch). I haven't been able to reproduce this in a simple example, but I'll try to describe where this error occurred. I was making a batch request:\n\nheaders (for the batch request): {\n  DataServiceVersion: \"3.0\",\n  MaxDataServiceVersion: \"3.0\",\n  MinDataServiceVersion: \"3.0\",\n}\n\nheaders (for the requests in the batch): {\n  Accept: \"application/json\"\n}\n\nOData.jsonHandler.useJsonLight = true;\n\nOK, here is the error. It is returned as the result of the first and second request in the batch:\n```\n\"TypeError: Cannot read property 'length' of undefined\n    at http://localhost:51518/app/Scripts/datajs-1.1.1.js:1972:47\n    at forEachSchema (http://localhost:51518/app/Scripts/datajs-1.1.1.js:1504:20)\n    at forEachSchema (http://localhost:51518/app/Scripts/datajs-1.1.1.js:1492:26)\n    at forEachSchema (http://localhost:51518/app/Scripts/datajs-1.1.1.js:1501:24)\n    at forEachSchema (http://localhost:51518/app/Scripts/datajs-1.1.1.js:1492:26)\n    at lookupNavigationPropertyEntitySet (http://localhost:51518/app/Scripts/datajs-1.1.1.js:1970:34)\n    at jsonLightReadObject (http://localhost:51518/app/Scripts/datajs-1.1.1.js:6633:67)\n    at jsonLightReadFeed (http://localhost:51518/app/Scripts/datajs-1.1.1.js:6714:21)\n    at jsonLightReadPayload (http://localhost:51518/app/Scripts/datajs-1.1.1.js:7208:28)\n    at jsonParser (http://localhost:51518/app/Scripts/datajs-1.1.1.js:7625:24)\"\n```",
+    "LastUpdatedDate": "2014-01-03T22:26:36.2-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-08-27T09:04:05.253-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "TypeError in lookupNavigationPropertyEntitySet in 1.1.1 w/JSON light",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 2,
+    "Id": 1126
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

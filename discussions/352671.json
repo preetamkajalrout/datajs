@@ -1,0 +1,90 @@
+[
+  {
+    "Id": "825365",
+    "ThreadId": "352671",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>does datajs support change/write requests also when handing over the payload as XML data or do I have to hand the data over in JSON format.</p>\r\n<p>Or anyway how can I achieve that datajs sends the POST/PUT/DELETE requests with the data as XML/ATOM and not with JSON data?</p>\r\n<p>Is this possible?</p>\r\n<p>Thanks.</p>\r\n",
+    "PostedDate": "2012-04-18T04:09:21.46-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "825601",
+    "ThreadId": "352671",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; Yes, you can write ATOM/XML using datajs.. by default we favor json... but there are a few ways to change it atom or xml..&nbsp;</p>\r\n<p>&nbsp;&nbsp; 1.&nbsp; In your headers collection, set the content type header to&nbsp; application/atom+xml</p>\r\n<p>&nbsp;&nbsp; 2.&nbsp;&nbsp;Use explicitly the atom (or xml handler) by passing&nbsp;OData.atomHandler&nbsp;to&nbsp;the OData.request() function</p>\r\n<p>&nbsp;&nbsp; 3.&nbsp; Set the the atom&nbsp;handler as the default handler for&nbsp;all requests. You can do this by:</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre><span style=\"color: green;\">// saving the default handler object is not necessary, </span>\r\n<span style=\"color: green;\">// but I strongly recommend it in case you need to restore it later.</span>\r\n\r\n<span style=\"color: blue;\">var</span> oldDefaultHandler = OData.defaultHandler;\r\nOData.defaultHandler = OData.atomHandler;\r\n</pre>\r\n</div>\r\n<p>&nbsp;Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-04-18T11:55:24.233-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "826021",
+    "ThreadId": "352671",
+    "Html": "<p>Hi Alex,</p>\n<p>&nbsp;</p>\n<p>thanks for the reply..the requests are now sent as XML. The only problem I have is that the server responds with</p>\n<pre><code class=\"wrappedText focusRow\">\"Error processing request stream. Binding to new entities is not supported</code><code class=\"wrappedText focusRow\"> in PUT operations.\"<br /><br /><br /></code></pre>\n<p>Do you know if the server doesn't support this or if there is another error?</p>\n<p>Here is my small hacky sample code ;)</p>\n<p>var sMetadataURL = \"http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/$metadata\";<br /> var sUrl = \"http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products\";<br /> <br /> var oHeaders = {};<br /> request = { <br /> headers : oHeaders, // object that contains HTTP headers as name value pairs <br /> requestUri : sUrl, // OData endpoint URI <br /> };<br /> <br /> OData.read(sMetadataURL, function (metadata) { <br /> OData.read(request, function (data, response) {<br /> debugger; <br /> <br /> var entry = data.results[0];<br /> // modify data<br /> entry.Name = \"Doe2\";<br /> var updateUrl = entry.__metadata.uri; <br /> <br /> oHeaders['Content-Type'] = \"application/atom+xml\";<br /> oHeaders['DataServiceVersion'] = \"2.0\";<br /> <br /> request = { <br /> headers : oHeaders, // object that contains HTTP headers as name value pairs <br /> requestUri : updateUrl, // OData endpoint URI <br /> method : \"PUT\", // HTTP method (GET, POST, PUT, DELETE) <br /> data : entry // Payload of the request (in intermediate format) <br /> };<br /> <br /> OData.defaultHandler = OData.atomHandler;<br /> OData.request(request, function (data, response) {<br /> debugger;<br /> }, function(err){<br /> alert(err);<br /> }, undefined, undefined, metadata);<br /> }, function(err){<br /> alert(err); <br /> }, undefined, undefined, metadata);<br /> }, function (error) { <br /> alert(error);<br /> }, OData.metadataHandler);</p>\n<p>&nbsp;</p>\n<p>It worked when using JSON to do the PUT request.</p>\n<p>Another question: In the payload do I have to embed the metadata if I e.g. PUT, POST a new entry or is it sufficient to add the complete metadata document when triggering the request and datajs does the corresponding data formatting etc.? Does datajs really check each property and then checks the metadata document if it contains metadata for this property and does the correct conversion? Or does datajs check if the property has \"embedded\" metadata and uses that data and if not doesn't use any metadata?</p>\n<p>Thank you very much :)</p>",
+    "PostedDate": "2012-04-19T08:27:13.41-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "829143",
+    "ThreadId": "352671",
+    "Html": "<p>Hi Joe,</p>\n<p>&nbsp;&nbsp;&nbsp; For ATOM if you include the metadata document, the library will look for the properties there&nbsp;and set the appropriate types and the magic (you still have to specify __metadata.type for it to work).&nbsp; Also, if there is metadata about the properties in the payload itself, then that is going to be used instead.&nbsp; For example if your object looks like this:</p>\n<div style=\"color: black; background-color: white;\">\n<pre>{\r\n    __metadata:{\r\n        type:<span style=\"color: #a31515;\">\"ns.type\"</span>,\r\n        properties:{\r\n            p1: {\r\n                type: <span style=\"color: #a31515;\">\"Edm.Int32\"</span>\r\n            }\r\n       }\r\n   },\r\n   p1: 5000,\r\n   p2: <span style=\"color: blue;\">true</span>\r\n}\r\n</pre>\n</div>\n<p>Then, the library will use the type information found in __metadata for p1; however, it will look into the metadata document to figure out what's the type for p2.</p>\n<p>When using JSON the library doesn't do any special processing of the request payload other&nbsp;than&nbsp;date&nbsp;formatting.</p>\n<p>About the error, can you post a network trace of the reqeuest??</p>\n<p>Regards,</p>\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-04-26T17:08:23.333-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "829317",
+    "ThreadId": "352671",
+    "Html": "<p>Hi Alex,</p>\r\n<p>&nbsp;</p>\r\n<p>thanks for the clarifications. So I get it right that when using JSON the metadata documnent will not be used whereas when using ATOM it is parsed? I thought that in both cases the document is used...</p>\r\n<p>Here is the trace of the PUT request. To test it youself you can simply copy the sample above in a HTML file.</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;<br />response body<br />{<br />\"error\": {<br />\"code\": \"\", \"message\": {<br />\"lang\": \"en-US\", \"value\": \"Error processing request stream. Binding to new entities is not supported in PUT operations.\"<br />}<br />}<br />}<br /><br />response header:<br />Key\tValue<br />Response\tHTTP/1.1 400 Bad Request<br />Date\tFri, 27 Apr 2012 11:32:16 GMT<br />Content-Type\tapplication/json<br />Server\tMicrosoft-IIS/7.5<br />Cache-Control\tprivate<br />DataServiceVersion\t1.0;<br />X-AspNet-Version\t4.0.30319<br />X-Powered-By\tASP.NET<br />Proxy-Connection\tKeep-Alive<br />Connection\tKeep-Alive<br /><br />request header:<br /><br />Key\tValue<br />Request\tPUT http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products(0) HTTP/1.1<br />Content-Type\tapplication/atom+xml<br />Accept\tapplication/atomsvc+xml;q=0.8, application/json;q=0.5, */*;q=0.1<br />DataServiceVersion\t2.0<br />Referer\thttp://localhost:8080/writetest.html<br />Accept-Language\ten<br />Accept-Encoding\tgzip, deflate<br />User-Agent\tMozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)<br />Host\tservices.odata.org<br />Content-Length\t1176<br />Proxy-Connection\tKeep-Alive<br />Pragma\tno-cache<br /><br />request body:<br />&lt;entry xmlns=\"http://www.w3.org/2005/Atom\"<br /> xmlns:d=\"http://schemas.microsoft.com/ado/2007/08/dataservices\"<br /> xmlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\"&gt;<br /> &lt;author&gt;<br /> &lt;name /&gt;<br /> &lt;/author&gt;<br /> &lt;title type=\"text\"&gt;Doe2&lt;/title&gt;<br /> &lt;content type=\"application/xml\"&gt;<br /> &lt;m:properties&gt;<br /> &lt;d:ID m:type=\"Edm.Int32\"&gt;0&lt;/d:ID&gt;<br /> &lt;d:ReleaseDate m:type=\"Edm.DateTime\"&gt;1992-01-01T00:00:00<br /> &lt;/d:ReleaseDate&gt;<br /> &lt;d:DiscontinuedDate m:null=\"true\" m:type=\"Edm.DateTime\" /&gt;<br /> &lt;d:Rating m:type=\"Edm.Int32\"&gt;4&lt;/d:Rating&gt;<br /> &lt;d:Price m:type=\"Edm.Decimal\"&gt;2.5&lt;/d:Price&gt;<br /> &lt;/m:properties&gt;<br /> &lt;/content&gt;<br /> &lt;id&gt;http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products(0)<br /> &lt;/id&gt;<br /> &lt;category term=\"ODataDemo.Product\"<br /> scheme=\"http://schemas.microsoft.com/ado/2007/08/dataservices/scheme\" /&gt;<br /> &lt;link<br /> rel=\"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Category\"<br /> href=\"http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products(0)/Category\" /&gt;<br /> &lt;link<br /> rel=\"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Supplier\"<br /> href=\"http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products(0)/Supplier\" /&gt;<br /> &lt;summary type=\"text\"&gt;Whole grain bread&lt;/summary&gt;<br />&lt;/entry&gt;</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-04-27T04:38:34.013-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "831380",
+    "ThreadId": "352671",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Thanks for the trace it was really helpful.&nbsp; To clear that out the way, you are getting this issue because you are issuing a PUT and the payload has navigation properties in it.&nbsp;You should&nbsp;do a MERGE request, or massage the entry object above and remove the navigation properties&nbsp;altogether.&nbsp;... To do such a rquest you should change your code above to:</p>\r\n<p>oHeaders[<span style=\"color: #a31515;\">\"x-http-method\"</span>] = <span style=\"color: #a31515;\">\"MERGE\"</span>;<br />request = { <br />&nbsp;&nbsp;&nbsp; headers : oHeaders, <span style=\"color: green;\">// object that contains HTTP headers as name value pairs </span><br />&nbsp;&nbsp;&nbsp; requestUri : updateUrl, <span style=\"color: green;\">// OData endpoint URI </span><br />&nbsp;&nbsp;&nbsp; method : <span style=\"color: #a31515;\">\"POST\"</span>, <span style=\"color: green;\">// HTTP method (GET, POST, PUT, DELETE) </span><br />&nbsp;&nbsp;&nbsp; data : entry <span style=\"color: green;\">// Payload of the request (in intermediate format) </span><br />};</p>\r\n<p>&nbsp;This will send a MERGE request using http method tunneling.&nbsp; It has to be done this way because MERGE is not a standard http verb and many http processors (like proxies and the like) might block the non-standard verb.</p>\r\n<p>&nbsp;To sum it up, in OData PUT means completly replace the entry, and MERGE is do a differential update to the entry.. that is only update those values that are specified&nbsp;and different.</p>\r\n<p>&nbsp; Now about&nbsp;the metadata.. sorry&nbsp;if I was not clear about it.&nbsp; When reading a response yes,&nbsp;the metadata document is used to do&nbsp;the appropriate data conversions and feed customizations (if any) in ATOM.&nbsp; When&nbsp;sending a rquest, only in ATOM the metadata document is used to apply feed customizations if any and set the property types.&nbsp; When sending JSON requests, the metadata document is not used at all.</p>\r\n<div id=\"_mcePaste\" class=\"mcePaste\" style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; top: 0px; left: -10000px;\">﻿</div>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-02T16:12:11.79-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "835057",
+    "ThreadId": "352671",
+    "Html": "<p>Hi Alex,</p>\r\n<p>&nbsp;  1.  In your headers collection, set the content type header to  application/atom+xml</p>\r\n<p>do I now also have to add <code class=\"focusRow subFocusRow \">odata=verbose</code> in datajs 1.03 for atom/xml requests?</p>\r\n<p>BTW: what does verbose mean?</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks!</p>",
+    "PostedDate": "2012-05-11T03:57:07.94-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "835333",
+    "ThreadId": "352671",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; No for atom you don't need to add the odata parameter to the content type.&nbsp; The verbose is becasue there is going to be eventually a new JSON format in OData V3, so, WCF Data Services 5.0 added that parameter to the mime type to distinguish between the two of them.. and the one currently available is now called JSON verbose.&nbsp; More info is available <a href=\"http://blogs.msdn.com/b/astoriateam/archive/2012/04/11/what-happened-to-application-json-in-wcf-ds-5-0.aspx\" target=\"_blank\">here </a></p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-11T15:35:34.897-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "961812",
+    "ThreadId": "352671",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I tried to Delete one data using my Odata service using the DELETE method , there is a</p>\r\n<pre>'no handler for data' error returns </pre>\r\n<p>And the error as</p>\r\n<pre><code>{\r\n</code><code>    &quot;error&quot;: {\r\n</code><code>        &quot;message&quot;: {\r\n</code><code>            &quot;lang&quot;: &quot;en-US&quot;, &quot;value&quot;: &quot;This release of library support only GET (read) request, received</code><code> a request with method DELETE&quot;\r\n</code><code>        }\r\n</code><code>    }\r\n</code><code>}<br><br>can you please help me to solve this issue<br><br>Regards<br>Ratheesh</code></pre>\r\n",
+    "PostedDate": "2012-12-20T06:38:23.857-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "967293",
+    "ThreadId": "352671",
+    "Html": "\r\n<p>Hi ratheeshkr</p>\r\n<p>what version of datajs are you&nbsp;using and &nbsp;can you please post a network trace of the request to clarify things more ?</p>\r\n<p>--------</p>\r\n<p>Regards,</p>\r\n<p>Hussein</p>\r\n",
+    "PostedDate": "2012-12-21T15:45:55.657-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "980160",
+    "ThreadId": "352671",
+    "Html": "\r\n<p>Dear&nbsp;<span>Hussein,</span></p>\r\n<p>Thank you for your response,</p>\r\n<p>I tried this using the&nbsp;datajs version 1.1.0, and&nbsp;<a id=\"ReleaseLinkStable8\" title=\"datajs version 0.0.3\" href=\"http://datajs.codeplex.com/releases/view/64285\">datajs version 0.0.3</a>.</p>\r\n<p>Regards</p>\r\n<p>Ratheesh</p>\r\n<p>&nbsp;</p>\r\n<p><span><span><br>\r\n</span></span></p>\r\n",
+    "PostedDate": "2012-12-26T21:13:11.11-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

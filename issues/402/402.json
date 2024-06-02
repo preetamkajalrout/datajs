@@ -1,0 +1,91 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I have single OData service with HTTP ETag implemented. I have two javascript clients on different domains which read data from the services using the same URLs service by datajs.createDataCache. When first client reads data from the service everything is ok, when second client (opened in the same browser) reads the same data - it fails. In fiddler first response has ETag header, second request has header If-None-Match and second response returns 304 Not Modified, but client fails. I'm using Google Chrome 12.",
+    "LastUpdatedDate": "2013-12-04T17:36:12.59-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-07-05T01:43:56.513-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Problem with multiple cross domain clients and data cache",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 402
+  },
+  "FileAttachments": [
+    {
+      "FileId": 105,
+      "FileName": "headers.txt",
+      "DownloadUrl": ".\\105"
+    },
+    {
+      "FileId": 106,
+      "FileName": "js-code.txt",
+      "DownloadUrl": ".\\106"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Thank you for reporting this. Can you share a minimum repro please?  At least how are you creating the cache objects and what the call to readRange looks like?  DataJS will treat as successful only those HTTP responses whose status code is on the 200 - 299 range. Responses with any other status code are sent to the fail handler of the promise returned by cache.readRange() so they can be handled accordingly. \r\n\r\nIs the server returning an ETag header for the collection? Is this OData endpoint implemented with WCF Data Services or some other runtime?  Also, in the second request are you setting the ETag header explicitly to the same value you got from the first request?  ",
+      "PostedDate": "2011-07-06T11:11:04.47-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Really, nothing specific in JavaScript code, I do not specify any ETag specific headers, everything is done by the browser itself. I see the same messages in fiddler when I use dataCache and when I directly opening OData URL.\r\n\r\nOData endpoint implemented with WCF Data Services but ETag and If-None-Match implemented as WCF extension as we need ETag support for collections. \r\n\r\nI'm attaching headers recorded by Fiddler and javascript code.  \r\n\r\nPlease let me know if you need additional information to reproduce this issue. Note that this is cross-domain scenario, there could be some security issues e.g. not all status codes could be visible for cross-domain ajax.",
+      "PostedDate": "2011-07-06T13:50:37.843-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2011-07-06T13:51:13.99-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Headers attached.",
+      "PostedDate": "2011-07-06T13:51:16.46-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2011-07-06T13:51:31.95-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "JS code attached.",
+      "PostedDate": "2011-07-06T13:51:32.37-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:12.33-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-12-04T17:36:12.59-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

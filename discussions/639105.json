@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1428537",
+    "ThreadId": "639105",
+    "Html": "Hi,\r<br />\n<br />\nChrome shows this deprecation warning 'webkitIndexedDB' is deprecated. Please use 'indexedDB' instead.\r<br />\n<br />\nThe easiest solution would be to amend the following line @8516 in v1.1.2<br />\n<ul>\n<li>\nvar indexedDB = window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.indexedDB;<br />\n</li>\n</ul>\nTo this:<br />\n<ul>\n<li>\nvar indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;<br />\n</li>\n</ul>\nAre there plans to release an update including this change? \r<br />\n<br />\nthanks,\r<br />\nsigman<br />\n",
+    "PostedDate": "2015-06-03T00:49:48.067-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

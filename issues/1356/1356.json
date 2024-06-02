@@ -1,0 +1,66 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "When using datajs the following message is shown in the log:\n\n'webkitIndexedDB' is deprecated. Please use 'indexedDB' instead. \n\nGoogle Chrome 38",
+    "LastUpdatedDate": "2015-12-09T11:52:37.643-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2014-10-26T02:17:25.94-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Chrome - webkitIndexedDB is deprecated",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 4,
+    "Id": 1356
+  },
+  "FileAttachments": [
+    {
+      "FileId": 345,
+      "FileName": "fix-deprecated-webkit-indexed-db.js.patch",
+      "DownloadUrl": ".\\345"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "IndexedDB has been available for several years now. Therefore the \"webkit\" prefix is not needed anymore. I updated datajs in patch 17015.\nBut honestly I do not have any hopes that this gets merged into an updated version.",
+      "PostedDate": "2014-11-24T06:49:13.403-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Yes, please incorporate this change.",
+      "PostedDate": "2015-01-21T10:36:44.06-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "replace line:\r\n\r\n```\nvar indexedDB = window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.indexedDB;\n```\r\n\r\nwith\r\n\r\n```\nvar indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;\n```\r\n\r\n",
+      "PostedDate": "2015-12-09T11:52:22.457-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2015-12-09T11:52:37.643-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

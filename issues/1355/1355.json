@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi guys,\n\nI found a little issue on OS X Safari, you can find the details including a solution about it here: http://www.nabisoft.com/tutorials/javascript/resolving-datajs-response-header-access-errors-for-safari-on-mac-os-x\n\n__To make it short:__ in line 2581 there is a missing call of __normalizeHeaders(headers);__\n\nThis leads to the fact that in OS X Safari you have to access the response header with __response.headers['Content-Type']__ while you have to use __response.headers['content-type']__ for other browsers. It seems that Safari changes standard HTTP headers, i.e. 'content-type' is changed to 'Content-Type' even though the server sends all lower-case headers (I guess this is for a better human readability).\n\nPlease also have a look at the learnings of my tutorial. I am not sure if it's a good approach to pass headers via arrays, however, I am sure there was a good reason for that...\n\nBest,\nNabi\n\nps Thanks for the great work on datajs!!!",
+    "LastUpdatedDate": "2014-10-20T12:14:22.29-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2014-10-20T12:14:22.29-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Inconsistent header field names problem in OS X Safari",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1355
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

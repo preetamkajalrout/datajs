@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi,\n\nI'm issuing a batch operation that returns statusCode 202 but the response is empty.\nThe batch includes several GET requests that work fine when issued alone (i.e. in a separate request).\nFor example: \n<ServiceURI>/MyObjects(guid'00505695-007C-1ED5-9CB8-6B359297A375') - works fine, \nand so is: <ServiceURI>/MyObjects - that returns all entries. \n... but when sent together as a batch request - none of them returns any response, \nand as you can see - I tried several options (slash at the beginning, no slash,  etc...) \n\nAny idea?\n\nHere's the batch request code:\n\nOData.request({\n    requestUri: serviceUrl + \"/$batch\",\n        method: \"POST\",\n        data: {\n            __batchRequests: [\n              { requestUri: \"/MyObjects?$expand=toactions&$format=json&$inlinecount=allpages\", method: \"GET\"},\n              { requestUri: \"/MyObjects(guid'00505695-007C-1ED5-9CB8-6B359297A375')\", method: \"GET\"},\n              { requestUri: \"MyObjects\", method: \"GET\"},\n              { requestUri: \"MyObjects(guid'00505695-007C-1ED5-9CB8-6B359297A375')\", method: \"GET\"},\n              { requestUri: \"GetCount\", method: \"GET\"},\n              { requestUri: \"/GetCount\", method: \"GET\"}\n           ]\n        },\n        headers: {\n            \"X-Requested-With\": \"XMLHttpRequest\",\n            \"Content-Type\": \"multipart/mixed\",\n            \"DataServiceVersion\": \"2.0\",       \n            \"X-CSRF-Token\": sHeaderXcsrfToken\n        }\n\nThanks,\n\nDan",
+    "LastUpdatedDate": "2015-12-24T17:27:39.14-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2015-10-20T10:00:00.18-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Batch operation returns empty response",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1707
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "What version of ODATA are you using?\n",
+      "PostedDate": "2015-12-24T17:27:39.14-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

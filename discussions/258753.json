@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "617174",
+    "ThreadId": "258753",
+    "Html": "\r\n<p>Looking at the documentation, it appeared that setting the formatQueryString property will automatically append $format=x to the request url.</p>\r\n<p>Quoting from the documentation:</p>\r\n<p><code>&quot;formatQueryString</code>: this is a query string option inserted in the URL.&quot;</p>\r\n<p>&nbsp;</p>\r\n<p>However, from the source code it doesn't appear this is the case. &nbsp;formatQueryString is only appended when you use JSONP (line 806 of datajs-0.0.3.js). &nbsp;What if I didn't want to use JSONP but still wanted datajs to append the format string everytime\r\n I made a request? &nbsp;Currently there doesn't seem to be a way other than manually inserting $format=json into the request uri.</p>\r\n<p>&nbsp;</p>\r\n<p>Should formatQueryString be used everytime you made a request, regardless if JSONP is true or not?</p>\r\n",
+    "PostedDate": "2011-05-24T00:59:48.56-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "617734",
+    "ThreadId": "258753",
+    "Html": "<p>Jonathan, the formatQueryString was designed specifically for JSONP - that's the section where we put it in the documentation, but clearly we can do better with the name :)</p>\r\n<p>It's really meant to name the format option for cases where the server calls it something different.</p>\r\n<p>For a general-purpose mess-with-request mechanism, it's pretty easy to intercept the requests before they go out to the network. I just uploaded a short sample on <a href=\"http://datajs.codeplex.com/wikipage?title=Custom%20OData%20httpClient\">how to do this</a>.</p>\r\n<p>Hope this helps,</p>\r\n<p>Marcelo</p>\r\n<div id=\"_mcePaste\" class=\"mcePaste\" style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; top: 0px; left: -10000px;\">﻿</div>",
+    "PostedDate": "2011-05-24T15:54:05.75-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

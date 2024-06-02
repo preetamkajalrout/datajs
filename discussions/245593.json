@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "564492",
+    "ThreadId": "245593",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I have a question about metadata. How can I access the metadata document through the datajs API?</p>\r\n<p>Do I have to access the document on my own and hand the parts which are relevant for data retrieval to the Data.read method?</p>\r\n<p>Is it then necessary to create a custom handler too?</p>\r\n<p>Or how works the data retrieval with regards to metadata?</p>\r\n<p>Is there an example how to use metadata with datajs and in which format it should be provided for the Data.read method?</p>\r\n<p>Another question: Does datajs read the metadata document and validate it itself before sending a request?</p>\r\n<p>Thank you!</p>\r\n",
+    "PostedDate": "2011-02-11T01:57:54.69-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "564812",
+    "ThreadId": "245593",
+    "Html": "<p>Hi ironmanager,</p>\r\n<p>OData.read can be used to read and parse the metadata document from the service. Out of the box&nbsp;datajs comes with a handler, so it is not necessary for you to create a custom one; however it does not automatically choose it when parsing, so&nbsp;you do need to specify it as the last argument to OData.read, as follows:</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.read(<span style=\"color: #a31515;\">\"&lt;serviceRoot&gt;/$metadata\"</span>, <span style=\"color: blue;\">function</span> (metadata) {\r\n    <span style=\"color: green;\">// success callback</span>\r\n}, <span style=\"color: blue;\">function</span> (error) {\r\n    <span style=\"color: green;\">// error callback</span>\r\n}, OData.metadataHandler);\r\n</pre>\r\n</div>\r\n<p>On a successful response, the success callback will be called with the deserialized representation of the metadata passed in (the \"metadata\" variable in the example above). You can then pass this object into a subsequent OData.read call to instruct that call to use the metadata, as follows:</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.read(<span style=\"color: #a31515;\">\"&lt;serviceRoot&gt;/&lt;endpoint&gt;\"</span>, <span style=\"color: blue;\">function</span> (data) {\r\n    <span style=\"color: green;\">// success callback</span>\r\n}, <span style=\"color: blue;\">function</span> (error) {\r\n    <span style=\"color: green;\">// error callback</span>\r\n}, undefined, undefined, metadata);\r\n</pre>\r\n</div>\r\n<p>Alternatively, if you are working with a single service and you'll be making multiple&nbsp;data reads that need to make use of the metadata, you can push the metadata onto the metadata stack:</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.defaultMetadata.push(metadata);\r\n</pre>\r\n</div>\r\n<p>and then call OData.read on your data endpoints without needing to pass the metadata object into every call.</p>\r\n<p>datajs does not perform any validation on the metadata document -- it assumes the server sends the correct document.</p>\r\n<p>Hope that answers all your questions! Please let me know if you have any more issues.</p>\r\n<p>David</p>",
+    "PostedDate": "2011-02-11T11:07:02.297-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

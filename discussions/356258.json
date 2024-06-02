@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "838055",
+    "ThreadId": "356258",
+    "Html": "\r\n<p>hello</p>\r\n<p>I try to use dataJS in a metro app (win 8 ) but i have this error :</p>\r\n<p>( an active x component can't create an object )</p>\r\n<p>someone know how to fixe it ?</p>\r\n<p>3 erreurs<br>\r\n&nbsp;<br>\r\n0 avertissements<br>\r\n&nbsp;<br>\r\n2 messages<br>\r\nLa console est attach&eacute;e et accepte les commandes.<br>\r\nHTML1300: Une navigation s&rsquo;est produite.<br>\r\nFile: default.html<br>\r\nException non g&eacute;r&eacute;e &agrave; la ligne 637, colonne 9 dans ms-appx://23278b41-31ec-4489-8ef0-104d23949600-k23xq2qymrjtm/Scripts/datajs-1.0.3.js<br>\r\n0x800a01ad - Erreur d&rsquo;ex&eacute;cution JavaScript: Un composant ActiveX ne peut pas cr&eacute;er un objet<br>\r\nFile: datajs-1.0.3.js, line: 637 column: 9<br>\r\nAPPHOST9603: Cannot load the ActiveX plug-in that has the class ID '{88D96A05-F192-11D4-A65F-0040963251E5}'.&nbsp; Apps can't load ActiveX controls.<br>\r\nFile: default.html<br>\r\nAPPHOST9603: Cannot load the ActiveX plug-in that has the class ID '{F5078F32-C551-11D3-89B9-0000F81FE221}'.&nbsp; Apps can't load ActiveX controls.<br>\r\nFile: default.html</p>\r\n",
+    "PostedDate": "2012-05-18T01:06:39.237-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "842781",
+    "ThreadId": "356258",
+    "Html": "\r\n<p>Hi Nbgfi,</p>\r\n<p>&nbsp;&nbsp;&nbsp; Thank you for letting us know this. We will look into this.&nbsp; By the way, are you using the latest Win8 preview?</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>\r\n",
+    "PostedDate": "2012-05-30T13:13:34.73-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "842963",
+    "ThreadId": "356258",
+    "Html": "<p>Hi Nbgfi,</p>\r\n<p>please see my post for a workaround:</p>\r\n<p><a href=\"http://datajs.codeplex.com/discussions/357673\">http://datajs.codeplex.com/discussions/357673</a></p>\r\n<p>&nbsp;</p>\r\n<p>You've to change one function in the datajs library and remove the active x code.</p>\r\n<p>&nbsp;</p>\r\n<p>Cheers,</p>\r\n<p>Thomas</p>",
+    "PostedDate": "2012-05-31T01:43:22.347-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "620778",
+    "ThreadId": "259648",
+    "Html": "\r\n<p>Hello,<br>\r\nI have two suggestions to you if they aren't already in your task list.<br>\r\nActually I am using ebay oData service and the situation is:<br>\r\nI am reading categories from eBay service, using caching and paging, items per page: 10, and prefetch: 10 items. Also on a page there are 2 buttons NEXT and PREVIOUS<br>\r\n<br>\r\nWhen page is loaded for the first time it actually calls oData service twice, first time to get first 10 items, and after that async call to prefetch next 10 items.<br>\r\n<br>\r\nWhen I click Next button it loads next 10 items from the cache (but does not prefetch next 10 items !!!). My suggestion is to check does next 10 items are in local store, and to make async call depends of the condition.<br>\r\n<br>\r\nAnother suggestion is about performance issue. If I click Next button and data is not cached it initialize call to load next data. But if I don't have mechanism for preventing multiple clicks on Next Button (block UI, disable button etc.), and continue to click\r\n Next, it initiate multiple calls as :<br>\r\n<br>\r\n<span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>20</strong>&amp;top=10&amp;$callback=handleJSONP_20&amp;$format=json</span><br>\r\n<span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>20</strong>&amp;$top=10&amp;$callback=handleJSONP_21$format=json&nbsp;</span><br>\r\n<span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>20</strong>&amp;$top=10&amp;$callback=handleJSONP_22$format=json&nbsp;</span><br>\r\n<span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>20</strong>&amp;$top=10&amp;$callback=handleJSONP_23$format=json</span></p>\r\n<p>....</p>\r\n<p>As requests finishes it actually initiate another one call for every async &quot;thread&quot; - the new one is for prefetching next 10 items:</p>\r\n<p><span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>30</strong>&amp;$top=10&amp;$callback=handleJSONP_24&amp;$format=json</span><br>\r\n<span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>30</strong>&amp;$top=10&amp;$callback=handleJSONP_25$format=json&nbsp;</span><br>\r\n<span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>30</strong>&amp;$top=10&amp;$callback=handleJSONP_26$format=json&nbsp;</span><br>\r\n<span style=\"color:#0000ff\">http://ebayodata.cloudapp.net/Categories?$skip=<strong>30</strong>&amp;$top=10&amp;$callback=handleJSONP_27$format=json</span></p>\r\n<p>&nbsp;and in this case you are performing <strong>6 requests unnecessary</strong>&nbsp;(3 for each range).</p>\r\n<p>My suggestion will be to track calls to the server, so if i initiate the same call ($skip=<strong>20</strong>&amp;$top=10) &nbsp;it shouldn't initiate another call until the previous one finished.</p>\r\n<p>Regards</p>\r\n<p>Vlatko Ivanovski</p>\r\n",
+    "PostedDate": "2011-05-31T06:38:14.677-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "621165",
+    "ThreadId": "259648",
+    "Html": "<p>Vlatko, that just sound like a bug on our end. The cache should never ask twice for the same piece of information, and we should definitely allow multiple outstanding requests to 'next'.</p>\r\n<p>If you don't want to receive the notification for a previous one (so you don't even see the results and you never get an out-of-order callback), then you can call .abort() on the result of readRange() - this will cancel the operation.</p>\r\n<p>Thanks for the issue report! Are you using the latest published or the latest built-from-sources version? There are a few fixes that we've uploaded since our last download release...</p>",
+    "PostedDate": "2011-05-31T21:41:35.953-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "621556",
+    "ThreadId": "259648",
+    "Html": "<p>Minor update, the method is cancel() not abort()</p>\r\n<p>Regards</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-06-01T11:22:40.803-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

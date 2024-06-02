@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "642997",
+    "ThreadId": "265321",
+    "Html": "\r\n<p>Hi guys,</p>\r\n<p>&nbsp;</p>\r\n<p>i'm now trying to read an odata service with using CORS. To support this the server has to respond with specific headers like:</p>\r\n<p><span lang=\"EN-US\" style=\"font-size:8.0pt; font-family:&quot;Courier New&quot;\">'Access-Control-Allow-Origin: *'</span></p>\r\n<p>&nbsp;<span lang=\"EN-US\" style=\"font-size:8.0pt; font-family:&quot;Courier New&quot;\">'Access-Control-Allow-Methods: GET</span></p>\r\n<p><span lang=\"EN-US\" style=\"font-size:8.0pt; font-family:&quot;Courier New&quot;\"><span lang=\"EN-US\" style=\"font-size:8.0pt; font-family:&quot;Courier New&quot;\">'Access-Control-Expose-Headers: Content-Type, Content-Length</span>&nbsp;</span></p>\r\n<p>Now datajs calls the&nbsp;readResponseHeaders(xhr, headers); method and in there&nbsp;xhr.getAllResponseHeaders().</p>\r\n<p>Now this returns null when using firefox 3.5 and Firefox 5 returns an empty string although I exposed some headers as seen above.</p>\r\n<p>So I could not get the response type (if it was xml or JSON) &nbsp;and so on the datajs handler can't handle and process the response correctly...</p>\r\n<p>Calling xhr<span style=\"font-size:11.0pt; font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;\">.getResponseHeader(&bdquo;Content-Type&ldquo;);.\r\n</span>&nbsp;for example worked.</p>\r\n<p>&nbsp;</p>\r\n<p>So in the end I would say that this is a firefox bug where firefox doesn't return the requested CORS headers.</p>\r\n<p>&nbsp;</p>\r\n<p>You can try it yourself by using this samply by John Resig...</p>\r\n<p>http://ejohn.org/blog/cross-site-xmlhttprequest/</p>\r\n<p>&nbsp;</p>\r\n<p>Did you guys also tried datajs with CORS and ran into similar problems? If yes is there a way that datajs can handle this?</p>\r\n<p>Otherwise we have to wait for fixes in firefox. Also I don't know about if and how other browsers already support CORS.</p>\r\n<p>&nbsp;</p>\r\n<p>PS: Also interesting to read:</p>\r\n<p>http://stackoverflow.com/questions/4850288/how-can-i-access-the-content-length-header-from-a-cross-domain-ajax-request</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks!</p>\r\n",
+    "PostedDate": "2011-07-15T08:46:13.553-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "644512",
+    "ThreadId": "265321",
+    "Html": "<p>Hi Joe82,</p>\r\n<p>We didn't specifically try CORS since it's not a popular standard right now.&nbsp;I think&nbsp;you pinpointed the issue in Firefox&nbsp;in the stackoverflow link you mentioned.&nbsp;Unfortunately, if there's a bug in the browser in the handling of those headers there's no way for datajs to get around that at this point. Hopefully the bug has been reported and will be fixed by Firefox.</p>\r\n<p>-Beth</p>",
+    "PostedDate": "2011-07-19T10:25:15.023-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "644916",
+    "ThreadId": "265321",
+    "Html": "<p>yeah...for now I adapted datajs to check if getAllresponseHeaders returns anything and if not then I try implicitly to get the needed headers with getResponseHeader, so it could work with the firefox bug:</p>\r\n<p>&nbsp;</p>\r\n<p>var readResponseHeaders = function (xhr, headers) {<br /> /// &lt;summary&gt;Reads response headers into array.&lt;/summary&gt;<br /> /// &lt;param name=\"xhr\" type=\"XMLHttpRequest\"&gt;HTTP request with response available.&lt;/param&gt;<br /> /// &lt;param name=\"headers\" type=\"Array\"&gt;Target array to fill with name/value pairs.&lt;/param&gt;<br /><br /> var responseHeaders = xhr.getAllResponseHeaders();<br />&nbsp; &nbsp;if (!responseHeaders){<br />&nbsp; &nbsp; &nbsp;var contentType = xhr.getResponseHeader(\"Content-Type\");<br />&nbsp; &nbsp; &nbsp;var contentLength = xhr.getResponseHeader(\"Content-Length\");<br />&nbsp; &nbsp; &nbsp;if (contentType)<br />&nbsp; &nbsp; &nbsp; &nbsp;headers[\"Content-Type\"] = contentType;<br />&nbsp; &nbsp; &nbsp;if (contentLength)<br />&nbsp; &nbsp; &nbsp; &nbsp;headers[\"Content-Length\"] = contentLength;<br />&nbsp; &nbsp;}else{<br />&nbsp; &nbsp;responseHeaders = responseHeaders.split(/\\r?\\n/);<br />&nbsp; &nbsp;var i, len;<br />&nbsp; &nbsp;for (i = 0, len = responseHeaders.length; i &lt; len; i++) {<br />&nbsp; &nbsp; &nbsp;if (responseHeaders[i]) {<br />&nbsp; &nbsp; &nbsp; &nbsp;var header = responseHeaders[i].split(\": \");<br />&nbsp; &nbsp; &nbsp; &nbsp;headers[header[0]] = header[1];<br />&nbsp; &nbsp; &nbsp;}<br />&nbsp; &nbsp;}<br /> }<br /> <br /> };</p>",
+    "PostedDate": "2011-07-20T04:53:20.293-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "831426",
+    "ThreadId": "354342",
+    "Html": "\r\n<p>Hi all,</p>\r\n<p>Is it possible to check the readystate of an Odata.request?</p>\r\n<p>What I need to do is to check if the post request is ready then only I proceed on doing the rest.</p>\r\n<p>My code is as bellow.</p>\r\n<p>&nbsp;</p>\r\n<p>OData.request( request, <br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; function (data, response) {\r\n<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; //Success Callback&nbsp;\r\n<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; alert(response.readyState);<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if(response.readyState == 4){<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; addTimeCallBackParse(data, entryMessageCount);<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }, <br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; function (err) { <br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; //Error Callback:\r\n<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; errorHandler(err);<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; );&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>when I tried to allert response.readyState it comes out as Undefined. Can someone please help me.</p>\r\n<p>&nbsp;</p>\r\n<p>Thank you</p>\r\n",
+    "PostedDate": "2012-05-02T20:02:03.213-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "831443",
+    "ThreadId": "354342",
+    "Html": "<p>Hi Bluryone,</p>\r\n<p>&nbsp;&nbsp; That is because the response object&nbsp;datajs passes to the callback&nbsp;is not an XmlHttpRequest object and it doesn't have the readyState property...&nbsp;&nbsp; Actually you don't need to worry about the readyState and other XHR details in the OData.request method... The library takes care of this for you and it is guaranteed that the success and error callbacks are going to be called only when the XHR completes and its readyState === 4.&nbsp;&nbsp;&nbsp; In the code above, if you remove the if(response.readyState) and just live the call to your addTimeCallbackParse function everything should be fine.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-02T21:29:53.33-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "832058",
+    "ThreadId": "354342",
+    "Html": "<p>Hi atrigo,</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks for the advice.</p>\r\n<p>Yes I found out that the posting was sucessful however the processes which are done in the service backend is the problem.</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks.</p>",
+    "PostedDate": "2012-05-04T00:31:44.19-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

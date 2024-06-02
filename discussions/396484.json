@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "915999",
+    "ThreadId": "396484",
+    "Html": "\r\n<p>Hello,</p>\r\n<p>I am currently trying to use Data.js to access my Web Api through OData.</p>\r\n<p>My model is called Rule and has&nbsp;4 porperties, RuleKey (which is the id), Name, Attr, Value</p>\r\n<p>I have a Controller called TestController in which, I have Get method which does this.</p>\r\n<p>[Queryable]<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public IQueryable&lt;Rule&gt; Get()<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; List&lt;Rule&gt; rules = new List&lt;Rule&gt;();<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rules.Add(new Rule() { RuleKey = 1, Name = &quot;Rule1&quot;, Attribute = &quot;AAA&quot;, Operator = &quot;is&quot;, Value = &quot;SSS&quot; });<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rules.Add(new Rule() { RuleKey = 2, Name = &quot;Rule2&quot;, Attribute = &quot;BBB&quot;, Operator = &quot;in&quot;, Value = &quot;7250, 7260&quot; });<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rules.Add(new Rule() { RuleKey = 3, Name = &quot;Rule3&quot;, Attribute = &quot;CCCC&quot;, Operator = &quot;is&quot;, Value = &quot;.388&quot; });</p>\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return rules.AsQueryable();<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>\r\n<p>On the client side, I am trying to do this.</p>\r\n<p><br>\r\n&nbsp;&nbsp;&nbsp; OData.read(&quot;/api/Test&quot;,<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function (data) {<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var results = data.results;<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, function (err) {<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var json = JSON.stringify(err);<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>This keeps giving me the following error.</p>\r\n<p>&quot;No handler for data&quot;</p>\r\n<p>Here is the request</p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"></p>\r\n<p><span lang=\"EN\"></p>\r\n<p>GET http://localhost:41720/api/Test HTTP/1.1</p>\r\n<p>Host: localhost:41720</p>\r\n<p>Connection: keep-alive</p>\r\n<p>MaxDataServiceVersion: 2.0</p>\r\n<p>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1</p>\r\n<p>Accept: application/atomsvc&#43;xml;q=0.8, application/json;odata=verbose;q=0.5, */*;q=0.1</p>\r\n<p>Referer: http://localhost:41720/</p>\r\n<p>Accept-Encoding: gzip,deflate,sdch</p>\r\n<p>Accept-Language: en-US,en;q=0.8</p>\r\n<p>Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3</p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"><span lang=\"EN\"><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"><span lang=\"EN\">&nbsp;</span></span></span></span></span></span></p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"><span lang=\"EN\"><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"><span lang=\"EN\"><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"><span lang=\"EN\">&nbsp;</span></span></span></span></span></span></span></span></span>All\r\n I am trying to do here is a straight forward read. Why do I keep gettign this error. Am I missing some step.</p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"><span lang=\"EN\">&nbsp;</span></span></span>I did some research and found that we can try to get the metadata from the Api and send it along with the request.</p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"></span></span>Not sure if that would help. I was also not sure how to get metadata information from Web Api. I know we can use $metadata to get that info from a WCF service.</p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"></span></span>Please help. Let me know if you need any other information.</p>\r\n<p><span style=\"font-size:xx-small\"><span style=\"font-size:xx-small\"></span></span>Thanks.</p>\r\n</span>\r\n<p></p>\r\n</span></span>\r\n<p>&nbsp;</p>\r\n<p></p>\r\n",
+    "PostedDate": "2012-09-21T20:11:41.027-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "916769",
+    "ThreadId": "396484",
+    "Html": "<p>Hi Krishna,</p>\r\n<p>Can you share a trace of the response.&nbsp; I'm interested to see if the response has the Content-Type header set to a value that indicates a valid OData mime type.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-09-24T10:40:33.387-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "916810",
+    "ThreadId": "396484",
+    "Html": "<p>Hi Atrigo,</p>\r\n<p>Thanks for the response.</p>\r\n<p>I had to actually&nbsp;create a&nbsp;defaulthandler to get it to work.</p>\r\n<p><br />&nbsp;var jsonHandler = {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; read: function (response, context) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var contentType = response.headers[\"Content-Type\"];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (contentType &amp;&amp; contentType.indexOf(\"application/json\") === 0) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response.data = response.body;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; odata.defaultHandler.read(response, context);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; write: function (request, context) { }<br />&nbsp;&nbsp;&nbsp; }</p>",
+    "PostedDate": "2012-09-24T11:33:40.773-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "916838",
+    "ThreadId": "396484",
+    "Html": "<p>Hi Krishna,</p>\r\n<p>&nbsp;&nbsp; Out of curiosity, can you share a trace of the response? The fact that you had to that intrigues me.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-09-24T12:40:51.81-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927664",
+    "ThreadId": "396484",
+    "Html": "<p>Thanks, fixed my problem too!</p>\r\n<p>Any reason for this handler not be deployed in the project?</p>",
+    "PostedDate": "2012-10-16T13:56:19.013-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931413",
+    "ThreadId": "396484",
+    "Html": "<p>I wanted to add to this because I had this same issue today but I think I&nbsp; found the cause.&nbsp; I set a breakpoint where the jsonHandler is set and I noticed that the maxDataServiceVersion was set to 2.&nbsp; I realized that my service was set to use version 3 and set it to max version 2 and the issue went away.</p>\r\n<p>&nbsp;</p>\r\n<p>Its something to look at anyways.</p>\r\n<p>Jason</p>",
+    "PostedDate": "2012-10-23T18:50:37.01-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931919",
+    "ThreadId": "396484",
+    "Html": "<p>Hi Jason,</p>\r\n<p>Great point, thanks!&nbsp; DataJS 1.0.3 is an OData V2 client.&nbsp; DataJS 1.1.0 which is beta now is the OData V3 client.&nbsp; When this kind of issues happen, it is&nbsp;is very difficult to figure out what is going on&nbsp;without a trace of the&nbsp;response .</p>\r\n<p>Thanks,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-24T11:42:18.503-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi,\n\ndatajs1.1.1 has problems with parsing Atom/XML format with inline elements when these are empty.\ne.g.\n<link ... title=\"keys\" href=\"test(2)/Keys\"><m:inline></m:inline>\n\nthe parsed JSON object has.\n\"keys\":null\n\nWith JSON format it works and the parsed results contains then:\n\n\"keys\": {\"results\": []}}\n\nIt happens somewhere in the atomReadNavPropLink function....when inlineData is null",
+    "LastUpdatedDate": "2014-01-22T07:15:58.193-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2014-01-22T07:15:58.193-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Atom/XML format error with empty inline content",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1216
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

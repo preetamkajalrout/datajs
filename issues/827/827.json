@@ -1,0 +1,60 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": "2012-08-31T12:41:50.16-07:00",
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Concerning this example:\nOData.read(\"http://odata.netflix.com/v1/Catalog/Genres\", function (data, response) {\n \n//success handler\n \n       });\n \nHow would one append header information to the request?  In my case, I need to include authorization and other custom values required by my ODATA service.",
+    "LastUpdatedDate": "2013-05-16T04:44:28.13-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-08-28T13:33:53.35-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "How to append header to \"read\" request?",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 827
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "The OData.read() function takes either a string or an object as its first argument:  \r\n\r\nOData.read({ requestUri: \"http://odata.netflix.com/v1/Catalog/Genres\",\r\n  headers: { Accept: \"application/json\" } },\r\n  function (data, response) {\r\n    alert(\"Operation succeeded.\");\r\n  }, function (err) {\r\n    alert(\"Error occurred \" + err.message);\r\n  });",
+      "PostedDate": "2012-08-31T12:41:18.06-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2012-08-31T12:41:50.16-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:08.08-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T04:44:28.13-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

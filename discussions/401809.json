@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "936240",
+    "ThreadId": "401809",
+    "Html": "\r\n<p></p>\r\n<pre>Can anyone point me what I did wrong in the following snippet?</pre>\r\n<pre>The Odata endpoints expects two parameters OrganizationName and State which I provided.</pre>\r\n<pre>The response comes back saying that the params are not provided.</pre>\r\n<pre><br></pre>\r\n<pre> var requestGetOrganization = {\r\n        requestUri: &quot;https://api.datamarket.azure.com/Data.ashx/DigitalTrowel/Powerlinx/v2/GetOrganizations&quot;,\r\n        enableJsonpCallback: true,\r\n        data: { OrganizationName: &quot;Microsoft&quot;, State : &quot;WA&quot;},\r\n        method: &quot;GET&quot;,\r\n        user: &quot;myuser&quot;,\r\n        password: &quot;mypwd&quot;\r\n    };\r\n\r\n     \r\n     OData.request(requestGetOrganization,\r\n  function (data, request) {\r\n      var html = &quot;&quot;;\r\n      for (var i = 0; i &lt; data.results.length; i&#43;&#43;) {\r\n          html &#43;= &quot;<div>&quot; &#43; data.results[i].Name &#43; &quot;</div>&quot;;\r\n      }\r\n      document.getElementById(&quot;target-element-id&quot;).innerHTML = html;\r\n  }, \r\n   OData.defaultError, undefined, OData.defaultHttpClient, OData.defaultMetadata);\r\n    \r\n  </pre>\r\n<p></p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-11-03T23:51:33.593-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "942231",
+    "ThreadId": "401809",
+    "Html": "\r\n<p>Hi Matadoor,</p>\r\n<p>&nbsp;&nbsp; Sorry for the delayed response. Can you share the network trace of the request and the response.&nbsp; What is GetOrganization, is it a service operation? If that is the case then the arguments are passed as query parameters in the url:</p>\r\n<p>&nbsp;&nbsp;&nbsp; https://api.datamarket.azure.com/Data.ashx/DigitalTrowel/Powerlinx/v2/GetOrganizations?OrganizationName='Microsoft'&State='WA'</p>\r\n<p>&nbsp;&nbsp; Check this <a href=\"http://msdn.microsoft.com/en-us/library/dd744841(v=vs.103).aspx\" target=\"_blank\">\r\nMSDN page</a> for more details on them.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-11-15T11:21:11.06-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

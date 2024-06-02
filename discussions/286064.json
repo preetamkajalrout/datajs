@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "724772",
+    "ThreadId": "286064",
+    "Html": "<p>Hi,</p>\n<p>as datajs reads and &nbsp;processes the metadata internally it is possible to access this metadata and e.g. the types via an API or how is this possible?</p>\n<p>This is needed for doing e.g. validation of user input etc.</p>\n<p>Could this already parsed metadata be exposed somehow to the user?</p>\n<p>&nbsp;</p>\n<p>Thanks and best regards!</p>\n<p>&nbsp;</p>",
+    "PostedDate": "2012-01-13T07:04:54.953-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "725920",
+    "ThreadId": "286064",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; To what metadata do you refer?? To the additional information about properties and the like that is availabe in the ATOM feeds? Or to the metadata exposed by the end point via the $metadata&nbsp;URI?&nbsp;&nbsp;If the former, this data is available to you (only when&nbsp;working with ATOM feeds) as part of the&nbsp;entry objects that the library&nbsp;creates after parsing&nbsp;the ATOM feed / entry document.&nbsp; Please see the <a href=\"http://datajs.codeplex.com/wikipage?title=OData%20Payload%20Formats&amp;referringTitle=Documentation\" target=\"_blank\">OData payload formats</a>&nbsp;page for more details.&nbsp; If the latter, then&nbsp;you can request the full&nbsp;metadata of the OData service by using the metadata handler:&nbsp;</p>\r\n<pre><span style=\"color: blue;\">var</span> metadata;\r\nOData.read(<span style=\"color: #a31515;\">\"myservice.svc/$metadata\"</span>, <span style=\"color: blue;\">function</span> (data) { \r\n      metadata = data;\r\n   }, <span style=\"color: blue;\">function</span> (err) {\r\n      alert(JSON.stringify(err));\r\n   }, OData.metadataHandler);</pre>\r\n<p>&nbsp;&nbsp; We don't have publicly availabe apis to navigate through the metadata object.. but you are welcome to look into some of the internal helper functions that the library uses.&nbsp;</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre><div style=\"color: black; background-color: white;\"></div></pre>\r\n</div>",
+    "PostedDate": "2012-01-16T11:14:12.59-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "726369",
+    "ThreadId": "286064",
+    "Html": "<p>Hi Alex,</p>\r\n<p>&nbsp;</p>\r\n<p>thanks for your reply. Yes I meant the metadata document. The metadata included with atom feeds that is already exposed is nice but works only when the user requests this data in this format and not in JSON as you mentioned.</p>\r\n<p>Ok then I'll do a metadata request as you specified...Is there any documentation available how the retrieved metadata is parsed and converted by datajs?</p>\r\n<p>Also do you already parse metadata extensions that the service may provide/define?</p>\r\n<p>Best regards</p>\r\n<p>Joe</p>",
+    "PostedDate": "2012-01-17T05:49:01.2-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

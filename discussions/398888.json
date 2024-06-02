@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "924936",
+    "ThreadId": "398888",
+    "Html": "\r\n<table cellspacing=\"0\" cellpadding=\"0\">\r\n<tbody>\r\n<tr id=\"PostPanel\">\r\n<td id=\"PostDetailsCell_923940\" style=\"vertical-align:top; border:solid #BBB 1px; border-bottom:none; border-left:none; border-top:none; width:114px\">\r\n<div>\r\n<div style=\"white-space:normal\"><span title=\"10/9/2012 7:00:33 AM\">&nbsp;</span></div>\r\n</div>\r\n<br>\r\n</td>\r\n<td id=\"PostContent_923940\" style=\"width:100%; vertical-align:top\">\r\n<p>First and foremost Thank you Microsoft for TypeScript!</p>\r\n<p>I'm presently utilizing DATAJS in existing JS code.</p>\r\n<p>I've posted this request to TypeScript discussion on CodePlex, however, it's possible that the DATAJS folks are/already have a definition file for TypeScript.</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks</p>\r\n<p>&nbsp;</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n",
+    "PostedDate": "2012-10-10T14:20:18.897-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927615",
+    "ThreadId": "398888",
+    "Html": "<p>Hi Peterle188,</p>\r\n<p>&nbsp;&nbsp; Yes, TypeScript is a very good addition to the javascript world :).&nbsp; We don't have a TypeScript definition file; however we will consider creating one. Thanks for the sugestion.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-16T12:21:53.053-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1015762",
+    "ThreadId": "398888",
+    "Html": "Still nothing?<br />\n",
+    "PostedDate": "2013-03-15T01:24:13.697-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1078674",
+    "ThreadId": "398888",
+    "Html": "A  TypeScript definition file would be really great!\r<br />\n<br />\nRegards,\r<br />\nyann<br />\n",
+    "PostedDate": "2013-08-09T04:36:38.833-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1097226",
+    "ThreadId": "398888",
+    "Html": "Yes, I need the TS definition file also.<br />\n",
+    "PostedDate": "2013-09-20T14:31:37.657-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1099270",
+    "ThreadId": "398888",
+    "Html": "+1<br />\n",
+    "PostedDate": "2013-09-25T10:17:10.833-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

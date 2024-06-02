@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "849679",
+    "ThreadId": "359796",
+    "Html": "\r\n<p>Hi, guys!</p>\r\n<p>I have a problem with save of data through datajs. A lot of datepicker controls, in cases when time is not necessary (in most cases!!!), use date only, without time. But in this case datajs converts date incorrectly because it converts all datetime values\r\n in UTC format. For example, I have the next date:</p>\r\n<p>Fri Dec 18 1992 00:00:00 GMT&#43;0200 (FLE Standard Time)</p>\r\n<p>It means that my control shows me 18 Dec1992 and time is not needed at all. Of course, my GMT is &#43;2 hours, but it doesn't important for me. And datajs, anyway, converts my date value using this GMT. I mean the result is:</p>\r\n<p>1992-12-17T22:00:00 (my date value minus 2 hours)</p>\r\n<p>It's absolutely strange behaviour and I can't find the right solution how to set datajs to not do that conversion. Yes, I can write a hack trick over the control (for example, I use native Sencha Touch 2 controls), but it's not right method.</p>\r\n<p>The question is: how to work with <strong>dates</strong> using datajs <strong>\r\ncorrectly?</strong></p>\r\n",
+    "PostedDate": "2012-06-15T13:38:36.117-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "849964",
+    "ThreadId": "359796",
+    "Html": "<p>Or how to make datajs to not convert date in UTC date?</p>",
+    "PostedDate": "2012-06-17T01:35:27.267-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "851998",
+    "ThreadId": "359796",
+    "Html": "<p>Hi StasKalishenko,</p>\r\n<p>&nbsp; DataJS uses UTC for the&nbsp;DateTime and DateTimeOffset values so that the values can be manipulated directly from the wire using Javascript's UTC APIs without having to worry about local time zone.&nbsp; Displaying date values received from the wire&nbsp;to a particular&nbsp;time zone is something that has to handled&nbsp;by the presentation layer of the application.&nbsp;</p>\r\n<p>Now, based on your example above,&nbsp;is that how the control is displaying the date value? And what you would like is to have it show the date value in the current timezone or the specific time zone (in the example above +0200).&nbsp;&nbsp; If the former, then the control has to use javascript locale aware&nbsp;functions instead of the UTC ones.. perhaps it has some knob to change this behavior.&nbsp; If you want the latter, then you will have to make that adjustment yourself (or the datepicker control) because Javascript only allows to get the date values either in UTC or in the current locale. For this adjustment you can take advantage of the __offset field that DataJS adds to the&nbsp;resulting Date object when dealing with DateTimeOffset values.&nbsp;&nbsp; For more background information you can look at this <a href=\"http://blogs.msdn.com/b/marcelolr/archive/2011/02/15/datajs-support-for-datatime-and-datetimeoffset.aspx\" target=\"_blank\">entry </a>in Marcelo's blog and <a href=\"http://blogs.msdn.com/b/marcelolr/archive/2008/06/04/javascript-date-utc-and-local-times.aspx\" target=\"_blank\">this other one </a>in his blog also that talks about UTC&nbsp;and timezone&nbsp;nuisances with Date objects in javascript.&nbsp;</p>\r\n<p>Finally, if you are using ATOM, then it is not possible to disable DataJS parsing of Dates, that is because ATOM payloads clearly state when&nbsp;a property is of type Edm.DateTime or Edm.DateTimeOffset.&nbsp;&nbsp; On&nbsp;the other hand if using JSON then there is no&nbsp;parsing of dates by default.. this is because JSON payloads do not necessarily differentiate between a DateTime value and a string value that happens to be formatted as a DateTime literal.&nbsp; The behavior can be changed by setting the recognizeJsonDates&nbsp;flag in the&nbsp;OData.jsonHandler object to true or providing&nbsp;a metadata&nbsp;object that clearly identifies&nbsp;the property as of type Edm.DateTime.&nbsp;&nbsp; Keep in mind that&nbsp;in JSON&nbsp;your date values will&nbsp;come as&nbsp;strings following this format&nbsp;&nbsp;/Date(mmmmmm[+- nn])/&nbsp; where&nbsp;mmmm is the number of miliseconds and&nbsp;+-nn is the optional offset information.&nbsp; You will have to&nbsp;convert this&nbsp;values your self and in Javascript the&nbsp;Date(number) constructor&nbsp;creates a Date object&nbsp;using UTC.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo&nbsp;&nbsp;&nbsp;</p>",
+    "PostedDate": "2012-06-21T01:42:24.76-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

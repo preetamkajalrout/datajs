@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "859101",
+    "ThreadId": "362514",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I am just starting&nbsp;out with&nbsp;DataJS, and when&nbsp;I include the script,&nbsp;the html&nbsp;tags&nbsp;after the include line fail to&nbsp;be parsed by the html dom&nbsp;correctly. I am testing this with an empty asp.net webform and IE9, although\r\n it is also true with Chrome.</p>\r\n<p>So, in my &lt;head&gt; element, I have the following line:</p>\r\n<p>&lt;script src=&quot;Scripts/datajs-1.0.3.js&quot; type=&quot;text/javascript&quot;&gt;</p>\r\n<p>But the closing tag &quot;&lt;/head&gt;&quot;, and everything beyond is&nbsp;simply parsed as text (instead of html), when viewing the document in IE9 tools.</p>\r\n<p>It suggests to me there's a syntax error in the javascript. I can actually get datajs to work, if I place it at the end&nbsp;of the html document, etc.</p>\r\n<p>Thanks,</p>\r\n<p>Mike.</p>\r\n",
+    "PostedDate": "2012-07-09T03:54:03.047-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "859113",
+    "ThreadId": "362514",
+    "Html": "\r\n<div id=\"_mcePaste\" style=\"width:1px; height:1px; overflow:hidden; top:0px; left:-10000px\">\r\n&#65279;</div>\r\n<p>FYI -&nbsp;if I add an extra script element beneath the datajs include statement, containing just a semi-colon, it seems to work. eg:</p>\r\n<p><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">&lt;</span></span></span><span style=\"font-family:Consolas; color:#800000; font-size:x-small\"><span style=\"font-family:Consolas; color:#800000; font-size:x-small\"><span style=\"font-family:Consolas; color:#800000; font-size:x-small\">script</span></span></span><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\">\r\n</span></span><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\"><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\"><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\">src</span></span></span><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">=&quot;Scripts/datajs-1.0.3.js&quot;</span></span></span><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\">\r\n</span></span><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\"><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\"><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\">type</span></span></span><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">=&quot;text/javascript&quot;</span></span></span><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\">\r\n</span></span><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">/&gt;</span></span></span><span style=\"font-family:Consolas; font-size:x-small\">\r\n</span></p>\r\n<p><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">&lt;</span></span></span><span style=\"font-family:Consolas; color:#800000; font-size:x-small\"><span style=\"font-family:Consolas; color:#800000; font-size:x-small\"><span style=\"font-family:Consolas; color:#800000; font-size:x-small\">script</span></span></span><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\">\r\n</span></span><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\"><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\"><span style=\"font-family:Consolas; color:#ff0000; font-size:x-small\">type</span></span></span><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">=&quot;text/javascript&quot;&gt;</span></span></span><span style=\"font-family:Consolas; font-size:x-small\"><span style=\"font-family:Consolas; font-size:x-small\">;</span></span><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">&lt;/</span></span></span><span style=\"font-family:Consolas; color:#800000; font-size:x-small\"><span style=\"font-family:Consolas; color:#800000; font-size:x-small\"><span style=\"font-family:Consolas; color:#800000; font-size:x-small\">script</span></span></span><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\"><span style=\"font-family:Consolas; color:#0000ff; font-size:x-small\">&gt;</span></span></span></p>\r\n<p>As a&nbsp;workaround.</p>\r\n",
+    "PostedDate": "2012-07-09T04:19:29.753-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "859277",
+    "ThreadId": "362514",
+    "Html": "\r\n<p>Hi Mike,</p>\r\n<p>&nbsp;&nbsp; Actually, the problem is that the script tag in your first post is not properly closed.&nbsp; That will cause the browser to incorrectly interpret the rest of the HTML document.&nbsp; Even using a self closing script tag, like in your second\r\n post, will not necessariliy work. Those aren't sanctioned by the HTML standard yet, and is up to the browser to support them or not.&nbsp; See\r\n<a href=\"http://stackoverflow.com/questions/69913/why-dont-self-closing-script-tags-work\" target=\"_blank\">\r\nhere</a> for more details.</p>\r\n<p>&nbsp;&nbsp; Now, the workaround above&nbsp;works because the second script tag is properly closed, thus causing the browser to stop interpreting the html content as part of the first script tag.&nbsp; You can remove this extra tag and close the one in which\r\n you include datajs and everything will work fine:</p>\r\n<div style=\"background-color:white; color:black\">\r\n<pre><span style=\"color:blue\">&lt;</span><span style=\"color:#a31515\">script</span> <span style=\"color:red\">src</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;Scripts/datajs-1.0.3.js&quot;</span> <span style=\"color:red\">type</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;text/javascript&quot;</span><span style=\"color:blue\">&gt;</span><span style=\"color:blue\">&lt;/</span><span style=\"color:#a31515\">script</span><span style=\"color:blue\">&gt;</span></pre>\r\n</div>\r\n<p>Regards,</p>\r\n<p>Alex Trigo</p>\r\n",
+    "PostedDate": "2012-07-09T10:35:19.69-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "859292",
+    "ThreadId": "362514",
+    "Html": "<p>Thanks Alex,</p>\r\n<p>That solved it.</p>\r\n<p>...and I thought self-closing&nbsp;elements&nbsp;were part of the xml specification!</p>\r\n<p>Interesting link, cheers.</p>\r\n<p>Mike.</p>",
+    "PostedDate": "2012-07-09T11:06:19.5-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "859307",
+    "ThreadId": "362514",
+    "Html": "<p>Hi Mike,</p>\r\n<p>&nbsp;&nbsp;&nbsp; Indeed self-closing elements are part of the XML specification... but not of the HTML one :).&nbsp;</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-07-09T11:41:43.273-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "659370",
+    "ThreadId": "269403",
+    "Html": "\r\n<div>\r\n<p>I am following authentication method described at<a rel=\"nofollow\" href=\"http://blogs.msdn.com/b/astoriateam/archive/2010/07/21/odata-and-authentication-part-6-custom-basic-authentication.aspx\">http://blogs.msdn.com/b/astoriateam/archive/2010/07/21/odata-and-authentication-part-6-custom-basic-authentication.aspx</a></p>\r\n<p>I am able to consume service using ASP.NET (not a problem at all along with authentication information). Now I would like to create a plain HTML page and access the service using &quot;OData Javascript Library&quot; (datajs).</p>\r\n<p>If I disable authentication and request for data, it works fine. I could not find any sample code on how to send authentication header information using &quot;datajs&quot; (when used with OData.Request and/or OData.Read).</p>\r\n<p>Can anyone help me on this?</p>\r\n</div>\r\n",
+    "PostedDate": "2011-08-17T05:00:40.19-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "661749",
+    "ThreadId": "269403",
+    "Html": "<p>Hello,</p>\r\n<p>You can specify the authentication credentials in the request object that you pass into OData.read or OData.request, as follows:</p>\r\n<p>OData.read({ requestUri: myEndpointUri, user: myUsername, password: myPassword }, function (data) { // success }, ...);</p>\r\n<p>OData.request({ requestUri: myEndpointUri, method: \"POST\", user: myUsername, password: myPassword }, function (data) { // success }, ...);</p>\r\n<p>Thanks for pointing out that our documentation is missing this information, we will fix this.</p>\r\n<p>Please let us know if you are still having issues.</p>\r\n<p>Thanks,</p>\r\n<p>David</p>",
+    "PostedDate": "2011-08-22T12:57:40.627-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "925634",
+    "ThreadId": "269403",
+    "Html": "\r\n<p>Hi David,</p>\r\n<p>I wanted to get some data after logging into website through ODATA.read which is mentioned by you.</p>\r\n<p>But im not able to authnticate to that site.instead it is giving me the error:&quot;<span style=\"color:#ff0000\"><strong> Http request failed</strong></span>&quot;.i have given the correct url.</p>\r\n<p>whn im trying to Connect to that url by giving password and username it is succesfully loggin in.</p>\r\n<p><span style=\"color:#ff0000\">Please help me.</span></p>\r\n<p>here is my code:</p>\r\n<p>function getData()</p>\r\n<p>{</p>\r\n<p>var myUrl=&quot;https://cdms.clouddev.aus.hp.com/XRMServices/2011/OrganizationData.svc/&quot;;</p>\r\n<p>OData.read({ requestUri: myUrl,user: &quot;xxxxxxxxxxxxx&quot;,password: &quot;************&quot;},</p>\r\n<p>function (data) {</p>\r\n<p>alert(&quot;data&quot;&#43;JSON.stringify(data));</p>\r\n<p>});</p>\r\n<p>},</p>\r\n<p>function (err){</p>\r\n<p>alert(&quot;error&quot;&#43;JSON.stringify(err));</p>\r\n<p>});</p>\r\n<p>}</p>\r\n<p>Thanks,</p>\r\n<p>Teena.</p>\r\n",
+    "PostedDate": "2012-10-11T22:57:35.46-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927624",
+    "ThreadId": "269403",
+    "Html": "<p>Hi Teena,</p>\r\n<p>&nbsp;&nbsp; Which browser are you using? Seems to me that you are doing a cross domain request and not all browsers are ok with that due to the same orgin policy.&nbsp; Can you please share a network trace of the request and response (please black out username and password :) )</p>\r\n<p>Thanks!</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-16T12:44:59.117-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "941531",
+    "ThreadId": "269403",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>Hope it's alright if I swoop in and add a question...</p>\r\n<p>I am having a problem accessing my authentication header that I pass through as well.</p>\r\n<p>I call my WCF service as follows:</p>\r\n<pre><code><span>var</span><span> url </span><span>=</span><span> </span><span class=\"str\">&quot;http://localhost/myServices/myService.svc/aMethod&quot;</span><span>;</span><span>\n</span><span>OData</span><span>.</span><span>defaultHttpClient</span><span>.</span><span>enableJsonpCallback </span><span>=</span><span> </span><span>true</span><span>;</span><span>\n\n</span><span>OData</span><span>.</span><span>request</span><span>(</span><span>\n        </span><span>{</span><span>requestUri</span><span>:</span><span> url</span><span>,</span><span> method</span><span>:</span><span> </span><span class=\"str\">&quot;GET&quot;</span><span>,</span><span> user</span><span>:</span><span> </span><span class=\"str\">'Joe'</span><span>,</span><span> password</span><span>:</span><span> </span><span class=\"str\">'Soap'</span><span> </span><span>},</span><span>\n        </span><span>function</span><span> </span><span>(</span><span>data</span><span>,</span><span> request</span><span>)</span><span> </span><span>{</span><span>\n            </span><span>// successful</span><span>\n        </span><span>},</span><span>\n        </span><span>function</span><span> </span><span>(</span><span>error</span><span>)</span><span> </span><span>{</span><span>\n            </span><span>// error</span><span>\n        </span><span>}</span><span>\n</span><span>)</span></code></pre>\r\n<p>I then expected to have access to &quot;Joe&quot; and &quot;Soap&quot; in my HTTP module, as well as in Fiddler when I track the requests, but I can't find those values, nor do I see an Authentication Header in the request.</p>\r\n<p>Am I missing something?</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks, help is much appreciated.</p>\r\n<p>Dave</p>\r\n",
+    "PostedDate": "2012-11-14T04:24:48.98-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "942226",
+    "ThreadId": "269403",
+    "Html": "\r\n<p>Hi Dave,</p>\r\n<p>&nbsp;&nbsp; I assume that you are doing a cross domain request using JSONP right?&nbsp;Unfortunately, with JSONP there is nothing you can do about setting headers and&nbsp;shaping the request in any other way than the url. This is because on how JSONP works and the fact that\r\n it relies on injecting &lt;script&gt; tags in the web page DOM to retrive the data. The only thing that can be changed on a &lt;script&gt; tag is the url it is pointing to.&nbsp;</p>\r\n<p>&nbsp;&nbsp; There are some blogs out there that explain some&nbsp;methods that would allow you to do an &quot;authenticated JSONP&quot; but they&nbsp;involve using&nbsp;magic tricks&nbsp;with IFrames and the like.&nbsp; My suggestion though is that you use a reverse proxy&nbsp;(a dummy service in the same\r\n domain as your webapp that&nbsp;just relays the request to the real endpoint in the other domain) or you might try to look into using CORS as well (disclaimer: CORS is still gaining traction and has to be supported by both&nbsp;the&nbsp;browser and the&nbsp;server.)</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.&nbsp;&nbsp;&nbsp;</p>\r\n",
+    "PostedDate": "2012-11-15T11:11:04.87-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

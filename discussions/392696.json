@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "902775",
+    "ThreadId": "392696",
+    "Html": "\r\n<p>Dears,</p>\r\n<p>I try to run my program on iOS iPad Safari and Android Tablet Chrome browser, but when the line of code go to the one that I use datajs to retrieve data from a WCF Data Service, it seems pass through and do nothing. However, it works on&nbsp;IE, Firefox\r\n and Chrome browser on the desktop.</p>\r\n<p>Does anyone encounter the&nbsp;same problem?</p>\r\n<p>Thanks.</p>\r\n<p>Best regards,<br>\r\nCalvin Lam&nbsp;</p>\r\n",
+    "PostedDate": "2012-08-22T18:54:17.57-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "906966",
+    "ThreadId": "392696",
+    "Html": "<p>Hi Calvin,</p>\r\n<p>&nbsp;&nbsp;&nbsp; Which versions of the browsers are you using?&nbsp; Can you share a snippet of the failing code?</p>\r\n<p>Thanks</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-08-31T10:17:25.56-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

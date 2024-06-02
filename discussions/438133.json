@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1021650",
+    "ThreadId": "438133",
+    "Html": "Hi everyone!\r<br />\nDid anybody face with the following problem on iOS 5.1 (or 5.1.1): we create a batch request (with several requests inside), datajs sends it correctly and, as we can see in Fiddler, correct response is being returned, but the method “onreadystatechange” is not being called at all. It’s quite strange, because some batch requests work normally. It looks like it depends on a size of response (on small responses onreadystatechange is firing as it should)\r<br />\n<br />\nEveruthing works fine on iOS 6 and later.<br />\n",
+    "PostedDate": "2013-03-27T02:44:42.97-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1025089",
+    "ThreadId": "438133",
+    "Html": "Hi n535,\r<br />\n<br />\nIf you still facing this problem, can I ask:<br />\n<ul>\n<li>what is the response code for the request in Fiddler ? if it's 400, then it might be because of the big response size.\r<br />\nIf you have access to the service and it's hosted using IIS  you can try this:\r<br />\n<a href=\"http://blogs.msdn.com/b/phaniraj/archive/2008/10/06/astoria-iis-http-400-bad-request-on-posting-large-payloads-to-an-astoria-service.aspx\" rel=\"nofollow\">http://blogs.msdn.com/b/phaniraj/archive/2008/10/06/astoria-iis-http-400-bad-request-on-posting-large-payloads-to-an-astoria-service.aspx</a></li>\n</ul>\n",
+    "PostedDate": "2013-04-03T14:03:47.18-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

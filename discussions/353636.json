@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "828739",
+    "ThreadId": "353636",
+    "Html": "\r\n<p>I am trying to access information stored on a SharePoint Online list using Javascript. Does datajs support this scenario already or can it be made to?</p>\r\n",
+    "PostedDate": "2012-04-25T19:54:25.15-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "829120",
+    "ThreadId": "353636",
+    "Html": "<p>Hi ru1fdo,</p>\r\n<p>&nbsp;&nbsp; Datajs out of the box will support it as long as your sharepoint list exposes its data using OData.&nbsp;You just need to use the OData.read or OData.request methods and point them to the odata endpoint of your list.&nbsp; For example, a url like the one below will get you the service document of all the lists in your site</p>\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; http://mysharepoint/sites/mysite/_vti_bin/listdata.svc/</p>\r\n<p>&nbsp;&nbsp; This one will get you to a particular list in your site exposed as an odata feed</p>\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; http://mysharepoint/sites/mysite/_vti_bin/listdata.svc/list1</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-04-26T15:49:17.177-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "829192",
+    "ThreadId": "353636",
+    "Html": "<p>Hi Alex,</p>\r\n<p>Thank you so much for the response. However, I am interested in accessing a list on SharePoint ONLINE versus an on-premise SharePoint instance. Given the authentication that is in use on SharePoint online and the lack of control that we have over the MS implementation, do you know if this is accessible?</p>\r\n<p>Thanks in advance,</p>\r\n<p>Ruwan</p>",
+    "PostedDate": "2012-04-26T20:26:40.31-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "831385",
+    "ThreadId": "353636",
+    "Html": "<p>Hi Ruwan,</p>\r\n<p>&nbsp;&nbsp; Sorry I misunderstood what you meant by Sharepoint Online. Can you explain your scenario a little bit more?&nbsp; By the way, I think this link will help you on getting started on how to access a list in Sharepoint Online&nbsp;as an OData feed</p>\r\n<p><a href=\"http://accessindepth.blogspot.com/2011/06/reading-office-365-betas-sharepoint.html\">http://accessindepth.blogspot.com/2011/06/reading-office-365-betas-sharepoint.html</a></p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-02T16:18:22.373-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

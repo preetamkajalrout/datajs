@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "1027948",
+    "ThreadId": "439673",
+    "Html": "Hi, first of all,  Im sorry for any grammar mistakes, english is not my native... Im really new in app development so Im going to try and explain this in the best way...\r<br />\n<br />\nI create and app for Android using html5 code (generate by the SAP Gateway plugin for Eclipse), basically the app calls up a service URL located in a remote but accessible server (a SAP Gateway Server), when I run the app in a J2EE server from Eclipse it runs perfectly, the problem is when i run it as an Android app, both on the device or in  the emulator, it loads me the Error  &quot;HTTP request failed&quot;...\r<br />\n<br />\nFrom the server side I think its all ok, I can manually acces de Odata from any broswer (both mobile and local) so I think is jsut a matter of configuration within the datajs or the app itself...\r<br />\n<br />\nDoing some research I found that  it may be a problem that can be fixed by adding the code:\r<br />\n<br />\nOData.defaultHttpClient.enableJsonpCallback = true;\r<br />\n<br />\nThe problem is that I dont understand the base of the problem and where to add this code (if it is the potential fix)...\r<br />\n<br />\nAny help would be apreciated...\r<br />\nThanks!<br />\n",
+    "PostedDate": "2013-04-09T09:14:32.04-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1028055",
+    "ThreadId": "439673",
+    "Html": "I manage to trace back the error by executing the app from a browser and using the Developer Tools, It seems that the error is 401 Unanthorized type, It seems (and it makes sense) that within the aplication itself theres no popup windows that ask for the credentials that need to be supplied for gaining access, I say it makes sense because the only way I can execute my app is when I do it on a J2EE server and thats executed trough the IE enviroment... Im kind of lost here, how do I tell my app the credentials if by default they are not being requested? \r<br />\n<br />\nThanks!<br />\n",
+    "PostedDate": "2013-04-09T12:45:39.99-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1028085",
+    "ThreadId": "439673",
+    "Html": "Hi AndrueDLT,<br />\n<ul>\n<li>\nIn order to give the service the credentials, you can embed the values in the request in the form:\r<br />\nOData.read({requestUri: [uri], user: [user], password: [password]}, successHandler, errorHandler);<br />\n</li>\n<li>\nIn order to overcome the problem of using datajs in browsers other than IE ( the problem of same-origin policy), you can set OData.defaultHttpClient.enableJsonpCallback = true; \r<br />\nAnd that is before issuing any request, which will use JonP for cross domain requests.\r<br />\nFor more info on the same-origin policy problem you can check these links:\r<br />\n<a href=\"https://datajs.codeplex.com/wikipage?title=OData%20Security&amp;referringTitle=OData%20Networking\" rel=\"nofollow\">OData Security</a>\r<br />\n<a href=\"https://datajs.codeplex.com/wikipage?title=Cross%20Domain%20Requests&amp;referringTitle=OData%20Security\" rel=\"nofollow\">Cross Domain Requests</a><br />\n</li>\n</ul>\n<hr />\nRegards,\r<br />\nHussein<br />\n",
+    "PostedDate": "2013-04-09T14:10:03.61-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1028153",
+    "ThreadId": "439673",
+    "Html": "Hi Hussein, \r<br />\n<br />\nThanks a lot for the response!\r<br />\n<br />\nI checked both links and kind of understand more the problem now, Im trying to fix it by enabling the JSonCallBack because I dont like the idea of manually imposing it the credentials, mainly because I want to deploy this app in Android devices...\r<br />\n<br />\nenabling JSonCallBack as follow:<br />\n<pre><code>OData.defaultHttpClient.enableJsonpCallback = true;\nOData.read(request, successCallback, displayError);\n</code></pre>\n\nSeems to work at the beggining, because I executed the app trough Chrome (Chrome throw me the HTTP request failed error before) and I finally got that credentials logon window, the problem is that It doesn't bring my data, after a while I get a Request timed error, tracing it with the Chrome Development Tools I found out that now the problem is with the callback made from the endpoint, as I get an 500 INTERNAL SERVER ERROR in te GET method. Executing it from IE directly now gives me the same error, when without the JSonCallBack worked just fine. \r<br />\n<br />\nThe request URL related is: &quot;XXXXXXXXXXXXXXXXXXX?$callback=parent.handleJSONP_0&amp;$format=json&quot;\r<br />\n<br />\nwhere XXXXXXXXX is the correct service URL...\r<br />\n<br />\nHope I gave enough information for tracing this issue, thanks again for your response! Any ideas?<br />\n",
+    "PostedDate": "2013-04-09T17:17:19.343-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1028548",
+    "ThreadId": "439673",
+    "Html": "In order to understand the source of the issue and clear things more:<br />\n<ul>\n<li>What is the DataServiceVersion of the service ?</li>\n<li>What is the version of DataJS you are using ?</li>\n</ul>\n<hr />\nRegards,\r<br />\nHussein<br />\n",
+    "PostedDate": "2013-04-10T09:56:13.463-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1028561",
+    "ThreadId": "439673",
+    "Html": "Hi,<br />\n<br />\nI´m using DataJS: datajs-1.0.2, the DataServiceVersion I´m not quite sure on how to find it out... <br />\n<br />\nDoing more investigation (a lot more..) and test I found out that apprently (yet to be confirmed) the SAP Netweaver Gateway Services does not support JSONP or CORS so I think thats why I recieve this error, if thats the case then I´m going to need to focus the problem in other ways rather than using JSONP to go trough the cross-domain issue...<br />\n<br />\nI have found several posible solutions (without using the JSON implementations) and I found out something like:<br />\n<br />\nFor the mobile development that we do we simply write the HTML5 application locally using an XAMPP and Apache's mod_proxy which is enabled by default. In the httpd--proxy.conf configuration I simply but the following line in...<br />\n <br />\n<br />\nBut my knowleage about servers and related issues are really low, and I think this solution goes way over in topic for this post, although any help related would be welcome....<br />\n<br />\nAny ideas?<br />\n<br />\nThanks for all the help...<br />\nAndres <br />\n",
+    "PostedDate": "2013-04-10T10:17:30.68-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

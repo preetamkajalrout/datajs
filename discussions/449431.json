@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "1066068",
+    "ThreadId": "449431",
+    "Html": "Hi guys:\r<br />\n<br />\nI get an error when using the new datajs 1.1.1 beta2:\r<br />\n<br />\nThis worked before.\r<br />\nHere is the code:\r<br />\n<br />\nError:\r<br />\n--&gt;Cannot set property 'contentTypeOdata' of null&quot;<br />\n<pre><code>var sURL1 = &quot;http://services.odata.org/(S(readwrite))/OData/OData.svc/$metadata&quot;;\nvar sURL2 = &quot;http://services.odata.org/(S(readwrite))/OData/OData.svc/Products?$expand=Category&quot;;\n\n\nvar oRequest = { \n            requestUri : sURL1,\n    };\n\nOData.read(oRequest, function(oMetadata){\n\n    var oRequest = { \n            requestUri : sURL2,\n    };\n\n\n\nOData.read(oRequest, function (oData) { \n    debugger;\n    alert('success');\n},\n  function(oError){\n       alert (oError.message);\n},null,null,oMetadata);\n\n\n}, function(oError){\n       alert (oError.message);\n}, OData.metadataHandler);\n</code></pre>\n\nThis happens only when I read the metadata first and hand it over to the next request and when using the expand property...\r<br />\n<br />\nCrash happens in jsonLightReadObject:\r<br />\n var propertyValue = data[name];<br />\n<pre><code>                var propertyModel = jsonLightDataItemModel(name, dataModel);\n                var isNavigationProperty = jsonLightIsNavigationProperty(name, data, propertyModel);\n                var propertyType = jsonLightDataItemType(name, propertyValue, data, propertyModel, model);\n                var propertyMetadata = propertiesMetadata[name] = propertiesMetadata[name] || { type: propertyType };\n                if (isNavigationProperty) {\n                    var propertyInfo = {};\n                    if (objectInfo.entitySet !== undefined) {\n                        var navigationPropertyEntitySetName = lookupNavigationPropertyEntitySet(propertyModel, objectInfo.entitySet.name, model);\n                        propertyInfo = getEntitySetInfo(navigationPropertyEntitySetName, model);\n                    }\n                    propertyInfo.contentTypeOdata = objectInfo.contentTypeOdata;\n</code></pre>\n\npropertyInfo is null\r<br />\nCould you please check this?\r<br />\n<br />\nThanks!\r<br />\nJoe<br />\n",
+    "PostedDate": "2013-07-09T05:03:03.367-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1066810",
+    "ThreadId": "449431",
+    "Html": "Hi Joe,\r<br />\n<br />\nThanks for reporting the issue.\r<br />\nIt happens when there you do a request for json with fullmetadata and there is type inheritance on the type like your case it fails on the FeaturedProduct entity.\r<br />\nThis will be fixed in the 1.1.1 release.\r<br />\n<br />\nHussein<br />\n",
+    "PostedDate": "2013-07-10T15:44:33.273-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067057",
+    "ThreadId": "449431",
+    "Html": "Hi nomier,\r<br />\n<br />\nthank you very much :)\r<br />\nWhen will 1.1.1 be available?\r<br />\n<br />\nThanks and best regards\r<br />\nJoe<br />\n",
+    "PostedDate": "2013-07-11T07:27:08.197-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1069249",
+    "ThreadId": "449431",
+    "Html": "Hi Joe, \r<br />\n<br />\nDataJS 1.1.1 is released now and contains the fix.\r<br />\n<br />\n<br />\nRegards,\r<br />\nHussein Nomier<br />\n",
+    "PostedDate": "2013-07-16T15:23:45.763-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

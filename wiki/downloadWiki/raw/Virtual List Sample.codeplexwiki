@@ -1,0 +1,10 @@
+! Virtual List Sample
+
+This sample displays movie genres from Netflix in a virtualized list.
+
+Some techniques demonstrated include:
+
+* How to configure the cache to store and prefetch items. 
+* How to use the cache as a backing store for a virtualized list. 
+
+The sample file is [file:VirtualList.htm].

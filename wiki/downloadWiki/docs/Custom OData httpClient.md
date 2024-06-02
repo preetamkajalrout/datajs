@@ -1,0 +1,32 @@
+# Custom OData httpClient
+For OData-related functionality, datajs uses the HTTP component specified directly in the API call that needs it, or in OData.defaultHttpClient. This gives developers the opportunity to replace or augment the default behavior as necessary.
+
+The following sample shows how to create an HTTP client component that adds a query string parameter to every request.
+
+{code:javascript}
+// During page initialization...
+
+// Capture the current http client object.
+var oldClient = OData.defaultHttpClient;
+
+// Create a new client object that will add a query string parameter.
+var myClient = {
+    request: function (request, success, error) {
+        // Add a '?' if there is no query string; separate with '&' otherwise.
+        if (request.requestUri.indexOf("?") === -1) {
+            request.requestUri += "?";
+        } else {
+            request.requestUri += "&";
+        }
+
+        // Add our own parameter.
+        request.requestUri += "something=another";
+
+        // Call back into the original http client.
+        return oldClient.request(request, success, error);
+    }
+};
+
+// We can either pass myClient explicitly, or set it globally for the page as the default:
+OData.defaultHttpClient = myClient;
+{code:javascript}

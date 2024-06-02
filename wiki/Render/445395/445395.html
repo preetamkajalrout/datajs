@@ -1,0 +1,19 @@
+<div class="wikidoc"><h1>Cache Prefetching</h1>
+In many scenarios, users will view a large collection of data by being presented with some of the first items. If they&#39;re interested, they will typically move forward through the collection; in some cases, they will &quot;jump ahead&quot; quite a bit or decide to move all the way to the end.<br /><br />The cache component of datajs provides built-in support for prefetching data to make this scenario faster. When a range of data is read with the <span class="codeInline">readRange</span> API, the cache will read that data as fast as possible, but will continue reading ahead a bit more of data. By the time the user scans the data and possibly decides to move forward again, it&#39;s likely that the data is already available in the cache and can be served without any additional round-trips.<br /><br />There is no code that needs to be written to make this work - the cache component takes care of it automatically.<br /><br />The prefetcher can be configured through the <span class="codeInline">options</span> object passed to the <span class="codeInline">cache</span>. If <span class="codeInline">prefetchSize</span> is defined, that will be the number of elements that are prefetched after any range is read. If left undefined, it will default to <span class="codeInline">pageSize</span>, so exactly one extra page of data is available.<br /><br />Two special values can also be used:<br />
+<ul><li>If <span class="codeInline">prefetchSize</span> is set to zero, the prefetcher is completely disabled.</li>
+<li>If <span class="codeInline">prefetchSize</span> is set to -1, the prefetcher will keep reading data until the end of the collection is found.</li></ul>
+<br />Setting <span class="codeInline">prefetchSize</span> to -1 and reading data starting at the beginning of the page is a useful way to read the whole collection into the cache, subject to any limits in the cache size or the underlying store.<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> cache = datajs.createDataCache({
+  name: <span style="color:#A31515;">&quot;mydata&quot;</span>,
+  source: <span style="color:#A31515;">&quot;myurl&quot;</span>,
+  prefetchSize: -1
+});
+
+cache.readRange(0, 10).then(<span style="color:Blue;">function</span> (data) { ... });
+
+<span style="color:Green;">// At this point, the first ten items will be read,</span>
+<span style="color:Green;">// and the cache will keep working in the background,</span>
+<span style="color:Green;">// to help make all further reads faster.</span>
+</pre></div>
+<hr />
+Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=Using%20Caches&referringTitle=Cache%20Prefetching">Using Caches</a><br />Next Topic: <a href="https://datajs.codeplex.com/wikipage?title=Frequently%20Asked%20Questions&referringTitle=Cache%20Prefetching">Frequently Asked Questions</a><br /></div><div class="ClearBoth"></div>

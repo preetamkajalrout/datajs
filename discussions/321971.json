@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "773849",
+    "ThreadId": "321971",
+    "Html": "\r\n<p>Hi guys, I have the following problem:</p>\r\n<p>1. Create headers for request e.g.</p>\r\n<p><span>var headers = {Accept </span><span>: &quot;application/atomsvc&#43;xml...n/json;q=0.5, */*;q=0.1&quot;</span> };</p>\r\n<p>2. &nbsp;use this header var for the next request e.g. read metadata or read data</p>\r\n<p>After the request datajs has modified the headers variable and it now has the following content:</p>\r\n<p></p>\r\n<div><span>Accept </span><span>&quot;application/atomsvc&#43;xml...n/json;q=0.5, */*;q=0.1&quot;</span></div>\r\n<div><span>Content-Type </span><span>&quot;application/json&quot;</span></div>\r\n<div><span>DataServiceVersion </span><span>&quot;2.0&quot;</span>&nbsp;</div>\r\n<span><br>\r\n</span>\r\n<p></p>\r\n<p>3. do a POST request with the same header var</p>\r\n<p></p>\r\n<div><span>Accept </span><span>&quot;application/atomsvc&#43;xml...n/json;q=0.5, */*;q=0.1&quot;</span></div>\r\n<div><span>Content-Type </span><span>&quot;application/json&quot;</span></div>\r\n<div><span>DataServiceVersion </span><span>&quot;1.0&quot;</span>&nbsp;</div>\r\n<p></p>\r\n<p>4. Do a Read request with the same header var...This request fails because datajs has modified the header var.</p>\r\n<p>--&gt; Read request fails because the server expects DataServiceVersion 2.0.</p>\r\n<p>&nbsp;</p>\r\n<p>==&gt; So is this a datajs bug where datajs doesn't make a copy of the header parameters and modifies the passed header reference variable or do I have to create a new header every time I do a read/write request?</p>\r\n<p>THX </p>\r\n<div><span><br>\r\n</span></div>\r\n<p></p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-02-17T01:22:31.1-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "776524",
+    "ThreadId": "321971",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; First things first :).&nbsp; The library will modify the headers object by only adding those headers that were missing from it and required&nbsp;for the&nbsp;request.&nbsp; So for example, if you&nbsp;pass a headers object that doesn't have a DataServiceVersion value, then the library will add one with a sensible default, based on the request payload.&nbsp; On the other hand, if the headers object already has a DataServiceVersion value the library will pass it along and will not modify it.&nbsp; I tried to repro the behavior you mention between step 2 and 3:&nbsp; that the library modified the header DataServiceVersion from \"2.0\" to \"1.0\" when doing a POST request. However, this behavior doesn't repro&nbsp;for me.&nbsp; It would be great&nbsp;If you could&nbsp;share with us a sample code of how are you invoking these requests so I can investigate further.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-02-17T16:43:25.513-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "783820",
+    "ThreadId": "321971",
+    "Html": "<p>Hi Alex,</p>\n<p>hope you are doing great also :)</p>\n<p>I retried and now I think I got the problem. In the first place my header var didn't include a&nbsp;DataServiceVersionvalue.</p>\n<p>If I always reuse my header variable and do a PUT request the following request headers are sent:</p>\n<p>PUT http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products(2) HTTP/1.1<br /> Host: localhost:8080<br /> User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:10.0.2) Gecko/20100101 Firefox/10.0.2<br /> Accept: application/atomsvc+xml;q=0.8, application/json;q=0.5, */*;q=0.1<br /> Accept-Language: en<br /> Accept-Encoding: gzip, deflate<br /> Connection: keep-alive<br /> DataServiceVersion: 1.0<br /> Content-Type: application/json; charset=UTF-8<br /> Content-Length: 669</p>\n<p>Now if I reuse my header var (it has now DataServiceVersion: 1.0) and do the following request, it fails:</p>\n<p>&nbsp;GET http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products?$skip=0&amp;$top=1&amp;$inlinecount=allpages HTTP/1.1</p>\n<p>Host: localhost:8080<br />&nbsp;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:10.0.2) Gecko/20100101 Firefox/10.0.2<br /> Accept: application/json<br /> Accept-Language: en<br /> Accept-Encoding: gzip, deflate<br /> Connection: keep-alive<br /> DataServiceVersion: 1.0<br /> Content-Type: application/json</p>\n<p>Because in 1.0 the skip/top etc is not supported.</p>\n<p>So what would be the best solution?</p>\n<p>--&gt; always use a new header variable?</p>\n<p>--&gt; set the version to 2.0...then datajs will set the version to 1.0 for PUT but won't modify my header variable...right? so in the next getRequest the version is again 2.0...</p>\n<p>&nbsp;OK here is the sample code...yeah it's a bit messy ;)</p>\n<p>Please debug and inspect the requests...you will see that the PUT and the following GET request will have DataServiceVersion = 1.0</p>\n<p>&nbsp;</p>\n<p>var sMetadataURL = \"http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/$metadata\";<br />var sUrl = \"http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products\";<br /> <br /> var oHeaders = {};<br /> request = { <br /> headers : oHeaders, // object that contains HTTP headers as name value pairs <br /> requestUri : sUrl, // OData endpoint URI <br /> };<br /> <br /> OData.read(sMetadataURL, function (metadata) { <br /> OData.read(request, function (data, response) {<br /> debugger;\t\t<br /> <br /> var entry = data.results[0];<br /> // modify data<br /> entry.Name = \"Doe\";<br /> var updateUrl = entry.__metadata.uri;\t<br /> <br /> request = { <br /> headers : oHeaders, // object that contains HTTP headers as name value pairs <br /> requestUri : updateUrl, // OData endpoint URI <br /> method : \"PUT\", // HTTP method (GET, POST, PUT, DELETE) <br /> data : entry // Payload of the request (in intermediate format) <br /> };<br /><br /> OData.request(request, function (data, response) {<br /> debugger;<br /> var readURL = \"http://services.odata.org/(S(wj5boqtjql2dfjjcqmfy3i1y))/OData/OData.svc/Products\";\t\t\t<br /> request = { <br /> headers : oHeaders, // object that contains HTTP headers as name value pairs <br /> requestUri : readURL, // OData endpoint URI <br /> method : \"GET\", // HTTP method (GET, POST, PUT, DELETE) <br /> };<br /> OData.read(request, function (data, response) {<br /> debugger;<br /> }, function(err){<br /> alert(err)<br /> }, undefined, undefined, metadata);<br /> <br /> }, function(err){<br /> alert(err);<br /> }, undefined, undefined, metadata);<br /> }, function(err){<br /> alert(err);\t\t<br /> }, undefined, undefined, metadata);<br /> }, function (error) { <br /> alert(error);<br /> }, OData.metadataHandler);</p>\n<p>&nbsp;</p>",
+    "PostedDate": "2012-02-20T05:22:27.053-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "792407",
+    "ThreadId": "321971",
+    "Html": "<p>Hi Joe,</p>\n<p>&nbsp;&nbsp; I'm doing good too, thanks :).&nbsp;</p>\n<p style=\"padding-left: 30px;\"><em>So what would be the best solution?</em></p>\n<p style=\"padding-left: 30px;\"><em>--&gt; always use a new header variable?</em></p>\n<p style=\"padding-left: 30px;\"><em>--&gt; set the version to 2.0...then datajs will set the version to 1.0 for PUT but won't modify my header variable...right? so in the next getRequest the version is again 2.0...</em></p>\n<p><em>&nbsp;&nbsp; </em>I'd say that the best solution in this case is to&nbsp;set the DataServiceVersion value in your headers collection to \"2.0\" from the start... you already know that you are targeting an OData V2 endpoint anyway :). DataJS will pickup this value in all the requests and will not modify it to 1.0 in the PUT (because you are overriding the default ) so the 2.0 will stay put on all the requests.</p>\n<p>Regards,</p>\n<p>Alex Trigo.</p>\n<p><em>&nbsp;&nbsp; </em></p>",
+    "PostedDate": "2012-02-21T16:54:55.093-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "794580",
+    "ThreadId": "321971",
+    "Html": "<p>Ok thanks Alex. I'll do so.</p>",
+    "PostedDate": "2012-02-22T03:24:31.033-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1351746",
+    "ThreadId": "321971",
+    "Html": "What about custom headers?\r<br />\n<br />\nIf have the following in code, but the request header does not include the information:<br />\n<pre><code>    var _headers = {};\n    _headers[&quot;subscription-key&quot;] = &quot;XXXXXXXXXXXXXXXXXX&quot;;\n    var request = {\n        headers: _headers, // object that contains HTTP headers as name value pairs \n        requestUri: _url // OData endpoint URI \n    };\n</code></pre>\n\nDo I need to do something else?\r<br />\n<br />\nBest regards,\r<br />\nPeter<br />\n",
+    "PostedDate": "2015-02-12T05:18:44.983-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

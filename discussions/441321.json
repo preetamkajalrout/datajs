@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1034685",
+    "ThreadId": "441321",
+    "Html": "edit: Put another way: I am trying to save a null value in a field while using MERGE method.  Is this possible?  If not, is there a way to use PUT when the table has an identity column and I get errors about trying to update the identity column?<br />\n<br />\nOriginal:<br />\nI have a table with an identity column and some nullable foreign keys.<br />\n<br />\nI want to update a record with a null value for one of the foreign keys.<br />\n<br />\nUsing Merge, the column just doesn't get sent to the server, and the change doesn't apply.<br />\n<br />\nI've tried using PUT, but can't seem to get past the fact that there is an identity column.  (I've tried &quot;delete&quot;ing that column on my JS object, but didn't have any effect.)<br />\n<br />\nCan you either tell me how to force the null column to be included in a merge write, or tell me how to have PUT not try to update my identity column?<br />\n<br />\nI'm running this through a POST batch command.<br />\n<br />\nUsing:<br />\ndatajs-1.1.0, <br />\nWCF Data Services backed by EF.  (VS2010/.NET 4.0)<br />\n<br />\nThanks!<br />\nChris<br />\n",
+    "PostedDate": "2013-04-23T10:06:09.717-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

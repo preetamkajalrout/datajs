@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "930987",
+    "ThreadId": "400446",
+    "Html": "\r\n<p>Hi Alex,</p>\r\n<p>&nbsp;</p>\r\n<p>can datajs send a batch also with Atom/XML content for the data in the changesets?</p>\r\n<p>I observed that the data is always in JSON Format e.g.:</p>\r\n<p>&nbsp;</p>\r\n<p><code>--batch_ab58-7c73-33d5 </code><code>Content-Type: multipart/mixed; boundary=changeset_9f66-3f75-31bb\r\n</code><code></code><code>--changeset_9f66-3f75-31bb </code><code>Content-Type: application/http\r\n</code><code>Content-Transfer-Encoding: binary </code><code></code><code>POST Products HTTP/1.1\r\n</code><code>Accept: application/atom&#43;xml,application/atomsvc&#43;xml,application/xml\r\n</code><code>MaxDataServiceVersion: 2.0 </code><code>DataServiceVersion: 2.0 </code>\r\n<code>Content-Type: application/json;odata=verbose </code><code></code><code>{&quot;ID&quot;:&quot;9&quot;,&quot;Name&quot;:&quot;Test&quot;,&quot;Description&quot;:&quot;Description&quot;,&quot;ReleaseDate&quot;:&quot;\\/Date(1350943200000)\\/&quot;,&quot;Price&quot;:&quot;2&quot;</code><code>,&quot;Rating&quot;:&quot;3&quot;}\r\n</code><code>--changeset_9f66-3f75-31bb-- </code><code></code><code>--batch_ab58-7c73-33d5--</code></p>\r\n<p>Also I set the accept headers only to</p>\r\n<p>&nbsp;&quot;application/atom&#43;xml,application/atomsvc&#43;xml,application/xml&quot;;</p>\r\n<p>&nbsp;Is that possible?</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-10-23T04:31:08.493-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931850",
+    "ThreadId": "400446",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Yes, the thing is that you have to specify it on each request in the batch:</p>\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style=\"color: blue;\">var</span> request = {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; requestUri: <span style=\"color: #a31515;\">\"http://temp.org\"</span>,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; method: <span style=\"color: #a31515;\">\"POST\"</span>,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data: {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; __batchRequests: [<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { requestUri: <span style=\"color: #a31515;\">\"http://feed(1)\"</span>, headers: {} },<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { requestUri: <span style=\"color: #a31515;\">\"http://feed(2)\"</span>, headers: { <span style=\"color: #a31515;\">\"Accept\"</span>: <span style=\"color: #a31515;\">\"application/json;odata=verbose\"</span> }, method: <span style=\"color: #a31515;\">\"GET\"</span> },<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { __changeRequests: [<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { requestUri: <span style=\"color: #a31515;\">\"http://feed(1)\"</span>, headers: {}, method: <span style=\"color: #a31515;\">\"POST\"</span>, data: testPayload },<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { requestUri: <span style=\"color: #a31515;\">\"http://feed(2)\"</span>, headers: { <span style=\"color: #a31515;\">\"Content-Type\"</span>: <span style=\"color: #a31515;\">\"application/atom+xml\"</span>, DataServiceVersion: <span style=\"color: #a31515;\">\"2.0\"</span> }, method: <span style=\"color: #a31515;\">\"PUT\"</span>, data: testPayload }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { requestUri: <span style=\"color: #a31515;\">\"http://feed(1)\"</span>, headers: {} }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };</p>\r\n<p>&nbsp;</p>\r\n<div id=\"_mcePaste\" class=\"mcePaste\" style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; top: 0px; left: -10000px;\">﻿</div>\r\n<p>Also, the batch handler uses the library's default handler to serialize each individual request. You may also set the OData.defaultHandler object to&nbsp; OData.atomHandler to get the same result.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-24T09:50:35.777-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "932293",
+    "ThreadId": "400446",
+    "Html": "<p>Thanks Alex, I got it working now.</p>",
+    "PostedDate": "2012-10-25T03:38:18.75-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

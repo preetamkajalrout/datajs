@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "832060",
+    "ThreadId": "354509",
+    "Html": "\r\n<p>Hi all,</p>\r\n<p>I am currently developing a mobile app using datajs to consume the Odata Rest service.</p>\r\n<p>When I test the application on Google Chrome it works with the following are done --allow-file-access-from-files --disable-web-security.</p>\r\n<p>However, when i tried it on an android emulator, I have problem with authentication most probably because of the same origin policy problem.</p>\r\n<p>Is there anyway to get around this?</p>\r\n<p>Thank you.</p>\r\n<p>Amanda</p>\r\n",
+    "PostedDate": "2012-05-04T00:36:06.853-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "833079",
+    "ThreadId": "354509",
+    "Html": "<p>Hi Amanda,</p>\r\n<p>&nbsp;&nbsp;&nbsp; I believe you are right and the same origing policy is being the culprit here.&nbsp; You can try some iframe based techniques (search fro \"Cross Domain Authentication\" and&nbsp;some helpful articles might pop up.&nbsp;)&nbsp;to get the authentication token and then let datajs use JSONP to make the cross domain requests.&nbsp; Bear in mind that JSONP requests are read only and&nbsp; you will not be able to make any updates to the OData Endpoint.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-07T12:11:17.377-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "833214",
+    "ThreadId": "354509",
+    "Html": "<p>Hi Alex,</p>\r\n<p>Thanks for the reply =)</p>\r\n<p>I cannot use JSONP because I would eventually need to POST back and update data back to the server. Do you think reverse proxy will be able to solve this?</p>\r\n<p>Thanks</p>\r\n<p>Amanda</p>",
+    "PostedDate": "2012-05-07T19:26:27.9-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "835310",
+    "ThreadId": "354509",
+    "Html": "<p>Hi Amanda,</p>\r\n<p>&nbsp;&nbsp; I see, in that case yes a reverse proxy is probably what you need :)</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-11T14:41:40.937-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

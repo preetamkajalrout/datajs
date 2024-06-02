@@ -1,0 +1,50 @@
+GET /configuration-v1.svc/DefaultConfiguration/Modules HTTP/1.1
+Host: linen-na.cloudapp.net
+Connection: keep-alive
+Authorization: Basic removed
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: application/atom+xml;charset=iso-8859-1
+Content-Encoding: gzip
+ETag: W/"e8b2b51c26a2ba6b8e6354d78fb73ecb,06%2F25%2F2011%2017%3A11%3A20,1f3d3bd5-2c56-4764-b89b-389bb1c09777,fcb896ed-c039-4115-bc46-b8d506b5808e,7607301e8c94d5dd3141cb3dafc59fb0"
+Server: Microsoft-IIS/7.0
+X-ServerName: RD00155D31ADC4
+X-Content-Type-Options: nosniff
+DataServiceVersion: 2.0;
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Wed, 06 Jul 2011 20:37:55 GMT
+Content-Length: 2612
+
+------------------------------------------------------------------
+GET /configuration-v1.svc/DefaultConfiguration/Modules HTTP/1.1
+Host: linen-na.cloudapp.net
+Connection: keep-alive
+Cache-Control: max-age=0
+Authorization: Basic removed
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+If-None-Match: W/"e8b2b51c26a2ba6b8e6354d78fb73ecb,06%2F25%2F2011%2017%3A11%3A20,1f3d3bd5-2c56-4764-b89b-389bb1c09777,fcb896ed-c039-4115-bc46-b8d506b5808e,7607301e8c94d5dd3141cb3dafc59fb0"
+
+HTTP/1.1 304 Not Modified
+Cache-Control: private
+Content-Encoding: gzip
+Server: Microsoft-IIS/7.0
+X-ServerName: RD00155D31ADC4
+X-Content-Type-Options: nosniff
+DataServiceVersion: 1.0;
+X-AspNet-Version: 4.0.30319
+Set-Cookie: CFU=TAX; path=/
+X-Powered-By: ASP.NET
+Date: Wed, 06 Jul 2011 20:40:50 GMT
+
+------------------------------------------------------------------

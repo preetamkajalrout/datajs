@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "635698",
+    "ThreadId": "263481",
+    "Html": "\r\n<p>I'm looking for a simple way to handle data in my web application and i tried different solutions. knockoutjs, ExtJs, jQXB and datajs.</p>\r\n<p>The difference between them are evident but for the day-by-day work and expecially to mantain the compatibility with HTML4 in what datajs can help me more than other solutions such as jQXB/M ?</p>\r\n<p>Thanks</p>\r\n",
+    "PostedDate": "2011-06-30T16:26:17.897-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "635725",
+    "ThreadId": "263481",
+    "Html": "<p>datajs is focused on data management as such, and we've intentionally shied away from making decisions for developers around what binding technology, page architecture or control library they want to use.</p>\r\n<p>So you can imagine using datajs to get data into the browser, and then using any of knockout, extjs, jquery, jquery UI, etc. They have a different focus than datajs.</p>\r\n<p>The Frequently Asked Questions section in the Documentation talks a bit about this, but I'll be happy to clarify further if this is unclear.</p>",
+    "PostedDate": "2011-06-30T17:28:16.177-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

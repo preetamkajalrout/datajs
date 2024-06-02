@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "925058",
+    "ThreadId": "398915",
+    "Html": "\r\n<div>\r\n<p>I'm trying to make a connection and download anything using oData format. The URL pointing to a service that I'm using returns a nice oData-ishly looking document. Now, I'd like to read in those contents into my JavaScript method and play with it for a while.\r\n I can't, though, due to the error that the property <code>parse</code> is not findable. That makes me sad.</p>\r\n<p>According to <a rel=\"nofollow\" href=\"http://datajs.codeplex.com/wikipage?title=Frequently%20Asked%20Questions&referringTitle=Frequently%20Asked%20Questions&ANCHOR#json-null-error\">\r\nthis page</a> (and a lot of others that I've found) the error in subject is caused by a non-available JSON parser. This issue is apparently a big deal for IE7 and below. But I'm on IE9 and IE10 and both experience the same issue. JSON support is supposed to\r\n be integrated into them by default.</p>\r\n<ol>\r\n<li>What more can be done to make my machine get the data? </li><li>Could it matter that the service is on a CRM Dynamics 2011 server? </li></ol>\r\n<p>The code I'm executing to get there is below. It's fetched from the project's site for DataJS at this location. Of course, I've tested that the\r\n<code>OData</code> object exists and is accessible.</p>\r\n<pre><code><span>OData</span><span>.</span><span>read</span><span>(</span><span><br>&nbsp; </span><span class=\"str\">&quot;https://myurl/2011/OrganizationData.svc/crmk_CustomEntitySet&quot;</span><span>,</span><span><br>&nbsp; </span><span>function</span><span>(</span><span>dataSet</span><span>)</span><span> </span><span>{</span><span> alert</span><span>(</span><span class=\"str\">&quot;Yippi!&quot;</span><span>);</span><span> </span><span>},</span><span><br>&nbsp; </span><span>function</span><span>(</span><span>errorMessage</span><span>)</span><span> </span><span>{</span><span> alert</span><span>(</span><span class=\"str\">&quot;Buuuu...&quot;</span><span>);</span><span> </span><span>}</span><span><br></span><span>});</span><span><br></span></code></pre>\r\n</div>\r\n",
+    "PostedDate": "2012-10-10T23:36:31.667-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927617",
+    "ThreadId": "398915",
+    "Html": "<p>Hi Chamster,</p>\r\n<p>&nbsp; The problem is that your pages is being shown by the browser in compatiblity mode. This is the default mode in IE9 and IE10 when the page is being served from the intranet.. and that includes local host.&nbsp;You can add this tag to your page so that is will always be rendered in IE's latest and greatest mode:</p>\r\n<pre style=\"font-family: Consolas; background: white; color: black; font-size: 13px;\"><span style=\"color: blue;\">&lt;</span><span style=\"color: maroon;\">meta</span>&nbsp;<span style=\"color: red;\">http-equiv</span><span style=\"color: blue;\">=</span><span style=\"color: blue;\">\"X-UA-Compatible\"</span>&nbsp;<span style=\"color: red;\">content</span><span style=\"color: blue;\">=</span><span style=\"color: blue;\">\"IE=Edge\"</span>&nbsp;<span style=\"color: blue;\">/&gt;</span>\r\n</pre>\r\n<p>&nbsp; If you still need to support old versions of IE or browsers that don't have a native JSON parser, please <a href=\"http://datajs.codeplex.com/wikipage?title=Frequently%20Asked%20Questions&amp;referringTitle=Documentation#parse-null-error\" target=\"_blank\">look&nbsp;here at our FAQ</a>.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.&nbsp;</p>\r\n<div id=\"_mcePaste\" class=\"mcePaste\" style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; top: 0px; left: -10000px;\">﻿</div>",
+    "PostedDate": "2012-10-16T12:28:28.27-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927670",
+    "ThreadId": "398915",
+    "Html": "<p>Amazing. So, it turns out that I indeed <strong>was</strong> running IE7 (sort of), which we joked about at work. Great info, thank you!</p>\r\n<p>May I ask where did you find that information? I made a quick Google search but I returned empty-handed.</p>",
+    "PostedDate": "2012-10-16T14:22:14.89-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931826",
+    "ThreadId": "398915",
+    "Html": "<p>Hi Chamster,</p>\r\n<p>&nbsp;&nbsp; Yes, indeed you were.&nbsp; This blog explains nicely about document compatibility in IE (<a href=\"http://msdn.microsoft.com/en-us/library/cc288325.aspx\">http://msdn.microsoft.com/en-us/library/cc288325.aspx</a>).&nbsp; From there you can move on.&nbsp; Also just search around for IE compatibility meta tags&nbsp; or IE X-UA-Compatible meta tag.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-24T09:19:48.78-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "953091",
+    "ThreadId": "398915",
+    "Html": "\r\n<p>I forgot to thank you.</p>\r\n<p>Thank you. :-)</p>\r\n",
+    "PostedDate": "2012-12-07T12:04:34.907-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "See the thread at http://datajs.codeplex.com/discussions/250762 for more information - here is the originating post.\n \nProblems with PUT\nHello,\n \ni try to execute using datajs version 0.0.2 the following javascript for an update:\n \n \nvar requestPut = {\n    headers: { \"DataServiceVersion\": \"2.0\" },\n    method: \"PUT\",  \n    requestUri: \"http://localhost:2976/WcfDataService1.svc/Machines(1)\",\n    data: {\n        MachineName: 'Mixer'\n    }\n}\nOData.request(\n    requestPut,\n    SuccessSingle\n);\n \nbut i get this error message: \n \nErrorHTTP request failed - {\"error\": {\"code\": \"\", \"message\": {\"lang\": \"en-GB\", \"value\": \"Error processing request stream. The property name 'results' specified for type 'DataModel.Machine' is not valid.\"}}}\nThe 'results' is there in the json request (seen with Fiddler)...\n \n \n{\"results\":[{\"MachineName\":\"Mixer\"}]}\n \nFor some reason this results is handled as a property of my Machine entity.\n \nOn the same server, POST and DELETE work well for the same service:\n \n \n \n \n[JSONPSupportBehavior()]\npublic class WcfDataService1 : DataService<SdnODataEntities>\n{\n    public static void InitializeService(DataServiceConfiguration config)\n    {\n        config.SetEntitySetAccessRule(\"*\", EntitySetRights.All);\n        config.SetEntitySetPageSize(\"*\", 10);\n        config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V2;\n    }\n}\n \nWhat could be wrong?",
+    "LastUpdatedDate": "2013-06-14T00:31:46.31-07:00",
+    "PlannedForRelease": "datajs version 0.0.4",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-03-23T21:53:48.09-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Problems with JSON V2 serializer",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 215
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "This has been fixed in datajs 0.0.4. The issue was casued by the json handler wrongfully wrapping entries in a \"results\" array when doing create and update operations.",
+      "PostedDate": "2011-06-20T14:41:02.64-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2011-06-20T14:41:34.923-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:13.29-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T04:44:31.4-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T04:44:31.557-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-06-14T00:31:46.31-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

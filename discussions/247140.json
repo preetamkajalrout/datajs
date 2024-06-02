@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "570480",
+    "ThreadId": "247140",
+    "Html": "<p><span><span>&nbsp;</span></span></p>\n<p>I am trying to consume an ODATA feed that is throwing an error when the json data that is returned is parsed - IE8 gives me Error Occurred Invalid Character, IE7 Error occurred Unable to get value of the property 'parse' : object is null or undefined, Firefox Error occurred JSON.parse.</p>\n<p>You will notice from the json below the ODATA feed contains some guids - I was able to get jsonlint to validate it as long as I deleted the \\ that is escaping the single quote that comes before and after the guid value in the __metadata section.</p>\n<p>{<br />\"d\" : {<br />\"__metadata\": {<br />\"uri\": \"<a href=\"http://localhost/imap/tool/IMapDataService.svc/InterventionSets(guid\\'a0fec1a5-373b-43cc-802a-037151e416ef\\'\">http://localhost/imap/tool/IMapDataService.svc/InterventionSets(guid\\'a0fec1a5-373b-43cc-802a-037151e416ef\\'</a>)\", \"type\": \"IMapModel.InterventionSet\"<br />}, \"GUID\": \"a0fec1a5-373b-43cc-802a-037151e416ef\", \"Name\": \"Standard Precautions\", \"Description\": \"Establish a reliable approach to ensure that standard precautions are used to prevent transmission of infections.\"<br />}<br />}</p>\n<p><span><span><span lang=\"EN\">here is the call I am making </span></span></span></p>\n<p><span><span><span lang=\"EN\"><span><span><span lang=\"EN\">OData.read(\"imapdataservice.svc/InterventionSets(guid'a0fec1a5-373b-43cc-802a-037151e416ef')?$select=Name,Description,GUID&amp;$expand=Aims,Domains\",<br />&nbsp;&nbsp;&nbsp;function (data, request) {<br /></span></span></span></span></span></span><span><span><span lang=\"EN\"><span><span><span lang=\"EN\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(\"success\");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, <br />&nbsp;&nbsp;&nbsp;function (err) {<br />&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;alert(\"Error occurred \" + err.message);<br />&nbsp; &nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;);</span></span></span></span></span></span></p>\n<p>&nbsp;</p>\n<p><span><span><span lang=\"EN\"><span><span><span lang=\"EN\"><span><span><span lang=\"EN\"><span><span><span lang=\"EN\">I was also having trouble calling the service directly with jquery and jsonGet - I was getting a similar parsing error.</span></span></span></span></span></span></span></span></span></span></span></span></p>\n<p><span><span><span lang=\"EN\"><span><span><span lang=\"EN\"><span><span><span lang=\"EN\"><span><span><span lang=\"EN\">thanks<br />Michael</span></span></span></span></span></span></span></span></span></span></span></span></p>\n<p>&nbsp;</p>",
+    "PostedDate": "2011-02-22T14:49:41.813-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "571687",
+    "ThreadId": "247140",
+    "Html": "<p>Hello Michael</p>\n<p>Seems that your service is using an older version of WCF Data Services (formerly ADO.NET Data Services)&nbsp;that escapes single quotes when serializing to JSON.&nbsp; This issue was resolved in both .NET 4.0&nbsp; and&nbsp;an update for .NET 3.5 sp1.</p>\n<p>You can get the .NET 3.5 sp1 update at:</p>\n<p><a href=\"http://www.microsoft.com/downloads/en/details.aspx?displaylang=en&amp;FamilyID=21f20103-551e-4501-89b3-e53fcac5cffd\">http://www.microsoft.com/downloads/en/details.aspx?displaylang=en&amp;FamilyID=21f20103-551e-4501-89b3-e53fcac5cffd</a>&nbsp;</p>\n<p>And .NET 4.0 at:</p>\n<p><a href=\"http://www.microsoft.com/downloads/en/details.aspx?FamilyID=9cfb2d51-5ff4-4491-b0e5-b386f32c0992&amp;displaylang=en\">http://www.microsoft.com/downloads/en/details.aspx?FamilyID=9cfb2d51-5ff4-4491-b0e5-b386f32c0992&amp;displaylang=en</a></p>\n<p>Regards,</p>\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-02-24T11:35:31.66-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "572114",
+    "ThreadId": "247140",
+    "Html": "<p>Thanks Alex - but I am using the .NET 3.5 SP1 updated dll</p>\r\n<p>here is the reference from the project : C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\v3.5\\System.Data.Services.dll</p>\r\n<p>and the dll&nbsp; is File Version : <strong>3.5.30729.5004</strong></p>\r\n<p>And the service specifies maxprotocolversion as v2:</p>\r\n<pre style=\"font-family: consolas;\">  config.DataServiceBehavior.MaxProtocolVersion&nbsp;=&nbsp;<span style=\"color: #2b91af;\">DataServiceProtocolVersion</span>.V2;</pre>\r\n<pre style=\"font-family: consolas;\">Is there anything else I can check to confirm that I am running the updated dataservice code?</pre>\r\n<pre style=\"font-family: consolas;\">thanks</pre>\r\n<pre style=\"font-family: consolas;\">Michael</pre>",
+    "PostedDate": "2011-02-25T06:14:42.507-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "572358",
+    "ThreadId": "247140",
+    "Html": "<p>Hi Michael,</p>\r\n<p>I see, the version that you mention is that of the dll's that come with&nbsp;Win7 and&nbsp;Win2k8 R2 and the link I originally gave you was for XP, Vista, and Win 2k8.&nbsp; Here is the link&nbsp;to the update for&nbsp;Win7 and&nbsp;Win2k8 R2&nbsp;.NET 3.5 SP1</p>\r\n<p><a href=\"http://www.microsoft.com/downloads/details.aspx?familyid=3e102d74-37bf-4c1e-9da6-5175644fe22d\">http://www.microsoft.com/downloads/details.aspx?familyid=3e102d74-37bf-4c1e-9da6-5175644fe22d</a></p>\r\n<p>In the <a href=\"http://support.microsoft.com/kb/982307\" target=\"_blank\">knowledge base article</a>&nbsp;associated with this download, you will notice that the version of the update is <strong>3.5.30729.5022</strong></p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-02-25T13:59:42.373-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "573291",
+    "ThreadId": "247140",
+    "Html": "<p>Alex,</p>\r\n<p>thanks for the new patch - it works correctly now - the single quotes in the json are no longer getting encoded and the json parse error is gone.</p>\r\n<p>Thanks again<br />Michael</p>",
+    "PostedDate": "2011-02-28T07:36:46.053-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

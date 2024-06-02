@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "576730",
+    "ThreadId": "248746",
+    "Html": "\r\n<p>I am successfully consuming an ODATA feed in IE8&#43;, Firefox and Chrome - but in IE7 I am receiving an error</p>\r\n<p><strong>Unable to get value of the property 'parse': object is null or undefined</strong></p>\r\n<p>Does datajs work in IE 7?</p>\r\n<p>thanks<br>\r\nMichael</p>\r\n",
+    "PostedDate": "2011-03-07T09:34:06.337-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "576773",
+    "ThreadId": "248746",
+    "Html": "<p>Michael, datajs should work correctly in IE7, however it relies on a JSON parser to be available. Most modern browsers have one natively implemented, but IE7 for example doesn't.</p>\r\n<p>You can fix this by including a script to add JSON support. This is described in the FAQ at <a href=\"http://datajs.codeplex.com/wikipage?title=Frequently%20Asked%20Questions#x_x_x_x_x_x_x_x_x_x_x_x_window-parse-null\">http://datajs.codeplex.com/wikipage?title=Frequently%20Asked%20Questions#x_x_x_x_x_x_x_x_x_x_x_x_window-parse-null</a>.</p>\r\n<p>Please let me know if you run into any further trouble with this.</p>\r\n<p>Thanks,<br />Marcelo</p>",
+    "PostedDate": "2011-03-07T11:09:38.88-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "576794",
+    "ThreadId": "248746",
+    "Html": "<p>thanks - that did the trick</p>",
+    "PostedDate": "2011-03-07T11:47:58.817-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

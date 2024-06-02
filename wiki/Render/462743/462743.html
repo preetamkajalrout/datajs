@@ -1,0 +1,71 @@
+<div class="wikidoc"><h1>OData Code Snippets</h1>This topic provides some snippets to help you get up and running quickly when using the datajs OData support.<br /><br /><b>Reading and displaying data</b><br />The following snippet shows how to read a list of category names from the Northwind service, using jQuery to add them to an element with ID &#39;target-element-id&#39;. Because the service supports JSONP, the default network library uses it even though the document comes from a different domain.<br /><br /><div style="color:Black;background-color:White;"><pre>
+OData.read( 
+  <span style="color:#A31515;">&quot;http://services.odata.org/Northwind/Northwind.svc/Categories&quot;</span>, 
+  <span style="color:Blue;">function</span> (data) { 
+    <span style="color:Blue;">var</span> html = <span style="color:#A31515;">&quot;&quot;</span>; 
+    $.each(data.results, <span style="color:Blue;">function</span>(l) { html += <span style="color:#A31515;">&quot;&lt;div&gt;&quot;</span> + l.CategoryName + <span style="color:#A31515;">&quot;&lt;/div&gt;&quot;</span>; }); 
+    $(html).appendTo($(<span style="color:#A31515;">&quot;#target-element-id&quot;</span>)); 
+  } 
+);
+</pre></div><br /><b>Reading paginated data</b><br />The following snippet shows how to read a collection that the server sends down in pages, and concatenating all results into a single array.<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> arr = [];
+<span style="color:Blue;">var</span> collectionUrl = <span style="color:#A31515;">&quot;OData-url&quot;</span>;
+
+<span style="color:Blue;">function</span> readMoreData(url) {
+  OData.read(url, <span style="color:Blue;">function</span> (data) {
+    arr = arr.concat(data.results);
+    <span style="color:Blue;">if</span> (data.__next) {
+      readMoreData(data.__next);
+    } <span style="color:Blue;">else</span> {
+      alert(<span style="color:#A31515;">&quot;Done!&quot;</span>);
+    }
+  });
+}
+
+readMoreData(collectionUrl);
+</pre></div><br /><b>Adding data</b><br />The following snippet shows how to add a new customer to an OData service that exposes a Customers resource set with Name, CustomerCategory and ID properties.<br /><br /><div style="color:Black;background-color:White;"><pre>
+OData.request( 
+  { requestUri: <span style="color:#A31515;">&quot;/customer-service/Customers&quot;</span>, 
+    method: <span style="color:#A31515;">&quot;POST&quot;</span>, 
+    data: { Name: <span style="color:#A31515;">&quot;customer name&quot;</span>, CustomerCategory: 123 } }, 
+  <span style="color:Blue;">function</span> (insertedItem) { 
+    $(<span style="color:#A31515;">&quot;&lt;div&gt;inserted customer ID: &quot;</span> + insertedItem.ID + <span style="color:#A31515;">&quot;&lt;/div&gt;&quot;</span>).appendTo($(<span style="color:#A31515;">&quot;#target-element-id&quot;</span>)); 
+  } 
+);
+</pre></div><br /><b>Adding data in batches</b><br />The following snippet shows how to add and cross-reference a Customer and an Order. Note that the first request includes a header for &quot;Content-ID&quot;, and the second request references the newly added customer as &quot;$1&quot;.<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">// The request will be a batch of read and change operations.</span>
+<span style="color:Green;">// The changes all go together in a single __changeRequests.</span>
+<span style="color:Blue;">var</span> requestData = { __batchRequests: [ { __changeRequests: [
+    { requestUri: <span style="color:#A31515;">&quot;Customers&quot;</span>, method: <span style="color:#A31515;">&quot;POST&quot;</span>, headers: { <span style="color:#A31515;">&quot;Content-ID&quot;</span>: <span style="color:#A31515;">&quot;1&quot;</span> }, data: { 
+        CustomerID: 400, CustomerName: <span style="color:#A31515;">&quot;John&quot;</span>
+    }  },
+    { requestUri: <span style="color:#A31515;">&quot;Orders&quot;</span>, method: <span style="color:#A31515;">&quot;POST&quot;</span>, data: { 
+        OrderID: 400, Total: <span style="color:#A31515;">&quot;99.99&quot;</span>,
+        Customer: { __metadata: { uri: <span style="color:#A31515;">&quot;$1&quot;</span> } }
+    } }
+] } ] };           
+
+OData.request({
+    requestUri: <span style="color:#A31515;">&quot;/ScratchService.svc/$batch&quot;</span>,
+    method: <span style="color:#A31515;">&quot;POST&quot;</span>,
+    data: requestData
+}, <span style="color:Blue;">function</span> (data) {
+    <span style="color:Green;">// Look for errors within the responses.</span>
+    <span style="color:Blue;">var</span> errorsFound = <span style="color:Blue;">false</span>;
+    <span style="color:Blue;">for</span> (<span style="color:Blue;">var</span> i = 0; i &lt; data.__batchResponses.length; i++) {
+        <span style="color:Blue;">var</span> batchResponse = data.__batchResponses[i];
+        <span style="color:Blue;">for</span> (<span style="color:Blue;">var</span> j = 0; j &lt; batchResponse.__changeResponses.length; j++) {
+            <span style="color:Blue;">var</span> changeResponse = batchResponse.__changeResponses[j];
+            <span style="color:Blue;">if</span> (changeResponse.message) {
+                errorsFound = <span style="color:Blue;">true</span>;
+            }
+        }
+    }
+
+    <span style="color:Green;">// Display whether any errors were found, and a JSON-ified payload.</span>
+    alert(<span style="color:#A31515;">&quot;Result (errors found=&quot;</span> + errorsFound + <span style="color:#A31515;">&quot;):\r\n&quot;</span> + window.JSON.stringify(data));
+}, <span style="color:Blue;">function</span> (err) {
+    alert(err.message);
+}, OData.batchHandler);
+</pre></div><hr />
+Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=Using%20OData&referringTitle=OData%20Code%20Snippets">Using OData</a><br />Next Topic: <a href="https://datajs.codeplex.com/wikipage?title=OData%20Networking&referringTitle=OData%20Code%20Snippets">OData Networking</a></div><div class="ClearBoth"></div>

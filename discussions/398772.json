@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "924519",
+    "ThreadId": "398772",
+    "Html": "\r\n<p>In CRM Dynamics I'm executing the following code.</p>\r\n<p>&nbsp;&nbsp;&nbsp; var temp = OData.read({<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp; urlOrRequest: &quot;https://myurl/2011/OrganizationData.svc/crmk_docusignsettingsSet&quot;,<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; success: function(dataSet) { alert(&quot;Yippi!&quot;); },<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; error: function(errorMessage) { alert(&quot;Buuuu...&quot;); },<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; handler: null,<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; httpClient: null,<br>\r\n&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; metaData: null<br>\r\n&nbsp;&nbsp;&nbsp; });</p>\r\n<p>However, I get neither of the callbacks to execute. Everything is just ghostly quiet. As I attempt to close or reload the page, though, I get an error message from CRM Dynamics, the partial contents of which are listed below.</p>\r\n<p>&nbsp;&nbsp;&nbsp; &lt;ScriptErrorDetails&gt;<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Message&gt;Exception thrown and not caught&lt;/Message&gt;<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Line&gt;13&lt;/Line&gt;<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;URL&gt;/%7B634854498230000000%7D/WebResources/crmk_MyResourceWithDataJS&lt;/URL&gt;<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;PageURL&gt;/userdefined/edit.aspx?etc=10008&amp;pagemode=iframe&amp;preloadcache=1349853066209&lt;/PageURL&gt;<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp; &lt;Function&gt;&lt;/Function&gt;<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp; &lt;CallStack&gt;&lt;/CallStack&gt;<br>\r\n&nbsp;&nbsp;&nbsp; &lt;/ScriptErrorDetails&gt;</p>\r\n<p>Given my competence level with CRM Dynamics (low) and with DataJS package (loooow), I'm stuck having no clue as to why it doesn't work nor how to trouble-shoot it. I've checked out all the examples I could find on the page. I understand them but that doesn't\r\n help me get my code to work.</p>\r\n<p>Any suggestions would be warmly appreciated.</p>\r\n",
+    "PostedDate": "2012-10-10T00:33:40.41-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927612",
+    "ThreadId": "398772",
+    "Html": "<p>Hi Chamster,</p>\r\n<p>&nbsp;&nbsp;I'm not knowledgeable on CRM Dynamics; however, the call you have to the OData.read function is wrong.&nbsp; The success callbacks, handler, httpclient and metadata are not specified a part of the reuqest object; rather they are direct arguments of the function.&nbsp; Please <a href=\"http://datajs.codeplex.com/wikipage?title=datajs%20OData%20API&amp;referringTitle=Documentation#OData.read\" target=\"_blank\">look here</a> for the OData.read function reference for more details on its usage.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-16T12:18:20.21-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "927672",
+    "ThreadId": "398772",
+    "Html": "<p>You're absolutely right. I discovered that a few days ago myself but forgot to update the question here. My apologies for that. Nevertheless, I'm wondering how come the approach I (wrongly) used hasn't been implemented. My impression is that it's the preferred, if not recommended, way to create JavaScript \"objects\". Am I mistaken? I resolved that by adding my own \"constructor\" that picks the input, splits it and puts it into the correct parameters. Is there a technical reason that should be avoided?</p>",
+    "PostedDate": "2012-10-16T14:29:15.573-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "931815",
+    "ThreadId": "398772",
+    "Html": "<p>Hi Chamster,</p>\r\n<p>&nbsp;&nbsp; The approach that you mention is only a matter of style... When we originally choose to implement the library we went&nbsp;with the option of specifying the success and error callbacks and additional stuff not describing the request on their own arguments.&nbsp; Putting everything into an \"arguments\" object is a nice usage optimization and we will consider it for further revisions of the library.&nbsp; In the end is only a matter of style and preference.. for example, we could have elected to return a promise from the OData.read and OData.request functions instead (which might be an interesting idea :))</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-10-24T09:09:51.663-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

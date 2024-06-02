@@ -1,0 +1,242 @@
+[
+  {
+    "Id": 148,
+    "Title": "header field names case-insensitive problem"
+  },
+  {
+    "Id": 215,
+    "Title": "Problems with JSON V2 serializer"
+  },
+  {
+    "Id": 255,
+    "Title": "Make datajs available via NuGet"
+  },
+  {
+    "Id": 303,
+    "Title": "Problem with Android default browser"
+  },
+  {
+    "Id": 344,
+    "Title": "There is no way to configure HTTP headers for data cache API"
+  },
+  {
+    "Id": 392,
+    "Title": "\"no handler for data\" when reading text/html media link"
+  },
+  {
+    "Id": 402,
+    "Title": "Problem with multiple cross domain clients and data cache"
+  },
+  {
+    "Id": 407,
+    "Title": "Useless code in a method"
+  },
+  {
+    "Id": 408,
+    "Title": "Error in regex evaluation"
+  },
+  {
+    "Id": 424,
+    "Title": "All async methods should return a deferred object"
+  },
+  {
+    "Id": 425,
+    "Title": "setTimeout without delay"
+  },
+  {
+    "Id": 480,
+    "Title": "Create a possibility to add custom handler for data"
+  },
+  {
+    "Id": 482,
+    "Title": "Integrate OQuery into datajs"
+  },
+  {
+    "Id": 534,
+    "Title": "How to parse response of odata batch request"
+  },
+  {
+    "Id": 535,
+    "Title": "How to parse response of odata batch request"
+  },
+  {
+    "Id": 557,
+    "Title": "EDM Types problem with metadata document"
+  },
+  {
+    "Id": 573,
+    "Title": "Code review issue on DjsDeferred"
+  },
+  {
+    "Id": 592,
+    "Title": "http://schemas.microsoft.com/ado/2009/11/edm"
+  },
+  {
+    "Id": 636,
+    "Title": "Error attempting sample code."
+  },
+  {
+    "Id": 641,
+    "Title": "Is DataJS a NODE capable library?"
+  },
+  {
+    "Id": 656,
+    "Title": "$.each works incorrectly"
+  },
+  {
+    "Id": 665,
+    "Title": "Enable JSONP for $metadata requests"
+  },
+  {
+    "Id": 666,
+    "Title": "Enable Vocabulary parsing with DataJS"
+  },
+  {
+    "Id": 678,
+    "Title": "MaxDataServiceVersion is not allowed by Access-Control-Allow-Headers."
+  },
+  {
+    "Id": 694,
+    "Title": "Exception: MaxDataServiceVersion '2.0' is too low for the response."
+  },
+  {
+    "Id": 804,
+    "Title": "readResponseHeaders corrupts header values containing \": \""
+  },
+  {
+    "Id": 817,
+    "Title": "Incorrect XML output in Atom PUT request"
+  },
+  {
+    "Id": 827,
+    "Title": "How to append header to \"read\" request?"
+  },
+  {
+    "Id": 857,
+    "Title": "Verbose JSON V3 Date format updated - datajs doesn't handle it yet"
+  },
+  {
+    "Id": 899,
+    "Title": "Bug DateTime atom format seconds optional"
+  },
+  {
+    "Id": 910,
+    "Title": "formatDateTimeOffset minutes"
+  },
+  {
+    "Id": 941,
+    "Title": "Need optional json light __metadata insertion"
+  },
+  {
+    "Id": 980,
+    "Title": "Parsing JSON light result of batch queries over OData v3"
+  },
+  {
+    "Id": 1049,
+    "Title": "Diff for suggested changes to 1.1.1beta"
+  },
+  {
+    "Id": 1099,
+    "Title": "Obscure IE bug when using window.localStorage"
+  },
+  {
+    "Id": 1110,
+    "Title": "DataJS crashes request for json with metadata provided and there is type inheritance on the type"
+  },
+  {
+    "Id": 1111,
+    "Title": "Minutes are not correctly handled for datatimeoffset with offset that contains minutes"
+  },
+  {
+    "Id": 1118,
+    "Title": "OData CrossDomain Problem"
+  },
+  {
+    "Id": 1126,
+    "Title": "TypeError in lookupNavigationPropertyEntitySet in 1.1.1 w/JSON light"
+  },
+  {
+    "Id": 1128,
+    "Title": "POST in Atom format all properties have Edm.String"
+  },
+  {
+    "Id": 1165,
+    "Title": "doesn't support withCredentials in CORS"
+  },
+  {
+    "Id": 1166,
+    "Title": "Response Status Code"
+  },
+  {
+    "Id": 1182,
+    "Title": "Odata.read() unable to send long string request url"
+  },
+  {
+    "Id": 1188,
+    "Title": "Document browser support"
+  },
+  {
+    "Id": 1189,
+    "Title": "HTTP Request failed in Firefox"
+  },
+  {
+    "Id": 1192,
+    "Title": "Javascript representation of Edm.Double is String in OData V2"
+  },
+  {
+    "Id": 1204,
+    "Title": "datajs-1.1.1.js: lookupNavigationPropertyEntitySet and getEntitySetInfo throw an exception"
+  },
+  {
+    "Id": 1216,
+    "Title": "Atom/XML format error with empty inline content"
+  },
+  {
+    "Id": 1220,
+    "Title": "nevermind"
+  },
+  {
+    "Id": 1221,
+    "Title": "datajs-$VER.js defines two named AMD modules"
+  },
+  {
+    "Id": 1258,
+    "Title": "Prevention of converting to UTC"
+  },
+  {
+    "Id": 1272,
+    "Title": "TypeError: undefined is not a function at xmlNewAttribute"
+  },
+  {
+    "Id": 1280,
+    "Title": "CORS not supported"
+  },
+  {
+    "Id": 1355,
+    "Title": "Inconsistent header field names problem in OS X Safari"
+  },
+  {
+    "Id": 1356,
+    "Title": "Chrome - webkitIndexedDB is deprecated"
+  },
+  {
+    "Id": 1647,
+    "Title": "DefinitelyTyped for DataJS"
+  },
+  {
+    "Id": 1707,
+    "Title": "Batch operation returns empty response"
+  },
+  {
+    "Id": 1708,
+    "Title": "Patch request fails"
+  },
+  {
+    "Id": 1729,
+    "Title": "definitive bug"
+  },
+  {
+    "Id": 1741,
+    "Title": "Unable to load JSON from OData response using datajs-1.1.3"
+  }
+]

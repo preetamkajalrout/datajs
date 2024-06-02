@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "571431",
+    "ThreadId": "247400",
+    "Html": "\r\n<p>Hey guys,</p>\r\n<p>is there some documentation about how the response data I get from datajs is structured? For example how is an entry, a link, properties,... provided by datajs?</p>\r\n<p>Are there any differences between JSON and ATOM/XML responses? (I realized that some XML/ATom services provide metadata in their response and that is then also available in datajs).</p>\r\n<p>In which structure is the metadata provided? As I realized it is provided if available in the __metadata properties.</p>\r\n<p>Additionally it would be nice that if I read the metadata first and then make a request with handing over this metadata that in the response I can also see the metadata. This is currently only the case if the server provides metadata in the ATOM/XML response\r\n document which is optional and not every server does this. Especially when using JSON there is no metadata included in the datajs response object also if I handed over the metadata in the request myself.</p>\r\n<p>Thanks.</p>\r\n",
+    "PostedDate": "2011-02-24T04:15:38.717-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "577477",
+    "ThreadId": "247400",
+    "Html": "<p>Hi Ironmanager</p>\r\n<p>Hope you are doing great.&nbsp; We just uploaded ﻿﻿﻿(and&nbsp;linked to the documentation page)&nbsp;a new <a href=\"http://datajs.codeplex.com/wikipage?title=OData%20Payload%20Formats\" target=\"_blank\">wiki page</a> detailing the intermediate representation used by the library.&nbsp;</p>\r\n<p>Thanks</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-03-08T16:49:47.86-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

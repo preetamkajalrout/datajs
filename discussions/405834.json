@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "952331",
+    "ThreadId": "405834",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I'm using datajs library, and I need to add the header &#65279;MinDataServiceVersion:3.0;<br>\r\nI tried like this: &#65279;&#65279;&#65279;</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:blue\">var</span> request = { requestUri: url, method: httpMethod, user: user, password: password, dataType: <span style=\"color:#a31515\">'jsonp'</span>, MinDataServiceVersion: 3.0 };\r\n</pre>\r\n</div>\r\n<p>but it seems didn't work, because I need the dates in ATOM format (not JSON format)</p>\r\n<p>Thanks,<br>\r\nChristian Sandoval</p>\r\n",
+    "PostedDate": "2012-12-06T08:29:45.873-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "955273",
+    "ThreadId": "405834",
+    "Html": "\r\n<p>Hi Christian,</p>\r\n<p>In order to specifiy MinDataServiceVersion you need to write the request as:</p>\r\n<div style=\"background-color:white; color:black\">\r\n<pre> <span style=\"color:blue\">var</span> request = { requestUri: url, method: httpMethod, user: user, password: password, headers: { MinDataServiceVersion: 3.0 }};\r\n</pre>\r\n<p>You can refer to the documenation&nbsp;for more details about the API</p>\r\n</div>\r\n<p><a title=\"DataJS API Doc\" href=\"http://datajs.codeplex.com/wikipage?title=datajs%20OData%20API&referringTitle=References\">http://datajs.codeplex.com/wikipage?title=datajs%20OData%20API&amp;referringTitle=References</a></p>\r\n<p>&nbsp;</p>\r\n<p>Thanks,</p>\r\n<p>Hussein Nomier</p>\r\n",
+    "PostedDate": "2012-12-12T12:23:34.183-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "955279",
+    "ThreadId": "405834",
+    "Html": "\r\n<p>Thank you Hussein,</p>\r\n<p>It works!</p>\r\n",
+    "PostedDate": "2012-12-12T12:30:14.607-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

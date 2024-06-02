@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "912249",
+    "ThreadId": "395423",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I have an OData service which has a property of type Edm.Time which is nullable.</p>\r\n<p>When a time value is null the server returns e.g.</p>\r\n<p>&nbsp;</p>\r\n<p>{<br>\r\n&quot;d&quot;: {<br>\r\n&quot;results&quot;: [<br>\r\n{<br>\r\n&nbsp; &quot;ID&quot;: 1,<br>\r\n&quot;Col1&quot;: &quot;PT0H35M48S&quot;,<br>\r\n&quot;Col2&quot;: &quot;/Date(1354665600000)/&quot;,<br>\r\n&quot;Col3&quot;: &quot;/Date(1305115259999)/&quot;<br>\r\n},<br>\r\n{<br>\r\n&nbsp; &quot;ID&quot;: 2,<br>\r\n&quot;Col1&quot;: null,<br>\r\n&quot;Col2&quot;: &quot;/Date(1354665600000)/&quot;,<br>\r\n&quot;Col3&quot;: &quot;/Date(1354708859999)/&quot;<br>\r\n}<br>\r\n],<br>\r\n&quot;__count&quot;: &quot;2&quot;<br>\r\n}<br>\r\n}</p>\r\n<p>&nbsp;</p>\r\n<p>Now datajs crashes with Invalid duration value.</p>\r\n<p>it happens in the jsonParser function:</p>\r\n<p>....</p>\r\n<p>if (property.type === &quot;Edm.DateTime&quot; || property.type === &quot;Edm.DateTimeOffset&quot;) {<br>\r\nif (propertyValue) {<br>\r\npropertyValue = parseJsonDateString(propertyValue);<br>\r\nif (!propertyValue) {<br>\r\nthrow { message: &quot;Invalid date/time value&quot; };<br>\r\n}<br>\r\nvalue[propertyName] = propertyValue;<br>\r\n}<br>\r\n}</p>\r\n<p>} else if (property.type === &quot;Edm.Time&quot;) {<br>\r\nvalue[propertyName] = parseDuration(propertyValue);<br>\r\n}</p>\r\n<p>...</p>\r\n<p>There is no check liken in the Edm.DateTime section if the propertyValue is defined or not.</p>\r\n<p>Is this a bug?</p>\r\n<p>&nbsp;</p>\r\n<p>Another question:</p>\r\n<p>&nbsp;</p>\r\n<p>Why parses datajs the Edm.Time values different than datevalues?</p>\r\n<p>As a result I get an object which contains the time value... under 'ms':</p>\r\n<p>var result = { ms: ms, __edmType: &quot;Edm.Time&quot; }; // in parseDuration</p>\r\n<p>Why is the value not directly under the time property?</p>\r\n<p>&nbsp;Thanks!</p>\r\n<p>&nbsp;</p>\r\n<div id=\"_mcePaste\" style=\"left:-10000px; top:263px; width:1px; height:1px; overflow-x:hidden; overflow-y:hidden\">\r\njsonParser function</div>\r\n",
+    "PostedDate": "2012-09-13T08:06:45.863-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "914249",
+    "ThreadId": "395423",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp;&nbsp; Indeed the null check looks like a bug in datajs. Thanks for bringing this to our attention.&nbsp; As why we parse Edm.Time values like that is because they represent time span values and not actual time values ( the OData documentation is a little bit confusing in this regards).&nbsp; So being a duration we parse it into an object that stores the time span value as miliseconds under the ms property.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-09-18T10:47:47.89-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

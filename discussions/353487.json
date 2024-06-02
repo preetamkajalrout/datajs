@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "828269",
+    "ThreadId": "353487",
+    "Html": "\r\n<p>Hi everyone,</p>\r\n<p>&nbsp;</p>\r\n<p>I have problems with CSRF token when I request a post request to the server.</p>\r\n<p>I have read somewhere that suggest to fetch it in the request with</p>\r\n<p>headers: {&quot;X-CSRF-Token&quot;:&quot;Fetch&quot;}</p>\r\n<p>and then later get the token from the response.</p>\r\n<p>&nbsp;</p>\r\n<p>However, I do not know how to read the response header using the datajs.</p>\r\n<p>Anyone who knows this? I really appriciate if someone could assist me in this matter.</p>\r\n<p>&nbsp;</p>\r\n<p>Thank you.</p>\r\n",
+    "PostedDate": "2012-04-25T02:23:49.597-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "829117",
+    "ThreadId": "353487",
+    "Html": "<p>Hi Bluryone,</p>\r\n<p>&nbsp;&nbsp; You can receive a second argument in the success handler that you pass to the OData.read and OData.request functions.&nbsp; This argument is the response object and you can access the headers as follows:</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>OData.read(<span style=\"color: #a31515;\">\"http://myHost/myService.svc\"</span>,\r\n  <span style=\"color: blue;\">function</span> (data, request) {\r\n      <span style=\"color: blue;\">var</span> myHeader = request.headers[<span style=\"color: #a31515;\">\"my-header\"</span>];\r\n      <span style=\"color: green;\">// do something interesting with the data.</span>\r\n  }, \r\n  <span style=\"color: blue;\">function</span> (err) {\r\n      <span style=\"color: blue;\">var</span> request = err.request; <span style=\"color: green;\">// the request that was sent.</span>\r\n      <span style=\"color: blue;\">var</span> response = err.response; <span style=\"color: green;\">// the response that was received.</span>\r\n      <span style=\"color: green;\">// handle the error</span>\r\n  });\r\n\r\n</pre>\r\n</div>\r\n<p>Keep in mind that if you are using JSONP you will get a response object entirely fabricated by&nbsp;the library.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-04-26T15:39:53.497-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

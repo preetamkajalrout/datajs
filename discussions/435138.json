@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1009315",
+    "ThreadId": "435138",
+    "Html": "On production development you know exactly that your services will work optimized for JSON.\r<br />\nCurrently you have a lot of crap in the minified 76KB file that you don't need.\r<br />\nFor example, would be great if you could release the base file with all the abstractions and then separate the ATOM and JSON handlers to separate files.\r<br />\n<br />\nWhen using JSON only you'd probably download &amp; parse &amp; execute just half of the code!<br />\n",
+    "PostedDate": "2013-03-02T12:51:41.173-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1039723",
+    "ThreadId": "435138",
+    "Html": "First of all, IMO clear and valid point DotNetWise makes. If there is content that will be served in only one of either JSON or ATOM format, this normally leads to a design, where a base module asnchronously loads the format code as needed. Nowadays with all the AMD magic working in the wild, this is bread and butter business. But in 2011 ... I guess not.\r<br />\n<br />\nSo, when looking at the current (1.1.1beta) code, I see a gzip'ed minified monolithic small blob of approx. 28 kilobytes which in many cases is quite ok for the functionality it delivers (in my experience).\r<br />\n<br />\nFurther inspecting by superficially grep'ing through the code it yields 43 lines where the case insensitive term atom is present together with function and 70 for json of 592 function lines (all comments stripped) found.\r<br />\n<br />\nDigging a bit deeper, there is conditional merging/mixing/parameterizing in/with quite some functions going on in there, which gives me the impression, that the welcome clean split, might be not just a 1-2-3 snip-snip refactoring, but be more a redesign. \r<br />\n      <br />\nAnd in the latter case, one might also reconsider the current binding to the global window object, and where to bind if used as node.js module (somehow global, process or module.exports)?\r<br />\n<br />\nAfter all, the HTTP header split code enhancement suggestions didn't make it into the code base until now, so I think currently there might be a developing resource problem, rendering a redesign request - at the moment - unrealistic (as seen from the outside).<br />\n",
+    "PostedDate": "2013-05-06T00:03:42.307-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

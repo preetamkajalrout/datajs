@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1085393",
+    "ThreadId": "454662",
+    "Html": "I was attempting to switch to the json light format, but I found that even though the data is being returned from the data service in json light format, datajs seems to convert it back into the verbose syntax before returning it to the success callback. Is this by design? Is there any way to turn this off? I just want the data in its original form from the service, with metadata applied. Perhaps I'm misunderstanding how datajs is implemented.<br />\n",
+    "PostedDate": "2013-08-27T07:04:38.5-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1087963",
+    "ThreadId": "454662",
+    "Html": "Hi,<br />\n<br />\nDataJS uses json verbose as the internal format for the final output object, so that if you request jsonlight, json verbose or atom, you will get the same result.<br />\nThe benefit you get from using json light with datajs is that the amount of data on the wire is smaller.<br />\n<br />\nUnfortunately you can't skip the conversion to json verbose now, unless you create your own json handler and use it instead of the build in handler.<br />\n<br />\nWe are considering converting this internal format to json light with full metadata instead which would make sense, but this can be in a later release.<br />\n<br />\n<br />\nRegards,<br />\nHussein<br />\n",
+    "PostedDate": "2013-09-03T15:31:07.92-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

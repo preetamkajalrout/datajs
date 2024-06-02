@@ -1,0 +1,802 @@
+[
+  {
+    "Id": "245412",
+    "Title": "Security issue",
+    "LatestDate": "2011-02-11T00:13:49.537-08:00"
+  },
+  {
+    "Id": "245593",
+    "Title": "questions regarding metadata",
+    "LatestDate": "2011-02-11T11:07:02.297-08:00"
+  },
+  {
+    "Id": "245960",
+    "Title": "sync/async requests and different content types",
+    "LatestDate": "2013-05-22T22:29:44.827-07:00"
+  },
+  {
+    "Id": "245972",
+    "Title": "cross domain request sample",
+    "LatestDate": "2011-03-18T12:11:34.767-07:00"
+  },
+  {
+    "Id": "246107",
+    "Title": "custom properties in metadata document",
+    "LatestDate": "2011-02-16T10:05:26.977-08:00"
+  },
+  {
+    "Id": "246480",
+    "Title": "primitive type representation",
+    "LatestDate": "2011-02-17T09:38:49-08:00"
+  },
+  {
+    "Id": "246583",
+    "Title": "Microsoft JScript runtime error: 'e.JSON' is null or not an object",
+    "LatestDate": "2011-02-18T11:50:08.313-08:00"
+  },
+  {
+    "Id": "247140",
+    "Title": "parse error",
+    "LatestDate": "2011-02-28T07:36:46.053-08:00"
+  },
+  {
+    "Id": "247400",
+    "Title": "datajs response data structure",
+    "LatestDate": "2011-03-08T16:49:47.86-08:00"
+  },
+  {
+    "Id": "248746",
+    "Title": "IE7 Parse Error",
+    "LatestDate": "2011-03-07T11:47:58.817-08:00"
+  },
+  {
+    "Id": "250762",
+    "Title": "Problems with PUT",
+    "LatestDate": "2011-03-24T16:26:04.45-07:00"
+  },
+  {
+    "Id": "253595",
+    "Title": "batch paging",
+    "LatestDate": "2011-04-13T00:31:06.107-07:00"
+  },
+  {
+    "Id": "253790",
+    "Title": "Problem when loading into Firefox Add-on",
+    "LatestDate": "2011-04-15T12:00:02.99-07:00"
+  },
+  {
+    "Id": "254444",
+    "Title": "datajs: Quick Start",
+    "LatestDate": "2011-04-18T22:54:51.767-07:00"
+  },
+  {
+    "Id": "254544",
+    "Title": "Serialization of batches of type complex is not supported?",
+    "LatestDate": "2011-04-19T15:02:45.43-07:00"
+  },
+  {
+    "Id": "256940",
+    "Title": "Programmatic Metadata Navigation",
+    "LatestDate": "2011-05-09T17:13:00.923-07:00"
+  },
+  {
+    "Id": "257852",
+    "Title": "Need help in odata.readrange()",
+    "LatestDate": "2011-05-26T20:11:27.843-07:00"
+  },
+  {
+    "Id": "258225",
+    "Title": "CPU Usage Issue",
+    "LatestDate": "2011-05-24T00:51:47.273-07:00"
+  },
+  {
+    "Id": "258576",
+    "Title": "Windows Phone 7 (IEMobile/7.0) incompatibility?",
+    "LatestDate": "2011-05-23T12:07:22.45-07:00"
+  },
+  {
+    "Id": "258753",
+    "Title": "Question about formatQueryString behavior",
+    "LatestDate": "2011-05-24T15:54:05.75-07:00"
+  },
+  {
+    "Id": "259252",
+    "Title": "createDataCache - Prefetch Issue",
+    "LatestDate": "2011-05-27T10:52:15.38-07:00"
+  },
+  {
+    "Id": "259642",
+    "Title": "datajs cache - Firefox warning",
+    "LatestDate": "2011-06-01T12:03:45.313-07:00"
+  },
+  {
+    "Id": "259648",
+    "Title": "datajs caching and paging- 2 suggestions",
+    "LatestDate": "2011-06-01T11:22:40.803-07:00"
+  },
+  {
+    "Id": "259710",
+    "Title": "OGDI and datajs",
+    "LatestDate": "2011-05-31T21:36:16.663-07:00"
+  },
+  {
+    "Id": "259713",
+    "Title": "OGDI and datajs",
+    "LatestDate": "2011-06-02T13:02:32.127-07:00"
+  },
+  {
+    "Id": "261059",
+    "Title": "Trouble with accessing metadata",
+    "LatestDate": "2011-06-12T00:00:46.41-07:00"
+  },
+  {
+    "Id": "261456",
+    "Title": "read atom feed",
+    "LatestDate": "2011-06-20T12:15:24.2-07:00"
+  },
+  {
+    "Id": "262572",
+    "Title": "Way to disable ?$format=json in request uri?",
+    "LatestDate": "2011-06-24T13:37:16.447-07:00"
+  },
+  {
+    "Id": "262908",
+    "Title": "Odata batch \"GET\" with web methods",
+    "LatestDate": "2011-06-29T12:37:51.217-07:00"
+  },
+  {
+    "Id": "263481",
+    "Title": "datajs and jQXB",
+    "LatestDate": "2011-06-30T17:28:16.177-07:00"
+  },
+  {
+    "Id": "263936",
+    "Title": "Data retrieval with datajs and Server paging size problem",
+    "LatestDate": "2011-07-18T17:07:29.003-07:00"
+  },
+  {
+    "Id": "265321",
+    "Title": "CORS and firefox and datajs problem",
+    "LatestDate": "2011-07-20T04:53:20.293-07:00"
+  },
+  {
+    "Id": "266424",
+    "Title": "Google Maps",
+    "LatestDate": "2011-07-27T03:01:33.707-07:00"
+  },
+  {
+    "Id": "268841",
+    "Title": "Access is denied error when executing datajs in wordpress",
+    "LatestDate": "2011-08-18T04:05:38.377-07:00"
+  },
+  {
+    "Id": "269403",
+    "Title": "How to pass authentication header using datajs",
+    "LatestDate": "2012-11-15T11:11:04.87-08:00"
+  },
+  {
+    "Id": "269553",
+    "Title": "How to get the record count from Odata using DataJS.",
+    "LatestDate": "2011-09-13T06:34:34.487-07:00"
+  },
+  {
+    "Id": "270606",
+    "Title": "How to get the record count when using DataCache",
+    "LatestDate": "2011-09-11T14:52:20.4-07:00"
+  },
+  {
+    "Id": "272261",
+    "Title": "Question about writing ",
+    "LatestDate": "2011-09-12T10:40:30.64-07:00"
+  },
+  {
+    "Id": "273239",
+    "Title": "BROWSER ISSUES",
+    "LatestDate": "2011-09-21T16:42:24.047-07:00"
+  },
+  {
+    "Id": "273438",
+    "Title": "Reading a specific property of an entity in XML with datajs results in error",
+    "LatestDate": "2011-09-25T03:02:34.623-07:00"
+  },
+  {
+    "Id": "274845",
+    "Title": "Using datajs (datajs-1.0.1.min.js) together with Azure Table Storage OData",
+    "LatestDate": "2011-10-17T17:27:55.41-07:00"
+  },
+  {
+    "Id": "275096",
+    "Title": "Problem with filtering and date format",
+    "LatestDate": "2011-10-11T04:59:12.84-07:00"
+  },
+  {
+    "Id": "275792",
+    "Title": "Microsoft Ajax Content Delivery Network",
+    "LatestDate": "2011-10-13T10:56:34.99-07:00"
+  },
+  {
+    "Id": "279020",
+    "Title": " http 304 error ",
+    "LatestDate": "2012-01-04T07:15:32.123-08:00"
+  },
+  {
+    "Id": "282117",
+    "Title": "batch: server returns \"The content type specified in not valid for batch requests. Content type must be 'multipart/mixed' and there must be a valid single boundary delimiter specified.\"",
+    "LatestDate": "2011-12-08T23:20:11.667-08:00"
+  },
+  {
+    "Id": "282540",
+    "Title": "synchronus read call",
+    "LatestDate": "2011-12-12T10:51:38.537-08:00"
+  },
+  {
+    "Id": "283825",
+    "Title": "Creating new entities with foreign keys required",
+    "LatestDate": "2015-05-07T01:55:37.31-07:00"
+  },
+  {
+    "Id": "283891",
+    "Title": "How to use object in same request",
+    "LatestDate": "2012-01-04T10:56:49.177-08:00"
+  },
+  {
+    "Id": "285504",
+    "Title": "Using SSO or SAML to connect to a OData provider",
+    "LatestDate": "2012-01-10T11:36:45.867-08:00"
+  },
+  {
+    "Id": "285648",
+    "Title": "datajs unsupported on Webkit",
+    "LatestDate": "2014-07-21T13:30:21.623-07:00"
+  },
+  {
+    "Id": "285798",
+    "Title": "Date element in Sharepoint 2010",
+    "LatestDate": "2012-01-12T04:21:13.427-08:00"
+  },
+  {
+    "Id": "286064",
+    "Title": "API for Accessing metadata",
+    "LatestDate": "2012-01-17T05:49:01.2-08:00"
+  },
+  {
+    "Id": "286221",
+    "Title": "https call returns \"HTTP request failed\" with Status Code 0",
+    "LatestDate": "2012-01-16T11:26:42.63-08:00"
+  },
+  {
+    "Id": "289559",
+    "Title": "Inheritance Insert",
+    "LatestDate": "2012-02-17T16:50:34.793-08:00"
+  },
+  {
+    "Id": "321971",
+    "Title": "Problem with headers",
+    "LatestDate": "2015-02-12T05:18:44.983-08:00"
+  },
+  {
+    "Id": "326225",
+    "Title": "Cross domain with basic authentication",
+    "LatestDate": "2012-02-21T17:10:41.283-08:00"
+  },
+  {
+    "Id": "344801",
+    "Title": "OData.request with dates",
+    "LatestDate": "2012-08-31T16:05:24.803-07:00"
+  },
+  {
+    "Id": "346424",
+    "Title": "Problem when parsing DateTimeOffset",
+    "LatestDate": "2012-03-22T02:21:35.323-07:00"
+  },
+  {
+    "Id": "350520",
+    "Title": "problem with cache.readRange(..) when using collection indices in OData",
+    "LatestDate": "2012-03-30T17:07:23.44-07:00"
+  },
+  {
+    "Id": "350660",
+    "Title": "Timeout error on Android browsers (simulator and device)",
+    "LatestDate": "2012-04-03T14:55:15.51-07:00"
+  },
+  {
+    "Id": "351344",
+    "Title": "Getting 400 Bad Request now that WCF Data Service on separate web server",
+    "LatestDate": "2012-04-26T16:50:56.12-07:00"
+  },
+  {
+    "Id": "352671",
+    "Title": "Write request with Atom/XML",
+    "LatestDate": "2012-12-26T21:13:11.11-08:00"
+  },
+  {
+    "Id": "353487",
+    "Title": "How to retrive value from http response header using datajs (ODATA))",
+    "LatestDate": "2012-04-26T15:39:53.497-07:00"
+  },
+  {
+    "Id": "353636",
+    "Title": "Accessing SharePoint Online List Data",
+    "LatestDate": "2012-05-02T16:18:22.373-07:00"
+  },
+  {
+    "Id": "353682",
+    "Title": "ATOM PUT Request",
+    "LatestDate": "2012-05-02T14:30:59.033-07:00"
+  },
+  {
+    "Id": "354342",
+    "Title": "odata.request to check readyState",
+    "LatestDate": "2012-05-04T00:31:44.19-07:00"
+  },
+  {
+    "Id": "354375",
+    "Title": "OData read converts Date into non-usable format in Safari",
+    "LatestDate": "2012-05-03T14:43:47.917-07:00"
+  },
+  {
+    "Id": "354509",
+    "Title": "datajs phonegap (android emulator)",
+    "LatestDate": "2012-05-11T14:41:40.937-07:00"
+  },
+  {
+    "Id": "354801",
+    "Title": "Cross Domain Batch Request fails",
+    "LatestDate": "2012-05-07T11:39:31.493-07:00"
+  },
+  {
+    "Id": "355228",
+    "Title": "Error Faced",
+    "LatestDate": "2012-05-11T14:52:49.817-07:00"
+  },
+  {
+    "Id": "355462",
+    "Title": "Problem with delete change request via atomHandler",
+    "LatestDate": "2012-05-14T02:09:51.027-07:00"
+  },
+  {
+    "Id": "355946",
+    "Title": "Integration with a JQUERY grid",
+    "LatestDate": "2012-05-15T21:46:59.667-07:00"
+  },
+  {
+    "Id": "356238",
+    "Title": "Post request to deep insert / complexe entities",
+    "LatestDate": "2013-03-02T14:03:13.81-08:00"
+  },
+  {
+    "Id": "356258",
+    "Title": "ActiveX error ",
+    "LatestDate": "2012-05-31T01:43:22.347-07:00"
+  },
+  {
+    "Id": "356806",
+    "Title": "Datajs cache and http 403 forbiden",
+    "LatestDate": "2012-05-30T12:57:54.55-07:00"
+  },
+  {
+    "Id": "357593",
+    "Title": "OData.request Timeout",
+    "LatestDate": "2012-05-30T12:31:48.503-07:00"
+  },
+  {
+    "Id": "357673",
+    "Title": "datajs not compatible with Windows 8 Metro Apps?",
+    "LatestDate": "2012-06-13T13:22:48.543-07:00"
+  },
+  {
+    "Id": "359796",
+    "Title": "DataJS and date",
+    "LatestDate": "2012-06-21T01:42:24.76-07:00"
+  },
+  {
+    "Id": "360977",
+    "Title": "odata verbose problem",
+    "LatestDate": "2012-06-28T07:34:04.08-07:00"
+  },
+  {
+    "Id": "361821",
+    "Title": "update with composed pirmary key",
+    "LatestDate": "2012-07-24T09:16:52.407-07:00"
+  },
+  {
+    "Id": "362514",
+    "Title": "DataJS-1.0.3 Breaks HTML page",
+    "LatestDate": "2012-07-09T11:41:43.273-07:00"
+  },
+  {
+    "Id": "387966",
+    "Title": "Batch POST tunneling",
+    "LatestDate": "2012-07-24T08:40:13.05-07:00"
+  },
+  {
+    "Id": "391490",
+    "Title": "501 not implemented, xml-atom",
+    "LatestDate": "2013-12-19T06:11:55.517-08:00"
+  },
+  {
+    "Id": "391826",
+    "Title": "Payload Creation differs in IE and Mozilla",
+    "LatestDate": "2012-08-17T11:25:38.847-07:00"
+  },
+  {
+    "Id": "392696",
+    "Title": "iOS and Android Web browser cannot run datajs code",
+    "LatestDate": "2012-08-31T10:17:25.56-07:00"
+  },
+  {
+    "Id": "392839",
+    "Title": "Can we add AMD support?",
+    "LatestDate": "2012-08-31T11:30:08.02-07:00"
+  },
+  {
+    "Id": "394824",
+    "Title": "Get data from OData with datajs and save to sqlite in phonegap",
+    "LatestDate": "2012-09-08T05:32:25.253-07:00"
+  },
+  {
+    "Id": "395423",
+    "Title": "Problem with Edm.Time",
+    "LatestDate": "2012-09-18T10:47:47.89-07:00"
+  },
+  {
+    "Id": "396012",
+    "Title": "WCF Data Services 5 Authentication datajs and phonegap",
+    "LatestDate": "2012-09-24T11:17:53.233-07:00"
+  },
+  {
+    "Id": "396112",
+    "Title": "ERROR: Request is not local and cannot be done through JSONP",
+    "LatestDate": "2012-09-24T10:36:47.157-07:00"
+  },
+  {
+    "Id": "396484",
+    "Title": "\"No handler for Data\"",
+    "LatestDate": "2012-10-24T11:42:18.503-07:00"
+  },
+  {
+    "Id": "397531",
+    "Title": "SharePoint odata POST succeeds using IE, fails using Chrome",
+    "LatestDate": "2012-10-03T01:50:54.093-07:00"
+  },
+  {
+    "Id": "397628",
+    "Title": "how to get the data content from response body?",
+    "LatestDate": "2012-10-02T10:11:05.19-07:00"
+  },
+  {
+    "Id": "398011",
+    "Title": "Error with $batch request while sending multiple queries",
+    "LatestDate": "2012-10-16T12:08:43.267-07:00"
+  },
+  {
+    "Id": "398032",
+    "Title": "Anyone else have this issue? Any workarounds, aside from not using metadata?",
+    "LatestDate": "2012-10-05T11:31:53.673-07:00"
+  },
+  {
+    "Id": "398295",
+    "Title": "response.headers.ETag undefined",
+    "LatestDate": "2012-11-11T17:25:03.057-08:00"
+  },
+  {
+    "Id": "398772",
+    "Title": "No callback execution on read and an error received (exception thrown and not caught)",
+    "LatestDate": "2012-10-24T09:09:51.663-07:00"
+  },
+  {
+    "Id": "398888",
+    "Title": "Please provide a TypeScript Definition file",
+    "LatestDate": "2013-09-25T10:17:10.833-07:00"
+  },
+  {
+    "Id": "398915",
+    "Title": "Unable to get value of the property 'parse': object is null or undefined (IE9/IE10)",
+    "LatestDate": "2012-12-07T12:04:34.907-08:00"
+  },
+  {
+    "Id": "399875",
+    "Title": "Question to abort function",
+    "LatestDate": "2012-10-25T03:40:26.47-07:00"
+  },
+  {
+    "Id": "400446",
+    "Title": "batch with AtomPub format possible?",
+    "LatestDate": "2012-10-25T03:38:18.75-07:00"
+  },
+  {
+    "Id": "400470",
+    "Title": "batch with changeset Problem",
+    "LatestDate": "2012-10-26T01:37:53.91-07:00"
+  },
+  {
+    "Id": "401809",
+    "Title": "How do a make a call to Azure Datamarket?",
+    "LatestDate": "2012-11-15T11:21:11.06-08:00"
+  },
+  {
+    "Id": "403816",
+    "Title": "Cant update lists in sharerpoint using datajas -- 'mediaType' is null or not an object",
+    "LatestDate": "2012-11-20T12:41:14.943-08:00"
+  },
+  {
+    "Id": "405834",
+    "Title": "Is possible to add the header MinDataServiceVersion?",
+    "LatestDate": "2012-12-12T12:30:14.607-08:00"
+  },
+  {
+    "Id": "406797",
+    "Title": "Something along the lines of $.ajaxstart and $.ajaxcomplete",
+    "LatestDate": "2012-12-14T08:58:16.887-08:00"
+  },
+  {
+    "Id": "409004",
+    "Title": "Read only works in Safari",
+    "LatestDate": "2013-01-18T01:38:54.8-08:00"
+  },
+  {
+    "Id": "427970",
+    "Title": "no handler for data error while delete or post",
+    "LatestDate": "2012-12-31T10:27:32.583-08:00"
+  },
+  {
+    "Id": "428038",
+    "Title": "OData V3 support",
+    "LatestDate": "2013-02-06T16:33:21.517-08:00"
+  },
+  {
+    "Id": "429052",
+    "Title": "OData CORS and datajs",
+    "LatestDate": "2013-02-12T08:47:11.4-08:00"
+  },
+  {
+    "Id": "430283",
+    "Title": "no handler for data problem again",
+    "LatestDate": "2013-02-11T01:46:14.99-08:00"
+  },
+  {
+    "Id": "432861",
+    "Title": "Using bitmasks with OData",
+    "LatestDate": "2013-02-12T08:52:21.607-08:00"
+  },
+  {
+    "Id": "435138",
+    "Title": "Release a JSON-only version ",
+    "LatestDate": "2013-05-06T00:03:42.307-07:00"
+  },
+  {
+    "Id": "437282",
+    "Title": "Using datajs in Phonegap Application-ios?",
+    "LatestDate": "2013-03-19T23:03:56.63-07:00"
+  },
+  {
+    "Id": "437283",
+    "Title": "Using datajs in Phonegap Application-ios?",
+    "LatestDate": "2013-03-22T11:14:43.903-07:00"
+  },
+  {
+    "Id": "438133",
+    "Title": "onreadystatechange not firing on ios 5.1.1",
+    "LatestDate": "2013-04-03T14:03:47.18-07:00"
+  },
+  {
+    "Id": "439673",
+    "Title": "\"HTTP request failed\" when testing Android html5 (Eclipse + Phonegap) app....",
+    "LatestDate": "2013-04-10T10:17:30.68-07:00"
+  },
+  {
+    "Id": "441321",
+    "Title": "PUT/MERGE Identity/Null Value Help",
+    "LatestDate": "2013-04-23T10:06:09.717-07:00"
+  },
+  {
+    "Id": "441954",
+    "Title": "How is Edm.Time handled in datajs?",
+    "LatestDate": "2013-05-07T09:55:33.457-07:00"
+  },
+  {
+    "Id": "442798",
+    "Title": "Edm.DateTime \"Invalid date/time value\": No \"Z\" in date/time",
+    "LatestDate": "2013-09-23T09:18:46.433-07:00"
+  },
+  {
+    "Id": "444840",
+    "Title": "odata.read return data = undefined  in Firefox",
+    "LatestDate": "2013-05-30T13:15:46.49-07:00"
+  },
+  {
+    "Id": "446445",
+    "Title": "HTML5 File Upload API and OData",
+    "LatestDate": "2013-06-08T19:25:55.237-07:00"
+  },
+  {
+    "Id": "448716",
+    "Title": "load metadata in batch request",
+    "LatestDate": "2013-07-11T07:26:07.2-07:00"
+  },
+  {
+    "Id": "449002",
+    "Title": "Incorrect Dates returned from sharepoint",
+    "LatestDate": "2013-07-12T12:39:38.41-07:00"
+  },
+  {
+    "Id": "449103",
+    "Title": "Success callback not called",
+    "LatestDate": "2013-07-13T07:38:50.763-07:00"
+  },
+  {
+    "Id": "449431",
+    "Title": "Bug in datajs beta2 1.1.1?",
+    "LatestDate": "2013-07-16T15:23:45.763-07:00"
+  },
+  {
+    "Id": "449946",
+    "Title": "Android credentials",
+    "LatestDate": "2013-07-14T08:08:34.87-07:00"
+  },
+  {
+    "Id": "450210",
+    "Title": "Legacy DB with DateTimes in non-UTC timezones",
+    "LatestDate": "2013-07-16T08:49:52.21-07:00"
+  },
+  {
+    "Id": "451506",
+    "Title": "issue with POST in Atom/XML format",
+    "LatestDate": "2013-09-13T05:13:31.967-07:00"
+  },
+  {
+    "Id": "451598",
+    "Title": "SAP OData Gateway iOS Safari",
+    "LatestDate": "2013-07-27T11:14:51.62-07:00"
+  },
+  {
+    "Id": "452503",
+    "Title": "enable xhr withCredentials property",
+    "LatestDate": "2013-08-05T20:22:36.897-07:00"
+  },
+  {
+    "Id": "452638",
+    "Title": "Cross domain requests to Sharepoint?",
+    "LatestDate": "2013-08-06T21:57:32.11-07:00"
+  },
+  {
+    "Id": "454662",
+    "Title": "Internal representation vs. json light representation?",
+    "LatestDate": "2013-09-03T15:31:07.92-07:00"
+  },
+  {
+    "Id": "454673",
+    "Title": "TypeError in lookupNavigationPropertyEntitySet in 1.1.1 w/JSON light",
+    "LatestDate": "2013-08-27T08:59:35.147-07:00"
+  },
+  {
+    "Id": "455241",
+    "Title": "Error No Handler for Data",
+    "LatestDate": "2014-01-29T15:21:10.8-08:00"
+  },
+  {
+    "Id": "458469",
+    "Title": "How to call a POST operation of WCF DATA Service from datajs",
+    "LatestDate": "2013-09-19T12:42:26.03-07:00"
+  },
+  {
+    "Id": "462073",
+    "Title": "deep creates supported?",
+    "LatestDate": "2014-02-05T01:39:34.473-08:00"
+  },
+  {
+    "Id": "464132",
+    "Title": "HTTP Response Codes",
+    "LatestDate": "2013-10-30T16:08:52.65-07:00"
+  },
+  {
+    "Id": "464276",
+    "Title": "Error in IE9+: “Can't execute code from a freed script”",
+    "LatestDate": "2014-03-31T05:42:49.823-07:00"
+  },
+  {
+    "Id": "466888",
+    "Title": "having trouble running the Read Data sample in Eclipse",
+    "LatestDate": "2013-11-07T10:52:25.317-08:00"
+  },
+  {
+    "Id": "467188",
+    "Title": "running the \"read data\" sample -- the resulting URL doesn't like the \"$format=json\" parameter",
+    "LatestDate": "2013-11-08T08:51:01.08-08:00"
+  },
+  {
+    "Id": "472290",
+    "Title": "how to round-trip data on multiple OData.read calls?",
+    "LatestDate": "2015-12-30T10:25:25.623-08:00"
+  },
+  {
+    "Id": "473331",
+    "Title": "An alternative HTTP client for SharePoint 2013",
+    "LatestDate": "2013-12-12T04:57:54.05-08:00"
+  },
+  {
+    "Id": "479376",
+    "Title": "How OData.request can work with properties represented by a deffered property ?",
+    "LatestDate": "2014-01-02T16:15:30.27-08:00"
+  },
+  {
+    "Id": "484162",
+    "Title": "How to modify rel-attribute",
+    "LatestDate": "2014-01-09T01:54:30.947-08:00"
+  },
+  {
+    "Id": "501343",
+    "Title": "POST an image file using OData.Request",
+    "LatestDate": "2014-01-15T13:43:46.653-08:00"
+  },
+  {
+    "Id": "528288",
+    "Title": "CORS headers with datajs 1.1.1 and OData v3 ('no handler found for data')",
+    "LatestDate": "2014-03-24T09:32:11.707-07:00"
+  },
+  {
+    "Id": "528367",
+    "Title": "Batch Request not populating data in response for Firefox",
+    "LatestDate": "2014-01-29T15:32:22.563-08:00"
+  },
+  {
+    "Id": "528526",
+    "Title": "when I jump to a new page, my Odata.read call gets an error - instead of an abort message.",
+    "LatestDate": "2014-01-31T07:05:47.59-08:00"
+  },
+  {
+    "Id": "539763",
+    "Title": "Error using batch request against WebAPI odata ",
+    "LatestDate": "2014-03-21T12:42:13.983-07:00"
+  },
+  {
+    "Id": "540063",
+    "Title": "OData v4 support",
+    "LatestDate": "2014-08-13T20:11:54.85-07:00"
+  },
+  {
+    "Id": "540238",
+    "Title": "Delta Query support",
+    "LatestDate": "2014-03-26T10:20:32.84-07:00"
+  },
+  {
+    "Id": "561049",
+    "Title": "IE9+ CORS not supported, not as hard to implement",
+    "LatestDate": "2014-08-13T06:30:07.767-07:00"
+  },
+  {
+    "Id": "566466",
+    "Title": "breezejs and jaydata dependency",
+    "LatestDate": "2014-09-08T19:06:48.907-07:00"
+  },
+  {
+    "Id": "573921",
+    "Title": "ASP.NET MVC 5 and internal OData service",
+    "LatestDate": "2014-12-05T22:29:04.823-08:00"
+  },
+  {
+    "Id": "576456",
+    "Title": "Simple demo returns error",
+    "LatestDate": "2015-01-10T03:16:00.2-08:00"
+  },
+  {
+    "Id": "639105",
+    "Title": "'webkitIndexedDB' is deprecated. Please use 'indexedDB' instead.",
+    "LatestDate": "2015-06-03T00:49:48.067-07:00"
+  },
+  {
+    "Id": "641732",
+    "Title": "Support for OData v4.0",
+    "LatestDate": "2015-07-22T04:48:15.103-07:00"
+  },
+  {
+    "Id": "644239",
+    "Title": "Use datajs from within angular.js",
+    "LatestDate": "2015-08-26T06:30:46.533-07:00"
+  },
+  {
+    "Id": "647735",
+    "Title": "What are the allowable namespaces in the metadata that datajs can read with the help of OData.metadataHandler.read(response, context) function ?",
+    "LatestDate": "2015-11-17T11:44:03.737-08:00"
+  }
+]

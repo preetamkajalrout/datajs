@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "It says: \"no handler for data\" during loading JSON from OData (v3, .NET implementation).\n\nPossible fix:\n\nFile: JSLib\\src\\odata-json.js\nLine:\n        json = traverse(json.d, function (key, value) {\nCorrected Line:\n        json = traverse(json.value, function (key, value) {",
+    "LastUpdatedDate": "2016-04-08T17:13:02.443-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2016-04-08T17:13:02.443-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Unable to load JSON from OData response using datajs-1.1.3",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1741
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

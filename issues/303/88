@@ -1,0 +1,141 @@
+
+--- WEBKIT 3.1 ---
+GET http://odata.netflix.com/v1/Catalog/Genres?$top=5&$callback=handleJSONP_0&$format=json HTTP/1.1
+Host: odata.netflix.com
+Accept-Encoding: gzip
+Referer: http://192.168.1.6/odata/netflix.html
+Accept-Language: en-US
+User-Agent: Mozilla/5.0 (Linux; U; Android 2.2; en-us; sdk Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+Accept: */*
+Accept-Charset: utf-8, iso-8859-1, utf-16, *;q=0.7
+
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/javascript;charset=utf-16
+Expires: Mon, 09 May 2011 11:57:22 GMT
+Vary: *
+Server: Microsoft-IIS/7.0
+DataServiceVersion: 1.0;
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 09 May 2011 11:56:52 GMT
+Content-Length: 3054
+
+??????????{
+"d" : [
+{
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('20th%20Century%20Period%20Pieces')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "20th Century Period Pieces", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('20th%20Century%20Period%20Pieces')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Abs%2C%20Glutes%2C%20%26%20More')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Abs, Glutes, & More", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Abs%2C%20Glutes%2C%20%26%20More')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20%26%20Adventure')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Action & Adventure", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20%26%20Adventure')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Classics')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Action Classics", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Classics')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Comedies')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Action Comedies", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Comedies')/Titles"
+}
+}
+}
+]
+}?
+
+--- FIREFOX 4 ---
+
+GET http://odata.netflix.com/v1/Catalog/Genres?$top=5&$callback=handleJSONP_0&$format=json HTTP/1.1
+Host: odata.netflix.com
+User-Agent: Mozilla/5.0 (Android; Linux armv7l; rv:2.1.1) Gecko/20110415 Firefox/4.0.2pre Fennec/4.0.1
+Accept: */*
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip, deflate
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Keep-Alive: 600
+Connection: keep-alive
+Referer: http://192.168.1.6/odata/netflix.html
+Cache-Control: max-age=0
+
+
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/javascript;charset=iso-8859-1
+Expires: Mon, 09 May 2011 11:54:03 GMT
+Vary: *
+Server: Microsoft-IIS/7.0
+DataServiceVersion: 1.0;
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 09 May 2011 11:53:33 GMT
+Content-Length: 1532
+
+handleJSONP_0({
+"d" : [
+{
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('20th%20Century%20Period%20Pieces')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "20th Century Period Pieces", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('20th%20Century%20Period%20Pieces')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Abs%2C%20Glutes%2C%20%26%20More')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Abs, Glutes, & More", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Abs%2C%20Glutes%2C%20%26%20More')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20%26%20Adventure')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Action & Adventure", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20%26%20Adventure')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Classics')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Action Classics", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Classics')/Titles"
+}
+}
+}, {
+"__metadata": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Comedies')", "type": "NetflixCatalog.Model.Genre"
+}, "Name": "Action Comedies", "Titles": {
+"__deferred": {
+"uri": "http://odata.netflix.com/v1/Catalog/Genres('Action%20Comedies')/Titles"
+}
+}
+}
+]
+});

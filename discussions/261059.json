@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "626444",
+    "ThreadId": "261059",
+    "Html": "\r\n<p>Hi I am getting an error back when trying to read metadata for Netflix.</p>\r\n<p>I get the message 'AccessRestricted URI Denied'</p>\r\n<p>I am using the following code</p>\r\n<p>&nbsp;</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre>OData.defaultHttpClient.enableJsonpCallback = <span style=\"color:blue\">true</span>;\r\nOData.read(<span style=\"color:#a31515\">&quot;odata.netflix.com/v2/Catalog/$metadata&quot;</span>, <span style=\"color:blue\">function</span> (metadata) {\r\n    <span style=\"color:green\">// success callback</span>\r\n    console.debug(<span style=\"color:#a31515\">'made it'</span>);\r\n}, <span style=\"color:blue\">function</span> (error) {\r\n    <span style=\"color:green\">// error callback</span>\r\n    alert(<span style=\"color:#a31515\">&quot;Error occurred &quot;</span> &#43; error.message);\r\n}, OData.metadataHandler);\r\n</pre>\r\n</div>\r\n<p>Everything is find if I read regular data such as&nbsp; &nbsp;&nbsp;&nbsp;</p>\r\n<pre><pre>OData.read(&quot;odata.netflix.com/v2/Catalog/Genres&quot;, function (data) {....</pre>\r\n</pre>\r\n<p>Thanks</p>\r\n<p>&nbsp;</p>\r\n<pre><br><br></pre>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2011-06-11T13:12:47.76-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "626489",
+    "ThreadId": "261059",
+    "Html": "<p>The underlying problem is that the server at odata.netflix.com doesn't support serializing OData metadata as JSON/JSONP, so you can't really get at it from a different domain. OData doesn't specify a JSON representation for metadata at the moment.</p>\r\n<p>Another problem that you might run into is that the URLs specified don't start with \"http://\", so they look like URLs relative to the page that the script is running in, directly on the same server.</p>\r\n<p>The recommended approach for dealing with metadata however should help work around. Typically you can get by without metadata, but if you need it to process things like content-mapped properties (which I believe the Netflix service doesn't require), the best way is to get the representation at development time and embed it along with the page in JavaScript literal format, to save an additional round-trip to the server. You can use datajs from a test page or shell script to help out with this, or just selectively embed the bits of metadata you care about.</p>\r\n<p>Marcelo</p>",
+    "PostedDate": "2011-06-11T19:11:36.643-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "626500",
+    "ThreadId": "261059",
+    "Html": "<p>Thanks</p>\r\n<p>I've switched to pulling metadata via the server.</p>\r\n<p>Just for general data (not metadata) is there a means to determine what formats a server supports? i.e. if remote server supports JSONP read data directly using datajs otherwise access via proxy?</p>",
+    "PostedDate": "2011-06-11T20:56:14.707-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "626522",
+    "ThreadId": "261059",
+    "Html": "<p>The protocol doesn't define a way of querying which formats it supports. Typically you can set the Accept header to ask for a specific format and rely on falling back to something else if it's not supported. The datajs handlers set up a preference for JSON but will deal with XML if that's all the server can handle. If the server really can't handle any of the formats you're asking for, it returns a specific HTTP status code, 415 - Unsupported Media Type.</p>\r\n<p>That said, the story changes a bit with JSONP, because the mechanism relies on javascript injected into a SCRIPT tag in the browser to work around same-origin restrictions. So most of the read scenarios work, <em>except</em> those that can't produce javascript, produce broken javascript or rely on header information (as headers are inaccessible when using JSONP).</p>\r\n<p>If you own the service, then you can often find ways to work around many of these problems, either by supporting additional query parameters or having service operations that can help out. Ultimately, it's up to the service owner to make these decisions (for good reasons - it's up to them to determine whether opening things up further is a safe thing to do!)</p>",
+    "PostedDate": "2011-06-12T00:00:46.41-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I've encountered a simple problem right off the bat using one of the samples provided.  I used the following sample from an aspnet mvc page\n \n        OData.read({ requestUri: \"http://odata.netflix.com/v1/Catalog/Genres\",\n            headers: { Accept: \"application/json\" }\n        },\n          function (data, response) {\n              alert(\"Operation succeeded.\");\n          }, function (err) {\n              alert(\"Error occurred \" + err.message);\n          });\nFor me this code never succeeds, I always get the error here.  Looking at fiddler the error returned is a 501 Not Implemented error.  What is wrong?\n \nHTTP/1.1 501 Not Implemented\nCache-Control: private\nContent-Length: 217\nContent-Type: application/xml\nExpires: Sun, 06 May 2012 18:20:55 GMT\nVary: *\nServer: Microsoft-IIS/7.0\nDataServiceVersion: 1.0;\nX-AspNet-Version: 4.0.30319\nX-Powered-By: ASP.NET\nDate: Sun, 06 May 2012 18:20:25 GMT\n \n<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<error xmlns=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\">\n  <code></code>\n  <message xml:lang=\"en-US\">Not Implemented</message>\n</error>",
+    "LastUpdatedDate": "2013-02-21T17:20:09.9-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-05-06T11:28:34.37-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Error attempting sample code.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 636
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Ok, the \"not implemented\" error happens for both FireFox and Chrome, Not IE.  The latter returns Http status 200 and the data in json format, but then the sample throws the error: Unable to get value of the property 'parse': object is null or undefined",
+      "PostedDate": "2012-05-06T12:12:52.17-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "It seems the \"Unable to get value of property parse\" is caused by using IE 9.  It doesn't throw this error in IE 8.  That's apparently because in IE 9 mode window .JSON is undefined, where as it is defined in IE 8.   ",
+      "PostedDate": "2012-05-06T13:27:13.617-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Hi Bill,\r\n\r\n   First things first, you are doing a cross domain request to the netflix odata catalog.  I assume that you are using the latest versions of Chrome and FireFox right? Seems to me that these two browsers are sending a CORS request and the netflix server not liking it because it doesnt support it.  You can easily verify this by looling into fiddler and verifying that the browser sent first a rquest using the OPTIONS http verb and the server responding to that 501 not implemented.  You should use JSONP in this case. Look into \r\n\r\nhttp://datajs.codeplex.com/wikipage?title=Cross%20Domain%20Requests&referringTitle=Documentation  \r\n\r\nfor more information about JSONP and how to enable it in datajs.\r\n\r\nOn IE.. IE9 by default falls back to compatbility mode when pages are served from the intranet and the localhost.  In that mode, it behaves like it was IE7, which didn't have a JSON parser.  You can include the following metatag in the head of your web page:\r\n\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />\r\n\r\nTo instruct IE that the page should be viewed in the browser's latest version mode.  \r\n\r\nAlso you can look into our FAQ on this topic:\r\n\r\nhttp://datajs.codeplex.com/wikipage?title=Frequently%20Asked%20Questions&referringTitle=Documentation#json-null-error\r\n",
+      "PostedDate": "2012-05-07T12:36:57.79-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Thanks for the quick reply.  You have definitely improved my understanding of how chrome, firefox and IE handle interaction with an Odata service.  Thanks again.",
+      "PostedDate": "2012-05-07T16:50:07.21-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:09.9-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "680268",
+    "ThreadId": "274845",
+    "Html": "\r\n<p><strong>Using datajs (datajs-1.0.1.min.js) together with Azure Table Storage OData</strong><br>\r\n<br>\r\nI have tried to connect to Azure Table Storage with the datajs library using OData. I have passed the stage of generating the signature for Authorization: SharedKey but still ending in the error function of OData.read/OData.request even though I receive the\r\n atom data because of &quot;Cannot parse date/time value to given precision.&quot;<br>\r\n<br>\r\nAny suggestions?</p>\r\n",
+    "PostedDate": "2011-10-05T06:12:56.413-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "680933",
+    "ThreadId": "274845",
+    "Html": "<p>Hi Senikk,</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; Seems that the date/value is being delivered in a format that the library doesn't not entirely understand.&nbsp; Could you please share with us a trace of the&nbsp;response so we can investigate further?</p>\r\n<p>Thanks</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-10-06T11:06:35.887-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "681062",
+    "ThreadId": "274845",
+    "Html": "<p><em>Here is the header part of the response:</em></p>\r\n<p>HTTP/1.1 200 OK<br />Cache-Control: no-cache<br />Transfer-Encoding: chunked<br />Content-Type: application/atom+xml;charset=iso-8859-1<br />Server: Windows-Azure-Table/1.0 Microsoft-HTTPAPI/2.0<br />x-ms-request-id: 4024d865-8642-4f20-8ba1-579cf08153aa<br />x-ms-version: 2009-09-19<br />Date: Thu, 06 Oct 2011 22:17:55 GMT</p>\r\n<p><em>And the feed body part:</em></p>\r\n<p>&lt;?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"yes\"?&gt;&lt;feed xml:base=\"http://paragraftilklasserom.table.core.windows.net/\" xmlns:d=\"http://schemas.microsoft.com/ado/2007/08/dataservices\" xmlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\" xmlns=\"http://www.w3.org/2005/Atom\"&gt;&nbsp; &lt;title type=\"text\"&gt;bruker&lt;/title&gt;&nbsp; &lt;id&gt;http://paragraftilklasserom.table.core.windows.net/bruker&lt;/id&gt;&nbsp; &lt;updated&gt;2011-10-06T22:17:55Z&lt;/updated&gt;&nbsp; &lt;link rel=\"self\" title=\"bruker\" href=\"bruker\" /&gt;&nbsp; &lt;entry m:etag=\"W/&amp;quot;datetime'2011-09-24T16%3A20%3A15.7724193Z'&amp;quot;\"&gt;&nbsp; &nbsp; &lt;id&gt;http://paragraftilklasserom.table.core.windows.net/bruker(PartitionKey='bruker',RowKey='AAAA')&lt;/id&gt;&nbsp; &nbsp; &lt;title type=\"text\"&gt;&lt;/title&gt;&nbsp; &nbsp; &lt;updated&gt;2011-10-06T22:17:55Z&lt;/updated&gt;&nbsp; &nbsp; &lt;author&gt;&nbsp; &nbsp; &nbsp; &lt;name /&gt;&nbsp; &nbsp; &lt;/author&gt;&nbsp; &nbsp; &lt;link rel=\"edit\" title=\"bruker\" href=\"bruker(PartitionKey='bruker',RowKey='AAAA')\" /&gt;&nbsp; &nbsp; &lt;category term=\"paragraftilklasserom.bruker\" scheme=\"http://schemas.microsoft.com/ado/2007/08/dataservices/scheme\" /&gt;&nbsp; &nbsp; &lt;content type=\"application/xml\"&gt;&nbsp; &nbsp; &nbsp; &lt;m:properties&gt;&nbsp; &nbsp; &nbsp; &nbsp; &lt;d:PartitionKey&gt;bruker&lt;/d:PartitionKey&gt;&nbsp; &nbsp; &nbsp; &nbsp; &lt;d:RowKey&gt;AAAA&lt;/d:RowKey&gt;&nbsp; &nbsp; &nbsp; &nbsp; &lt;d:Timestamp m:type=\"Edm.DateTime\"&gt;2011-09-24T16:20:15.7724193Z&lt;/d:Timestamp&gt;&nbsp; &nbsp; &nbsp; &nbsp; &lt;d:Brukernavn&gt;senikk&lt;/d:Brukernavn&gt;&nbsp; &nbsp; &nbsp; &nbsp; &lt;d:Passord&gt;xxxx&lt;/d:Passord&gt;&nbsp; &nbsp; &nbsp; &lt;/m:properties&gt;&nbsp; &nbsp; &lt;/content&gt;&nbsp; &lt;/entry&gt;&lt;/feed&gt;</p>",
+    "PostedDate": "2011-10-06T15:26:18.913-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "681415",
+    "ThreadId": "274845",
+    "Html": "<div style=\"background-color: white; color: black;\">\n<pre>Hi Senikk, </pre>\n</div>\n<p>&nbsp;&nbsp; Thanks for the trace.&nbsp; The problem is with the precision of the timestamp property:</p>\n<p>&nbsp;&nbsp;&nbsp; &lt;d:Timestamp m:type=\"Edm.DateTime\"&gt;2011-09-24T16:20:15.7724193Z&lt;/d:Timestamp&gt;</p>\n<p>&nbsp;&nbsp; As you can see, it&nbsp;has seven digits for the second fractions value.&nbsp; The problem is that in javascript we cannot represent this value accurately because it only allows for second fractions up to milliseconds. The library errors out because of the data loss that this would cause.&nbsp; Do you own the tables you are trying to access?&nbsp; Can you reduce the precision of the timestamp field to use <span style=\"color: black; font-size: 10pt;\">milliseconds </span>instead? Or can you avoid selecting that property?</p>\n<p>Regards,</p>\n<p>Alex Trigo.</p>\n<p>&nbsp;</p>",
+    "PostedDate": "2011-10-07T11:27:20.883-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "681868",
+    "ThreadId": "274845",
+    "Html": "<p>\"Timestamp\" is one of the needed fields in Windows Azure Table Storage which you can't do anything about. I got datajs working against Table Storage changing to the latest x-ms-version \"2011-08-18\" and&nbsp;DataServiceVersion and&nbsp;MaxDataServiceVersion to 2.0 which now support $select statement. :) But having to select every fields needed and not the Timestamp field feels a bit of work which shouldn't be needed to do.&nbsp;</p>\r\n<p>Terje :)</p>",
+    "PostedDate": "2011-10-09T12:45:36.997-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "685498",
+    "ThreadId": "274845",
+    "Html": "<p>Hi Terje,</p>\r\n<p>Hope you are doing great.&nbsp; We are fixing this issue so you can query against Table Storage without resorting to such painful workarounds.&nbsp;</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-10-17T17:27:55.41-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

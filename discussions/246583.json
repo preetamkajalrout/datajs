@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "568330",
+    "ThreadId": "246583",
+    "Html": "\r\n<p>The subject is all I ever get when I use this thing against a WCF Data Service.&nbsp;</p>\r\n<p></p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:blue\">&lt;</span><span style=\"color:#a31515\">BODY</span><span style=\"color:#a31515\"> </span><span style=\"color:red\">OnLoad</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;x()&quot;</span><span style=\"color:blue\">&gt;</span>\r\n\t<span style=\"color:blue\">&lt;</span><span style=\"color:#a31515\">script</span> <span style=\"color:red\">type</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;text/javascript&quot;</span> <span style=\"color:red\">src</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;jquery.js&quot;</span><span style=\"color:blue\">&gt;</span><span style=\"color:blue\">&lt;/</span><span style=\"color:#a31515\">script</span><span style=\"color:blue\">&gt;</span>\r\n\t<span style=\"color:blue\">&lt;</span><span style=\"color:#a31515\">script</span> <span style=\"color:red\">type</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;text/javascript&quot;</span> <span style=\"color:red\">src</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;datajs.js&quot;</span><span style=\"color:blue\">&gt;</span><span style=\"color:blue\">&lt;/</span><span style=\"color:#a31515\">script</span><span style=\"color:blue\">&gt;</span>\r\n\t<span style=\"color:blue\">&lt;</span><span style=\"color:#a31515\">SCRIPT</span> <span style=\"color:red\">type</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;text/javascript&quot;</span><span style=\"color:blue\">&gt;</span>\r\n\t<span style=\"color:blue\">function</span> x( ) {\r\n\t\tOData.defaultHttpClient.enableJsonpCallback = <span style=\"color:blue\">true</span>;\r\n\t\tOData.read(<span style=\"color:#a31515\">&quot;http://localhost:50517/TestData.svc/pressrelease?$top=5&amp;$select=DateLine,HeadLine&amp;$orderby=DateAndTime desc&quot;</span>,\r\n\t\t  <span style=\"color:blue\">function</span> (data, request) {\r\n\t\t\t<span style=\"color:blue\">var</span> html = <span style=\"color:#a31515\">&quot;&quot;</span>;\r\n\t\t\t<span style=\"color:blue\">for</span> (<span style=\"color:blue\">var</span> i = 0; i &lt; data.results.length; i&#43;&#43;) {\r\n\t\t\t\thtml &#43;= <span style=\"color:#a31515\">&quot;&lt;p&gt;&quot;</span> &#43; data.results[i].HeadLine &#43; <span style=\"color:#a31515\">&quot;&lt;/p&gt;&quot;</span>;\r\n\t\t\t}\r\n\t\t\tdocument.getElementById(<span style=\"color:#a31515\">&quot;odataDiv&quot;</span>).innerHTML = html;\r\n\t\t  });\r\n\t}\r\n\t<span style=\"color:blue\">&lt;/</span><span style=\"color:#a31515\">SCRIPT</span><span style=\"color:blue\">&gt;</span>\r\n\t<span style=\"color:blue\">&lt;</span><span style=\"color:#a31515\">DIV</span> <span style=\"color:red\">id</span><span style=\"color:blue\">=</span><span style=\"color:blue\">&quot;odataDiv&quot;</span><span style=\"color:blue\">&gt;</span>\r\n\t<span style=\"color:blue\">&lt;/</span><span style=\"color:#a31515\">DIV</span><span style=\"color:blue\">&gt;</span>\r\n<span style=\"color:blue\">&lt;/</span><span style=\"color:#a31515\">BODY</span><span style=\"color:blue\">&gt;</span>\r\n\r\n</pre>\r\n</div>\r\n<p></p>\r\n",
+    "PostedDate": "2011-02-17T20:33:46.65-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "568339",
+    "ThreadId": "246583",
+    "Html": "<p>Hi cosmokenney,</p>\r\n<p>What browser and version are you using? If it's IE6&nbsp;or IE7 (or greater version in compatibility mode), they&nbsp;do not have native JSON support so you&rsquo;ll need to add an additional script reference to <a href=\"https://github.com/douglascrockford/JSON-js/raw/master/json2.js\">https://github.com/douglascrockford/JSON-js/raw/master/json2.js</a>.</p>\r\n<p><span style=\"color: blue; font-size: 9.5pt;\">&lt;</span><span style=\"color: maroon; font-size: 9.5pt;\">script</span><span style=\"font-size: 9.5pt;\"> <span style=\"color: red;\">type</span><span style=\"color: blue;\">=\"text/javascript\"</span> <span style=\"color: red;\">src</span><span style=\"color: blue;\">=\"https://github.com/douglascrockford/JSON-js/raw/master/json2.js&gt;&lt;/</span><span style=\"color: maroon;\">script</span><span style=\"color: blue;\">&gt;</span></span></p>\r\n<p>If that doesn&rsquo;t resolve the issue, please let me know.</p>\r\n<p>-Beth</p>",
+    "PostedDate": "2011-02-17T22:00:23.417-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "568717",
+    "ThreadId": "246583",
+    "Html": "<p>Brilliant! Thank you.&nbsp;</p>\r\n<p>I want to&nbsp;apologize.&nbsp;I've been working with Windows Forms and WPF apps for years, It's as if I'm starting over on the web :-(</p>\r\n<p>Thanks for the easy fix.</p>\r\n<p>Ken.</p>",
+    "PostedDate": "2011-02-18T11:50:08.313-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hello, \n\nwe use the OData V2, standard which specifies, that the JSON representation of Edm.Double is a String. When using datajs to load the OData V2 request, I would expect, the String is converted to a Javascript number/float in case of the type Edm.Double. This is what is stated on the following discussion thread:\nhttp://datajs.codeplex.com/discussions/246480\n\nBut it's not like that, Doubles stay as String when calling an OData V2 request in JSON format, as they are like this in the JSON format, and there is no explicit transformation in datajs. When calling the same OData V2 request in ATOM/XML format, then a parseFloat is called for types of Edm.Double.\nSo the question is, why is this explicit transformation (parseFloat) not also done for JSON format?\n\nI think there is an inconsistency in handling Edm.Double in JSON or XML format in Javascript, which is very annoying, as the logic is different when working with the values in Javascript. Especially if automatic binding is in place in a model, there is no way to do a transformation on these String-Doubles.\n\nThanks and best regards, \n\nOliver",
+    "LastUpdatedDate": "2014-01-09T04:10:05.01-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-12-13T07:17:29.383-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Javascript representation of Edm.Double is String in OData V2",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 3,
+    "Id": 1192
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

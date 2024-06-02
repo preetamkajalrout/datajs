@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1441989",
+    "ThreadId": "644239",
+    "Html": "Hello,\r<br />\n<br />\nIs there any tutorial somewhere or can someone help me setup datajs as a service within an angular JS project? I am using the ngbp starter project and I'm having troulble loading up OData usng datajs.\r<br />\n<br />\nI want to read the metadata from my OData API using datajs.\r<br />\n<br />\nThanks!<br />\n",
+    "PostedDate": "2015-08-26T06:30:46.533-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "613660",
+    "ThreadId": "257852",
+    "Html": "<p>Hi</p>\n<p>I am porting NetFlix OData sample from PHP SDK that is on OData.org. I am re writing the sample with DataJS.</p>\n<p>I am trying to make use of the caching API. As part of the sample, i have a drop down for filling up Genres. I have the following cache defined for getting Genres. I had previously done the same with Odata.read(). but wanted to make use of the cache. So here is the cache definition:</p>\n<p>&nbsp;OData.defaultHttpClient.enableJsonpCallback = true;<br />var cache = datajs.createDataCache({<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: \"genres\",<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; source: \"<a href=\"http://odata.netflix.com/Catalog/Genres\">http://odata.netflix.com/Catalog/Genres</a>\",<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prefetchSize: -1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });&nbsp;</p>\n<p>Note that i want to read all the Genres in one shot. So i have the prefetchsize set to -1. Now my question, using readrange how do i tell that i want to get all the items. ReadRange takes a startindex and a count i.e. OData.readrange(startIndex, count) ????</p>\n<p>As of now i have hardcoded the count as 485, which is what the Genres collection has and able to get the desired result i.e. second time when i refresh the page, it gets the items from the cache.</p>\n<p>So i am looking for a direction in this regards.</p>\n<p>regards<br />Lohith<br /><a href=\"http://about.me/kashyapa\">http://about.me/kashyapa</a></p>",
+    "PostedDate": "2011-05-16T18:32:18.64-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "614034",
+    "ThreadId": "257852",
+    "Html": "<p>Lohith, the cache is meant to simplify the scenario of a paginated / scrolling view over a big data set, which is why it presents data like that. I think you have three reasonable options here.</p>\r\n<p>1. Change the UI to be something other than a combo box. Combo boxes work great for some ranges of values, but asking the user to pick the right value from among 485 might be a bit too much. Maybe you can use an list with a box that filters or seeks into the list, for example. In either case, you can populate the combo box or list incrementally by making successive calls to readRange() - reading and adding to the combo box until there are no more results to be read, and you end up with a fully populate cache.</p>\r\n<p>2. You can also make an OData call to read everything in one go and store it directly using the store API. <a href=\"http://datajs.codeplex.com/wikipage?title=datajs%20store%20API\">http://datajs.codeplex.com/wikipage?title=datajs%20store%20API</a>. You miss out on the cache helping you out with server pagination and such though.</p>\r\n<p>3. For your particular case, you might simply call cache.readRange with a very large number, like 1000 or so. (the cache&nbsp;reads as much as it can and will return the 485 actual entities)&nbsp;Yes, your web page will stop working correctly if there are ever more than 1000 genres because you will miss some, but then again, it's probably unusable at the point you have a single combo box with over 1000 entries that the user needs to scroll through, which puts you back at #1, having to use a different set of controls to display a very large amount of data.</p>\r\n<p>Hope this helps,</p>\r\n<p>Marcelo</p>",
+    "PostedDate": "2011-05-17T09:16:32.467-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "619049",
+    "ThreadId": "257852",
+    "Html": "<p>Marcelo</p>\r\n<p>Thanks for the reply. For now i will leave with what i have. Thanks once again for your clarification :) Appreciate it.</p>\r\n<p>regards<br />Lohith<br /><a href=\"http://about.me/kashyapa\">http://about.me/kashyapa</a></p>",
+    "PostedDate": "2011-05-26T20:11:27.843-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

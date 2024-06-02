@@ -1,0 +1,44 @@
+<div class="wikidoc"><h1>datajs store API</h1>
+The store API provides a common abstraction over a few mechanisms that can be used to store data.<br />
+<ul><li>In-memory </li>
+<li>DOM Storage </li>
+<li>IndexedDB Storage (experimental) </li></ul>
+<br />This store abstraction is essentially a key/value pair, where the key is a string and the value is a JavaScript value persisted through a JSON round-trip.<br /><br />All of the store APIs work asynchronously. That is, you pass in success and error callbacks that fire sometime in the future, after the script has done its immediate work.<br /><br />The success callbacks will return either the key/value pair as added or updated, or a true/false value indicating whether the key that was just operated on existed.<br />
+<h2>datajs.createStore</h2>
+<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> store = datajs.createStore(name [, mechanism]);
+</pre></div>
+<ul><li><span class="codeInline">name</span>: this is a string used to distinguish one store from another.</li>
+<li><span class="codeInline">mechanism</span>: this is a string that can have one of the following values: &quot;best&quot;, &quot;memory&quot;, &quot;dom&quot; and &quot;indexeddb&quot;.</li></ul>
+<br />If left unspecified, it <span class="codeInline">mechanism</span> defaults to <span class="codeInline">datajs.defaultStoreMechanism</span>, which in turn defaults to &quot;best&quot;, which uses DOM if available and otherwise falls back to an in-memory store.<br /><br />Once IndexedDB gains is stabilized and implemented in major browsers, &quot;best&quot; will use IndexedDB if available in preference of the other two mechanisms.<br /><br />The createStore function immediately returns a <span class="codeInline">store</span> object.<br />
+<h2>store.add</h2>Adds a new key/value pair, fails if the key was already in the store. <br /><div style="color:Black;background-color:White;"><pre>
+store.add(key, value, success<span style="color:Green;">/*(key, value)*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div>
+<h2>store.addOrUpdate</h2>Adds a new key/value pair, updates the existing value if the key was already in the store. <br /><div style="color:Black;background-color:White;"><pre>
+store.addOrUpdate(key, value, success<span style="color:Green;">/*(key, value)*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div>
+<h2>store.clear</h2>Cleans up all data use and invalidates the store. <br /><div style="color:Black;background-color:White;"><pre>
+store.clear(success<span style="color:Green;">/*()*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div>
+<h2>store.close</h2>Closes any resources that the store may be using. <br /><div style="color:Black;background-color:White;"><pre>
+store.close() 
+</pre></div>
+<h2>store.contains</h2>Checks whether the key is in the store.<br /><div style="color:Black;background-color:White;"><pre>
+store.contains(key, success<span style="color:Green;">/*(bool)*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div>
+<h2>store.defaultError </h2>This is a field with a function to be used when the error callback isn&#39;t specified; it defaults to throwing the error. <br /><div style="color:Black;background-color:White;"><pre>
+store.defaultError = <span style="color:Blue;">function</span> (error) { };
+</pre></div>
+<h2>store.getAllKeys</h2>Returns an array with all key values. <br /><div style="color:Black;background-color:White;"><pre>
+store.getAllKeys(success<span style="color:Green;">/*(array)*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div>
+<h2>store.read</h2>Gets a key/value back; fails if the key is not present. <br /><div style="color:Black;background-color:White;"><pre>
+store.read(key, success<span style="color:Green;">/*(key, value)*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div>
+<h2>store.update</h2>Updates the value for a key that is in the store; fails if the key is not in the store. <br /><div style="color:Black;background-color:White;"><pre>
+store.update(key, value, success<span style="color:Green;">/*(key, value)*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div>
+<h2>store.remove</h2>Removes a key and its value from the store if found; the success callback argument is true if the key was found, false otherwise. <br /><div style="color:Black;background-color:White;"><pre>
+store.remove(key, success<span style="color:Green;">/*(bool)*/</span>, error<span style="color:Green;">/*(error)*/</span>) 
+</pre></div><hr />
+Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=OData%20Payload%20Formats&referringTitle=datajs%20store%20API">OData Payload Formats</a><br />Next Topic: <a href="https://datajs.codeplex.com/wikipage?title=datajs%20cache%20API&referringTitle=datajs%20store%20API">datajs cache API</a><br /></div><div class="ClearBoth"></div>

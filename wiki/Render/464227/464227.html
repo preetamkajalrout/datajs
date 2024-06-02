@@ -1,0 +1,115 @@
+<div class="wikidoc"><h1>OData API</h1><ul><li><a href="#OData.read">OData.read</a></li>
+<li><a href="#OData.request">OData.request</a></li>
+<li><a href="#Batch Operations">Batch Operations</a></li>
+<li><a href="#OData.defaultSuccess">OData.defaultSuccess</a></li>
+<li><a href="#OData.defaultError">OData.defaultError</a></li>
+<li><a href="#OData.defaultHttpClient">OData.defaultHttpClient</a></li></ul>
+<br /><a name="OData.read"></a>
+<h2>OData.read</h2>Reads data from the specified URL.<br /><br /><pre>
+OData.read = function (url | request, [success(data, response)], [error(error)], [handler], [httpClient], [metadata])
+</pre>
+<ul><li>url - A string containing the URL to which the request is sent.</li>
+<li>request -  An Object that represents the HTTP request to be sent.</li>
+<li>success(data, response) - A callback function that is executed if the request succeeds, taking the processed data and the server response.</li>
+<li>error(error) - A callback function that is executed if the request fails, taking an error object.</li>
+<li>handler - Handler object for the response data.</li>
+<li>httpClient - Object to use as an HTTP stack.</li>
+<li>metadata - Object describing the structural metadata to use.</li></ul>
+<br />This function is used to read data from an OData end point. In its simplest form this function takes a URL string to which an HTTP GET request is sent.<br /><br />For example you can get all available Genres in the Netflix service by making the following call.<br /><br /><div style="color:Black;background-color:White;"><pre>
+OData.read(<span style="color:#A31515;">&quot;http://odata.netflix.com/v1/Catalog/Genres&quot;</span>);
+</pre></div><br />As part of the URI you can also pass in parameters.<br /><br /><div style="color:Black;background-color:White;"><pre>
+OData.read(<span style="color:#A31515;">&quot;http://odata.netflix.com/v1/Catalog/Genres?$top=3&quot;</span>);
+</pre></div><br />For full documentation on OData supported URIs refer to the <a href="http://www.odata.org/developers/protocols/uri-conventions">OData documentation</a>.<br /><br />The <span class="codeInline">success</span> parameter of the <span class="codeInline">read</span> operation takes a callback function, which is executed if the request succeeds. If it is not defined then the default success handler is used from <span class="codeInline">OData.defaultSuccess</span>, which simply shows a dialog box with the results in a string form. It is a good practice to define your own success callback function.<br /><br /><div style="color:Black;background-color:White;"><pre>
+OData.read(<span style="color:#A31515;">&quot;http://odata.netflix.com/v1/Catalog/Genres&quot;</span>,
+  <span style="color:Blue;">function</span> (data, request) {
+    <span style="color:Blue;">var</span> html = <span style="color:#A31515;">&quot;&quot;</span>;
+    <span style="color:Blue;">for</span> (<span style="color:Blue;">var</span> i = 0; i &lt; data.results.length; i++) {
+      html += <span style="color:#A31515;">&quot;&lt;div&gt;&quot;</span> + data.results[i].Name + <span style="color:#A31515;">&quot;&lt;/div&gt;&quot;</span>;
+    }
+    document.getElementById(<span style="color:#A31515;">&quot;target-element-id&quot;</span>).innerHTML = html;
+  });
+</pre></div><br />The <span class="codeInline">read</span> function also takes an <span class="codeInline">error</span> parameter which is a callback function. The error callback is executed if the request fails. If the function is not defined then the default error handler <span class="codeInline">OData.defaultError</span> is invoked causing the error to be thrown as an exception.<br /><br /><div style="color:Black;background-color:White;"><pre>
+OData.read(<span style="color:#A31515;">&quot;http://odata.netflix.com/v1/Catalog/Genres&quot;</span>,
+  <span style="color:Blue;">function</span> (data, request) {
+    <span style="color:Blue;">var</span> html = <span style="color:#A31515;">&quot;&quot;</span>;
+    <span style="color:Blue;">for</span> (<span style="color:Blue;">var</span> i = 0; i &lt; data.results.length; i++) {
+      html += <span style="color:#A31515;">&quot;&lt;div&gt;&quot;</span> + data.results[i].Name + <span style="color:#A31515;">&quot;&lt;/div&gt;&quot;</span>;
+    }
+    document.getElementById(<span style="color:#A31515;">&quot;target-element-id&quot;</span>).innerHTML = html;
+  }, <span style="color:Blue;">function</span>(err){
+    alert(<span style="color:#A31515;">&quot;Error occurred &quot;</span> + err.message);
+});
+</pre></div><br />A handler can optionally be passed to the <span class="codeInline">read</span> function. By default the MIME-based handler is used, which looks at the Content-Type header and uses the correct handler to parse the payload results. For example if the response&#39;s content type header is application/json then the JSON handler would be invoked to parse the data.<br /><br />The <span class="codeInline">read</span> function also takes in an <span class="codeInline">httpClient</span> object. If it is not defined then the default httpClient object is used from <span class="codeInline">OData.defaultHttpClient</span>, which is set to a library that can take an HTTP request representation and return a response message from it.<br /><br />The <span class="codeInline">metadata</span> parameter is optional, and defaults to OData.defaultMetadata. Handlers make use of metadata to enhance how they process data.<br /><br />To allow finer control over what is sent in the request this function also allows passing in a request object instead of a simple URI string. The schema for this object is described in more detail under <a href="#OData.request">OData.request</a>.<br /><br />The following example shows how to specify the accept type inside the request object, along with success and error callback functions.<br /><br /><div style="color:Black;background-color:White;"><pre>
+OData.read({ requestUri: <span style="color:#A31515;">&quot;http://odata.netflix.com/v1/Catalog/Genres&quot;</span>,
+  headers: { Accept: <span style="color:#A31515;">&quot;application/json&quot;</span> } },
+  <span style="color:Blue;">function</span> (data, response) {
+    alert(<span style="color:#A31515;">&quot;Operation succeeded.&quot;</span>);
+  }, <span style="color:Blue;">function</span> (err) {
+    alert(<span style="color:#A31515;">&quot;Error occurred &quot;</span> + err.message);
+  });
+</pre></div><br />The <span class="codeInline">read</span> operation returns a request value. The request value supports an <span class="codeInline">abort</span> invocation to cancel progress.<br /><br /><a name="OData.request"></a>
+<h2>OData.request</h2>Sends a request containing OData payload to the server.<br /><br /><pre>
+OData.request = function (request, [success(data, response)], [error(error)], [handler], [httpClient], [metadata])
+</pre>
+<ul><li>request - An Object that represents the HTTP request to be sent</li>
+<li>success(data, response) - A callback function that is executed if the request succeeds, taking the processed data and the server response.</li>
+<li>error(error)  - A callback function that is executed if the request fails, taking an error object.</li>
+<li>handler - Handler object for the request data.</li>
+<li>httpClient - Object to use as an HTTP stack.</li>
+<li>metadata - Object describing the structural metadata to use.</li></ul>
+<br />The <span class="codeInline">OData.request</span> function is a low level API for fine grained control over the request. It provides optional parameters to set callback functions, custom data handler and the HTTP client to use.<br /><br />This API takes a request object as the first parameter that contains the headers, the target URI, the HTTP verb, which defines which CRUD operation to perform, and lastly the data on which the action takes place.<br /><br />The request object should conform to the following signature:<br /><br /><div style="color:Black;background-color:White;"><pre>
+request = { 
+    headers : object, <span style="color:Green;">// object that contains HTTP headers as name value pairs </span>
+    requestUri : string, <span style="color:Green;">// OData endpoint URI </span>
+    method : string, <span style="color:Green;">// HTTP method (GET, POST, PUT, DELETE) </span>
+    data : object, <span style="color:Green;">// Payload of the request (in intermediate format) </span>
+    user: string, <span style="color:Green;">// (Optional) Username to send for BASIC authentication</span>
+    password: string <span style="color:Green;">// (Optional) Password to send for BASIC authentication</span>
+};
+</pre></div><br />The headers is an object containing key value pairs that let the user control the semantics of the HTTP request. For example user can specify the &#39;Accept&#39; type for data or the version of the DataService. Whatever is defined in the headers object takes precedence over the defaults; however if a value is missing in the headers then the defaults are used. For example if the caller specifies a given DataServiceVersion, then handlers will not set the value for the DataServiceVersion header.<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">var</span> request = { headers : { <span style="color:#A31515;">&quot;DataServiceVersion&quot;</span>: <span style="color:#A31515;">&quot;2.0&quot;</span> } };
+</pre></div><br />The requestUri is a string value that specifies the location on the OData endpoint to which the operation is targeted. For operations on existing items the URI should resolve to a single entity or link. For an insert operation this URI points to the resource set or collection to which the entity is inserted. For more information on OData operations refer to: http://www.odata.org/developers/protocols/operations<br /><br />Here are few examples of how the requestUri would look for a given operation.<br /><br />Add a new entity in an entity set<br />requestUri : http://services.odata.org/website/odata.svc/Customers<br /><br />Add a new entity in a linked entity set<br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)/Orders<br /><br />Update an existing entity <br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)<br /><br />Update an existing linked entity <br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)/Orders(1)<br /><br />Merge an existing entity <br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)<br /><br />Merge an existing linked entity <br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)/Orders(1)<br /><br />Remove an existing entity <br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)<br /><br />Remove (i.e. set to null) a primitive property value in an existing entity <br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)/FirstName/$value<br /><br />Remove an existing linked entity <br />requestUri : http://services.odata.org/website/odata.svc/Customers(1)/Orders(1)<br /><br />The method property in the request object determines, via an HTTP verb, the CRUD operation to perform. The following table shows the operations supported by the protocol and how they map to HTTP verbs.<br />
+<ul><li>Add a new entity: POST </li>
+<li>Update an existing entity: PUT</li>
+<li>Update an existing entity with only the specified values: MERGE</li>
+<li>Delete an entity: DELETE </li></ul>
+<br />The data property defines the payload of the request defined in the intermediate format. The request is passed as input to the handler object which serializes the request payload to the appropriate wire format; as controlled by the request headers. The transformed data is then stored in the body property. Finally, the modified request object is passed to the underlying network stack.<br /><br />Some update operations, such as POST, generate a response with the new item. This data is valuable because it provides useful metadata like the edit URI or concurrency information. It is also useful for any server generated property values. The response is processed by the appropriate handler. All responses trigger the invocation of either a success or error callback depending on the status of the HTTP response.<br /><br />The success parameter of the request operation takes a callback function, which is executed if the request succeeds. If it is not defined then the default success handler is used from OData.defaultSuccess. It is a good practice to define your own success callback function.<br /><br />The request function also takes an error parameter which is a callback function. The error callback function is executed if the request fails. If error callback function is not defined then the default error handler is used from the OData.defaultError.<br /><br />Optionally a handler can be passed to the OData.request function. If it&#39;s not defined, the MIME-based handler is used, which looks at the Content-Type header and uses the correct handler to parse the payload results. For example if the data type is JSON then JSON handler would be invoked to parse the data.<br /><br />The request function also takes in an httpClient object. If it is not defined then the default httpClient object is used from OData.defaultHttpClient.<br /><br /><a name="Batch Operations"></a>
+<h2>Batch Operations</h2>datajs request API also supports OData batch operations that that allow grouping multiple operations into a single HTTP request. Following two examples show how to do batch operations for GET, PUT and POST by using <i></i>batchRequests and <i></i>changeRequests <br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">// Example 1:</span>
+OData.request( {
+    requestUri: <span style="color:#A31515;">&quot;http://ODataServer/FavoriteMovies.svc/$batch&quot;</span>,
+    method: <span style="color:#A31515;">&quot;POST&quot;</span>,
+    data: { __batchRequests: [
+       { requestUri: <span style="color:#A31515;">&quot;BestMovies(0)&quot;</span>, method: <span style="color:#A31515;">&quot;GET&quot;</span> },
+       { requestUri: <span style="color:#A31515;">&quot;BestMovies(1)&quot;</span>, method: <span style="color:#A31515;">&quot;GET&quot;</span> }
+    ]}
+}, <span style="color:Blue;">function</span> (data, response) {
+    <span style="color:Green;">//success handler</span>
+}, undefined, OData.batchHandler);
+
+<span style="color:Green;">// Example 2:</span>
+OData.request( {
+     requestUri: <span style="color:#A31515;">&quot;http://ODataServer/FavoriteMovies.svc/$batch&quot;</span>,
+     method: <span style="color:#A31515;">&quot;POST&quot;</span>,
+     data: { __batchRequests: [
+             { __changeRequests: [
+                 { requestUri: <span style="color:#A31515;">&quot;BestMovies(0)&quot;</span>, method: <span style="color:#A31515;">&quot;PUT&quot;</span>, data: {MovieTitle: <span style="color:#A31515;">&#39;Up&#39;</span>} },
+                 { requestUri: <span style="color:#A31515;">&quot;BestMovies&quot;</span>, method: <span style="color:#A31515;">&quot;POST&quot;</span>, data: {ID: 2, MovieTitle: <span style="color:#A31515;">&#39;Samurai&#39;</span>} }
+             ]}
+     ]}
+ }, <span style="color:Blue;">function</span> (data, response) {
+     <span style="color:Green;">//success handler</span>
+}, undefined, OData.batchHandler);
+</pre></div><br /><a name="OData.defaultSuccess"></a>
+<h2>OData.defaultSuccess</h2>
+Default callback function for APIs that succeed.<br /><pre>
+OData.defaultSuccess = function (data, response)
+</pre><br /><br />The OData.defaultSuccess property is used to fill in the value for calls that do not specify a success callback handler.<br /><br />By default, it simply displays the string representation of data in an alert box. This is convenient for quick prototyping, for example you can type <span class="codeInline"> javascript:(function(){OData.read(&quot;/myservice.svc/Customers&quot;);})() </span> in the location bar of the browser when datajs.js is available, and see the results in an alert box.<br /><br />This property is not often used; instead, most API calls should include a situation-specific success handler.<br /><br /><a name="OData.defaultError"></a>
+<h2>OData.defaultError</h2>Default callback function for APIs that fail.<br /><pre>
+OData.defaultError = function (error, [response])
+</pre><br /><br />The OData.defaultError property is used to fill in the value for calls that do not specify an error callback handler.<br /><br />By default, it simply throws the given error, which may go unhandled and break into the debugger if one is running in the browser. This is convenient for debugging, but typically the library consumer can do something more appropriate.<br /><br />This property is often used as a generic error handler hook when all or most API calls end up routing through the same error handling mechanism.<br /><br />Note that the error object may contain more or less information depending on when the error was found. For example, failures that occur when a request is being sent will not have a response property, but failures that occur while processing the response typically will have this property set.<br /><br /><a name="OData.defaultHttpClient"></a>
+<h2>OData.defaultHttpClient</h2>Provides the default HTTP layer for datajs.<br /><br /><pre>
+OData.defaultHttpClient = { request: function (request, success, error) }
+</pre><br /><br />The OData.defaultHttpClient property is used to fill in the value for calls that do not specify an HTTP client value.<br /><br />The single property request provides a function that can be invoked with a request object, a success callback and an error callback.<br /><br />By default, the library provides an HTTP client that relies on the XMLHttpRequest object to handle network requests.<br /><br />The built-in HTTP client also provides properties to control the use of JSONP - see <a href="https://datajs.codeplex.com/wikipage?title=Cross%20Domain%20Requests&referringTitle=datajs%20OData%20API">Cross Domain Requests</a> for additional information.<br /><br />This property is typically left in its default state, although it may be replaced for advanced scenarios such as to add custom HTTP-level logging.<br /><br />For an example of how to create a custom HTTP client, see <a href="https://datajs.codeplex.com/wikipage?title=Custom%20OData%20httpClient&referringTitle=datajs%20OData%20API">Custom OData httpClient</a>.
+<hr />
+Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=References&referringTitle=datajs%20OData%20API">References</a><br />Next Topic: <a href="https://datajs.codeplex.com/wikipage?title=OData%20Payload%20Formats&referringTitle=datajs%20OData%20API">OData Payload Formats</a></div><div class="ClearBoth"></div>

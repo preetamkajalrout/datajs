@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "856817",
+    "ThreadId": "361821",
+    "Html": "\r\n<p>Hello,</p>\r\n<p>I am trying to perform an update for a table where primary key is composed by two fields. Could somebody give me a clue about how to perform this update? I have tryed using mytable(field1:value, field2:value) but it did not work. Some idea?</p>\r\n<p>Thanks</p>\r\n",
+    "PostedDate": "2012-07-03T07:09:12.077-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "889778",
+    "ThreadId": "361821",
+    "Html": "<p>You must use it in this form&nbsp;<span>mytable(field1=value, field2=value) equal (=) instead of colon (:).&nbsp;</span></p>",
+    "PostedDate": "2012-07-24T09:16:52.407-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

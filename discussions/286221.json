@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "725507",
+    "ThreadId": "286221",
+    "Html": "\r\n<p>Hi!</p>\r\n<p>I can successfully call an odata feed over http using datajs, but when I put my https service I get an error message &quot;HTTP request failed&quot;.</p>\r\n<p>Here is the error object:</p>\r\n<p>I'm using basic&nbsp;authentication header.</p>\r\n<div id=\"_mcePaste\" style=\"height:1px; width:1px; overflow:hidden; left:-10000px; top:0px\">\r\n&#65279;</div>\r\n<p><span style=\"font-size:xx-small; font-family:Consolas\"></p>\r\n<div><span style=\"font-size:xx-small; font-family:Consolas\">\r\n<pre>? err\r\n{...}\r\n    message: &quot;HTTP request failed&quot;\r\n    request: {...}\r\n    response: {...}\r\n? err.response\r\n{...}\r\n    requestUri: &quot;https://XXXXX.cloudapp.net/bbi.svc/DimMetric&quot;\r\n    statusCode: 0\r\n    statusText: &quot;&quot;\r\n    headers: []\r\n    body: &quot;&quot;</pre>\r\n</span></div>\r\n</span>\r\n<p></p>\r\n<p>How can I debug what is happening ? Thanks</p>\r\n<p></p>\r\n<p></p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-01-15T14:14:41.093-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "725931",
+    "ThreadId": "286221",
+    "Html": "<p>Hi tiagonmas,</p>\r\n<p>&nbsp;&nbsp;&nbsp; Hope you are doing great.&nbsp; You can always debug what's going on over the network by using Fiddler or the browsers debuggin tools.. For example, IE9 has a very good debugger with a network trace. Chrome has also a solid set of developer tools that will also allow you to trace the requests and their responses.. Firefox has the FireBug debugger wich is very solid too.&nbsp;</p>\r\n<p>&nbsp;&nbsp;&nbsp; Based on what you post, it looks to me that you are issuing a cross domain request, and the browser is rejecting it because of the <a href=\"http://en.wikipedia.org/wiki/Same_origin_policy\" target=\"_blank\">same origin policy </a>(hence the HTTP status 0).&nbsp; The library has support for cross domain requests using JSONP; however, it is off by default and you have to turn it on.&nbsp; There are to ways to do it, globally by setting the flag&nbsp; odata.defaultHttpClient.enableJsonpCallback = true;&nbsp; or per request by setting the enableJsonpCallback property of the request object to true:</p>\r\n<pre>OData.read({ requestUri: <span style=\"color: #a31515;\">\"uri\"</span>, enableJsonpCallback: <span style=\"color: blue;\">true</span>} , <span style=\"color: blue;\">function</span> (data) { \r\n    <span style=\"color: green;\">// success function</span>\r\n}, \r\n<span style=\"color: blue;\">function</span> (err) {\r\n    <span style=\"color: green;\">// error function.</span>\r\n});</pre>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-01-16T11:26:42.63-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

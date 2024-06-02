@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "616533",
+    "ThreadId": "258576",
+    "Html": "\r\n<p>I have been working on implementing the datajs 0.0.3 library in a web application used by WP7, but it seems to be failing on OData.read without causing an exception!<br>\r\nI have added the external JSON2.js library as IEMobile/7.0 does not natively support JSON, but this has had no effect on this particular issue.</p>\r\n<p>The lack of developer console for IEMobile 7 is making it difficult to track down the deeper cause for this issue, so I am a bit stuck here!</p>\r\n<p>Any suggestions would be much appreciated.&nbsp;</p>\r\n<p>Luke</p>\r\n",
+    "PostedDate": "2011-05-22T20:12:56.993-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "616931",
+    "ThreadId": "258576",
+    "Html": "<p>Hi LukeGriffin,</p>\r\n<p>Does the same issue repro on desktop Internet Explorer or the Windows Phone 7 emulator? If it does you can attach Fiddler (take a look at <a href=\"http://blogs.msdn.com/b/fiddler/archive/2010/10/15/fiddler-and-the-windows-phone-emulator.aspx\">http://blogs.msdn.com/b/fiddler/archive/2010/10/15/fiddler-and-the-windows-phone-emulator.aspx</a>&nbsp;to see how to use Fiddler with the WP7 emulator) to debug the network traffic to see if that tells you anything. If the issue only repros on the physical device, you can still use the same settings with Fiddler, and then manually set the device to proxy through Fiddler.</p>\r\n<p>Alternatively, if you could send us a minimum repro of the issue we can take a look at it.</p>\r\n<p>Thanks,</p>\r\n<p>David</p>",
+    "PostedDate": "2011-05-23T12:07:22.45-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

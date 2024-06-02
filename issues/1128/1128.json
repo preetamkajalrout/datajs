@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "When doing POST requests in XML/Atom format datajs 1.1.1 then all properties get Edm.String as embedded type which is wrong.\n\nPlease see detailed issue here:\n\nhttp://datajs.codeplex.com/discussions/451506",
+    "LastUpdatedDate": "2013-09-13T02:57:07.423-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-09-02T01:36:31.523-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "POST in Atom format all properties have Edm.String",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 2,
+    "Id": 1128
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "710439",
+    "ThreadId": "282540",
+    "Html": "\r\n<p>Hi ,</p>\r\n<p>I am creating my UI based on my data.js read operation response.</p>\r\n<p>But i am facing issue when i am doing read call.</p>\r\n<p>When i do read call,the response coming late and my UI start building but when the bind property executes ,it throws error as the response from the read operation is not yet reached,</p>\r\n<p>So i want to make my call syncronus so that my ui start building only when my response in place or if you have any good idea then then kindly inform me.</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks,</p>\r\n<p>sudhanshu</p>\r\n",
+    "PostedDate": "2011-12-11T00:04:35.81-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "711031",
+    "ThreadId": "282540",
+    "Html": "<p>Hi Sudhanshu,</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; Based on what you describe in your scenario you would probably need to trigger the initialization / creation of your response dependant UI from the OData.read() success handler function.&nbsp;&nbsp; You'll probably want to have some other piece of UI that shows up at the very beggining and letting the user know that your webapp is initializing, or loading while it is waiting for the response to come back.&nbsp; Then in the success handler you can hide or completely remove the \"Waiting\" UI element and show the real UI with all its glory :).</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-12-12T10:51:38.537-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

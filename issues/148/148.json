@@ -1,0 +1,91 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi guys,\n \nI don't know if this is a server issue or a datajs issue. Please see the attached screenshot first. I used datajs v.0.0.2 and IE8.\nThe server responded with the response header \"content-type\" but datajs checks for \"Content-Type\" (case sensitive) line 3527. So the header is not found and the handler function is not called.\nThe spec says: \nhttp://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2\nEach header field consists of a name followed by a colon (\":\") and the field value.\nField names are case-insensitive.\nSo after that a server may also respond with \"content-type\".\nCould you please check this?\nThanks!",
+    "LastUpdatedDate": "2013-06-14T00:31:46.503-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2011-02-18T02:35:17.767-08:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "header field names case-insensitive problem",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 148
+  },
+  "FileAttachments": [
+    {
+      "FileId": 38,
+      "FileName": "headerbug.jpg",
+      "DownloadUrl": ".\\38"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "You are right, as per the specification field names are case-insensitive. We will fix this issue. \r\nThanks for reporting.\r\nasad",
+      "PostedDate": "2011-02-24T18:33:08.95-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2011-03-22T08:20:43.42-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "RMcMahon, thanks for the contribution - we already have a fix that we're thinking of uploading later this week that should take care of the issue, this should serve as a good kick in the behind to make sure we do it in a timely manner.\r\n\r\nI'm very interested in your experience with the project. Did building work well for you? Is the code more or less well organized, or do you think we should invest time in improving some particular aspect?",
+      "PostedDate": "2011-03-28T12:58:42.167-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "The fix has already been uploaded, it should be available if you get the code and in our next release. Please reactivate if this isn't quite working for you (we only normalize the headers we use, and try to not mess with anything else).",
+      "PostedDate": "2011-04-07T16:08:31.8-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "The fix has already been uploaded, it should be available if you get the code and in our next release. Please reactivate if this isn't quite working for you (we only normalize the headers we use, and try to not mess with anything else).",
+      "PostedDate": "2011-04-07T16:08:37.923-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:13.647-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T04:44:31.727-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T04:44:31.857-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-06-14T00:31:46.503-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I'm using WCF Data Services version 5.0.2, and I'm explicitly specifying V3 of the OData protocol with the verbose JSON format (Accept: application/json;odata=verbose). At some point, it appears that they changed the V3 OData JSON verbose format to use the same date format as the ATOM format, rather than the old tick-based format. However, when I specify the service metadata in datajs, it attempts to validate and/or parse requests based on the assumption that the data is in the old tick-based format, and so I get 'Invalid Date/Time format' errors.",
+    "LastUpdatedDate": "2013-06-14T00:31:44.77-07:00",
+    "PlannedForRelease": "datajs version 1.1.0-beta",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-10-04T06:08:57.767-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Verbose JSON V3 Date format updated - datajs doesn't handle it yet",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 857
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Hi, has been resolved in datajs-1.1.0-beta2",
+      "PostedDate": "2012-11-15T10:54:04.603-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2012-11-15T10:54:50.81-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-21T17:20:07.887-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T04:44:27.817-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T04:44:27.98-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-06-14T00:31:44.77-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1435508",
+    "ThreadId": "641732",
+    "Html": "It seems that datajs doesn't support odata V4 with schema: <a href=\"http://docs.oasis-open.org/odata/ns/edmx\" rel=\"nofollow\">http://docs.oasis-open.org/odata/ns/edmx</a>\r<br />\nOnly microsoft schemas are supported, for example: <a href=\"http://schemas.microsoft.com/ado/2007/06/edmx\" rel=\"nofollow\">http://schemas.microsoft.com/ado/2007/06/edmx</a><br />\n",
+    "PostedDate": "2015-07-22T04:48:15.103-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

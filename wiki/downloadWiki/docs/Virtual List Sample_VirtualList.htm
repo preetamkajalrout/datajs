@@ -1,0 +1,486 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Virtual List Demo</title>
+    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"> </script>
+    <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js" type="text/javascript"></script>
+    <script src="datajs-1.0.2.js" type="text/javascript"></script>
+    <style type="text/css">
+        .scrollbar-track
+        {
+            background: #3399FF;
+            position: absolute;
+            right: 0px;
+            width: 20px;
+            height: 100%;
+        }
+        
+        .scrollbar-thumb
+        {
+            background: #330099;
+        }
+        
+        .list-surface
+        {
+            position: absolute;
+            width: 90%;
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+        
+        .list-container
+        {
+            border: 1px solid black;
+            margin: 0px;
+            padding: 0px;
+            height: 200px;
+            position: relative;
+            display: none;
+        }
+        
+        body
+        {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Virtual List</h1>
+
+    <p>
+    This sample demonstrates the use of the datajs Cache API to create a virtualized list.
+    </p>
+
+    <script id="odataTemplate" type="text/x-jquery-tmpl">
+        <div style='position: relative; height: 32px; margin: 2px; border: 1px solid gainsboro;'>Short name: ${Name}</div>
+    </script>
+    <div id='adhocGrid' class='list-container'>
+        <div class="list-surface"></div>
+        <div class="scrollbar-track">
+            <div class="scrollbar-thumb" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        var mix = {};
+    </script>
+    <script type="text/javascript">
+        mix.scrollbar = (function () {
+            function captureMouse(moveCallback, releaseCallback) {
+                var previousMouseMove = document.body.onmousemove;
+                var previousMouseUp = document.body.onmouseup;
+
+                var onLostCapture = function () {
+                    document.body.onmousemove = previousMouseMove;
+                    document.body.onmouseup = previousMouseUp;
+
+                    releaseCallback();
+                }
+
+                $(document.body).bind("mouseup", onLostCapture);
+                $(document.body).bind("mousemove", moveCallback);
+
+                return onLostCapture;
+            };
+
+            function create(options) {
+                var min = options.min || 0;
+                var max = options.max || 100;
+                var value = Math.max(Math.min(options.value || 0, max), min);
+                var thumbSize = Math.max(options.thumbSize || (max - min) / 10, (max - min));
+                var isMouseDown = false;
+                var start = 0;
+                var startY = 0;
+                var thumb = $(options.hostElement).children(".scrollbar-thumb");
+                var scrollbar = {};
+                var release;
+
+                var onMouseDown = function (e) {
+                    e = e || event;
+
+                    isMouseDown = true;
+                    startY = e.clientY;
+                    start = value;
+
+                    release = captureMouse(onMouseMove, onMouseUp);
+                    e.returnValue = false;
+                    return false;
+                };
+
+                function availableHeight() {
+                    return options.hostElement.offsetHeight - thumbSize;
+                };
+
+                var onMouseMove = function (e) {
+                    e = e || event;
+
+                    if (isMouseDown) {
+                        var delta = e.clientY - startY;
+                        if (delta > 0)
+                            delta = Math.floor(delta);
+                        else
+                            delta = Math.ceil(delta);
+
+                        if (delta != 0) {
+                            value = start + (delta / availableHeight()) * (max - min);
+                            value = Math.max(min, Math.min(value, max));
+                            update();
+                        }
+
+                        e.returnValue = false;
+                        return false;
+                    }
+
+                    if ((e.button & 1) !== 1 && release) {
+                        isMouseDown = false;
+                        release();
+                        release = null;
+                        return;
+                    }
+
+                };
+
+                var onMouseUp = function () {
+                    isMouseDown = false;
+                };
+
+                function setMin(value) {
+                    min = value;
+                    update();
+                };
+                function getMin() {
+                    return min;
+                };
+
+                function setMax(value) {
+                    max = value;
+                    update();
+                };
+                function getMax() {
+                    return max;
+                };
+
+                function setMinAndMax(minValue, maxValue) {
+                    min = minValue;
+                    max = maxValue;
+                    update();
+                };
+
+                function setValue(newValue) {
+                    value = newValue;
+                    update();
+                };
+
+                function getValue() {
+                    return value;
+                };
+
+                function setThumbSize(value) {
+                    if (typeof value === 'number' && isFinite(value)) {
+                        thumbSize = value;
+                    }
+                    update();
+                };
+
+                function update() {
+                    var pixels = (value / (max - min)) * availableHeight();
+                    thumb.css("position", "relative");
+                    if (typeof pixels === 'number' && isFinite(pixels)) {
+                        thumb.css("top", pixels + "px");
+                    }
+                    if (typeof thumbSize === 'number' && isFinite(thumbSize)) {
+                        thumb.css("height", thumbSize + "px");
+                    }
+                    if (options.updated !== undefined) {
+                        options.updated(scrollbar);
+                    }
+                };
+
+                scrollbar.setThumbSize = setThumbSize;
+                scrollbar.getValue = getValue;
+                scrollbar.setValue = setValue;
+                scrollbar.setMin = setMin;
+                scrollbar.getMin = getMin;
+                scrollbar.setMax = setMax;
+                scrollbar.getMax = getMax;
+                scrollbar.setMinAndMax = setMinAndMax;
+                scrollbar.update = update;
+
+                thumb.bind('mousedown', onMouseDown);
+                update();
+
+                return scrollbar;
+            };
+
+            return { create: create };
+        })();
+
+        mix.list = (function () {
+            function createHtmlSkeleton(root) {
+                root.innerHTML = '' +
+            '<div class="list-surface"></div>' +
+            '<div class="scrollbar-track"><div class="scrollbar-thumb" /></div>';
+            }
+
+            function create(options) {
+                var surfaceOptions = options;
+                var dataCount = -1;
+
+                createHtmlSkeleton($(options.hostElement).get(0));
+
+                var listSurfaceHost = $(options.hostElement).find(".list-surface").get(0);
+                surfaceOptions.listSurfaceHost = listSurfaceHost;
+                surfaceOptions.ready = function (theDataCount) {
+                    scroll.setMinAndMax(0, theDataCount);
+                    dataCount = theDataCount;
+                };
+
+                var surface = createSurface(surfaceOptions);
+                var scrollSurface = $(options.hostElement).find(".scrollbar-track").get(0);
+                var scroll = mix.scrollbar.create({
+                    hostElement: scrollSurface,
+                    updated: function (s) {
+                        surface.setDisplayRange({ topRow: Math.ceil(s.getValue()) });
+                    }
+                });
+
+                // Remove any existing handlers.
+                $(listSurfaceHost).unbind("resize");
+                $(scrollSurface).unbind("resize");
+
+                //$(listSurfaceHost).bind("resize", function () {
+                //    scrollSurface.style.height = listSurfaceHost.offsetHeight;
+                //});
+
+                $(scrollSurface).bind("resize", function () {
+                    if (dataCount !== -1) {
+                        scroll.setThumbSize(
+                    Math.min(Math.max(listSurfaceHost.offsetHeight * (surface.getDisplayRange().pageSize / dataCount), 3),
+                    listSurfaceHost.offsetHeight));
+                    }
+                });
+
+                return {
+                    setDisplayRange: surface.setDisplayRange,
+                    getDisplayRange: surface.getDisplayRange
+                };
+            };
+
+            function createSurface(options) {
+                var rootElement = null;
+                var data = options.data;
+                var localOptions = options;
+                var topRow = 0;
+                var pageSize = localOptions.pageSize || 10;
+                var currentTopRowIndex = -1;
+                var currentBottomRowIndex = -1;
+                var dataCount = -1;
+                var template = null;
+                var pending = null;
+
+                if (!localOptions.listSurfaceHost) {
+                    throw { message: "Cannot create a list without a hostElement field on the 'options' argument." };
+                }
+
+                rootElement = localOptions.listSurfaceHost;
+
+                var getPageSize = function () {
+                    if (dataCount !== -1) {
+                        return Math.min(pageSize, dataCount);
+                    } else {
+                        return pageSize;
+                    }
+                };
+
+                var getTopRow = function (proposedTopRow) {
+                    if (dataCount !== -1) {
+                        var m = Math.min(proposedTopRow, dataCount - getPageSize());
+                        return Math.max(m, 0);
+                    } else {
+                        return topRow;
+                    }
+                };
+
+                // Wait 3/4ths of a second before showing the spinny.
+                /*
+                if (!suppressWait) {
+                timeoutId = window.setTimeout(function () {
+                if (finished === false) {
+                cell.setAttribute("class", "loadingCell");
+                }
+                timeoutId = null;
+                }, 750);
+                }
+                */
+
+                var calcVisibleRows = function (proposedTopRow) {
+                    var startVisibleRow = getTopRow(proposedTopRow);
+                    var endVisibleRow = Math.min(getPageSize() + startVisibleRow, dataCount);
+                    return { start: startVisibleRow, end: endVisibleRow };
+                };
+
+                var displayDataRow = function (displayIndex, dataIndex, dataItem) {
+                    var child = document.createElement("DIV");
+                    if (displayIndex === rootElement.childNodes.length) {
+                        rootElement.appendChild(child);
+                    } else {
+                        if (displayIndex >= rootElement.childNodes.length) {
+                            alert("oops");
+                        }
+                        rootElement.insertBefore(child, rootElement.childNodes[displayIndex]);
+                    }
+
+                    if (!template) {
+                        template = $("#odataTemplate").template();
+                    }
+                    $.tmpl(template, dataItem).appendTo(child);
+                    child.title = "item at index " + dataIndex + ", display " + displayIndex;
+                };
+
+                var displayRows = function () {
+                    if (dataCount === -1) {
+                        var countDone = function (count) {
+                            dataCount = count;
+                            if (localOptions.ready) {
+                                localOptions.ready(dataCount);
+                            }
+                            displayRows();
+
+                        }
+                        if (OData.defaultHttpClient.enableJsonpCallback) {
+                            setTimeout(function () {
+                                // Set the count to some arbitrary number
+                                countDone(500);
+                            }, 0);
+                        } else {
+                            data.count().then(countDone);
+                        }
+                        return;
+                    }
+
+                    var visibleRows = calcVisibleRows(topRow);
+                    var startVisibleRow = visibleRows.start;
+                    var endVisibleRow = visibleRows.end;
+
+                    // Add/subtract rows from beggining or end of table.
+                    // We 'reset' the first time or when there is no overlap in rows.
+                    var rowsToRemoveFromStart = 0, rowsToAddFromStart = 0;
+                    var rowsToRemoveAtEnd = 0, rowsToAddAtEnd = 0;
+                    if (currentTopRowIndex === -1 || startVisibleRow > currentBottomRowIndex || currentTopRowIndex > endVisibleRow) {
+                        while (rootElement.hasChildNodes()) {
+                            rootElement.removeChild(rootElement.firstChild);
+                        }
+
+                        rowsToAddFromStart = endVisibleRow - startVisibleRow;
+                    } else {
+                        if (startVisibleRow > currentTopRowIndex) {
+                            rowsToRemoveFromStart = startVisibleRow - currentTopRowIndex;
+                        } else if (startVisibleRow < currentTopRowIndex) {
+                            rowsToAddFromStart = currentTopRowIndex - startVisibleRow;
+                        }
+
+                        if (endVisibleRow > currentBottomRowIndex) {
+                            rowsToAddAtEnd = endVisibleRow - currentBottomRowIndex;
+                        } else if (endVisibleRow < currentBottomRowIndex) {
+                            rowsToRemoveAtEnd = currentBottomRowIndex - endVisibleRow;
+                        }
+                    }
+
+                    currentTopRowIndex = startVisibleRow;
+                    currentBottomRowIndex = endVisibleRow;
+
+                    if (pending) {
+                        pending.cancel();
+                        pending = null;
+                    }
+
+                    pending = data.readRange(currentTopRowIndex, (currentBottomRowIndex - currentTopRowIndex) + 1).
+                then(function (results) {
+                    pending = null;
+                    var i;
+                    for (i = 0; i < rowsToRemoveFromStart; i++) {
+                        rootElement.removeChild(rootElement.firstChild);
+                    }
+                    for (i = 0; i < rowsToAddFromStart; i++) {
+                        displayDataRow(i, i + startVisibleRow, results[i]);
+                    }
+
+                    for (i = 0; i < rowsToRemoveAtEnd; i++) {
+                        rootElement.removeChild(rootElement.lastChild);
+                    }
+
+                    for (i = 0; i < rowsToAddAtEnd; i++) {
+                        displayDataRow(
+                            (endVisibleRow - startVisibleRow) - (rowsToAddAtEnd - i), endVisibleRow - (rowsToAddAtEnd - i),
+                            results[i]);
+                    }
+
+                    $(options.hostElement).fadeIn();
+                }, function (err) {
+                    pending = null;
+                });
+                };
+
+                var setDisplayRange = function (value) {
+                    if (data) {
+                        var changed = false;
+                        if (value.topRow === undefined) {
+                            value.topRow = topRow;
+                        }
+                        if (value.pageSize === undefined) {
+                            value.pageSize = pageSize;
+                        }
+                        if (typeof value.pageSize === 'number' && isFinite(value.pageSize)) {
+                            if (pageSize !== value.pageSize) {
+                                changed = true;
+                                pageSize = value.pageSize;
+                            }
+                        }
+                        if (typeof value.topRow === 'number' && isFinite(value.topRow)) {
+                            if (topRow !== value.topRow) {
+                                var visibleRows = calcVisibleRows(value.topRow);
+                                if (visibleRows.start !== topRow) {
+                                    topRow = value.topRow;
+                                    changed = true;
+                                }
+                            }
+                        }
+
+                        if (changed) {
+                            displayRows();
+                        }
+                    }
+                };
+
+                // Initialize the control.
+                displayRows();
+
+                return {
+                    setDisplayRange: setDisplayRange,
+                    getDisplayRange: function () { return { topRow: topRow, pageSize: pageSize }; }
+                };
+            };
+
+            return { create: create, createSurface: createSurface };
+        })();
+
+        OData.defaultHttpClient.enableJsonpCallback = window.ActiveXObject === undefined;
+
+        var cache = datajs.createDataCache({
+            name: "genres",
+            source: "http://odata.netflix.com/Catalog/Genres",
+            pageSize: 10,
+            prefetchSize: -1
+        });
+
+        mix.list.create({
+            hostElement: $("#adhocGrid").get(0),
+            data: cache,
+            pageSize: 5
+        });
+
+    </script>
+</body>
+</html>

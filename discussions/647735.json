@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1452833",
+    "ThreadId": "647735",
+    "Html": "<strong><em>sample.xml</em></strong>\r<br />\n&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;\r<br />\n&lt;edmx:Edmx Version=&quot;4.0&quot; xmlns:edmx=&quot;<a href=\"http://docs.oasis-open.org/odata/ns/edmx\" rel=\"nofollow\">http://docs.oasis-open.org/odata/ns/edmx</a>&quot;&gt;\r<br />\n  &lt;edmx:DataServices&gt;<br />\n<pre><code>&lt;Schema Namespace=&quot;MyNamespace&quot; xmlns=&quot;http://docs.oasis-open.org/odata/ns/edm&quot;&gt;\n  &lt;EntityType Name=&quot;Employee&quot; /&gt;\n  &lt;EntityType Name=&quot;Order&quot; /&gt;\n  &lt;EntityContainer Name=&quot;Container&quot;&gt;\n    &lt;Singleton Name=&quot;BigBoss&quot; Type=&quot;MyNamespace.Employee&quot; /&gt;\n    &lt;EntitySet Name=&quot;Orders&quot; EntityType=&quot;MyNamespace.Order&quot; /&gt;\n  &lt;/EntityContainer&gt;\n&lt;/Schema&gt;</code></pre>\n\n&lt;/edmx:DataServices&gt;\r<br />\n&lt;/edmx:Edmx&gt;\r<br />\n<br />\nIf I try to read the above xml response data, it is undefined. But if I replace the same with the namespace &quot;<a href=\"http://schemas.microsoft.com/ado/2007/06/edmx\" rel=\"nofollow\">http://schemas.microsoft.com/ado/2007/06/edmx</a>&quot;, I'm able to read the data.\r<br />\n<br />\nPlease let me know how I can use datajs to read and parse my sample xml.\r<br />\n<br />\nThanking You.<br />\n",
+    "PostedDate": "2015-11-17T11:44:03.737-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

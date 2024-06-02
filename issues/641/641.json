@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I am wondering if DataJS is suitable to be used on the server side in a node application?  The OData.org website suggests that it is (by implication): http://www.odata.org/libraries#node.js   \n \nBut on the other hand, it also seems that the JSON parser depends on the window object.  Wouldn't that make it not usable by Node?",
+    "LastUpdatedDate": "2014-01-30T13:05:22.867-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2012-05-07T16:59:14.047-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Is DataJS a NODE capable library?",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 641
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "It's not just the JSON parser. There is also a dependency on window.XMLHttpRequest or, if this is undefined window.ActiveXObject. Both of these are not available in Node.js.",
+      "PostedDate": "2014-01-30T13:05:22.867-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

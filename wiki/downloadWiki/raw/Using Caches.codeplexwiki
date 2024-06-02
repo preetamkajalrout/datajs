@@ -1,0 +1,41 @@
+! Using Caches
+
+The datajs cache API provides a very simple way of reading large paginated results into the browser in an efficient way that is very responsive to the needs of the user interface.
+
+The intent is to provide improved performance and resilience to intermittent network issues for pages that display a collection of data. The collection can be much larger than what might be loaded in memory. End users will often interact with only a subset of items at a time. Common ways are interacting one item at a time, in fixed-size pages that are individually selected, or in a continuous scrollable list.
+
+The API is appropriate for collections that aren't changing quickly, because the cache will not accept local modifications and will not contact the server for fresh data; instead the application can control when to do so by simply clearing the read-only contents. This allows improved performance by minimizing the number of rqeuests and the amount of data requested from the server. Resiliency is also improved by caching data in-memory or on-disk.
+
+The benefit to web developers is that this is all accomplished through a single API that behaves consistently regardless of the actual capabilities of the browser.
+
+For example, to read the first 10 items from a service, a page can include the following code.
+
+{code:javascript}
+var cache = datajs.createDataCache({
+  name: "sessions", 
+  source: "http://live.visitmix.com/odata/Sessions"
+});
+
+// Read ten items from the start and use jQuery template to render them on the page.
+cache.readRange(0, 10).then(function (data) {
+  $.tmpl($("#my-template"), data).appendTo("#somewhere");
+});
+
+// Add a handler to a button named 'remove-data' to remove the data the cache has.
+$("#remove-data").click(function() {
+  cache.clear().then(function() { alert("bye-bye data"); });
+});
+
+// Add a handler to a button named 'refresh-button' to refresh all the data.
+$("#refresh-button").click(function() {
+  cache.clear().then(function() {
+    // Go re-read the data from the cache, and it will be fresh.
+    // ...
+  }); 
+});
+{code:javascript}
+
+See also the [datajs cache API] reference.
+----
+Previous Topic: [Using Stores]
+Next Topic: [Cache Prefetching]

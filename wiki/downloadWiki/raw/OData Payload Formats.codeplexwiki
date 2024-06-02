@@ -1,0 +1,170 @@
+! OData Payload Formats
+
+The library uses an internal representation for the different OData payloads currently used by the protocol. As a payload is processed it will be transformed to/from an object that has a certain structure. The chosen formats mimic the OData V2 JSON format with certain extensions to capture additional ATOM constructs.
+
+* [#Feed]
+* [#Entry]
+* [#Extension]
+* [#Links]
+* [#Service Documents]
+* [#Batch Requests]
+
+{anchor:Feed}
+*Feed*
+
+OData feeds are collections of entry objects with some additional metadata depending on whether the data is transferred using ATOM or JSON formats. The library defines the feed object as follows.
+
+{code:javascript}
+feed = {
+  results: array,            // array of entry objects
+  __count: integer,          // count of entries in the collection; only available in OData V2 and later  
+  __next: string,            // URI to the next partial feed list; only available in OData V2 and later
+  __metadata: {              // additional data about the feed; only available from feeds in ATOM format
+    id: string,              // value of the id element in the ATOM feed document
+    id_extensions: array,    // array of attribute extension objects
+    next_extensions: array,  // array of attribute extension objects
+    self: string,            // URI of the feed
+    title: string,           // value of the title element in the ATOM feed document
+    title_extensions: array, // array of attribute extension objects
+    feed_extensions: array,  // array of attribute and element extension objects
+  }
+};
+{code:javascript}
+
+{anchor:Entry}
+*Entry*
+
+Similar to OData feeds, entries can have additional metadata if they are transmitted over the wire using ATOM documents.  These are represented using the following definition:
+
+{code:javascript}
+entry = {
+  __metadata : { // additional data about the entry
+    uri: string, // URI to the entry
+    uri_extensions: array // array of attribute extension objects; only available from entries in ATOM format
+    type: string, // entry entity type
+    type_extensions: array // array of attribute extension objects; only available from feeds in ATOM format
+    etag: string, // entity ETag value used for concurrency checks
+    edit: string, // URI for editing the entry
+    edit_link_extensions: array, // array of attribute extension objects; only available from entries in ATOM format
+    edit_media: string, // URI for editing the media entry
+    edit_media_extensions: array // array of attribute extension objects; only available from entries in ATOM format
+    media_src: string, // URI to the media source of the media entry
+    media_etag: string, // ETag value used for the media entry
+    content_type: string, // MIME type of the media entry        
+    self: string, // URI to the entry self link
+    self_link_extensions: array, // array of attribute extension objects; only available from entries in ATOM format
+    properties: { // object that contains property metadata as a dictionary ; only available from entries in ATOM format
+      name: {
+        type: string, // property type
+        extensions: array // array of attribute extension objects
+        properties: object // object that contains complex type property metadata as name value pairs
+      }
+    },
+  name: primitive | inline | deferred | complex // entry property and value
+};
+
+complex = {
+    __metadata : {
+       type: string // complex property type
+    },
+    property: primitive | complex // property and value
+};
+
+deferred = {
+    __deferred: { 
+        uri: string // URI to the linked entries
+    }
+};
+
+inline = feed object | entry object;
+
+primitive = string | number | date;
+{code:javascript}
+
+Date primitive values are a special case. In order to preserve offset data and distinguish the value between date time and date time offset two properties are added to the date object:
+
+* {{__edmType}}
+* {{__offset}}
+
+High precission date time values are supported by the library (up to nanoseconds) in which case the following property is added to the Date object and contains an integer with the number of nanoseconds found in the value:
+
+* {{__ns}}
+
+Entry navigation properties show up as properties in the entry object and, depending on whether the linked entry is in lined with in the payload, their values will be represented as deferred properties or in lined properties.
+
+{anchor:Extension}
+*Extension*
+
+ATOM format has well defined points in which custom elements and attributes might be added to the document. OData endpoints may leverage this characteristic of the protocol to add extra information when transferring data via ATOM documents. In order to handle this possibility, the library defines the following extensions object:
+
+{code:javascript}
+extensions = {
+    name: string,      // local name of the custom XML element or attribute
+    namespace: string, // namespace URI of the custom XML element or attribute
+    value: string,     // value of the custom XML element or attribute
+    attributes: array, // array of attribute extension objects of the custom XML element
+    children: array    // array of element extension objects of the custom XML element
+};
+{code:javascript}
+
+Extensions in an ATOM document can be in the form of custom XML elements or attributes.  To distinguish between both kinds of extension the documentation uses the terms  element extension object and attribute extension object.
+
+{anchor:Links}
+*Links*
+
+Links documents are collections of URIs pointing to linked entries; they are represented using the following definition:
+
+{code:javascript}
+links = {
+  __count: integer,  // count of entries in the collection; only available in OData V2 and later JSON format 
+  results: array     // array of uri objects.
+};
+
+uri = {
+    uri: string      // URI to the linked entry
+};
+{code:javascript}
+
+{anchor:Service Documents}
+*Service Document*
+
+{code:javascript}
+service_document = {
+  extensions: array  // array of element extension objects
+  workspaces: array  // array of workspace objects
+};
+
+workspace = {
+  extensions: array, // array of element extension objects
+  title: string,     // value of the workspace’s title element in the ATOM service document
+  collections: array // array of collection objects
+};
+
+collection = {
+  extensions: array, // array of element extension objects
+  href: string,      // URI to the collection
+  title: string      // name of the collection
+};
+{code:javascript}
+
+Service documents are an ATOM only concept and thus only available when using the ATOM format. If a service document is requested using JSON, then the OData endpoint only sends an array with all the available collection names. The library normalizes the JSON data into the above representation using a single workspace object without title.
+
+{anchor:Batch Requests}
+*Batch Request*
+
+Batch request objects allow for grouping several requests into a single operation that is sent to the OData endpoint. They are defined as:
+
+{code:javascript}
+batch = {
+  __batchRequests : array   // array of read request objects or changeRequest objects
+};
+ 
+changeRequest= {
+  __changeRequests : array  // array of write request objects
+};
+{code:javascript}
+
+Read request object, those whose HTTP method is "GET", cannot be part of a change request object. Similarly, write requests can only be batched inside a changeRequest object.
+----
+Previous Topic: [datajs OData API]
+Next Topic: [datajs store API]

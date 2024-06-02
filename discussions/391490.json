@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "899089",
+    "ThreadId": "391490",
+    "Html": "\r\n<p>Hi,</p>\r\n<p><br>\r\nI currently use dataJS to read a flow xml-atom. When I use xhr object : no problem.But, if I use DataJS, I have a error &quot;501 not implemented&quot; &nbsp;and the request method &quot;GET&quot; changes in &quot;OPTION&quot;.</p>\r\n<p><strong>Code xhr :</strong>&nbsp;</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre>xhr = <span style=\"color:blue\">new</span> XMLHttpRequest();\n    xhr.onreadystatechange = <span style=\"color:blue\">function</span> () {\n        <span style=\"color:blue\">if</span> (xhr.readyState == 4 &amp;&amp; (xhr.status == 200 || xhr.status == 0)) {\n      \n        }\n    };\n\n    xhr.open(<span style=\"color:#a31515\">&quot;GET&quot;</span>, <span style=\"color:#a31515\">&quot;</span><span style=\"color:#800000\">fluxAtomAdress</span><span style=\"color:#a31515\">&quot;</span><span style=\"background-color:white\">, </span><span style=\"color:blue\">true</span><span style=\"background-color:white\">);</span>\n</pre>\r\n</div>\r\n<div style=\"color:black; background-color:white\">xhr.send(<span style=\"color:blue\">null</span>);</div>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Code datajs :</strong>&nbsp;</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre>OData.request(\n       {\n           requestUri: &quot;<span style=\"color:#800000\">fluxAtomAdress</span>&quot;,\n           headers: {\n               <span style=\"color:#a31515\">&quot;MaxDataServiceVersion&quot;</span>: <span style=\"color:#a31515\">&quot;2.0&quot;</span>,\n           }\n       },\n           <span style=\"color:blue\">function</span> (data, request) {\n               <span style=\"color:green\">//code here</span>\n           },\n           <span style=\"color:blue\">function</span> (err, request) {\n<span style=\"color:green\"><span style=\"white-space:pre\">\t\t</span>//code here</span>\n           }\n       );\n</pre>\r\n</div>\r\n<p>&nbsp;</p>\r\n<p><strong>&nbsp;Request's headers :&nbsp;</strong></p>\r\n<p>Xhr :&nbsp;</p>\r\n<pre><pre>GET /OData/OData.svc/Companies HTTP/1.1\nHost: adresseFlux(An IP)\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1\nAccept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Language: fr,fr-fr;q=0.8,en-us;q=0.5,en;q=0.3\nAccept-Encoding: gzip, deflate\nConnection: keep-alive\nReferer: http://localhost:53018/\nOrigin: http://localhost:53018\nCache-Control: max-age=0</pre>\n<br></pre>\r\n<p>DataJs :&nbsp;</p>\r\n<pre>OPTIONS /OData/OData.svc/Companies HTTP/1.1\nHost: adressFlux(An Ip)\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1\nAccept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Language: fr,fr-fr;q=0.8,en-us;q=0.5,en;q=0.3\nAccept-Encoding: gzip, deflate\nConnection: keep-alive\nOrigin: http://localhost:53018\nAccess-Control-Request-Method: GET\nAccess-Control-Request-Headers: maxdataserviceversion</pre>\r\n<p><strong>request'response :</strong></p>\r\n<p>Xhr :&nbsp;</p>\r\n<pre>HTTP/1.1 200 OK\nCache-Control: no-cache\nContent-Length: 35155\nContent-Type: application/atom&#43;xml;charset=utf-8\nServer: Microsoft-IIS/7.0\nDataServiceVersion: 2.0;\nX-Powered-By: ASP.NET\nAccess-Control-Allow-Origin: *\nAccess-Control-Allow-Headers: Content-Type, Accept, MaxDataServiceVersion\nDate: Tue, 14 Aug 2012 09:37:22 GMT</pre>\r\n<p><br>\r\nDataJS :</p>\r\n<pre>HTTP/1.1 501 Not Implemented\nContent-Length: 217\nContent-Type: application/xml\nServer: Microsoft-IIS/7.0\nDataServiceVersion: 1.0;\nX-Powered-By: ASP.NET\nAccess-Control-Allow-Origin: *\nAccess-Control-Allow-Headers: Content-Type, Accept, MaxDataServiceVersion\nDate: Tue, 14 Aug 2012 09:09:58 GMT</pre>\r\n<p>&nbsp;</p>\r\n<p><strong>Servers(IIS 7) has property </strong>:</p>\r\n<p>&nbsp;</p>\r\n<div id=\"imcontent\" dir=\"ltr\"><span dir=\"ltr\"><span id=\"27703952.0\">&lt;</span><span id=\"27703952.0\">add</span>&nbsp;<span id=\"27703952.0\">name</span><span id=\"27703952.0\">=</span><span id=\"27703952.0\">&quot;</span><span id=\"27703952.0\">Access-Control-Allow-Headers</span><span id=\"27703952.0\">&quot;</span>&nbsp;<span id=\"27703952.0\">value</span><span id=\"27703952.0\">=</span><span id=\"27703952.0\">&quot;</span><span id=\"27703952.0\">Content-Type,\r\n Accept, MaxDataServiceVersion</span><span id=\"27703952.0\">&quot;</span><span id=\"27703952.0\">&nbsp;/&gt;</span>&nbsp;<br>\r\n</span><span id=\"27703952.0\">&lt;</span><span id=\"27703952.0\">add</span>&nbsp;<span id=\"27703952.0\">name</span><span id=\"27703952.0\">=</span><span id=\"27703952.0\">&quot;</span><span id=\"27703952.0\">Access-Control-Allow-Origin</span><span id=\"27703952.0\">&quot;</span>&nbsp;<span id=\"27703952.0\">value</span><span id=\"27703952.0\">=</span><span id=\"27703952.0\">&quot;</span><span id=\"27703952.0\">*</span><span id=\"27703952.0\">&quot;</span><span id=\"27703952.0\">&nbsp;/&gt;</span>&nbsp;</div>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><span>&nbsp;If you could help me with my issues,</span></p>\r\n<p>Thanks!</p>\r\n<p>Marc Audefroy</p>\r\n",
+    "PostedDate": "2012-08-14T04:48:41.053-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "901472",
+    "ThreadId": "391490",
+    "Html": "<p>Hello All,</p>\r\n<p>I still haven't solved my problem. Someone has an idea?</p>\r\n<p>&nbsp;Thanks!</p>\r\n<p>Marc Audefroy</p>",
+    "PostedDate": "2012-08-20T03:10:19.767-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "901995",
+    "ThreadId": "391490",
+    "Html": "\r\n<p>I found new items in my problem. This is the header's property&nbsp;&quot;MaxDataServiceVersion&quot; that causes of the error.&nbsp;</p>\r\n<p>In the librairy on line 1064. If I write like this:</p>\r\n<p>(the value of &quot;MaxDataServiceVersion&quot; is &quot;2.0&quot;)</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:green\">// Set the name/value pairs.</span>\n                <span style=\"color:blue\">if</span> (request.headers) {\n                    <span style=\"color:blue\">for</span> (name <span style=\"color:blue\">in</span> request.headers) {\n                        <span style=\"color:blue\">if</span> (name != <span style=\"color:#a31515\">&quot;MaxDataServiceVersion&quot;</span>)\n                        xhr.setRequestHeader(name, request.headers[name]);\n                    }\n                }\n</pre>\r\n</div>\r\n<p>&nbsp;</p>\r\n<p>It work...but&nbsp;not very good as solution...</p>\r\n<p>After, a new problem appears :</p>\r\n<p>If I use Google Chrome, it work, but if I use Mozilla. The request's response is empty. An idea? I feel that the callback is called too quickly.</p>\r\n<p>Thanks,</p>\r\n<p>&nbsp;</p>\r\n<p>Marc Audefroy</p>\r\n",
+    "PostedDate": "2012-08-21T07:57:58.003-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "902056",
+    "ThreadId": "391490",
+    "Html": "<p>Hi Marc,</p>\r\n<p>&nbsp;&nbsp; The reason for Mozilla behavior is that you are doing a cross domain request&nbsp;with custom headers set.&nbsp;Mozilla, since version 3.5 I believe, supports the CORS standard for cross domain requests. If the request has certain characteristicis (in the case of DataJS, adds custom headers to the request, like MaxDataServiceVersion) then Mozilla preflights it by first sending a request with the OPTIONS verb.&nbsp; The endpoint doesn't support this http verb, so it responds with the HTTP 501 not implemented status.&nbsp; If you try again the XHR code in your first example but setting a header of your own this time, you should get a 501 response as well.</p>\r\n<p>&nbsp;&nbsp;&nbsp;Blocking the addition of the MaxDataServiceVersion header is not a fix because it is required for proper communication with an OData endpoint (and you will hit the same problem with any other header you decide to add). I recommend strongly against such woraround. There are some ways of solving this, wich one you choose depends on your scenario.</p>\r\n<p>1. If your only going to do GET requests from the endpoint you can use JSONP for the request.&nbsp; This has the benefit of being comptible across browsers but your endpoint has to be capable of supporting JSON and the $format query option. Also keep in mind that you will always get&nbsp;JSON responses using this method.&nbsp; JSONP is supported by DataJS but is disabled by default and you will have to enable it explicityly in your webapp. There are to ways to do it, globally by setting the flag odata.defaultHttpClient.enableJsonpCallback = true; or per request by setting the enableJsonpCallback property of the request object to true:</p>\r\n<pre>OData.read({ requestUri: <span style=\"color: #a31515;\">\"uri\"</span>, enableJsonpCallback: <span style=\"color: blue;\">true</span>} , <span style=\"color: blue;\">function</span> (data) { \r\n    <span style=\"color: green;\">// success function</span>\r\n}, \r\n<span style=\"color: blue;\">function</span> (err) {\r\n    <span style=\"color: green;\">// error function.</span>\r\n});</pre>\r\n<p>2. Seems that you own the endpoint and the server where it is hosted... since you added the access-control-* headers to the web server. If this is the case, then you can write som handler or interceptor that catches the OTPIONS request and replies with the appropriate headers. Keep in mind that CORS is still fairly new and starting to be adopted just recently and not all the browsers support it. For example, IE10 fully supports it, IE9 and 8 only support a subset of CORS via XDomainRequest object that is not useful for communicating with OData endpoints. Earlier versions don't support CORS at all. Please let me know if you own the endpoing and if it is WCF Data Services base so I can share with you an example of how you can handle this verb via a WCF Message Interceptor.</p>\r\n<p>3. Have a service or controler in your web app that serves as a reverse proxy and&nbsp;relays the requests to other endpoints outside the web app domain. This is solution is compatible across all the browsers because for the browser would not be doing a cross domain request. Instead the request is made to the controler or the service in the same domain that served the web page.&nbsp; The controler will then resend the request to its intended endpoint and rerout the response back to the web page.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-08-21T10:52:57.803-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "902523",
+    "ThreadId": "391490",
+    "Html": "<p>Hi ATrigo,</p>\r\n<p>Thanks for your response and explanations! :)</p>\r\n<p>I used the first solution and it's worked =).</p>\r\n<p>For the second solution, hum...&nbsp;I think this is not the best solution. It seems a little&nbsp;<span>unwieldy. no?</span></p>\r\n<p>I thought the same think for the third solution but I didn't want an intermediary between the javascript and Web Service.</p>\r\n<p>Thank you again!</p>\r\n<p>Regards,</p>\r\n<p>Marc</p>",
+    "PostedDate": "2012-08-22T06:35:10.8-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1003013",
+    "ThreadId": "391490",
+    "Html": "Hey Alex,\r<br />\n<br />\nI'm running into the same problem with cross-browser compatibility as described by Marc. Unfortunatley option 1 won't work for me since I'm doing full CRUD via OData. You mention you have some code that implements option 2, I wonder if you could share it with me?<br />\n",
+    "PostedDate": "2013-02-18T12:54:37.18-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1031717",
+    "ThreadId": "391490",
+    "Html": "Hi Alex,\r<br />\n<br />\nI have also the same problem. \r<br />\n<br />\nI'm using WCF Data Services. Can you please share your code snippet?\r<br />\n<br />\nThank you!<br />\n",
+    "PostedDate": "2013-04-17T05:05:00.603-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1122936",
+    "ThreadId": "391490",
+    "Html": "I'm guessing there's little to no hope on a response to this - but I'm having the same issue - any progress/help available?<br />\n",
+    "PostedDate": "2013-11-13T07:30:42.437-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1138211",
+    "ThreadId": "391490",
+    "Html": "Had the same problem.\r<br />\nSolution was to switch to jQuery.<br />\n",
+    "PostedDate": "2013-12-19T06:11:55.517-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

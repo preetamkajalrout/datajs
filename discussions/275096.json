@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "681251",
+    "ThreadId": "275096",
+    "Html": "<p>Hi guys,<br /> <br /> I have a problem regarding dates...<br /> As datajs formats the date of the odata service to a JS date object I display this date object in a UI control.<br /> <br /> Now if a user wants to filter this date he normally enters the date in a different format than<br /> &nbsp; the expected Edm.DateTime format by the odata service.<br /> <br /> The problem is now to convert the user entry back to EDM.DateTime so I can trigger filter requests like<br /> <br /> http://services.odata.org/Northwind/Northwind.svc/Orders?$filter=((ShippedDate%20gt%20datetime%271996-07-16T00:00:00%27))<br /> <br /> to the server.<br /> <br /> I have seen that datajs already provides methods like formatDateTimeOffset in odata-utils<br /> which could be reused for that.<br /> <br /> But this method can be used internally only...<br /> Are there plans to expose these utils methods or otherwise will datajs provide own filter functions which accept JS date objects or strings and will do the parsing itself?</p>\n<p>Or what can I do now to solve my problem without duplicating your code? ;)</p>\n<p><br /> THX</p>\n<p>&nbsp;</p>\n<p>PS: Also I guess other util methods might be very useful ;)</p>",
+    "PostedDate": "2011-10-07T04:26:46.467-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "681388",
+    "ThreadId": "275096",
+    "Html": "<p>Hi Joe,</p>\r\n<p>&nbsp;&nbsp; Hope you are doing great.&nbsp; Thanks for bringing this to our attention and we&nbsp;will certainly consider opening up some the utility methods in future versions of the library.&nbsp;&nbsp;Other than the date formatting functions which other utilities you&nbsp;consider useful?&nbsp;</p>\r\n<p>For the time being, if you don't want to duplicate the code... which I completely understand :)&nbsp; you can use the following hacky method.&nbsp;The jsonHandler can serialize a date value in the way you need it.&nbsp; The following function would do the trick:</p>\r\n<p><span style=\"color: blue;\">function</span> formatDate(date) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style=\"color: blue;\">var</span> r = { headers: {}, data: date };<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OData.jsonHandler.write(r);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style=\"color: blue;\">return</span> r.body;<br />&nbsp; }<br /><br />&nbsp; alert(formatDate(<span style=\"color: blue;\">new</span> Date()));</p>\r\n<p>I definetly rather you duplicating the code than resorting to a hack like the one above :).</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2011-10-07T10:40:38.143-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "682535",
+    "ThreadId": "275096",
+    "Html": "<p>Hi Alex,</p>\r\n<p>thanks for the hack, it worked just fine ;)</p>\r\n<p>What would be useful in the utils are functions for the date time, date time offset parsing and formatting etc. and also perhaps the things to read the metadata like lookupEntityType etc...</p>\r\n<p>This could be useful if you need information about constraints of a property etc and also for validation purposes.</p>\r\n<p>Thanks!</p>\r\n<p>&nbsp;</p>\r\n<p>Best regards</p>\r\n<p>Joe</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2011-10-11T04:59:12.84-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1133158",
+    "ThreadId": "472290",
+    "Html": "I have a loop, and I'm calling &quot;OData.read&quot; within it. The maximum it will loop through is 6 times, but it may loop less, dependent on the situation.\r<br />\n<br />\nMy code looks like this:<br />\n<pre><code>for (var i = 0; i &lt; someArray.length; i++) {\n   var collection = someArray[i];\n                \n   OData.read({requestUri: collection.href, user: &quot;user&quot;, password:&quot;password&quot;},\n      function(data, response) {\n         var dataAsStr = JSON.stringify(data.results);\n         localStorage.setItem(collection.title, dataAsStr);\n      });\n   }\n            </code></pre>\n\nSo, I'm making a call, getting data back, and writing it out to localStorage. but I want to use the title of each collection, for the key used in localStorage. Problem is, the callback is asynchronous, so collection.title isn't valid when I get here. What I'd like to do is pass in a value into my read call, that would get returned to me in the success function. Can this be done?<br />\n",
+    "PostedDate": "2013-12-09T07:59:03.667-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1437924",
+    "ThreadId": "472290",
+    "Html": "I'm working on a similar problem. My solution is to wrap the OData.read(...) in its own function. <a href=\"http://plnkr.co/edit/5rivdG?p=preview\" rel=\"nofollow\">Here's</a> an example. In it, I use the productIndex in the callback that processes the data. In your case, you would replace the productIndex with the collection title.<br />\n<br />\nI've been working with datajs for just about one week now. Please tell me if you already found a better solution to this problem. :-)<br />\n",
+    "PostedDate": "2015-08-09T14:40:04.153-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1457556",
+    "ThreadId": "472290",
+    "Html": "Just wrap the OData.read({ ... }); inside an IFEE and pass in the collection as a parameter.<br />\n<pre><code>for (var i = 0; i &lt; someArray.length; i++) {\n   var collection = someArray[i];\n                \n   (function(c) {\n     OData.read({requestUri: c.href, user: &quot;user&quot;, password:&quot;password&quot;},\n        function(data, response) {\n           var dataAsStr = JSON.stringify(data.results);\n           localStorage.setItem(c.title, dataAsStr);\n        });\n    }(collection));\n}\n</code></pre>\n\n",
+    "PostedDate": "2015-12-30T10:25:25.623-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

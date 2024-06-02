@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "984562",
+    "ThreadId": "429052",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I'm having a problem with getting the datajs working with OData supporting CORS.<br>\r\n<br>\r\nSo when I'm sending a simple GET request to a server from FireFox this is how the raw request looks like:</p>\r\n<p>&nbsp;</p>\r\n<pre>OPTIONS http://xxx/dps/AnnotationTypes HTTP/1.1\r\nHost: dubv-dpdiweb01.dubeng.local\r\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:16.0) Gecko/20100101 Firefox/16.0\r\nAccept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,*/*;q=0.8\r\nAccept-Language: en-gb,en;q=0.5\r\nAccept-Encoding: gzip, deflate\r\nConnection: keep-alive\r\nOrigin: null\r\nAccess-Control-Request-Method: GET\r\nAccess-Control-Request-Headers: maxdataserviceversion</pre>\r\n<p>&nbsp;</p>\r\n<p>And the response from the server:</p>\r\n<p>&nbsp;</p>\r\n<pre>HTTP/1.1 501 Not Implemented\r\nCache-Control: private\r\nContent-Length: 195\r\nContent-Type: application/xml;charset=utf-8\r\nServer: Microsoft-IIS/8.0\r\nX-Content-Type-Options: nosniff\r\nDataServiceVersion: 1.0;\r\nX-AspNet-Version: 4.0.30319\r\nX-Powered-By: ASP.NET\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Max-Age: 1728000\r\nAccess-Control-Allow-Headers: Content-Type, Accept, Origin, X-Requested-With, MaxDataServiceVersion, DataServiceVersion, dptoken, role , platform\r\nAccess-Control-Allow-Methods: PUT, POST, GET, DELETE, MERGE, OPTIONS\r\nAccess-Control-Allow-Credentials: true\r\nDate: Wed, 09 Jan 2013 17:10:55 GMT\r\n\r\nNot Implemented</pre>\r\n<p>&nbsp;</p>\r\n<p>Chrome and IE also get the 501 response but they ignore it and next receive a proper response, so effectively communication with OData works fine in these browsers while FireFox gets stopped.</p>\r\n<p>I was wondering if anyone who successfully implemented the OData service with CORS had similar issues. Is there anything obvious in the headers that I pasted here that would indicate a problem? It seems that the server doesn't like the OPTIONS request send\r\n by a browser and this is probably a reason for the Not Implemented message.</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2013-01-09T09:25:34.82-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1000089",
+    "ThreadId": "429052",
+    "Html": "As a temporary solution we used this: <a href=\"http://datajs.codeplex.com/discussions/265321\" rel=\"nofollow\">http://datajs.codeplex.com/discussions/265321</a> and it worked fine.\r<br />\nAs a final solution to avoid cross-domain issues we are going to user reverse proxy.<br />\n",
+    "PostedDate": "2013-02-12T08:47:11.4-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

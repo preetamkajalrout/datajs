@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1113852",
+    "ThreadId": "464132",
+    "Html": "Need some sample on how can I get the HTTP response code if my OData Request fails. When I try to prompt the error message in error call back all I get is a generic message that &quot;HTTP Request fail...\r<br />\n<br />\nfunction login() {<br />\n<pre><code>var userId = $(&quot;#txtUserId&quot;).val();\nvar password = $(&quot;#txtPassword&quot;).val();\nif (userId == &quot;&quot;) {\n    alert(&quot;User Id is empty&quot;);\n    return false;\n}\nif (password == &quot;&quot;) {\n    alert(&quot;Password is empty&quot;);\n    return false;\n}\nelse {\n    // Validate by making a server call\n    alert('Inside server validate call');\n    var request = {\n        headers: getHeaders(), // object that contains HTTP headers as name value pairs \n        requestUri: tlyticsServiceUrl, // OData endpoint URI \n        method: &quot;GET&quot;,\n        datatype: &quot;json&quot;\n    };\n    OData.read(request,\n            function (data, result) {\n                                //Perform the Success steps\n            },\n            function (err) {\n               // Need the status codes here to manipulate results              });\n    return true;\n}</code></pre>\n\n}<br />\n",
+    "PostedDate": "2013-10-29T14:50:23.98-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1114687",
+    "ThreadId": "464132",
+    "Html": "Hi, you can try &quot;err.response.statusCode&quot;.<br />\n",
+    "PostedDate": "2013-10-30T16:08:52.65-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

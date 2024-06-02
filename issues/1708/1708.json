@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi, \n\nI'm trying to update a single property of a specific entry using PATCH OData request.\nThe result is always statusCode 500 with message: \n\"The server encountered an internal error that prevented it from fulfilling this request\".\n\nI've found examples in which odata.type  is included in the sent data object, and examples in which it is not included  – so I tried both options,  but the result is always statusCode 500.\n\nAny idea?\n\nThe request code looks like this:\nOData.request({\n    requestUri: \"<ServiceURI>/MyObjects(guid'00505695-007C-1ED5-9CB8-6B359297A375')\",\n    method: \"PATCH\",\n        data: {\n                //\t\"odata.type\" : <Service>.<ObjectType>, // I tried with and without this property\n                \t\"bPropertyToChange\" : true\n               },\n                headers: {\n                    \"X-Requested-With\": \"XMLHttpRequest\",\n                    \"Content-Type\": \"application/atom+xml\",\n                    \"DataServiceVersion\": \"2.0\",\n                    \"X-CSRF-Token\": sHeaderXcsrfToken\n                }\n            }, function (oData, oResponse) {\n            }, function (oMessage) {\n          }\n\nThanks,\n\nDan",
+    "LastUpdatedDate": "2015-12-09T11:54:06.933-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2015-10-20T10:08:27.623-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Patch request fails",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1708
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "The HTTP 500 error is coming from the server. Why are you wondering about the client? ",
+      "PostedDate": "2015-12-09T11:54:06.933-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

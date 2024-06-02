@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Datetimeoffset with minuteoffset is handled incorrectly and this is because parseDateTimeOffset calles getMinutes function and not getUTCMinutes()",
+    "LastUpdatedDate": "2017-12-07T12:26:23.957-08:00",
+    "PlannedForRelease": "datajs version 1.1.1beta2",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "datajs",
+    "ReportedDate": "2013-07-16T13:10:59.8-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Minutes are not correctly handled for datatimeoffset with offset that contains minutes",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 1111
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

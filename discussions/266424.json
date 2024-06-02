@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "646983",
+    "ThreadId": "266424",
+    "Html": "\r\n<p>Hello,I'm trying to build an html page that query an Odataservice and put the results (containing latitude and longitude) as markers on a google map.&nbsp;</p>\r\n<p>The main problem is that in all the examples I have seen there is a loop on the query results that append html code to some element while I need some</p>\r\n<p>javascript code to generate the marker.</p>\r\n<p>I'm not a Javascript expert so I was wondering if this is possibile and how.<br>\r\nSalvatore</p>\r\n",
+    "PostedDate": "2011-07-25T01:23:12.493-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "647973",
+    "ThreadId": "266424",
+    "Html": "<p>Hi Salvatore,</p>\n<p>&nbsp; Hope you are doing great.&nbsp; You can execute any arbitrary javascript code in the success and error handlers.&nbsp; If using the OData.read api directly, and assuming that&nbsp;there is an&nbsp;object representing&nbsp;your map named myMap (this object might have been initialized elsewhere and is in the scope chain)&nbsp;this would be:</p>\n<pre>OData.read(<span style=\"color: #a31515;\">\"uri to your map data service\"</span>, \r\n    <span style=\"color: blue;\">function</span> (data) {\r\n        <span style=\"color: blue;\">var</span> i, len;\r\n        <span style=\"color: blue;\">for</span>(i = 0, len = data.results.length; i &lt; len; i++) {</pre>\n<pre>            myMap.setPinPoint(data.results[i].lat; data.results[i].<span style=\"color: blue;\">long</span>);\r\n        }\r\n    }, \r\n    <span style=\"color: blue;\">function</span> (err) {\r\n        <span style=\"color: green;\">// do something to handle the error here.. </span>\r\n        alert(JSON.stringify(errr)); \r\n   });</pre>\n<p>&nbsp; The samples use such loops and html constructs to reperesent some specific logic that the application might want to apply to the data recevied.&nbsp; They are just an implmentation detail of the sample and only for doing something \"interesting\" with the data in the sample.&nbsp; Real world applications,&nbsp;like the one you describe, would use&nbsp;whatever specific logic necessary to process and do something useful with the data received.&nbsp; In your particular situation, it&nbsp;would be the javascript code needed to build a marker and inject it into the map :).</p>\n<p>Regards,</p>\n<p>Alex Trigo.&nbsp;</p>\n<div style=\"background-color: white; color: black;\">\n<pre>&nbsp;</pre>\n<pre> &nbsp;&nbsp;</pre>\n</div>\n<div id=\"_mcePaste\" class=\"mcePaste\" style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; top: 8px; left: -10000px;\">﻿</div>",
+    "PostedDate": "2011-07-26T14:18:42.033-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "648180",
+    "ThreadId": "266424",
+    "Html": "<p>Thanks for your kind help!</p>\r\n<p>I succedeed in implementing what I wanted. Datajs is a very interesting project and I'll keep on watching it!</p>\r\n<p>Salvatore</p>",
+    "PostedDate": "2011-07-27T03:01:33.707-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

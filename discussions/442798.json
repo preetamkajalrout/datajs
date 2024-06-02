@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1040339",
+    "ThreadId": "442798",
+    "Html": "Hi <br />\n<br />\nMy client crashes (datajs-1.1.0) with an &quot;Invalid date/time value&quot;. Using Fiddler I get the following:<br />\n<pre><code>...\n,&quot;Stamp@odata.type&quot;:&quot;Edm.DateTime&quot;,\n&quot;Stamp&quot;:&quot;2013-05-06T17:32:33.062+02:00&quot;\n...</code></pre>\n\nLooking a datajs it seems like a &quot;Z&quot; is expected in my date/time value:<br />\n<pre><code>if (!parts || (!withOffset &amp;&amp; offset !== &quot;Z&quot;)) {\n    if (nullOnError) {\n        return null;\n    }\n    throw { message: &quot;Invalid date/time value&quot; };\n} </code></pre>\n\nWhat do I have do change on my server in order to get the correct format? (I'm using OData with WebAPI)<br />\n<br />\nThanks!<br />\n",
+    "PostedDate": "2013-05-07T05:07:23.1-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1097797",
+    "ThreadId": "442798",
+    "Html": "I'm seeing the exact same thing, only I'm using WCF Data Services. The Edm.DateTime fields that are coming back do not contain a &quot;Z&quot;. Is this a compatibility problem? I'm running datajs-1.1.1 and whatever comes out of the box in Visual Studio 2012 with WCF Data Services... and I just discovered that there are later versions of the WCF Data Services libraries available on nuget and that's probably why I'm seeing this error... However, I just installed the 5.6.0 libraries and I'm still getting the same error. Any idea of what's going on? Is there a config setting I'm missing?<br />\n",
+    "PostedDate": "2013-09-22T11:38:54.727-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1098082",
+    "ThreadId": "442798",
+    "Html": "So I was only seeing this error when posting a new item. I had a ChangeInterceptor on my data service that added a datestamp using 'DateTime.Now'. Eventuall, I discovered that I needed to specify a datetime kind since it was serializing my datestamp as a local date with an offset. Doing the following inside my ChangeInterceptor solved the issue for me:<br />\n<pre><code>post.DateCreated = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);</code></pre>\n\n",
+    "PostedDate": "2013-09-23T09:18:46.433-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1226387",
+    "ThreadId": "540063",
+    "Html": "Any plans to support OData v4 ? If so , can you give a rough estimated time for the implementation?<br />\n",
+    "PostedDate": "2014-03-25T04:10:10.353-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1252785",
+    "ThreadId": "540063",
+    "Html": "yes please<br />\n",
+    "PostedDate": "2014-06-04T02:58:57.277-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1289857",
+    "ThreadId": "540063",
+    "Html": "Yes, there is. The DataJS V4 parity version is now maintained on Apache Olingo. Please check this page: <a href=\"http://olingo.apache.org/support.html\" rel=\"nofollow\">http://olingo.apache.org/support.html</a> for more information.<br />\n",
+    "PostedDate": "2014-08-13T20:11:54.85-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

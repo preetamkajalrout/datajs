@@ -1,0 +1,66 @@
+[
+  {
+    "Id": "1064695",
+    "ThreadId": "449103",
+    "Html": "I'm calling a service using the following code:\r<br />\n<br />\nvar oHeaders = {<br />\n<pre><code>              'Accept' : 'text/html,application/xhtml+xml,application/xml,application/json',\n              &quot;dataserviceversion&quot;: &quot;3.0&quot;,\n              &quot;maxdataserviceversion&quot;: &quot;3.0&quot;\n              };\n\n      oHeaders['X-SUP-URLREWRITE-ENABLED'] = &quot;True&quot;;\n\n      var request =\n      {\n        headers : oHeaders,\n        requestUri : &quot;http://services.odata.org/OData/OData.svc/Categories&quot;,\n        data: null,\n      };\n      OData.read(request, successFunction, failFunction, handlerFunction);\n</code></pre>\n\nThe response status I get is 200 but it doesn't call successFunction, it calls failFunction.  If not the response status, what determines which callback is called?\r<br />\n<br />\nRoss<br />\n",
+    "PostedDate": "2013-07-04T14:05:10.717-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1066798",
+    "ThreadId": "449103",
+    "Html": "Hi rhightower\r<br />\n<br />\nThanks for posting the question.\r<br />\n<br />\nI have a few questions to be able to answer this.\r<br />\nwhat browser are you using ?\r<br />\nwhat does the parameter handlerFunction do ? did you implement your own response handler ?\r<br />\nwhat is the value of the parameter passed to the fail function, does it specify a specific error ?\r<br />\n<br />\nHussein<br />\n",
+    "PostedDate": "2013-07-10T15:16:59.43-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1066856",
+    "ThreadId": "449103",
+    "Html": "Thanks for the reply Hussein,\r<br />\n<br />\nThis is my code:\r<br />\n<br />\n...<br />\n<pre><code>      var oHeaders = {\n              &quot;Accept&quot; : &quot;text/html,application/xhtml+xml,application/xml,application/json&quot;,\n              &quot;dataserviceversion&quot;: &quot;3.0&quot;,\n              &quot;maxdataserviceversion&quot;: &quot;3.0&quot;\n              };\n\n      oHeaders['X-SUP-URLREWRITE-ENABLED'] = &quot;True&quot;;\n\n      var request =\n      {\n        headers : oHeaders,\n        requestUri : &quot;http://smp.ucc.uwm.edu:8000/TestService&quot;,\n        data: null,\n        user: &quot;C103&quot;,\n        password: &quot;mobile&quot;\n      };\n      OData.read(request, successFunction, failFunction, handlerFunction);\n</code></pre>\n\n...\r<br />\n<br />\n<br />\nfunction successFunction(data, request){<br />\n<pre><code>alert(&quot;Success&quot;);      </code></pre>\n\n}\r<br />\n<br />\nfunction failFunction(err){<br />\n<pre><code>alert(&quot;fail&quot;);\nvar foo = JSON.stringify(err); \nalert(foo);\n$(&quot;#error&quot;).html(foo);\n$.mobile.listview.prototype.enhanceWithin($.mobile.activePage);\n</code></pre>\n\n}\r<br />\n<br />\nfunction handlerFunction(){<br />\n<pre><code>alert(&quot;handler&quot;);</code></pre>\n\n}\r<br />\n<br />\n<br />\nThe response includes this:\r<br />\n<br />\n...\r<br />\n&quot;request&quot;:{&quot;headers&quot;:{\r<br />\n  &quot;Accept&quot;:&quot;application/json&quot;,\r<br />\n  &quot;X-SUP-URLREWRITE-ENABLED&quot;:&quot;True&quot;,\r<br />\n...\r<br />\n  &quot;statusCode&quot;:200,\r<br />\n  &quot;statusText&quot;:&quot;OK&quot;\r<br />\n...\r<br />\n  {\\&quot;odata.metadata\\&quot;:\\&quot;<a href=\"http://services.odata.org/OData/OData.svc/$metadata\" rel=\"nofollow\">http://services.odata.org/OData/OData.svc/$metadata</a>\r<br />\n  #Products\\&quot;,\\&quot;value\\&quot;:[{\\&quot;ID\\&quot;:0,\\&quot;Name\\&quot;:\\&quot;Bread\\&quot;,\\&quot;Description\\&quot;:\\&quot;Whole grain bread\\&quot;\r<br />\n...<br />\n\r<br />\nIn fact, all the expected data is returned.  When the app runs I see the alert with fail, the alert with JSON.stringify(err).  It's an app on a iOS simulator.\r<br />\n<br />\nThanks,\r<br />\n<br />\nRoss<br />\n",
+    "PostedDate": "2013-07-10T19:38:25.753-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067206",
+    "ThreadId": "449103",
+    "Html": "You need to pass the handlerFunction as null, it's needed only when you want to create a custom reader for the response. I'm guessing that the failure is due the function read doesn't exist on the handler, can you try that and tell me if it still fails ?<br />\n",
+    "PostedDate": "2013-07-11T12:30:23.403-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067270",
+    "ThreadId": "449103",
+    "Html": "I tried:\r<br />\n<br />\n OData.read(request, successFunction, failFunction, null);\r<br />\n<br />\nand:\r<br />\n<br />\n OData.read(request, successFunction, failFunction);\r<br />\n<br />\nand get the same result.\r<br />\n<br />\nBaffling.\r<br />\n<br />\nRoss<br />\n",
+    "PostedDate": "2013-07-11T15:37:25.07-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067278",
+    "ThreadId": "449103",
+    "Html": "In order to debug this you can follow these steps:\r<br />\n<br />\n1 - Use the non minified version of DataJS.\r<br />\n2 - look in the datajs code for a function called request in odata.defaultHttpClient object.\r<br />\n3 - There is a part that calls the success callback according to this condition if (statusCode &gt;= 200 &amp;&amp; statusCode &lt;= 299) \r<br />\n4 - try adding breakpoint ( or alerts if you can't do that on the simulator ) in this place and see why is your success callback is not called and please tell me what you get.\r<br />\n<br />\nHope this helps\r<br />\n<br />\nHussein<br />\n",
+    "PostedDate": "2013-07-11T16:21:43.2-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067872",
+    "ThreadId": "449103",
+    "Html": "It appears that the problem is that the call is successful, the data is returned and the status is 200, but datajs cannot identify a handler for the data.  I tried adding a handler callback to the oData.read:\r<br />\n<br />\n OData.read(request, success, error, customHandler );\r<br />\n<br />\nHowever, customHandler is not called.\r<br />\n<br />\nRoss<br />\n",
+    "PostedDate": "2013-07-13T07:30:55.2-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1067874",
+    "ThreadId": "449103",
+    "Html": "I got it.  I looked at the data returned in a browser and noticed that the type was application/atom+xml.  Once I added that type it worked.  Trivial but this is new to me.\r<br />\n<br />\nI really appreciate your help, it made all the difference.\r<br />\n<br />\nRoss<br />\n",
+    "PostedDate": "2013-07-13T07:38:50.763-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

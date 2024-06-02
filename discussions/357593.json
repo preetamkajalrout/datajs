@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "842348",
+    "ThreadId": "357593",
+    "Html": "\r\n<p>Hi Experts,</p>\r\n<p>I have set the timeoutMS but the request doesn't respond back after the timeout was met. Any advice or examples?</p>\r\n<p>Thanks in advance.</p>\r\n<p>Below is a code snippet:</p>\r\n<pre>OData.request( {requestUri:queryserviceUri, headers: {&quot;WWW-Authenticate&quot;:&quot;myRealm&quot;,&quot;Authorization&quot;:auth, &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;, &quot;Cache-Control&quot; : &quot;no-cache&quot;}, timeoutMS: 15000 },</pre>\r\n<p>Best Regards,<br>\r\nYi Ying</p>\r\n",
+    "PostedDate": "2012-05-29T20:12:06.42-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "842759",
+    "ThreadId": "357593",
+    "Html": "<p>Hi Yi Ying,</p>\r\n<p>&nbsp;&nbsp; If the request timeouts, then the error callback function should be fired instead of the success callback.&nbsp; Can you confirm that this is the case?</p>\r\n<p>Thanks,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-30T12:31:48.503-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

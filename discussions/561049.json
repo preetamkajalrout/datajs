@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1289655",
+    "ThreadId": "561049",
+    "Html": "Hello everyone,\r<br />\n<br />\ngot a Q for ya all, mainly developers, is there any way you would implement support for IE9+ CORS? I mean XDocumentRequest. Lately I had to change the datajs file to make it running and it wasn't that hard, but not sure if all functions are okay with that. I think at least 5% of all CORS programmers would appreciate to take this rather than just cut out everyone with IE9(customers).\r<br />\n<br />\nThanks in advance.\r<br />\nFossil<br />\n",
+    "PostedDate": "2014-08-13T06:30:07.767-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

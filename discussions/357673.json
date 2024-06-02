@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "842583",
+    "ThreadId": "357673",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I tried to use datajs 1.0.2 and 1.0.3 for developing OData access in a Win 8 Metro app. Unfortunately, it is not working on the IE10 inside Metro (HTML5/JS App).</p>\r\n<p>Seems that the check</p>\r\n<p></p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:blue\">if</span> (window.ActiveXObject) {\r\n\r\n}\r\n</pre>\r\n</div>\r\n<p></p>\r\n<p>returns true, while creating a new instance with new ActiveXObject() runs into an exception because ActiveX objects are not allowed inside Metro apps.</p>\r\n<p>Could you check this behavior? I had to quickfix this in your release, in function createDomParser (line 1424 on v1.0.3), to use the window.DOMParser() before checking the window.ActiveXObject.</p>\r\n<p>Cheers,</p>\r\n<p>Thomas</p>\r\n",
+    "PostedDate": "2012-05-30T08:04:37.823-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "842753",
+    "ThreadId": "357673",
+    "Html": "<p>Hi Thomas,</p>\r\n<p>&nbsp;&nbsp;&nbsp;Thank you for bringing this to our attention. We will look into this.&nbsp; Definitlely we want datajs to work in IE10.</p>\r\n<p>Regards,</p>\r\n<p>Alex Trigo.</p>",
+    "PostedDate": "2012-05-30T12:20:09.217-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "848621",
+    "ThreadId": "357673",
+    "Html": "\r\n<p>Hi,</p>\r\n<p>I found a solution for the problem if you want to build an metro app. In the createDomParser method you have the following check:</p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:blue\">if</span> (window.ActiveXObject){\r\n\r\n}</pre>\r\n</div>\r\n<p>&nbsp;If you add the following check, the activeXObjects will be ignored in metro apps</p>\r\n<pre>if (window.ActiveXObject &amp;&amp; typeof Windows === &quot;undefined&quot;) {\r\n\r\n}</pre>\r\n<p>I hope this helps you at for now, It did for me.</p>\r\n<p>Greetings</p>\r\n<p>Kristof</p>\r\n",
+    "PostedDate": "2012-06-13T13:22:48.543-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]
