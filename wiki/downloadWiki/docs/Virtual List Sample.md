@@ -7,4 +7,4 @@ Some techniques demonstrated include:
 - How to configure the cache to store and prefetch items.
 - How to use the cache as a backing store for a virtualized list.
 
-The sample file is [VirtualList.htm](./Virtual%20List%20Sample.md).
+The sample file is [VirtualList.htm](./Virtual%20List%20Sample_VirtualList.htm).

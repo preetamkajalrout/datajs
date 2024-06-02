@@ -14,4 +14,4 @@ The sample unpacks into a Microsoft Visual Studio project with the following int
 
 This makes running other [Samples](./Samples.md) as simple as adding a new HTML file to this project and running it.
 
-[SimpleService.zip](./Local%20Service%20Sample_SimpleService.zips)
+[SimpleService.zip](./Local%20Service%20Sample_SimpleService.zip)
