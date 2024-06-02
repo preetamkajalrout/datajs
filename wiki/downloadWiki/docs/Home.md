@@ -5,6 +5,6 @@ datajs is a new cross-browser JavaScript library that enables data-centric web a
 
 More information on how to use this library is available on the [documentation page](./Documentation.md).
 
-To discuss problems or provide feedback, please use the [discussions page](http://datajs.codeplex.com/discussions).
+To discuss problems or provide feedback, please use the [discussions page](../../../discussions/).
 
 You can download the latest version from this site, or use the [NuGet datajs package](http://nuget.org/List/Packages/datajs).

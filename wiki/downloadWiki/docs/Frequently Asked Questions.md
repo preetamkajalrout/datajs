@@ -1,6 +1,6 @@
 # Frequently Asked Questions
 
-This page provides some answers to frequently asked questions about datajs. If you have a question that is not covered here, try searching the [discussions area](http://datajs.codeplex.com/discussions).
+This page provides some answers to frequently asked questions about datajs. If you have a question that is not covered here, try searching the [discussions area](../../../discussions/).
 
 - [How can I access and use OData metadata through the datajs API?](#how-can-i-access-and-use-odata-metadata-through-the-datajs-api)
 - [What is the relationship between JSON, OData, jQuery and datajs, and do I to choose between them?](#what-is-the-relationship-between-json-odata-jquery-and-datajs-and-do-i-to-choose-between-them)
