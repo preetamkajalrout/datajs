@@ -19,7 +19,7 @@ Following section mimics the top-level navigation structure for the wiki website
 - [Issues Archive](./issues/)
 - [Discussion Archive](./discussions/)
 - [Source Code](./sourceCode/sourceCode/JSLib/src/)
-- [Releases](./releases/releases.md) - Contains the last three releases
+- [Releases](https://github.com/preetamkajalrout/datajs/releases) - Contains the last three releases
 - [Full Releases Details - JSON](./releases/releaseList.json)
 
 ## LICENSE
