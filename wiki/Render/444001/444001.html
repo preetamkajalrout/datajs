@@ -1,6 +1,0 @@
-<div class="wikidoc"><h1>Local Service Sample</h1>This sample sets up a local OData service that is used by some other datajs samples.<br /><br />The sample unpacks into a Microsoft Visual Studio project with the following interesting components.<br />
-<ol><li>A database script, <span class="codeInline">ideas.sql</span>. You can run this from a command prompt window with <span class="codeInline">sqlcmd -S .\SQLEXPRESS -E -e -i ideas.sql</span> to set up a simple database with sample data on a local Microsoft SQL Express service.</li>
-<li>An ADO.NET Entity Framework model in an empty ASP.NET web project that maps the database into an object model.</li>
-<li>A WCF Data Service that exposes this model using OData in that same project.</li>
-<li>Various javascript files to simplify getting other samples.</li></ol>
-<br />This makes running other <a href="https://datajs.codeplex.com/wikipage?title=Samples&referringTitle=Local%20Service%20Sample">Samples</a> as simple as adding a new HTML file to this project and running it.<br /><br /><a href=".\0187bf96-7fbb-4cde-bfab-d2011c359af5">SimpleService.zip</a></div><div class="ClearBoth"></div>

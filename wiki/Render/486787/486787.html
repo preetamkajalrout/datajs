@@ -1,41 +1,0 @@
-<div class="wikidoc"><h1>Frequently Asked Questions</h1>This page provides some answers to frequently asked questions about datajs. If you have a question that is not covered here, try searching the <a href="http://datajs.codeplex.com/discussions">discussions area</a>.<br />
-<ul><li><a href="#metadata">How can I access and use OData metadata through the datajs API&#63;</a></li>
-<li><a href="#relationships">What is the relationship between JSON, OData, jQuery and datajs, and do I to choose between them&#63;</a></li>
-<li><a href="#parse-null-error">How do I fix a &#34;Unable to get value of the property &#39;parse&#39;&#58; object is null or undefined&#34; error&#63;</a></li>
-<li><a href="#json-null-error">How do I fix a &#34;window.JSON is null or not an object&#34; error&#63;</a></li>
-<li><a href="#json-parse-error">How do I fix an &#34;Invalid Character&#34; or &#34;JSON.parse error&#34; error when reading feed data&#63;</a></li>
-<li><a href="#post-tunneling">How do I use POST tunneling&#63;</a></li>
-<li><a href="#long-running-script">How do I prevent a &#34;long running script&#34; error message from the browser&#63;</a></li></ul>
-<br /><a name="metadata"></a>
-<h2>How can I access and use OData metadata through the datajs API?</h2><span class="codeInline">OData.read</span> can be used to read and parse the metadata document from the service. datajs comes with a handler to do this, so it is not necessary for you to create a custom one; however it does not automatically choose it when parsing, so you need to specify it as the last argument to <span class="codeInline">OData.read</span> as in the following sample:<br /><br /><div style="color:Black;background-color:White;"><pre>
-OData.read(<span style="color:#A31515;">&quot;&lt;serviceRoot&gt;/$metadata&quot;</span>, <span style="color:Blue;">function</span> (metadata) { 
-    <span style="color:Green;">// success callback </span>
-}, <span style="color:Blue;">function</span> (error) { 
-    <span style="color:Green;">// error callback </span>
-}, OData.metadataHandler);
-</pre></div><br />On a successful response, the success callback will be called with the deserialized representation of the metadata passed in (the <span class="codeInline">metadata</span> variable in the example above). You can then pass this object into a subsequent <span class="codeInline">OData.read</span> call to instruct that call to use the metadata, as follows:<br /><br /><div style="color:Black;background-color:White;"><pre>
-OData.read(<span style="color:#A31515;">&quot;&lt;serviceRoot&gt;/&lt;endpoint&gt;&quot;</span>, <span style="color:Blue;">function</span> (data) { 
-    <span style="color:Green;">// success callback </span>
-}, <span style="color:Blue;">function</span> (error) { 
-    <span style="color:Green;">// error callback </span>
-}, undefined, undefined, metadata);
-</pre></div><br />Alternatively, if you are working with a single service and you&#39;ll be making multiple data reads that need to make use of the metadata, you can push the metadata onto the metadata stack:<br /><br /><div style="color:Black;background-color:White;"><pre>
-OData.defaultMetadata.push(metadata);
-</pre></div><br />Then call <span class="codeInline">OData.read</span> on your data endpoints without needing to pass the metadata object into every call.<br /><br />datajs does not perform any validation on the metadata document. It assumes the server sends the correct document.<br /><br /><a name="relationships"></a>
-<h2>What is the relationship between JSON, OData, jQuery and datajs, and do I to choose between them?</h2>Refer to <a href="http://blogs.msdn.com/b/marcelolr/archive/2011/02/11/odata-jquery-and-datajs.aspx">OData, jQuery and datajs</a> for a detailed answer.<br /><br /><a name="parse-null-error"></a>
-<h2>How do I fix a &quot;Unable to get value of the property &#39;parse&#39;: object is null or undefined&quot; error?</h2>This error is typically caused by a missing JSON object, and has the same cause as a <a href="https://datajs.codeplex.com/wikipage?title=Frequently%20Asked%20Questions&referringTitle=Frequently%20Asked%20Questions&ANCHOR#json-null-error">&#34;window.JSON null&#34; error</a>.<br /><br /><a name="json-null-error"></a>
-<h2>How do I fix a &quot;window.JSON is null or not an object&quot; error?</h2>IE6 and IE7 (along with later versions run in compatibility mode) do not have native JSON support so you will need to add an additional script reference to json2.js.<br /><br />The following is a simple script tag that can be included in the document head to address this. Another solution is to include the file in your own web server and refer to it locally.<br /><br /><span class="codeInline"> &lt;script type=&quot;text/javascript&quot; src=&quot;http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js&quot;&gt;&lt;/script&gt; </span><br /><br /><a name="json-parse-error"></a>
-<h2>How do I fix an &quot;Invalid Character&quot; or &quot;JSON.parse error&quot; error when reading feed data?</h2>Reading a feed or an entry from a service that uses an older version of WCF Data Services (formerly ADO.NET Data Services) might return an error if the payload data has single quotes (&#39;) in it. This is because WCF Data Services is escaping the single quotes before sending the data through the wire. To fix this issue it is necessary to install the <a href="http://www.microsoft.com/downloads/en/details.aspx?displaylang=en&amp;FamilyID=21f20103-551e-4501-89b3-e53fcac5cffd">ADO.NET Data Services Update for .NET Framework 3.5 SP1</a> on the server.<br /><br />This issue doesn&#39;t impact services running on .NET Framework 4.0.<br /><br /><a name="post-tunneling"></a>
-<h2>How do I use POST tunneling?</h2>POST tunneling allows you to send PUT, MERGE and DELETE requests when an HTTP processor won&#39;t let them through (including the browser in some cases). For more information, see <a href="http://blogs.msdn.com/b/marcelolr/archive/2008/08/20/post-tunneling-in-ado-net-data-services.aspx">this blog post</a>.<br /><br />The following sample shows how to set up a request to use tunneling.<br /><br /><div style="color:Black;background-color:White;"><pre>
-<span style="color:Blue;">var</span> request = {
-  ...
-  method: <span style="color:#A31515;">&quot;POST&quot;</span>,
-  headers: {
-    ...
-    <span style="color:#A31515;">&quot;X-HTTP-Method&quot;</span>: <span style="color:#A31515;">&quot;MERGE&quot;</span>
-  }
-}; 
-</pre></div><br />This request can then be used with the <span class="codeInline">OData.request</span> API. The important part is using &quot;POST&quot; as the method, and then using the intended method (PUT, MERGE or DELETE) in the X-HTTP-Method header.<br /><br /><a name="long-running-script"></a>
-<h2>How do I prevent a &quot;long running script&quot; error message from the browser?</h2>When doing a readRange from a cache with a large page size of a large collection the browser could throw an error stating that there is a “long running script” prompting the user to quit or continue. The exact size of the page at which this occurs is browser and collection dependent, but the library has been tested up to a 10MB page size with default browser settings. Reducing the page size of the cache prevents this error.<br />
-<hr />
-Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=Cache%20Prefetching&referringTitle=Frequently%20Asked%20Questions">Cache Prefetching</a><br />Next Topic: <a href="https://datajs.codeplex.com/wikipage?title=References&referringTitle=Frequently%20Asked%20Questions">References</a></div><div class="ClearBoth"></div>

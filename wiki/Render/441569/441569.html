@@ -1,10 +1,0 @@
-<div class="wikidoc"><h1>OData Security</h1>The default HTTP library works by using the XMLHttpRequest object, which in general doesn&#39;t allow the page to get data from a server different from the one that served the page (this is often referred to as the same origin policy.).<br /><br />This means that the library generally trusts the server to provide non-malicious payloads (the library is, after all, also provided by the same server).<br /><br />Note that JSONP effectively works by inviting a different server to run code in your page. At that point, your page could become compromised - that is, you would no longer be able to trust the values you have or the functions you call. This is why JSONP is disabled by default in the <span class="codeInline">OData.defaultHttpClient</span> object. If you trust the servers that you will be contacting, then you can turn support on by setting this property to true, as in the following snippet.<br /><br /><div style="color:Black;background-color:White;"><pre>
-OData.defaultHttpClient.enableJsonpCallback = <span style="color:Blue;">true</span>;
-</pre></div><br />If you want to set this for a specific request instead of the library as a whole, you can pass this as an option in a request object.<br /><br /><div style="color:Black;background-color:White;"><pre>
-OData.request({
-  requestUri: <span style="color:#A31515;">&quot;http://www.example.org/jsonp-enabled-service/data&quot;</span>,
-  enableJsonpCallback: <span style="color:Blue;">true</span>
-}, ... });
-</pre></div><br />To protect against man-in-the-middle attacks, you should enable and use the HTTPS protocol and refer to the data sources through &#39;https://&#39; URLs.
-<hr />
-Previous Topic: <a href="https://datajs.codeplex.com/wikipage?title=OData%20Networking&referringTitle=OData%20Security">OData Networking</a><br />Next Topic: <a href="https://datajs.codeplex.com/wikipage?title=Cross%20Domain%20Requests&referringTitle=OData%20Security">Cross Domain Requests</a></div><div class="ClearBoth"></div>
